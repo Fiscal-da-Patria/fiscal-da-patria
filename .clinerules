@@ -1,0 +1,11 @@
+# Regras do Projeto: Fiscal da Pátria
+
+Você é um engenheiro sênior desenvolvendo o "Fiscal da Pátria", uma aplicação web cívica de transparência e auditoria de votações da Câmara dos Deputados.
+
+## Princípios Inegociáveis
+1. **Linguagem Popular de Impacto:** Traduzir termos legislativos para o bolso e o prato do povo (ex: "Comida sem imposto", "Salário livre de IR").
+2. **Tolerância Zero a Desinformação:** Apenas votações nominais da API oficial da Câmara (`dadosabertos.camara.leg.br`).
+3. **Inversão Semântica:** Respeitar rigorosamente a semântica de votações como a da Blindagem (onde votar NÃO defende o povo e SIM protege o político).
+4. **Links Oficiais:** Todo card de deputado deve possuir link para a proposição oficial no domínio `camara.leg.br`.
+5. **Estética Cívica:** Verde Mata (`#0F2F1D`), Verde Bandeira (`#1B4D3E`), Amarelo Cívico (`#D9A726`) e fundo neutro claro (`#F8FAF9`). Sem estética partidária.
+6. **Zero Database em Runtime:** O app lê dados consolidados de um arquivo estático JSON (`public/data/parlamentares.json`).

@@ -1,0 +1,1902 @@
+{
+  "_fonte": "Senado Federal — Dados Abertos (legis.senado.leg.br/dadosabertos)",
+  "_geradoEm": "2026-10-12T23:15:15.075Z",
+  "_senadores": 81,
+  "_comVotoNominal": 79,
+  "senadores": [
+    {
+      "id": "senado-5672",
+      "_codigo": 5672,
+      "cargo": "SENADOR",
+      "nome": "Alan Rick",
+      "nomeCivil": "Alan Rick Miranda",
+      "partido": "REPUBLICANOS",
+      "uf": "AC",
+      "fotoUrl": "/fotos/sen-5672.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5672.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5672",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-5982",
+      "_codigo": 5982,
+      "cargo": "SENADOR",
+      "nome": "Alessandro Vieira",
+      "nomeCivil": "Alessandro Vieira",
+      "partido": "MDB",
+      "uf": "SE",
+      "fotoUrl": "/fotos/sen-5982.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5982.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5982",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-6358",
+      "_codigo": 6358,
+      "cargo": "SENADOR",
+      "nome": "Ana Paula Lobato",
+      "nomeCivil": "Ana Paula Dias Lobato Nova Alves",
+      "partido": "PSB",
+      "uf": "MA",
+      "fotoUrl": "/fotos/sen-6358.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador6358.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/6358",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM"
+      }
+    },
+    {
+      "id": "senado-5967",
+      "_codigo": 5967,
+      "cargo": "SENADOR",
+      "nome": "Angelo Coronel",
+      "nomeCivil": "Angelo Mario Coronel de Azevedo Martins",
+      "partido": "REPUBLICANOS",
+      "uf": "BA",
+      "fotoUrl": "/fotos/sen-5967.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5967.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5967",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "AUSENTE"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "AUSENTE"
+      }
+    },
+    {
+      "id": "senado-6009",
+      "_codigo": 6009,
+      "cargo": "SENADOR",
+      "nome": "Astronauta Marcos Pontes",
+      "nomeCivil": "Marcos Cesar Pontes",
+      "partido": "PL",
+      "uf": "SP",
+      "fotoUrl": "/fotos/sen-6009.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador6009.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/6009",
+      "votos": {
+        "cesta_basica": "CONTRA",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "NAO",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-4639",
+      "_codigo": 4639,
+      "cargo": "SENADOR",
+      "nome": "Beto Faro",
+      "nomeCivil": "José Roberto Oliveira Faro",
+      "partido": "PT",
+      "uf": "PA",
+      "fotoUrl": "/fotos/sen-4639.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador4639.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/4639",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-6336",
+      "_codigo": 6336,
+      "cargo": "SENADOR",
+      "nome": "Camilo Santana",
+      "nomeCivil": "Camilo Sobreira de Santana",
+      "partido": "PT",
+      "uf": "CE",
+      "fotoUrl": "/fotos/sen-6336.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador6336.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/6336",
+      "votos": {
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "aposentadoria_agentes_saude": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-6295",
+      "_codigo": 6295,
+      "cargo": "SENADOR",
+      "nome": "Carlos Fávaro",
+      "nomeCivil": "Carlos Henrique Baqueta Fávaro",
+      "partido": "PSD",
+      "uf": "MT",
+      "fotoUrl": "/fotos/sen-6295.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador6295.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/6295",
+      "votos": {
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "aposentadoria_agentes_saude": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-5936",
+      "_codigo": 5936,
+      "cargo": "SENADOR",
+      "nome": "Carlos Portinho",
+      "nomeCivil": "Carlos Francisco Portinho",
+      "partido": "PL",
+      "uf": "RJ",
+      "fotoUrl": "/fotos/sen-5936.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5936.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5936",
+      "votos": {
+        "cesta_basica": "CONTRA",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "AUSENTE"
+      },
+      "votosOriginais": {
+        "cesta_basica": "NAO",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "AUSENTE"
+      }
+    },
+    {
+      "id": "senado-5990",
+      "_codigo": 5990,
+      "cargo": "SENADOR",
+      "nome": "Carlos Viana",
+      "nomeCivil": "Carlos Alberto Dias Viana",
+      "partido": "PSD",
+      "uf": "MG",
+      "fotoUrl": "/fotos/sen-5990.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5990.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5990",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "AUSENTE",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "AUSENTE",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-470",
+      "_codigo": 470,
+      "cargo": "SENADOR",
+      "nome": "Chico Rodrigues",
+      "nomeCivil": "Francisco de Assis Rodrigues",
+      "partido": "PSB",
+      "uf": "RR",
+      "fotoUrl": "/fotos/sen-470.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador470.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/470",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-5973",
+      "_codigo": 5973,
+      "cargo": "SENADOR",
+      "nome": "Cid Gomes",
+      "nomeCivil": "Cid Ferreira Gomes",
+      "partido": "PSB",
+      "uf": "CE",
+      "fotoUrl": "/fotos/sen-5973.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5973.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5973",
+      "votos": {
+        "cesta_basica": "AUSENTE",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "AUSENTE"
+      },
+      "votosOriginais": {
+        "cesta_basica": "AUSENTE",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "AUSENTE"
+      }
+    },
+    {
+      "id": "senado-739",
+      "_codigo": 739,
+      "cargo": "SENADOR",
+      "nome": "Ciro Nogueira",
+      "nomeCivil": "Ciro Nogueira Lima Filho",
+      "partido": "PP",
+      "uf": "PI",
+      "fotoUrl": "/fotos/sen-739.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador739.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/739",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-6337",
+      "_codigo": 6337,
+      "cargo": "SENADOR",
+      "nome": "Cleitinho",
+      "nomeCivil": "Cleiton Gontijo de Azevedo",
+      "partido": "REPUBLICANOS",
+      "uf": "MG",
+      "fotoUrl": "/fotos/sen-6337.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador6337.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/6337",
+      "votos": {
+        "cesta_basica": "CONTRA",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "CONTRA"
+      },
+      "votosOriginais": {
+        "cesta_basica": "NAO",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "NAO"
+      }
+    },
+    {
+      "id": "senado-475",
+      "_codigo": 475,
+      "cargo": "SENADOR",
+      "nome": "Confúcio Moura",
+      "nomeCivil": "Confúcio Aires Moura",
+      "partido": "MDB",
+      "uf": "RO",
+      "fotoUrl": "/fotos/sen-475.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador475.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/475",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "AUSENTE"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "AUSENTE"
+      }
+    },
+    {
+      "id": "senado-6335",
+      "_codigo": 6335,
+      "cargo": "SENADOR",
+      "nome": "Damares Alves",
+      "nomeCivil": "Damares Regina Alves",
+      "partido": "REPUBLICANOS",
+      "uf": "DF",
+      "fotoUrl": "/fotos/sen-6335.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador6335.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/6335",
+      "votos": {
+        "cesta_basica": "CONTRA",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "NAO",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-5998",
+      "_codigo": 5998,
+      "cargo": "SENADOR",
+      "nome": "Daniella Ribeiro",
+      "nomeCivil": "Daniella Velloso Borges Ribeiro",
+      "partido": "PP",
+      "uf": "PB",
+      "fotoUrl": "/fotos/sen-5998.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5998.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5998",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "AUSENTE",
+        "crime_organizado": "AUSENTE",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "AUSENTE",
+        "crime_organizado": "AUSENTE",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-3830",
+      "_codigo": 3830,
+      "cargo": "SENADOR",
+      "nome": "Davi Alcolumbre",
+      "nomeCivil": "David Samuel Alcolumbre Tobelem",
+      "partido": "UNIÃO",
+      "uf": "AP",
+      "fotoUrl": "/fotos/sen-3830.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador3830.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/3830",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "AUSENTE",
+        "crime_organizado": "AUSENTE",
+        "preco_energia": "AUSENTE"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "AUSENTE",
+        "crime_organizado": "AUSENTE",
+        "preco_energia": "AUSENTE"
+      }
+    },
+    {
+      "id": "senado-5793",
+      "_codigo": 5793,
+      "cargo": "SENADOR",
+      "nome": "Dr. Hiran",
+      "nomeCivil": "Hiran Manuel Gonçalves da Silva",
+      "partido": "PP",
+      "uf": "RR",
+      "fotoUrl": "/fotos/sen-5793.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5793.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5793",
+      "votos": {
+        "cesta_basica": "CONTRA",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "NAO",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-5906",
+      "_codigo": 5906,
+      "cargo": "SENADOR",
+      "nome": "Dra. Eudócia",
+      "nomeCivil": "Eudocia Maria Holanda de Araujo Caldas",
+      "partido": "PSDB",
+      "uf": "AL",
+      "fotoUrl": "/fotos/sen-5906.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5906.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5906",
+      "votos": {
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-4994",
+      "_codigo": 4994,
+      "cargo": "SENADOR",
+      "nome": "Eduardo Braga",
+      "nomeCivil": "Carlos Eduardo de Souza Braga",
+      "partido": "MDB",
+      "uf": "AM",
+      "fotoUrl": "/fotos/sen-4994.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador4994.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/4994",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-3777",
+      "_codigo": 3777,
+      "cargo": "SENADOR",
+      "nome": "Eduardo Gomes",
+      "nomeCivil": "Carlos Eduardo Torres Gomes",
+      "partido": "PL",
+      "uf": "TO",
+      "fotoUrl": "/fotos/sen-3777.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador3777.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/3777",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-4642",
+      "_codigo": 4642,
+      "cargo": "SENADOR",
+      "nome": "Efraim Filho",
+      "nomeCivil": "Efraim de Araújo Morais Filho",
+      "partido": "PL",
+      "uf": "PB",
+      "fotoUrl": "/fotos/sen-4642.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador4642.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/4642",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-5718",
+      "_codigo": 5718,
+      "cargo": "SENADOR",
+      "nome": "Eliziane Gama",
+      "nomeCivil": "Eliziane Pereira Gama Melo",
+      "partido": "PSD",
+      "uf": "MA",
+      "fotoUrl": "/fotos/sen-5718.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5718.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5718",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "AUSENTE",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "AUSENTE",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-22",
+      "_codigo": 22,
+      "cargo": "SENADOR",
+      "nome": "Esperidião Amin",
+      "nomeCivil": "Esperidião Amin Helou Filho",
+      "partido": "PP",
+      "uf": "SC",
+      "fotoUrl": "/fotos/sen-22.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador22.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/22",
+      "votos": {
+        "cesta_basica": "CONTRA",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "AUSENTE",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "NAO",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "AUSENTE",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-5953",
+      "_codigo": 5953,
+      "cargo": "SENADOR",
+      "nome": "Fabiano Contarato",
+      "nomeCivil": "Fabiano Contarato",
+      "partido": "PT",
+      "uf": "ES",
+      "fotoUrl": "/fotos/sen-5953.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5953.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5953",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-5917",
+      "_codigo": 5917,
+      "cargo": "SENADOR",
+      "nome": "Fernando Dueire",
+      "nomeCivil": "Fernando Antonio Caminha Dueire",
+      "partido": "PSD",
+      "uf": "PE",
+      "fotoUrl": "/fotos/sen-5917.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5917.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5917",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "AUSENTE"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "AUSENTE"
+      }
+    },
+    {
+      "id": "senado-345",
+      "_codigo": 345,
+      "cargo": "SENADOR",
+      "nome": "Flávio Arns",
+      "nomeCivil": "Flávio José Arns",
+      "partido": "PSB",
+      "uf": "PR",
+      "fotoUrl": "/fotos/sen-345.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador345.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/345",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "AUSENTE",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "AUSENTE",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-5894",
+      "_codigo": 5894,
+      "cargo": "SENADOR",
+      "nome": "Flávio Bolsonaro",
+      "nomeCivil": "Flávio Nantes Bolsonaro",
+      "partido": "PL",
+      "uf": "RJ",
+      "fotoUrl": "/fotos/sen-5894.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5894.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5894",
+      "votos": {
+        "cesta_basica": "CONTRA",
+        "aposentadoria_agentes_saude": "AUSENTE",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "AUSENTE"
+      },
+      "votosOriginais": {
+        "cesta_basica": "NAO",
+        "aposentadoria_agentes_saude": "AUSENTE",
+        "crime_organizado": "SIM",
+        "preco_energia": "AUSENTE"
+      }
+    },
+    {
+      "id": "senado-6008",
+      "_codigo": 6008,
+      "cargo": "SENADOR",
+      "nome": "Giordano",
+      "nomeCivil": "Alexandre Luiz Giordano",
+      "partido": "PODE",
+      "uf": "SP",
+      "fotoUrl": "/fotos/sen-6008.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador6008.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/6008",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "AUSENTE",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "AUSENTE",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-6341",
+      "_codigo": 6341,
+      "cargo": "SENADOR",
+      "nome": "Hamilton Mourão",
+      "nomeCivil": "Antonio Hamilton Martins Mourão",
+      "partido": "REPUBLICANOS",
+      "uf": "RS",
+      "fotoUrl": "/fotos/sen-6341.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador6341.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/6341",
+      "votos": {
+        "cesta_basica": "CONTRA",
+        "aposentadoria_agentes_saude": "CONTRA",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "NAO",
+        "aposentadoria_agentes_saude": "NAO",
+        "crime_organizado": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-5008",
+      "_codigo": 5008,
+      "cargo": "SENADOR",
+      "nome": "Humberto Costa",
+      "nomeCivil": "Humberto Sérgio Costa Lima",
+      "partido": "PT",
+      "uf": "PE",
+      "fotoUrl": "/fotos/sen-5008.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5008.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5008",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "AUSENTE",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "AUSENTE",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-5385",
+      "_codigo": 5385,
+      "cargo": "SENADOR",
+      "nome": "Irajá",
+      "nomeCivil": "Irajá Silvestre Filho",
+      "partido": "PSD",
+      "uf": "TO",
+      "fotoUrl": "/fotos/sen-5385.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5385.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5385",
+      "votos": {
+        "cesta_basica": "AUSENTE",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "AUSENTE",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-6010",
+      "_codigo": 6010,
+      "cargo": "SENADOR",
+      "nome": "Ivete da Silveira",
+      "nomeCivil": "Ivete Marli Appel da Silveira",
+      "partido": "MDB",
+      "uf": "SC",
+      "fotoUrl": "/fotos/sen-6010.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador6010.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/6010",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-4770",
+      "_codigo": 4770,
+      "cargo": "SENADOR",
+      "nome": "Izalci Lucas",
+      "nomeCivil": "Izalci Lucas Ferreira",
+      "partido": "PL",
+      "uf": "DF",
+      "fotoUrl": "/fotos/sen-4770.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador4770.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/4770",
+      "votos": {
+        "cesta_basica": "CONTRA",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "AUSENTE",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "NAO",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "AUSENTE",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-35",
+      "_codigo": 35,
+      "cargo": "SENADOR",
+      "nome": "Jader Barbalho",
+      "nomeCivil": "Jader Fontenelle Barbalho",
+      "partido": "MDB",
+      "uf": "PA",
+      "fotoUrl": "/fotos/sen-35.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador35.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/35",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "AUSENTE",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "AUSENTE",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-6340",
+      "_codigo": 6340,
+      "cargo": "SENADOR",
+      "nome": "Jaime Bagattoli",
+      "nomeCivil": "Jaime Maximino Bagattoli",
+      "partido": "PL",
+      "uf": "RO",
+      "fotoUrl": "/fotos/sen-6340.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador6340.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/6340",
+      "votos": {
+        "cesta_basica": "CONTRA",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "NAO",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-581",
+      "_codigo": 581,
+      "cargo": "SENADOR",
+      "nome": "Jaques Wagner",
+      "nomeCivil": "Jaques Wagner",
+      "partido": "PT",
+      "uf": "BA",
+      "fotoUrl": "/fotos/sen-581.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador581.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/581",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-4531",
+      "_codigo": 4531,
+      "cargo": "SENADOR",
+      "nome": "Jayme Campos",
+      "nomeCivil": "Jayme Veríssimo de Campos",
+      "partido": "UNIÃO",
+      "uf": "MT",
+      "fotoUrl": "/fotos/sen-4531.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador4531.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/4531",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "AUSENTE",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "AUSENTE",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-5895",
+      "_codigo": 5895,
+      "cargo": "SENADOR",
+      "nome": "Jorge Kajuru",
+      "nomeCivil": "Jorge Kajuru Reis da Costa Nasser",
+      "partido": "PSB",
+      "uf": "GO",
+      "fotoUrl": "/fotos/sen-5895.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5895.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5895",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "AUSENTE"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "AUSENTE"
+      }
+    },
+    {
+      "id": "senado-6342",
+      "_codigo": 6342,
+      "cargo": "SENADOR",
+      "nome": "Jorge Seif",
+      "nomeCivil": "Jorge Seif Júnior",
+      "partido": "PL",
+      "uf": "SC",
+      "fotoUrl": "/fotos/sen-6342.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador6342.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/6342",
+      "votos": {
+        "cesta_basica": "CONTRA",
+        "crime_organizado": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "NAO",
+        "crime_organizado": "SIM"
+      }
+    },
+    {
+      "id": "senado-6369",
+      "_codigo": 6369,
+      "cargo": "SENADOR",
+      "nome": "Jussara Lima",
+      "nomeCivil": "Antônia Jussara Gomes Alves Sousa Lima",
+      "partido": "PSD",
+      "uf": "PI",
+      "fotoUrl": "/fotos/sen-6369.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador6369.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/6369",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-4811",
+      "_codigo": 4811,
+      "cargo": "SENADOR",
+      "nome": "Laércio Oliveira",
+      "nomeCivil": "Laércio José de Oliveira",
+      "partido": "PP",
+      "uf": "SE",
+      "fotoUrl": "/fotos/sen-4811.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador4811.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/4811",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-5977",
+      "_codigo": 5977,
+      "cargo": "SENADOR",
+      "nome": "Leany Lemos",
+      "nomeCivil": "Leany Barreiro de Sousa Lemos",
+      "partido": "PSB",
+      "uf": "DF",
+      "fotoUrl": "/fotos/sen-5977.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5977.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5977",
+      "votos": {},
+      "votosOriginais": {}
+    },
+    {
+      "id": "senado-5926",
+      "_codigo": 5926,
+      "cargo": "SENADOR",
+      "nome": "Lucas Barreto",
+      "nomeCivil": "Luiz Cantuária Barreto",
+      "partido": "PSD",
+      "uf": "AP",
+      "fotoUrl": "/fotos/sen-5926.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5926.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5926",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-1186",
+      "_codigo": 1186,
+      "cargo": "SENADOR",
+      "nome": "Luis Carlos Heinze",
+      "nomeCivil": "Luis Carlos Heinze",
+      "partido": "PP",
+      "uf": "RS",
+      "fotoUrl": "/fotos/sen-1186.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador1186.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/1186",
+      "votos": {
+        "cesta_basica": "CONTRA",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "NAO",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-631",
+      "_codigo": 631,
+      "cargo": "SENADOR",
+      "nome": "Magno Malta",
+      "nomeCivil": "Magno Pereira Malta",
+      "partido": "PL",
+      "uf": "ES",
+      "fotoUrl": "/fotos/sen-631.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador631.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/631",
+      "votos": {
+        "cesta_basica": "CONTRA",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "AUSENTE"
+      },
+      "votosOriginais": {
+        "cesta_basica": "NAO",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "AUSENTE"
+      }
+    },
+    {
+      "id": "senado-5376",
+      "_codigo": 5376,
+      "cargo": "SENADOR",
+      "nome": "Mara Gabrilli",
+      "nomeCivil": "Mara Cristina Gabrilli",
+      "partido": "PSD",
+      "uf": "SP",
+      "fotoUrl": "/fotos/sen-5376.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5376.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5376",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-742",
+      "_codigo": 742,
+      "cargo": "SENADOR",
+      "nome": "Marcelo Castro",
+      "nomeCivil": "Marcelo Costa e Castro",
+      "partido": "MDB",
+      "uf": "PI",
+      "fotoUrl": "/fotos/sen-742.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador742.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/742",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "AUSENTE"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "AUSENTE"
+      }
+    },
+    {
+      "id": "senado-285",
+      "_codigo": 285,
+      "cargo": "SENADOR",
+      "nome": "Marcio Bittar",
+      "nomeCivil": "Marcio Miguel Bittar",
+      "partido": "PL",
+      "uf": "AC",
+      "fotoUrl": "/fotos/sen-285.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador285.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/285",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-5422",
+      "_codigo": 5422,
+      "cargo": "SENADOR",
+      "nome": "Marcos Rogério",
+      "nomeCivil": "Marcos Rogério da Silva Brito",
+      "partido": "PL",
+      "uf": "RO",
+      "fotoUrl": "/fotos/sen-5422.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5422.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5422",
+      "votos": {
+        "cesta_basica": "AUSENTE",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "AUSENTE"
+      },
+      "votosOriginais": {
+        "cesta_basica": "AUSENTE",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "AUSENTE"
+      }
+    },
+    {
+      "id": "senado-5942",
+      "_codigo": 5942,
+      "cargo": "SENADOR",
+      "nome": "Marcos do Val",
+      "nomeCivil": "Marcos Ribeiro do Val",
+      "partido": "AVANTE",
+      "uf": "ES",
+      "fotoUrl": "/fotos/sen-5942.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5942.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5942",
+      "votos": {
+        "cesta_basica": "CONTRA",
+        "aposentadoria_agentes_saude": "AUSENTE",
+        "crime_organizado": "AUSENTE",
+        "preco_energia": "AUSENTE"
+      },
+      "votosOriginais": {
+        "cesta_basica": "NAO",
+        "aposentadoria_agentes_saude": "AUSENTE",
+        "crime_organizado": "AUSENTE",
+        "preco_energia": "AUSENTE"
+      }
+    },
+    {
+      "id": "senado-5985",
+      "_codigo": 5985,
+      "cargo": "SENADOR",
+      "nome": "Nelsinho Trad",
+      "nomeCivil": "Nelson Trad Filho",
+      "partido": "PSD",
+      "uf": "MS",
+      "fotoUrl": "/fotos/sen-5985.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5985.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5985",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "AUSENTE",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "AUSENTE",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-5525",
+      "_codigo": 5525,
+      "cargo": "SENADOR",
+      "nome": "Omar Aziz",
+      "nomeCivil": "Omar José Abdel Aziz",
+      "partido": "PSD",
+      "uf": "AM",
+      "fotoUrl": "/fotos/sen-5525.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5525.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5525",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-5924",
+      "_codigo": 5924,
+      "cargo": "SENADOR",
+      "nome": "Oriovisto Guimarães",
+      "nomeCivil": "Oriovisto Guimaraes",
+      "partido": "PSDB",
+      "uf": "PR",
+      "fotoUrl": "/fotos/sen-5924.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5924.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5924",
+      "votos": {
+        "cesta_basica": "CONTRA",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "AUSENTE"
+      },
+      "votosOriginais": {
+        "cesta_basica": "NAO",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "AUSENTE"
+      }
+    },
+    {
+      "id": "senado-5523",
+      "_codigo": 5523,
+      "cargo": "SENADOR",
+      "nome": "Otto Alencar",
+      "nomeCivil": "Otto Roberto Mendonça de Alencar",
+      "partido": "PSD",
+      "uf": "BA",
+      "fotoUrl": "/fotos/sen-5523.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5523.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5523",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-825",
+      "_codigo": 825,
+      "cargo": "SENADOR",
+      "nome": "Paulo Paim",
+      "nomeCivil": "Paulo Renato Paim",
+      "partido": "PT",
+      "uf": "RS",
+      "fotoUrl": "/fotos/sen-825.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador825.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/825",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-5502",
+      "_codigo": 5502,
+      "cargo": "SENADOR",
+      "nome": "Plínio Valério",
+      "nomeCivil": "Francisco Plínio Valério Tomaz",
+      "partido": "PSDB",
+      "uf": "AM",
+      "fotoUrl": "/fotos/sen-5502.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5502.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5502",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-5386",
+      "_codigo": 5386,
+      "cargo": "SENADOR",
+      "nome": "Professora Dorinha Seabra",
+      "nomeCivil": "Maria Auxiliadora Seabra Rezende",
+      "partido": "UNIÃO",
+      "uf": "TO",
+      "fotoUrl": "/fotos/sen-5386.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5386.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5386",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-5012",
+      "_codigo": 5012,
+      "cargo": "SENADOR",
+      "nome": "Randolfe Rodrigues",
+      "nomeCivil": "Randolph Frederich Rodrigues Alves",
+      "partido": "PT",
+      "uf": "AP",
+      "fotoUrl": "/fotos/sen-5012.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5012.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5012",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-70",
+      "_codigo": 70,
+      "cargo": "SENADOR",
+      "nome": "Renan Calheiros",
+      "nomeCivil": "José Renan Vasconcelos Calheiros",
+      "partido": "MDB",
+      "uf": "AL",
+      "fotoUrl": "/fotos/sen-70.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador70.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/70",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "AUSENTE"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "AUSENTE"
+      }
+    },
+    {
+      "id": "senado-5207",
+      "_codigo": 5207,
+      "cargo": "SENADOR",
+      "nome": "Renan Filho",
+      "nomeCivil": "José Renan Vasconcelos Calheiros Filho",
+      "partido": "MDB",
+      "uf": "AL",
+      "fotoUrl": "/fotos/sen-5207.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5207.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5207",
+      "votos": {
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "aposentadoria_agentes_saude": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-5257",
+      "_codigo": 5257,
+      "cargo": "SENADOR",
+      "nome": "Renzo Braz",
+      "nomeCivil": "Renzo do Amaral Braz",
+      "partido": "PP",
+      "uf": "MG",
+      "fotoUrl": "/fotos/sen-5257.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5257.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5257",
+      "votos": {},
+      "votosOriginais": {}
+    },
+    {
+      "id": "senado-6025",
+      "_codigo": 6025,
+      "cargo": "SENADOR",
+      "nome": "Roberta Acioly",
+      "nomeCivil": "Roberta Leontina Xisto Acioly",
+      "partido": "REPUBLICANOS",
+      "uf": "RR",
+      "fotoUrl": "/fotos/sen-6025.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador6025.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/6025",
+      "votos": {
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "preco_energia": "AUSENTE"
+      },
+      "votosOriginais": {
+        "aposentadoria_agentes_saude": "SIM",
+        "preco_energia": "AUSENTE"
+      }
+    },
+    {
+      "id": "senado-4694",
+      "_codigo": 4694,
+      "cargo": "SENADOR",
+      "nome": "Rogerio Marinho",
+      "nomeCivil": "Rogério Simonetti Marinho",
+      "partido": "PL",
+      "uf": "RN",
+      "fotoUrl": "/fotos/sen-4694.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador4694.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/4694",
+      "votos": {
+        "cesta_basica": "CONTRA",
+        "aposentadoria_agentes_saude": "AUSENTE",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "AUSENTE"
+      },
+      "votosOriginais": {
+        "cesta_basica": "NAO",
+        "aposentadoria_agentes_saude": "AUSENTE",
+        "crime_organizado": "SIM",
+        "preco_energia": "AUSENTE"
+      }
+    },
+    {
+      "id": "senado-5352",
+      "_codigo": 5352,
+      "cargo": "SENADOR",
+      "nome": "Rogério Carvalho",
+      "nomeCivil": "Rogério Carvalho Santos",
+      "partido": "PT",
+      "uf": "SE",
+      "fotoUrl": "/fotos/sen-5352.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5352.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5352",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-5322",
+      "_codigo": 5322,
+      "cargo": "SENADOR",
+      "nome": "Romário",
+      "nomeCivil": "Romario de Souza Faria",
+      "partido": "S/Partido",
+      "uf": "RJ",
+      "fotoUrl": "/fotos/sen-5322.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5322.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5322",
+      "votos": {
+        "cesta_basica": "CONTRA",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "AUSENTE",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "NAO",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "AUSENTE",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-5974",
+      "_codigo": 5974,
+      "cargo": "SENADOR",
+      "nome": "Sargento Reginauro",
+      "nomeCivil": "Reginauro Sousa Nascimento",
+      "partido": "PSDB",
+      "uf": "CE",
+      "fotoUrl": "/fotos/sen-5974.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5974.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5974",
+      "votos": {
+        "preco_energia": "CONTRA"
+      },
+      "votosOriginais": {
+        "preco_energia": "NAO"
+      }
+    },
+    {
+      "id": "senado-6331",
+      "_codigo": 6331,
+      "cargo": "SENADOR",
+      "nome": "Sergio Moro",
+      "nomeCivil": "Sergio Fernando Moro",
+      "partido": "PL",
+      "uf": "PR",
+      "fotoUrl": "/fotos/sen-6331.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador6331.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/6331",
+      "votos": {
+        "cesta_basica": "CONTRA",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "NAO",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-5988",
+      "_codigo": 5988,
+      "cargo": "SENADOR",
+      "nome": "Soraya Thronicke",
+      "nomeCivil": "Soraya Vieira Thronicke",
+      "partido": "PSB",
+      "uf": "MS",
+      "fotoUrl": "/fotos/sen-5988.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5988.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5988",
+      "votos": {
+        "cesta_basica": "CONTRA",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "NAO",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-5959",
+      "_codigo": 5959,
+      "cargo": "SENADOR",
+      "nome": "Styvenson Valentim",
+      "nomeCivil": "Eann Styvenson Valentim Mendes",
+      "partido": "PODE",
+      "uf": "RN",
+      "fotoUrl": "/fotos/sen-5959.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5959.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5959",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-4560",
+      "_codigo": 4560,
+      "cargo": "SENADOR",
+      "nome": "Sérgio Petecão",
+      "nomeCivil": "Sérgio de Oliveira Cunha",
+      "partido": "PSD",
+      "uf": "AC",
+      "fotoUrl": "/fotos/sen-4560.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador4560.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/4560",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-6338",
+      "_codigo": 6338,
+      "cargo": "SENADOR",
+      "nome": "Teresa Leitão",
+      "nomeCivil": "Maria Teresa Leitão de Melo",
+      "partido": "PT",
+      "uf": "PE",
+      "fotoUrl": "/fotos/sen-6338.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador6338.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/6338",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "AUSENTE",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "AUSENTE",
+        "crime_organizado": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-5736",
+      "_codigo": 5736,
+      "cargo": "SENADOR",
+      "nome": "Tereza Cristina",
+      "nomeCivil": "Tereza Cristina Correa da Costa Dias",
+      "partido": "PP",
+      "uf": "MS",
+      "fotoUrl": "/fotos/sen-5736.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5736.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5736",
+      "votos": {
+        "cesta_basica": "CONTRA",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "NAO",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-5899",
+      "_codigo": 5899,
+      "cargo": "SENADOR",
+      "nome": "Vanderlan Cardoso",
+      "nomeCivil": "Vanderlan Vieira Cardoso",
+      "partido": "PSD",
+      "uf": "GO",
+      "fotoUrl": "/fotos/sen-5899.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5899.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5899",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "AUSENTE",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "AUSENTE",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-5748",
+      "_codigo": 5748,
+      "cargo": "SENADOR",
+      "nome": "Veneziano Vital do Rêgo",
+      "nomeCivil": "Veneziano Vital do Rêgo Segundo Neto",
+      "partido": "MDB",
+      "uf": "PB",
+      "fotoUrl": "/fotos/sen-5748.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5748.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5748",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-1173",
+      "_codigo": 1173,
+      "cargo": "SENADOR",
+      "nome": "Wellington Fagundes",
+      "nomeCivil": "Wellington Antonio Fagundes",
+      "partido": "PL",
+      "uf": "MT",
+      "fotoUrl": "/fotos/sen-1173.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador1173.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/1173",
+      "votos": {
+        "cesta_basica": "CONTRA",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "NAO",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-5411",
+      "_codigo": 5411,
+      "cargo": "SENADOR",
+      "nome": "Weverton",
+      "nomeCivil": "Weverton Rocha Marques de Sousa",
+      "partido": "PDT",
+      "uf": "MA",
+      "fotoUrl": "/fotos/sen-5411.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5411.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5411",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-5070",
+      "_codigo": 5070,
+      "cargo": "SENADOR",
+      "nome": "Wilder Morais",
+      "nomeCivil": "Wilder Pedro de Morais",
+      "partido": "PL",
+      "uf": "GO",
+      "fotoUrl": "/fotos/sen-5070.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5070.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5070",
+      "votos": {
+        "cesta_basica": "CONTRA",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "NAO",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-5783",
+      "_codigo": 5783,
+      "cargo": "SENADOR",
+      "nome": "Zenaide Maia",
+      "nomeCivil": "Zenaide Maia Calado Pereira dos Santos",
+      "partido": "PSD",
+      "uf": "RN",
+      "fotoUrl": "/fotos/sen-5783.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5783.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5783",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "FAVORAVEL",
+        "preco_energia": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "SIM",
+        "preco_energia": "SIM"
+      }
+    },
+    {
+      "id": "senado-3806",
+      "_codigo": 3806,
+      "cargo": "SENADOR",
+      "nome": "Zequinha Marinho",
+      "nomeCivil": "José da Cruz Marinho",
+      "partido": "PODE",
+      "uf": "PA",
+      "fotoUrl": "/fotos/sen-3806.jpg",
+      "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador3806.jpg",
+      "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/3806",
+      "votos": {
+        "cesta_basica": "FAVORAVEL",
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "AUSENTE",
+        "preco_energia": "AUSENTE"
+      },
+      "votosOriginais": {
+        "cesta_basica": "SIM",
+        "aposentadoria_agentes_saude": "SIM",
+        "crime_organizado": "AUSENTE",
+        "preco_energia": "AUSENTE"
+      }
+    }
+  ]
+}

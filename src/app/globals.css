@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+/* Habilita a variante `dark:` controlada pela classe no <html> (dark mode real). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ===== Tokens semânticos — Fiscal da Pátria =====
+   Claro (padrão) e escuro. Fonte de verdade: docs/01_prd_visao_geral.md */
+:root {
+  --background: #f8faf9; /* Fundo Neutro Claro */
+  --foreground: #0f2f1d; /* Verde Mata */
+  --superficie: #ffffff; /* Cards */
+  --titulo: #0f2f1d; /* Títulos / texto forte */
+  --corpo: rgba(27, 77, 62, 0.86); /* Texto secundário */
+  --corpo-fraco: rgba(27, 77, 62, 0.8); /* Texto terciário */
+  --contra-texto: #991b1b; /* Vermelho legível sobre fundo claro (AA) */
+  --borda: rgba(0, 0, 0, 0.06); /* Bordas finas */
+  --trilha: rgba(0, 0, 0, 0.05); /* Trilha de barras */
+}
+
+.dark {
+  --background: #0a1411;
+  --foreground: #eaf3ee;
+  --superficie: #12211c;
+  --titulo: #eaf3ee;
+  --corpo: rgba(234, 243, 238, 0.82);
+  --corpo-fraco: rgba(234, 243, 238, 0.7);
+  --contra-texto: #fca5a5; /* Vermelho legível sobre fundo escuro (AA) */
+  --borda: rgba(255, 255, 255, 0.12);
+  --trilha: rgba(255, 255, 255, 0.12);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-superficie: var(--superficie);
+  --color-titulo: var(--titulo);
+  --color-corpo: var(--corpo);
+  --color-corpo-fraco: var(--corpo-fraco);
+  --color-borda: var(--borda);
+  --color-trilha: var(--trilha);
+
+  /* Marca (constante nos dois temas) */
+  --color-verde-mata: #0f2f1d; /* Verde Mata */
+  --color-verde-bandeira: #1b4d3e; /* Verde Bandeira */
+  --color-dourado: #d9a726; /* Amarelo Cívico */
+  --color-fundo-neutro: var(--background);
+
+  /* Estados de voto */
+  --color-favoravel: #1b4d3e;
+  --color-contra: #b91c1c;
+  --color-contra-texto: var(--contra-texto);
+  --color-abstencao: #64748b;
+  --color-ausente: #cbd5e1;
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+

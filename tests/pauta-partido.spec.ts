@@ -1,0 +1,183 @@
+import { test, expect } from "@playwright/test";
+import { PAUTAS, TOTAL_PARLAMENTARES, abrirPrimeiroDossie, esperarCards } from "./helpers";
+
+/** Extrai um parâmetro de uma URL de compartilhamento. */
+const param = (href: string, chave: string) => new URL(href).searchParams.get(chave) ?? "";
+
+test.describe("Pills que quebram linha (visibilidade das 10 pautas)", () => {
+  test("nenhuma pauta fica escondida em scroll horizontal no mobile", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("/");
+
+    // Todos os 10 botões existem e estão visíveis (não dependem de arrastar).
+    await expect(page.locator("button[aria-pressed]")).toHaveCount(PAUTAS.length);
+    for (const rotulo of PAUTAS) {
+      await expect(page.getByRole("button", { name: rotulo })).toBeVisible();
+    }
+
+    // A caixa das pills quebra linha e não usa rolagem horizontal.
+    const caixa = page.locator("button[aria-pressed]").first().locator("xpath=..");
+    await expect(caixa).toHaveClass(/flex-wrap/);
+    await expect(caixa).not.toHaveClass(/overflow-x-auto/);
+
+    // Última pauta (a do Senado) realmente cabe na tela.
+    const ultima = page.getByRole("button", { name: PAUTAS[PAUTAS.length - 1] });
+    const cx = await ultima.boundingBox();
+    expect(cx).not.toBeNull();
+    expect((cx?.x ?? 0) + (cx?.width ?? 0)).toBeLessThanOrEqual(390);
+  });
+});
+
+test.describe("Compartilhar a PAUTA como assunto central", () => {
+  test("botão da votação selecionada leva a matéria + link profundo da pauta", async ({ page }) => {
+    await page.goto("/");
+    await esperarCards(page);
+
+    const btn = page.getByRole("link", { name: /Compartilhar esta votação/i });
+    await expect(btn).toHaveAttribute("href", /^https:\/\/api\.whatsapp\.com\/send\?text=/);
+
+    const texto = param((await btn.getAttribute("href")) as string, "text");
+    expect(texto).toMatch(/Comida sem imposto/i);
+    expect(texto).toMatch(/PEC 45\/2019/);
+    expect(texto).toContain("fiscaldapatria.org.br/?pauta=cesta_basica");
+  });
+
+  test("trocar de pauta troca o texto compartilhado", async ({ page }) => {
+    await page.goto("/");
+    await esperarCards(page);
+    await page.getByRole("button", { name: /Lei mais dura contra o crime organizado/i }).click();
+
+    const href = (await page
+      .getByRole("link", { name: /Compartilhar esta votação/i })
+      .getAttribute("href")) as string;
+    const texto = param(href, "text");
+    expect(texto).toMatch(/crime organizado/i);
+    expect(texto).toMatch(/PL 5582\/2025/);
+    expect(texto).toContain("/?pauta=crime_organizado");
+  });
+
+  test("dossiê: cada pauta tem seu próprio botão de enviar no Zap (foco na matéria)", async ({
+    page,
+  }) => {
+    await page.goto("/");
+    const dialog = await abrirPrimeiroDossie(page);
+
+    const botoes = dialog.getByRole("link", { name: /Enviar esta votação/i });
+    await expect(botoes).toHaveCount(11);
+
+    const primeiro = (await botoes.first().getAttribute("href")) as string;
+    const texto = param(primeiro, "text");
+    // A pauta é o assunto central + o voto do parlamentar específico + deep link dos dois.
+    expect(texto).toMatch(/Comida sem imposto/i);
+    expect(texto).toMatch(/PEC 45\/2019/);
+    expect(texto).toMatch(/deputado federal|senador/i);
+    expect(texto).toMatch(/\?deputado=(camara|senado)-\d+&pauta=cesta_basica/);
+  });
+
+  test("dossiê: cartão exportável da pauta ativa (4:5)", async ({ page }) => {
+    await page.goto("/");
+    const dialog = await abrirPrimeiroDossie(page);
+
+    await expect(dialog.getByText(/Cartão da pauta · PEC 45\/2019/i)).toBeVisible();
+    await expect(
+      dialog.getByRole("button", { name: /Exportar cartão da pauta \(PNG 4:5\)/i }),
+    ).toBeVisible();
+    await expect(dialog.getByText(/Comida sem imposto \(Cesta Básica\)/i).first()).toBeVisible();
+  });
+});
+
+test.describe("Gráfico: como cada partido votou", () => {
+  test("ordena pelas maiores bancadas (desempate: quem mais votou contra)", async ({
+    page,
+    request,
+  }) => {
+    const dados = (await (await request.get("/data/parlamentares.json")).json()) as Array<{
+      partido: string;
+      votos: Record<string, string>;
+    }>;
+    const contagem = new Map<string, { total: number; contra: number }>();
+    for (const p of dados) {
+      const atual = contagem.get(p.partido) ?? { total: 0, contra: 0 };
+      atual.total += 1;
+      if (p.votos.cesta_basica === "CONTRA") atual.contra += 1;
+      contagem.set(p.partido, atual);
+    }
+    const campeao = [...contagem.entries()]
+      .map(([partido, c]) => ({ partido, ...c }))
+      .sort(
+        (a, b) =>
+          b.total - a.total || b.contra - a.contra || a.partido.localeCompare(b.partido, "pt-BR"),
+      )[0].partido;
+
+    await page.goto("/");
+    await esperarCards(page);
+
+    const grafico = page.getByTestId("grafico-partidos");
+    await expect(grafico.getByText("Como cada partido votou")).toBeVisible();
+    await expect(
+      grafico.getByText(new RegExp(`${TOTAL_PARLAMENTARES} parlamentar`)),
+    ).toBeVisible();
+    await expect(grafico.getByText(/maiores bancadas primeiro/i)).toBeVisible();
+    // A 1ª bancada listada é a que tem mais votos (desempate pelos contrários).
+    await expect(grafico.locator("li").first()).toContainText(campeao);
+    await expect(grafico.getByText(/Rejeitou isenção/i).first()).toBeVisible();
+  });
+
+  test("colapsa em 5 partidos e o botão 'ver todos' expande", async ({ page }) => {
+    await page.goto("/");
+    await esperarCards(page);
+
+    const grafico = page.getByTestId("grafico-partidos");
+    const linhas = grafico.locator("li");
+    await expect(linhas).toHaveCount(5);
+
+    const botao = grafico.getByRole("button", { name: /Ver todos os \d+ partidos/i });
+    await expect(botao).toHaveAttribute("aria-expanded", "false");
+    await botao.click();
+
+    await expect.poll(async () => await linhas.count(), { timeout: 8_000 }).toBeGreaterThan(5);
+    await expect(
+      grafico.getByRole("button", { name: /Mostrar menos partidos/i }),
+    ).toHaveAttribute("aria-expanded", "true");
+
+    // volta a recolher
+    await grafico.getByRole("button", { name: /Mostrar menos partidos/i }).click();
+    await expect(linhas).toHaveCount(5);
+  });
+
+  test("fica na mesma linha do hemiciclo (desktop)", async ({ page }) => {
+    await page.setViewportSize({ width: 1280, height: 900 });
+    await page.goto("/");
+    await esperarCards(page);
+
+    const hemi = await page
+      .getByRole("img", { name: /Distribuição dos votos/i })
+      .boundingBox();
+    const graf = await page.getByTestId("grafico-partidos").boundingBox();
+    expect(hemi).not.toBeNull();
+    expect(graf).not.toBeNull();
+    // lado a lado: o gráfico começa à direita do hemiciclo, na mesma faixa vertical
+    expect(graf?.x ?? 0).toBeGreaterThan(hemi?.x ?? 0);
+    expect(graf?.y ?? 9_999).toBeLessThan((hemi?.y ?? 0) + (hemi?.height ?? 0));
+  });
+
+  test("segue o filtro de cargo (81 senadores)", async ({ page }) => {
+    await page.goto("/");
+    await esperarCards(page);
+    await page.getByRole("button", { name: /Senadores \(81\)/ }).click();
+
+    await expect(page.getByTestId("grafico-partidos").getByText(/81 parlamentar/i)).toBeVisible();
+  });
+
+  test("muda quando troca a pauta (composição nova)", async ({ page }) => {
+    await page.goto("/");
+    await esperarCards(page);
+    const grafico = page.getByTestId("grafico-partidos");
+    const antes = await grafico.innerText();
+
+    await page.getByRole("button", { name: /Aposentadoria dos agentes de saúde/i }).click();
+    await expect
+      .poll(async () => (await grafico.innerText()) !== antes, { timeout: 8_000 })
+      .toBe(true);
+  });
+});

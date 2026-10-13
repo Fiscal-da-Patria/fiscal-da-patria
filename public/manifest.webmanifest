@@ -1,0 +1,15 @@
+{
+  "name": "Fiscal da Pátria",
+  "short_name": "Fiscal da Pátria",
+  "description": "Veja como cada deputado votou nas pautas que mexem no seu bolso. Dados oficiais da Câmara dos Deputados.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0f2f1d",
+  "theme_color": "#0f2f1d",
+  "lang": "pt-BR",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
