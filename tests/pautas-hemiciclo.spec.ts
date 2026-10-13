@@ -33,9 +33,15 @@ test.describe("Pautas e hemiciclo", () => {
   });
 
   test("hemiciclo atualiza as contagens ao trocar de pauta", async ({ page }) => {
-    const legendaFavoravel = () => page.getByText(/A favor do cidadão:/).innerText();
-    const antes = await legendaFavoravel();
+    // A legenda usa o rótulo FACTUAL de cada pauta (conformidade editorial):
+    // "Apoiou isenção: 300" na Cesta Básica, "Apoiou piso: N" no piso da enfermagem.
+    await expect(page.getByText(/Apoiou isenção:/).first()).toBeVisible();
+
     await page.getByRole("button", { name: /Piso salarial da enfermagem/i }).click();
-    await expect.poll(async () => await legendaFavoravel(), { timeout: 5_000 }).not.toBe(antes);
+
+    const legendaPiso = page.getByText(/Apoiou piso:/).first();
+    await expect(legendaPiso).toBeVisible();
+    const texto = await legendaPiso.evaluate((no) => no.parentElement?.textContent ?? "");
+    expect(texto).toMatch(/Apoiou piso:\s*\d+/);
   });
 });

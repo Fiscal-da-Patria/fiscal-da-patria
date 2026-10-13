@@ -168,6 +168,48 @@ test.describe("Linha do tempo do funil legislativo", () => {
     await expect(funil.getByText(/Volta para a Câmara, que dá a palavra final/i)).toBeVisible();
     await expect(funil.getByText(/faz a lei valer mesmo contra a vontade do governo/i)).toBeVisible();
   });
+
+  test("os ícones da timeline continuam visíveis no tema escuro (contraste do círculo)", async ({
+    page,
+  }) => {
+    await page.goto("/poderes");
+
+    /** Contraste WCAG entre duas cores `rgb(...)` (fórmula de luminância relativa). */
+    const contraste = (corA: string, corB: string) => {
+      const luminancia = (cor: string) => {
+        const [r, g, b] = cor
+          .match(/\d+(\.\d+)?/g)!
+          .slice(0, 3)
+          .map(Number);
+        const canal = (c: number) => {
+          const s = c / 255;
+          return s <= 0.03928 ? s / 12.92 : ((s + 0.055) / 1.055) ** 2.4;
+        };
+        return 0.2126 * canal(r) + 0.7152 * canal(g) + 0.0722 * canal(b);
+      };
+      const [maior, menor] = [luminancia(corA), luminancia(corB)].sort((x, y) => y - x);
+      return (maior + 0.05) / (menor + 0.05);
+    };
+
+    for (const tema of ["claro", "escuro"] as const) {
+      await page.evaluate((t) => {
+        document.documentElement.classList.toggle("dark", t === "escuro");
+      }, tema);
+
+      const cores = await page
+        .locator("[data-etapa]")
+        .first()
+        .locator("span")
+        .first()
+        .evaluate((el) => {
+          const estilo = getComputedStyle(el);
+          return { icone: estilo.color, fundo: estilo.backgroundColor };
+        });
+
+      // WCAG 1.4.11: elemento gráfico precisa de 3:1 contra o fundo vizinho.
+      expect(contraste(cores.icone, cores.fundo), `tema ${tema}`).toBeGreaterThan(3);
+    }
+  });
 });
 
 test.describe("Âncoras, responsividade e atalhos contextuais", () => {

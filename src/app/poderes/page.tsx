@@ -498,7 +498,7 @@ export default function PoderesPage() {
                   data-etapa={etapa.n}
                   className="relative flex gap-4 md:flex-1 md:flex-col md:gap-3"
                 >
-                  <span className="z-10 grid h-10 w-10 shrink-0 place-items-center rounded-full border-2 border-dourado bg-superficie text-verde-mata shadow-sm">
+                  <span className="z-10 grid h-10 w-10 shrink-0 place-items-center rounded-full border-2 border-dourado bg-superficie text-titulo shadow-sm">
                     <Icone className="h-5 w-5" aria-hidden />
                   </span>
                   <div className="flex-1 rounded-2xl border border-borda bg-superficie p-4 shadow-sm">
