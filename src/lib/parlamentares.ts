@@ -220,7 +220,7 @@ export function numeroCompacto(n: number): string {
 }
 
 /** Critérios de ordenação da listagem. */
-export type Ordem = 'piores' | 'melhores' | 'intercalado' | 'maisVotados' | 'alfabetica';
+export type Ordem = 'piores' | 'melhores' | 'intercalado' | 'maisVotados';
 
 /** Rótulos do seletor "Ordenar por" (curtos e escaneáveis). */
 export const ROTULOS_ORDEM: Record<Ordem, string> = {
@@ -228,7 +228,6 @@ export const ROTULOS_ORDEM: Record<Ordem, string> = {
   intercalado: '⚖️ Placar equilibrado (Intercalado)',
   melhores: '✅ Favoráveis primeiro',
   maisVotados: '🗳️ Mais votados nas urnas',
-  alfabetica: '🔤 Ordem alfabética (A-Z)',
 };
 
 /** Banner contextual exibido acima da listagem (factual, sem juízo de valor). */
@@ -240,7 +239,6 @@ export const BANNER_ORDEM: Record<Ordem, string> = {
   intercalado:
     'Mostrando posições favoráveis e divergentes de forma intercalada, sempre começando pelos mais votados.',
   maisVotados: 'Mostrando os mais votados na eleição (dados oficiais do TSE).',
-  alfabetica: 'Mostrando em ordem alfabética (A-Z).',
 };
 
 /**
@@ -306,7 +304,6 @@ function alinhamentoNaPauta(p: ParlamentarConsolidado, slug: string): Alinhament
  *
  * `maisVotados`: ignora a gravidade e mostra os mais votados da eleição (2º critério isolado).
  * `intercalado`: alterna 1 CONTRA / 1 A FAVOR (mais votados de cada lado), depois o resto.
- * `alfabetica`: apenas por nome (A-Z).
  */
 export function ordenarParlamentares(
   parlamentares: ParlamentarConsolidado[],
@@ -315,8 +312,6 @@ export function ordenarParlamentares(
 ): ParlamentarConsolidado[] {
   const porNome = (a: ParlamentarConsolidado, b: ParlamentarConsolidado) =>
     a.nome.localeCompare(b.nome, 'pt-BR');
-
-  if (ordem === 'alfabetica') return [...parlamentares].sort(porNome);
 
   const porVotos = (a: ParlamentarConsolidado, b: ParlamentarConsolidado) =>
     (b.votosEleicao ?? 0) - (a.votosEleicao ?? 0);

@@ -49,17 +49,23 @@ test.describe("Entenda os Poderes — educação cívica", () => {
     await expect(senado.getByText(/3 por estado/i)).toBeVisible();
   });
 
-  test("grid responsivo: empilhado no mobile, 3 colunas no desktop", async ({ page }) => {
-    await expect(page.locator('[data-poder="legislativo"]').locator("xpath=..")).toHaveClass(
-      /md:grid-cols-3/,
-    );
+  test("carrossel no mobile (arrasta) e 3 colunas no desktop", async ({ page }) => {
+    const trilho = page.locator('[data-poder="legislativo"]').locator("xpath=..");
+    await expect(trilho).toHaveClass(/md:grid-cols-3/);
+    await expect(trilho).toHaveClass(/overflow-x-auto/);
 
     await page.setViewportSize({ width: 390, height: 900 });
     const mobile = await page
       .locator("[data-poder]")
       .evaluateAll((els) => els.map((e) => e.getBoundingClientRect()));
-    expect(Math.round(mobile[0].x)).toBe(Math.round(mobile[1].x)); // mesma coluna
-    expect(mobile[1].top).toBeGreaterThan(mobile[0].top);
+    expect(Math.round(mobile[0].y)).toBe(Math.round(mobile[1].y)); // lado a lado
+    expect(mobile[1].left).toBeGreaterThan(mobile[0].left);
+    // o trilho realmente rola para o lado (os 3 cards não cabem em 390px)
+    const rolagem = await trilho.evaluate((el) => ({
+      largura: el.clientWidth,
+      conteudo: el.scrollWidth,
+    }));
+    expect(rolagem.conteudo).toBeGreaterThan(rolagem.largura);
 
     await page.setViewportSize({ width: 1280, height: 900 });
     const desktop = await page
@@ -68,7 +74,6 @@ test.describe("Entenda os Poderes — educação cívica", () => {
     // mesma linha (o destaque do Legislativo sobe 8px de propósito)
     expect(Math.abs(desktop[0].y - desktop[1].y)).toBeLessThan(20);
     expect(desktop[1].left).toBeGreaterThan(desktop[0].left);
-    expect(mobile[0].x).toBeLessThan(desktop[1].left);
   });
 
   test("botão de retorno volta para a fiscalização", async ({ page }) => {
@@ -129,7 +134,10 @@ test.describe("Régua dos votos — quóruns constitucionais", () => {
     const pl = page.locator('[data-quorum="pl"]');
     await expect(pl.getByText(/Maioria simples/i)).toBeVisible();
     await expect(pl.getByText(/mais votos SIM do que NÃO/i)).toBeVisible();
-    await expect(pl.locator("[data-quorum-camara]")).toContainText(/mínimo de 257/i);
+    await expect(pl.locator("[data-quorum-camara]")).toContainText(/dos votos dos presentes/i);
+    await expect(
+      pl.getByText(/A sessão só delibera com a maioria absoluta presente: 257/i),
+    ).toBeVisible();
     await expect(pl.locator('[data-quorum-base="pl"]')).toContainText(/art\. 47/i);
   });
 
@@ -225,7 +233,7 @@ test.describe("Âncoras, responsividade e atalhos contextuais", () => {
     expect((await funil.boundingBox())?.y ?? 9999).toBeLessThan(200);
   });
 
-  test("régua empilha no mobile / 3 colunas no desktop e a timeline gira de eixo", async ({
+  test("no mobile a régua e a timeline viram carrossel; no desktop, grade", async ({
     page,
   }) => {
     await page.goto("/poderes");
@@ -247,14 +255,21 @@ test.describe("Âncoras, responsividade e atalhos contextuais", () => {
     const cartoesMobile = await page
       .locator("[data-quorum]")
       .evaluateAll((els) => els.map((e) => e.getBoundingClientRect()));
-    expect(Math.round(cartoesMobile[0].x)).toBe(Math.round(cartoesMobile[1].x)); // empilhado
-    expect(cartoesMobile[1].top).toBeGreaterThan(cartoesMobile[0].top);
+    expect(Math.round(cartoesMobile[0].y)).toBe(Math.round(cartoesMobile[1].y)); // lado a lado
+    expect(cartoesMobile[1].left).toBeGreaterThan(cartoesMobile[0].left);
+    expect(
+      await page
+        .locator("[data-quorum]")
+        .first()
+        .locator("xpath=..")
+        .evaluate((el) => el.scrollWidth > el.clientWidth),
+    ).toBe(true);
 
     const etapasMobile = await page
       .locator("[data-etapa]")
       .evaluateAll((els) => els.map((e) => e.getBoundingClientRect()));
-    expect(Math.round(etapasMobile[0].x)).toBe(Math.round(etapasMobile[1].x)); // eixo vertical
-    expect(etapasMobile[1].top).toBeGreaterThan(etapasMobile[0].top);
+    expect(Math.round(etapasMobile[0].y)).toBe(Math.round(etapasMobile[1].y)); // trilho horizontal
+    expect(etapasMobile[1].left).toBeGreaterThan(etapasMobile[0].left);
   });
 
   test("atalho contextual: PEC leva à régua; projeto de lei leva à linha do tempo", async ({

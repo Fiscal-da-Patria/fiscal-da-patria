@@ -66,15 +66,6 @@ test.describe("Ordenação (unidade)", () => {
     ]);
   });
 
-  test("alfabética ignora o voto", () => {
-    const dados = [fake("Carlos", "CONTRA"), fake("Ana", "FAVORAVEL"), fake("Beatriz", "AUSENTE")];
-    expect(ordenarParlamentares(dados, SLUG, "alfabetica").map((p) => p.nome)).toEqual([
-      "Ana",
-      "Beatriz",
-      "Carlos",
-    ]);
-  });
-
   test("quem não tem registro na pauta conta como AUSENTE", () => {
     const semRegistro = fake("Zeca", "FAVORAVEL");
     semRegistro.votos = {};
@@ -166,21 +157,12 @@ test.describe("Ordenação (interface)", () => {
     await expect(page.getByText(/posicionamento favorável à proposta/i)).toBeVisible();
   });
 
-  test("'alfabetica' reordena a lista (A-Z)", async ({ page, request }) => {
-    const dados = (await (
-      await request.get("/data/parlamentares.json")
-    ).json()) as ParlamentarConsolidado[];
-    const primeiro = [...dados].sort((a, b) => a.nome.localeCompare(b.nome, "pt-BR"))[0].nome;
-
+  test("o seletor não oferece mais a ordem alfabética (A-Z)", async ({ page }) => {
     await page.goto("/");
     await esperarCards(page);
-    await page.getByLabel("Ordenar a lista").selectOption("alfabetica");
-    await expect(page.getByText(/Mostrando em ordem alfabética/i)).toBeVisible();
-
-    const nomes = await page
-      .locator("[data-nome]")
-      .evaluateAll((els) => els.map((e) => e.getAttribute("data-nome")));
-    expect(nomes[0]).toBe(primeiro);
+    const opcoes = await page.getByLabel("Ordenar a lista").locator("option").allInnerTexts();
+    expect(opcoes).toHaveLength(4);
+    expect(opcoes.join(" ")).not.toMatch(/alfab/i);
   });
 
   test("'intercalado' no seletor: CONTRA e A FAVOR alternando no topo", async ({
@@ -212,8 +194,8 @@ test.describe("Ordenação (interface)", () => {
     await page.goto("/");
     await esperarCards(page);
     const seletor = page.getByLabel("Ordenar a lista");
-    await seletor.selectOption("alfabetica");
-    await expect(seletor).toHaveValue("alfabetica");
+    await seletor.selectOption("maisVotados");
+    await expect(seletor).toHaveValue("maisVotados");
 
     await page.getByRole("button", { name: /Fim da blindagem de políticos/i }).click();
     await expect(seletor).toHaveValue("piores");

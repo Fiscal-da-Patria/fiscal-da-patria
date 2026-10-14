@@ -134,13 +134,13 @@ const QUORUNS: Quorum[] = [
     exemplos: "Ex.: Igualdade Salarial (PL 1085/2023) e teto dos juros do cartão",
     destaque: "Maioria simples: quem tem mais votos",
     camara: "Maioria",
-    camaraNota: "dos presentes (mínimo de 257 para a sessão abrir)",
+    camaraNota: "dos votos dos presentes",
     senado: "Maioria",
-    senadoNota: "dos presentes (mínimo de 41 para a sessão abrir)",
+    senadoNota: "dos votos dos presentes",
     pontos: [
       "Vence quem tiver mais votos SIM do que NÃO entre os presentes; abstenção não é voto.",
+      "A sessão só delibera com a maioria absoluta presente: 257 deputados ou 41 senadores.",
       "Passa por 1 turno em cada Casa (em geral) e vai para sanção ou veto.",
-      "É o tipo mais comum — e o mais fácil de aprovar às pressas.",
     ],
     base: "Constituição, art. 47",
     icone: Gavel,
@@ -254,14 +254,15 @@ export default function PoderesPage() {
         {/* Diagrama dos 3 Poderes */}
         <section className="mt-10">
           <h2 className="sr-only">Os três Poderes da República</h2>
-          <div className="grid gap-4 md:grid-cols-3">
+          {/* No celular: carrossel de cards (arrasta para o lado). No desktop: grade. */}
+          <div className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 md:mx-0 md:grid md:grid-cols-3 md:overflow-visible md:px-0 md:pb-0">
             {PODERES.map((poder) => {
               const Icone = ICONES[poder.id];
               return (
                 <article
                   key={poder.id}
                   data-poder={poder.id}
-                  className={`flex flex-col rounded-2xl border bg-superficie p-5 shadow-sm ${
+                  className={`flex w-[82%] shrink-0 snap-start flex-col rounded-2xl border bg-superficie p-5 shadow-sm md:w-auto ${
                     poder.destaque
                       ? "border-2 border-dourado ring-2 ring-verde-bandeira/20 md:-mt-2 md:mb-2"
                       : "border-borda"
@@ -316,6 +317,9 @@ export default function PoderesPage() {
               );
             })}
           </div>
+          <p className="mt-2 text-[11px] font-medium text-corpo md:hidden">
+            Arraste para o lado para ver os outros cards →
+          </p>
         </section>
 
         {/* Câmara x Senado */}
@@ -329,10 +333,10 @@ export default function PoderesPage() {
             coisas diferentes.
           </p>
 
-          <div className="mt-5 grid gap-4 sm:grid-cols-2">
+          <div className="-mx-4 mt-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0">
             <article
               data-casa="camara"
-              className="rounded-2xl border border-borda bg-superficie p-5 shadow-sm"
+              className="w-[82%] shrink-0 snap-start rounded-2xl border border-borda bg-superficie p-5 shadow-sm sm:w-auto"
             >
               <span className="inline-flex items-center gap-2 rounded-full border border-verde-bandeira/40 bg-verde-bandeira/10 px-3 py-1 text-[11px] font-bold text-titulo">
                 <Users className="h-3.5 w-3.5" aria-hidden /> Câmara dos Deputados
@@ -349,7 +353,7 @@ export default function PoderesPage() {
 
             <article
               data-casa="senado"
-              className="rounded-2xl border border-borda bg-superficie p-5 shadow-sm"
+              className="w-[82%] shrink-0 snap-start rounded-2xl border border-borda bg-superficie p-5 shadow-sm sm:w-auto"
             >
               <span className="inline-flex items-center gap-2 rounded-full border border-dourado/50 bg-dourado/10 px-3 py-1 text-[11px] font-bold text-titulo">
                 <Landmark className="h-3.5 w-3.5" aria-hidden /> Senado Federal
@@ -363,6 +367,9 @@ export default function PoderesPage() {
               </p>
             </article>
           </div>
+          <p className="mt-2 text-[11px] font-medium text-corpo sm:hidden">
+            Arraste para o lado para ver o outro card →
+          </p>
         </section>
 
         {/* Régua dos votos */}
@@ -377,14 +384,14 @@ export default function PoderesPage() {
             um projeto comum.
           </p>
 
-          <div className="mt-5 grid gap-4 md:grid-cols-3">
+          <div className="-mx-4 mt-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 md:mx-0 md:grid md:grid-cols-3 md:overflow-visible md:px-0 md:pb-0">
             {QUORUNS.map((quorum) => {
               const Icone = quorum.icone;
               return (
                 <article
                   key={quorum.id}
                   data-quorum={quorum.id}
-                  className="flex flex-col rounded-2xl border border-borda bg-superficie p-5 shadow-sm"
+                  className="flex w-[82%] shrink-0 snap-start flex-col rounded-2xl border border-borda bg-superficie p-5 shadow-sm md:w-auto"
                 >
                   <div className="flex items-center gap-2">
                     <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg border border-dourado/50 bg-dourado/10 text-titulo">
@@ -395,10 +402,12 @@ export default function PoderesPage() {
                     </span>
                   </div>
 
-                  <h3 className="mt-3 text-base font-black leading-snug text-titulo">
-                    {quorum.nome}
-                  </h3>
-                  <p className="mt-1 text-[11px] leading-snug text-corpo">{quorum.exemplos}</p>
+                  <div className="mt-3 min-h-[6rem] md:min-h-[5rem]">
+                    <h3 className="text-base font-black leading-snug text-titulo">
+                      {quorum.nome}
+                    </h3>
+                    <p className="mt-1 text-[11px] leading-snug text-corpo">{quorum.exemplos}</p>
+                  </div>
 
                   <p
                     data-quorum-regra={quorum.sigla}
@@ -454,6 +463,9 @@ export default function PoderesPage() {
               );
             })}
           </div>
+          <p className="mt-2 text-[11px] font-medium text-corpo md:hidden">
+            Arraste para o lado para ver os outros cards →
+          </p>
 
           <p className="mt-4 rounded-2xl border border-borda bg-superficie p-4 text-xs leading-relaxed text-corpo shadow-sm">
             <Info className="mr-1 inline h-3.5 w-3.5 align-middle text-dourado" aria-hidden />
@@ -485,10 +497,10 @@ export default function PoderesPage() {
             esse caminho que o Fiscal da Pátria acompanha, voto a voto.
           </p>
 
-          <ol className="relative mt-6 space-y-6 md:flex md:gap-3 md:space-y-0">
+          <ol className="relative -mx-4 mt-6 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-2 md:mx-0 md:overflow-visible md:px-0 md:pb-0">
             <span
               aria-hidden
-              className="absolute left-[19px] top-3 h-[calc(100%-1.5rem)] w-0.5 rounded-full bg-trilha md:left-0 md:top-[19px] md:h-0.5 md:w-full"
+              className="absolute left-0 top-[19px] h-0.5 w-full rounded-full bg-trilha"
             />
             {ETAPAS.map((etapa) => {
               const Icone = etapa.icone;
@@ -496,7 +508,7 @@ export default function PoderesPage() {
                 <li
                   key={etapa.id}
                   data-etapa={etapa.n}
-                  className="relative flex gap-4 md:flex-1 md:flex-col md:gap-3"
+                  className="relative flex w-[82%] shrink-0 snap-start gap-4 md:w-auto md:flex-1 md:flex-col md:gap-3"
                 >
                   <span className="z-10 grid h-10 w-10 shrink-0 place-items-center rounded-full border-2 border-dourado bg-superficie text-titulo shadow-sm">
                     <Icone className="h-5 w-5" aria-hidden />
@@ -518,6 +530,9 @@ export default function PoderesPage() {
               );
             })}
           </ol>
+          <p className="mt-2 text-[11px] font-medium text-corpo md:hidden">
+            Arraste para o lado para seguir o funil →
+          </p>
 
           <p className="mt-4 rounded-2xl border border-borda bg-superficie p-4 text-xs leading-relaxed text-corpo shadow-sm">
             <strong className="text-titulo">Dica de fiscal:</strong> quando um projeto empaca, o motivo

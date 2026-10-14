@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { ExternalLink, Info, Send, X } from "lucide-react";
-import { PAUTAS, rotuloCurto, urlFonteOficial } from "@/lib/pautas";
+import { PAUTAS, exemploPratico, rotuloCurto, urlFonteOficial } from "@/lib/pautas";
 import Link from "next/link";
 import {
   COR_ALINHAMENTO,
@@ -157,6 +157,12 @@ export function DossieModal({
               </span>
             </div>
             <p className="mt-2 text-xs text-corpo">{pautaAtiva.ementaOficial}</p>
+            <p
+              data-exemplo-pratico={pautaAtiva.slug}
+              className="mt-2 rounded-lg border border-dourado/40 bg-dourado/5 px-3 py-2 text-[11px] leading-relaxed text-titulo"
+            >
+              <strong>No dia a dia:</strong> {exemploPratico(pautaAtiva)}
+            </p>
             <p className="mt-1 text-[11px] text-corpo-fraco">
               {votoBrutoDestaque
                 ? `Voto registrado na fonte oficial: ${ROTULO_VOTO_BRUTO[votoBrutoDestaque]}.`

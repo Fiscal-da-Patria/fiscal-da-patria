@@ -13,7 +13,7 @@ import { ParlamentarCard } from "@/components/ParlamentarCard";
 import { DossieModal } from "@/components/DossieModal";
 import { CargoTabs } from "@/components/CargoTabs";
 import { GraficoPartidos } from "@/components/GraficoPartidos";
-import { PAUTAS, motivoSemVotoCasa, urlFonteOficial } from "@/lib/pautas";
+import { PAUTAS, exemploPratico, motivoSemVotoCasa, urlFonteOficial } from "@/lib/pautas";
 import { bannerOrdem, rotulosOrdem } from "@/lib/parlamentares";
 import { mensagemPauta } from "@/lib/share";
 import {
@@ -40,11 +40,6 @@ export default function HomePage() {
   const [dossie, setDossie] = useState<ParlamentarConsolidado | null>(null);
   /** Mostra só quem tem voto registrado na matéria ativa (tira o ruído de "Sem voto"). */
   const [soVotaram, setSoVotaram] = useState(false);
-  /**
-   * Quando a casa filtrada **não votou** a matéria, a lista fica vazia por padrão
-   * (em vez de 81 cards de "Sem voto individual"). Este botão reexibe a casa toda.
-   */
-  const [mostrarSemVoto, setMostrarSemVoto] = useState(false);
   /** Cards visíveis por vez na lista (o resto vem em "Carregar mais"). */
   const [visiveis, setVisiveis] = useState(POR_PAGINA);
 
@@ -132,14 +127,13 @@ export default function HomePage() {
 
   /**
    * Base efetiva da lista. Quando a casa inteira não votou a matéria, a lista fica
-   * vazia por padrão (o aviso explica o motivo real do vazio) — listar 81 cards de
-   * "Sem voto individual" é ruído, não informação. O botão "ver a casa toda"
-   * liga `mostrarSemVoto`.
+   * vazia: o aviso acima já explica o motivo real, e listar 81 cards de
+   * "Sem voto individual" seria ruído, não informação.
    */
   const baseVisivel = useMemo(() => {
-    if (semVotoNaCasa && !mostrarSemVoto) return [];
+    if (semVotoNaCasa) return [];
     return soVotaram ? porCargo.filter((p) => p.votos[pautaSel] !== "NAO_APLICAVEL") : porCargo;
-  }, [porCargo, soVotaram, pautaSel, semVotoNaCasa, mostrarSemVoto]);
+  }, [porCargo, soVotaram, pautaSel, semVotoNaCasa]);
 
   const distribuicao = useMemo(() => distribuirPorPauta(baseVisivel, pautaSel), [
     baseVisivel,
@@ -160,13 +154,11 @@ export default function HomePage() {
   const listadosVisiveis = useMemo(() => listados.slice(0, visiveis), [listados, visiveis]);
 
   // Ao trocar a pauta, volta para a ordenação padrão (piores votos primeiro)
-  // e reinicia a lista: outra matéria, outra história (não faz sentido manter
-  // a paginação nem o "ver a casa toda" da matéria anterior).
+  // e reinicia a lista: outra matéria, outra história.
   function selecionarPauta(slug: string) {
     setPautaSel(slug);
     setOrdem("piores");
     setVisiveis(POR_PAGINA);
-    setMostrarSemVoto(false);
   }
 
   // Mantém a URL compartilhável: ?deputado=<id> enquanto um dossiê está aberto.
@@ -196,7 +188,6 @@ export default function HomePage() {
     setSoVotaram(false);
     setOrdem("piores");
     setVisiveis(POR_PAGINA);
-    setMostrarSemVoto(false);
     window.history.replaceState(null, "", window.location.pathname);
   }
 
@@ -254,6 +245,12 @@ export default function HomePage() {
               </div>
               <h3 className="mt-1 text-lg font-bold text-titulo">{pautaAtual.rotuloPopular}</h3>
               <p className="mt-1 text-xs text-corpo">{pautaAtual.ementaOficial}</p>
+              <p
+                data-exemplo-pratico={pautaAtual.slug}
+                className="mt-2 rounded-lg border border-dourado/40 bg-dourado/5 px-3 py-2 text-[11px] leading-relaxed text-titulo"
+              >
+                <strong>No dia a dia:</strong> {exemploPratico(pautaAtual)}
+              </p>
               <a
                 href={urlFonteOficial(pautaAtual)}
                 target="_blank"
@@ -346,22 +343,8 @@ export default function HomePage() {
                 : "Quem não votou aparece como “Sem voto individual” — normalmente porque não estava em exercício na sessão, faltou àquela votação específica ou a matéria segue pendente na outra casa."}
             </p>
             <div className="mt-2 flex flex-wrap gap-2">
-              {semVotoNaCasa ? (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setMostrarSemVoto((v) => !v);
-                    setVisiveis(POR_PAGINA);
-                  }}
-                  aria-pressed={mostrarSemVoto}
-                  data-ver-sem-voto="1"
-                  className="rounded-full border border-borda bg-superficie px-2.5 py-1 text-[11px] font-bold text-titulo transition hover:border-dourado"
-                >
-                  {mostrarSemVoto
-                    ? "🙈 Ocultar quem não votou"
-                    : `👁️ Ver os ${totalDaCasa} de qualquer forma`}
-                </button>
-              ) : (
+              {/* Sem votos na casa, o aviso acima já explicou o motivo: nada de botão extra. */}
+              {!semVotoNaCasa && (
                 <button
                   type="button"
                   onClick={() => {
@@ -437,7 +420,7 @@ export default function HomePage() {
                 <RotateCcw className="h-3.5 w-3.5" aria-hidden /> Recarregar
               </button>
             </div>
-          ) : semVotoNaCasa && !mostrarSemVoto ? (
+          ) : semVotoNaCasa ? (
             <div
               data-lista-vazia-casa="1"
               className="rounded-xl border border-borda bg-superficie p-10 text-center"
@@ -447,18 +430,8 @@ export default function HomePage() {
               </p>
               <p className="mx-auto mt-1 max-w-lg text-xs leading-relaxed text-corpo">
                 {motivoCasa} O Fiscal da Pátria só mostra voto registrado na fonte oficial: nada de
-                “voto suposto”.
+                “voto suposto”. Escolha a outra casa nas abas acima para ver quem votou por lá.
               </p>
-              <button
-                type="button"
-                onClick={() => {
-                  setMostrarSemVoto(true);
-                  setVisiveis(POR_PAGINA);
-                }}
-                className="mt-4 inline-flex items-center gap-2 rounded-xl border border-borda bg-superficie px-4 py-2 text-xs font-bold text-titulo shadow-sm transition hover:border-dourado focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dourado"
-              >
-                👁️ Ver os {totalDaCasa} de qualquer forma
-              </button>
             </div>
           ) : filtrados.length === 0 ? (
             <div className="rounded-xl border border-borda bg-superficie p-10 text-center">

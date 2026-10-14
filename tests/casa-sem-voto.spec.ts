@@ -60,7 +60,7 @@ test.describe("Pautas sem voto na casa filtrada (clareza do dado)", () => {
     );
   });
 
-  test("casa sem voto: lista vazia com o motivo real e caminho explícito para reexibir", async ({
+  test("casa sem voto: lista vazia com o motivo real (sem botão de reexibir)", async ({
     page,
   }) => {
     await page.goto("/");
@@ -68,21 +68,18 @@ test.describe("Pautas sem voto na casa filtrada (clareza do dado)", () => {
     await page.getByRole("button", { name: /Fim da escala 6x1/ }).click();
     await page.getByRole("button", { name: /Senadores \(81\) · 0 votaram/ }).click();
 
-    // Padrão: nada de 81 cards de "Sem voto individual" — o app explica o porquê.
+    // Sem votos na casa, o app explica o motivo — e não lista 81 "Sem voto individual".
     const vazio = page.locator('[data-lista-vazia-casa="1"]');
     await expect(vazio).toBeVisible();
     await expect(vazio).toContainText(/Senado ainda não votou esta matéria/i);
     await expect(page.locator("[data-nome]")).toHaveCount(0);
     await expect(page.locator('[data-carregar-mais="1"]')).toHaveCount(0);
+    // Decisão de produto: não existe mais atalho para reexibir a casa vazia.
+    await expect(page.locator('[data-ver-sem-voto="1"]')).toHaveCount(0);
+    await expect(page.locator('[data-so-votaram="1"]')).toHaveCount(0);
 
-    // Quem quiser conferir a casa inteira tem um caminho explícito…
-    await page.locator('[data-ver-sem-voto="1"]').click();
-    await carregarTodos(page);
-    await expect.poll(async () => await cards(page).count(), { timeout: 15_000 }).toBe(81);
-    await expect(page.locator("[data-nome]").first()).toContainText("Sem voto individual");
-
-    // …e trocar de casa continua funcionando.
-    await page.getByRole("button", { name: /Trocar para Deputados/i }).click();
+    // O caminho é a outra casa: na Câmara, esta pauta tem votação (513 votaram).
+    await page.getByRole("button", { name: /Deputados Federais \(513\) · 513 votaram/ }).click();
     await carregarTodos(page);
     await expect.poll(async () => await cards(page).count(), { timeout: 15_000 }).toBe(513);
   });

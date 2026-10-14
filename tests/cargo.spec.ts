@@ -95,7 +95,7 @@ test.describe("Congresso: cargo, abas e votos do Senado", () => {
     await expect(dialog.getByText(/simbólica/i).first()).toBeVisible();
   });
 
-  test("pauta auditada no Senado marca deputados como 'sem voto individual'", async ({
+  test("pauta auditada no Senado: a Câmara mostra o aviso em vez de 513 cards sem voto", async ({
     page,
   }) => {
     await page.goto("/");
@@ -104,13 +104,12 @@ test.describe("Congresso: cargo, abas e votos do Senado", () => {
 
     await expect(page.getByText(/Situação no Senado/i)).toBeVisible();
     await page.getByRole("button", { name: /Deputados Federais \(513\)/ }).click();
-    // A Câmara não votou esta matéria (a votação é auditada no Senado): a lista
-    // vem vazia por padrão e o app oferece reexibir a casa — aí cada card mostra
-    // o "Sem voto individual" com o motivo.
-    await page.locator('[data-ver-sem-voto="1"]').click();
-    await expect(
-      page.locator("[data-nome]").first().getByText(/Sem voto individual/),
-    ).toBeVisible();
+
+    // Decisão de produto: sem votos da casa, o app explica — não despeja cards vazios.
+    await expect(page.locator('[data-lista-vazia-casa="1"]')).toContainText(
+      /auditada no Senado Federal/i,
+    );
+    await expect(page.locator("[data-nome]")).toHaveCount(0);
   });
 
   test("deep link ?cargo=SENADOR abre já filtrado", async ({ page }) => {

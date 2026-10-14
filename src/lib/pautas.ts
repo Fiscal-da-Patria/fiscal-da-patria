@@ -359,6 +359,43 @@ export function rotuloCurto(pauta: PautaConfig): string {
 }
 
 /**
+ * **O que isso muda no dia a dia** — uma frase curta e concreta por pauta.
+ *
+ * Regra anti-desinformação: cada frase é uma tradução **direta do texto oficial**
+ * (`ementaOficial`, transcrito da fonte) para o cotidiano. Nada de número, prazo
+ * ou efeito que não esteja na própria matéria.
+ */
+export const EXEMPLOS_PRATICOS: Record<string, string> = {
+  cesta_basica:
+    'a cesta básica pode ficar com imposto zero: o arroz, o feijão e a comida do prato de todo dia.',
+  igualdade_salarial:
+    'mulher e homem na mesma função passam a ter que receber o mesmo salário.',
+  fim_blindagem:
+    'mexe nas prerrogativas de deputados e senadores — foro especial e imunidade parlamentar.',
+  ir_isento:
+    'menos Imposto de Renda para quem ganha menos, com cobrança mínima de quem ganha muito.',
+  super_ricos:
+    'cobra imposto dos fundos de investimento e do dinheiro aplicado no exterior pelos mais ricos.',
+  teto_juro_cartao:
+    'cria o Desenrola Brasil e limita os juros do rotativo do cartão de crédito.',
+  piso_enfermagem:
+    'fixa um piso salarial nacional para enfermeiros, técnicos, auxiliares e parteiras.',
+  fim_escala_6x1:
+    'reduz a jornada para 36 horas por semana em 10 anos — o fim do 6x1.',
+  aposentadoria_agentes_saude:
+    'aposentadoria com regra especial para agentes de saúde e de combate às endemias.',
+  crime_organizado:
+    'regras mais duras contra facções, alcançando também quem favorece ou financia o crime organizado.',
+  preco_energia:
+    'abre espaço no orçamento para aliviar a conta de luz no choque internacional de energia.',
+};
+
+/** Exemplo prático da pauta (fallback: a própria ementa oficial). */
+export function exemploPratico(pauta: PautaConfig): string {
+  return EXEMPLOS_PRATICOS[pauta.slug] ?? pauta.ementaOficial;
+}
+
+/**
  * **Por que** a casa filtrada não tem voto registrado nesta pauta.
  *
  * Fonte: o bloco `senado` de cada pauta (curado e revalidado contra a API
