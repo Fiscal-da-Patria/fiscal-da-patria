@@ -71,8 +71,9 @@ export function GraficoPartidos({
 
   const totalGeral = linhas.reduce((s, l) => s + l.total, 0);
   const comVoto = linhas.reduce((s, l) => s + (l.total - l.contagem.NAO_APLICAVEL), 0);
-  if (totalGeral === 0) return null;
 
+  // Lista vazia (a casa filtrada não votou a matéria): mostramos o estado vazio
+  // em vez de sumir com o bloco — o usuário precisa saber por que não há barras.
   const visiveis = expandido ? linhas : linhas.slice(0, LIMITE);
 
   const pct = (n: number, base: number) => (base > 0 ? Math.round((n / base) * 100) : 0);

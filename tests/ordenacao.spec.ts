@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { ordenarParlamentares } from "../src/lib/parlamentares";
-import { esperarCards, TOTAL_PARLAMENTARES } from "./helpers";
+import { carregarTodos, esperarCards, TOTAL_PARLAMENTARES } from "./helpers";
 import type { AlinhamentoVoto, ParlamentarConsolidado } from "../src/types/parlamentar";
 
 const SLUG = "fim_blindagem";
@@ -151,6 +151,7 @@ test.describe("Ordenação (interface)", () => {
     await expect(page.getByText(/posicionamento contrário à proposta/i)).toBeVisible();
     await expect(page.getByLabel("Ordenar a lista")).toHaveValue("piores");
 
+    await carregarTodos(page);
     const nomes = await page
       .locator("[data-nome]")
       .evaluateAll((els) => els.map((e) => e.getAttribute("data-nome")));

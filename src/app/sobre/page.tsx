@@ -53,6 +53,15 @@ export default function SobrePage() {
           </p>
         </header>
 
+        {/* Manifesto: a frase que resume por que fiscalizamos */}
+        <blockquote
+          data-manifesto="1"
+          className="mt-6 border-l-4 border-dourado pl-4 text-base font-semibold italic leading-relaxed text-titulo"
+        >
+          &ldquo;Patriota de verdade não idolatra político; patriota de verdade fiscaliza os fatos
+          para proteger a sua pátria.&rdquo;
+        </blockquote>
+
         <hr className="my-10 border-borda" />
 
         {/* Seção 1 */}
@@ -291,12 +300,6 @@ export default function SobrePage() {
             <SocialShareBar />
           </div>
         </section>
-
-        {/* Citação */}
-        <blockquote className="border-l-4 border-dourado pl-4 text-base font-semibold italic leading-relaxed text-titulo">
-          &ldquo;Patriota de verdade não idolatra político; patriota de verdade fiscaliza os fatos
-          para proteger a sua pátria.&rdquo;
-        </blockquote>
 
         <div className="mt-10">
           <Link

@@ -25,9 +25,10 @@
 | 16 | Pauta nova: fim da escala 6x1 | PEC 221/2019 auditada (472 Sim × 22 Não) — 11 pautas | ✅ |
 | 17 | Página "Entenda os Poderes" | Educação cívica: os 3 Poderes + Câmara × Senado | ✅ |
 | 18 | Régua dos votos + Linha do tempo | Quóruns (PEC 308/49 · PLP 257/41 · PL) e o funil legislativo em 5 passos | ✅ |
-| 19 | Deploy | Publicação (Vercel/Cloudflare Pages) + domínio | ⏳ próxima |
-| 20 | Otimização de fotos (WebP) | Reduzir o peso de `public/fotos` | ⏳ backlog |
-| 21 | OG dinâmico / Kit por estado | Crescimento e viralidade | ⏳ backlog |
+| 19 | Revisão de leitura e usabilidade | Manifesto no topo · rótulo único · rodapé único · casa sem voto · lista 20 em 20 | ✅ |
+| 20 | Deploy | Publicação (Vercel/Cloudflare Pages) + domínio | ⏳ próxima |
+| 21 | Otimização de fotos (WebP) | Reduzir o peso de `public/fotos` | ⏳ backlog |
+| 22 | OG dinâmico / Kit por estado | Crescimento e viralidade | ⏳ backlog |
 
 ## Registro por etapa
 
@@ -161,6 +162,16 @@
 - **Diagnóstico permanente:** o teste do `axe` no dossiê agora imprime o **seletor, o HTML e o `failureSummary`** (cores + tamanho de fonte) de cada nó reprovado — a próxima quebra de contraste se explica sozinha no log.
 - **Correção pedida em revisão visual (tema escuro):** os ícones dos 5 passos da linha do tempo usavam **`text-verde-mata`** (verde escuro fixo) sobre `bg-superficie` — no tema escuro o fundo também é escuro e os ícones ficavam **quase invisíveis**. Passaram a usar **`text-titulo`** (o token que adapta ao tema, o mesmo padrão dos cartões da régua). Para não repetir o erro, `tests/poderes.spec.ts` ganhou um teste que mede o **contraste real** do círculo em claro **e** escuro (`getComputedStyle` + luminância relativa; WCAG 1.4.11 exige 3:1) — esse tipo de regressão não passa mais batido (o `axe` não pega cor de ícone SVG).
 - **Verificação:** `tests/poderes.spec.ts` passou de 7 para **14 casos** (régua com números e base legal · timeline na ordem, com CCJ, Casa revisora e derrubada do veto · contraste dos ícones nos dois temas · âncoras medidas por `getBoundingClientRect` · régua/timeline responsivas · atalhos contextuais PEC × lei). Revalidação do `/poderes` depois do fix: **22/22 verdes** (spec + as 8 checagens do `axe`, claro/escuro, incluindo o dossiê) e **suíte completa: 146/146 verdes (6,2 min)** — `npm run build` OK.
+
+### Etapa 19 — Revisão de leitura e usabilidade (feedback do usuário) ✅
+- **Manifesto no topo:** a frase *"Patriota de verdade não idolatra político; patriota de verdade fiscaliza os fatos para proteger a sua pátria."* subiu para o **começo**: hero da home (com atalho "Sobre nós") e logo abaixo do cabeçalho do **Sobre Nós** (antes ficava no fim da página). Marcada com `data-manifesto` para teste.
+- **Rótulo único de navegação:** o item do menu, que já mudou para "Como Funciona" na Etapa 18, virou **"Entenda os 3 Poderes"** (mobile: "3 Poderes") — e o rodapé usa exatamente o mesmo texto. Antes eram três rótulos diferentes para a mesma página.
+- **Rodapé único e condensado:** o que parecia "dois rodapés" (três blocos empilhados com linhas divisórias) virou **um bloco só**: declaração de isenção + links + compartilhar. Todas as frases de compliance continuam **no mesmo parágrafo** (exigência de `tests/seo.spec.ts`): "iniciativa cívica voluntária", "não possuímos vínculo com partidos políticos, candidatos ou órgãos estatais", "Lei de Acesso à Informação (Lei 12.527/2011)", "dadosabertos.camara.leg.br" e "Não há pedido de voto".
+- **Sidebar no celular? Não — reordenação.** Medição real em 390×844 (`getBoundingClientRect` via script Playwright): o 1º card de deputado só aparecia **depois de 3,0 telas de rolagem** (y = 2504px), porque hemiciclo + gráfico por partido ocupavam **1419px** no topo. Sidebar não serve para 390px — e o conteúdo ali são **gráficos**, não navegação. Decisão: **ordem visual por CSS (`order-*`)**, com a lista subindo para **antes** dos gráficos no celular e a ordem original preservada no desktop (`md:order-none`). Resultado: 1º card em **2,1 telas** (y = 1777px) e os gráficos seguem logo abaixo do card da pauta no desktop.
+- **Casa que não votou a matéria (a pergunta certa):** sim, dá para afirmar *por quê* com o dado que já temos — `pauta.senado.status` (curado em `scripts/fetch_senado.ts` contra a API oficial): `pendente` (o Senado ainda **não votou**), `simbolica` (aprovou sem painel eletrônico) e `nominal`. O novo `motivoSemVotoCasa()` traduz cada caso, e quando a casa filtrada tem **zero** votos a lista **não** despeja 81 cards de "Sem voto individual": aparece um estado vazio com o motivo real (`data-lista-vazia-casa`) e o botão **"👁️ Ver os 81 de qualquer forma"** (`data-ver-sem-voto`) para quem quiser conferir de perto. O aviso de "Votação parcial (73 de 81)" continua com a lista completa.
+- **Paginação 20 em 20:** a lista mostra **20 cards** + botão **"⬇️ Carregar mais 20"** (`data-carregar-mais`), com contador honesto ("Mostrando 20 de 594 parlamentar(es)", `aria-live`). Qualquer mudança de pauta, busca, UF, cargo, ordenação ou filtro **reinicia a paginação**. Impacto medido: a home caiu de **144.573px para 7.778px** de documento (18× mais curta) e o primeiro paint ficou mais leve (20 cards em vez de 594).
+- **Gráfico por partido com lista vazia:** o `GraficoPartidos` fazia `return null` quando não havia ninguém para plotar — agora mantém o bloco e mostra o estado vazio ("Nenhum voto individual nesta casa"), que é justamente a informação útil nesse caso.
+- **Verificação:** helper **`carregarTodos()`** em `tests/helpers.ts` (clica "Carregar mais" até o fim, com trava de 80 cliques para não mascarar bug de paginação) usado pelos specs que conferem totais (cargo, filtros, ordenação, deep links, conformidade editorial) + `tests/casa-sem-voto.spec.ts` reescrito para o novo comportamento (lista vazia + motivo + reexibir → 81) + `PautaPills` ganhou `data-pautas-pills` (um teste contava **qualquer** `button[aria-pressed]`, e o botão do aviso entrou nessa conta — na prática, uma corrida com o fetch).
 
 ## Decisões-chave (registro)
 1. **Pautas:** as 7 do PRD, com IDs reais e **curadoria manual** da votação-chave.

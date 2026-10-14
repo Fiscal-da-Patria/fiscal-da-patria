@@ -4,6 +4,7 @@ import {
   TOTAL_PARLAMENTARES,
   TOTAL_SENADORES,
   cards,
+  carregarTodos,
   esperarCards,
 } from "./helpers";
 
@@ -26,6 +27,7 @@ test.describe("Congresso: cargo, abas e votos do Senado", () => {
     await page.goto("/");
     await esperarCards(page);
     await page.getByRole("button", { name: /Senadores \(81\)/ }).click();
+    await carregarTodos(page);
 
     await expect
       .poll(async () => await cards(page).count(), { timeout: 15_000 })
@@ -38,6 +40,7 @@ test.describe("Congresso: cargo, abas e votos do Senado", () => {
     await page.goto("/");
     await esperarCards(page);
     await page.getByRole("button", { name: /Deputados Federais \(513\)/ }).click();
+    await carregarTodos(page);
 
     await expect
       .poll(async () => await cards(page).count(), { timeout: 15_000 })
@@ -101,6 +104,10 @@ test.describe("Congresso: cargo, abas e votos do Senado", () => {
 
     await expect(page.getByText(/Situação no Senado/i)).toBeVisible();
     await page.getByRole("button", { name: /Deputados Federais \(513\)/ }).click();
+    // A Câmara não votou esta matéria (a votação é auditada no Senado): a lista
+    // vem vazia por padrão e o app oferece reexibir a casa — aí cada card mostra
+    // o "Sem voto individual" com o motivo.
+    await page.locator('[data-ver-sem-voto="1"]').click();
     await expect(
       page.locator("[data-nome]").first().getByText(/Sem voto individual/),
     ).toBeVisible();
@@ -108,11 +115,11 @@ test.describe("Congresso: cargo, abas e votos do Senado", () => {
 
   test("deep link ?cargo=SENADOR abre já filtrado", async ({ page }) => {
     await page.goto("/?cargo=SENADOR");
-    await esperarCards(page);
     await expect(page.getByRole("button", { name: /Senadores \(81\)/ })).toHaveAttribute(
       "aria-current",
       "true",
     );
+    await carregarTodos(page);
     await expect
       .poll(async () => await cards(page).count(), { timeout: 15_000 })
       .toBe(TOTAL_SENADORES);

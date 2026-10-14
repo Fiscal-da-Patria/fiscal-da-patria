@@ -45,9 +45,25 @@ export async function esperarCards(page: Page): Promise<void> {
   await expect(cards(page).first()).toBeVisible({ timeout: 30_000 });
 }
 
+/**
+ * A lista da home agora carrega **de 20 em 20** ("Carregar mais").
+ * Este helper clica no botão até a lista terminar (ou falha alto, para não
+ * mascarar um bug de paginação com um loop infinito).
+ */
+export async function carregarTodos(page: Page): Promise<void> {
+  await esperarCards(page);
+  const botao = page.locator('[data-carregar-mais="1"]');
+  for (let i = 0; i < 80; i++) {
+    if ((await botao.count()) === 0) return;
+    await botao.click();
+    await page.waitForTimeout(40);
+  }
+  throw new Error("carregarTodos: a lista não terminou de carregar depois de 80 cliques");
+}
+
 /** Espera a base completa (594 parlamentares) estar renderizada. */
 export async function esperarTodos(page: Page): Promise<void> {
-  await esperarCards(page);
+  await carregarTodos(page);
   await expect
     .poll(async () => await cards(page).count(), { timeout: 25_000 })
     .toBe(TOTAL_PARLAMENTARES);

@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { cards, esperarCards } from "./helpers";
+import { cards, carregarTodos, esperarCards } from "./helpers";
 
 /** Termos PROIBIDOS na interface visível (conformidade editorial/jurídica). */
 const PROIBIDOS = [/contra o cidadão/i, /a favor do cidadão/i, /pior voto/i, /melhor voto/i];
@@ -38,7 +38,7 @@ test.describe("Conformidade editorial — rótulos factuais", () => {
 
   test("tags factuais com a cor certa: verde = apoio, vermelho = divergente", async ({ page }) => {
     await page.goto("/");
-    await esperarCards(page);
+    await carregarTodos(page);
 
     const apoio = page.locator("[data-nome]").filter({ hasText: "Apoiou isenção" }).first();
     await expect(apoio).toBeVisible();
@@ -57,6 +57,7 @@ test.describe("Conformidade editorial — rótulos factuais", () => {
     await page.goto("/");
     await esperarCards(page);
     await page.getByRole("button", { name: /Fim da blindagem de políticos/i }).click();
+    await carregarTodos(page);
 
     const rejeitou = page.locator("[data-nome]").filter({ hasText: "Rejeitou blindagem" }).first();
     const apoiou = page.locator("[data-nome]").filter({ hasText: "Apoiou blindagem" }).first();

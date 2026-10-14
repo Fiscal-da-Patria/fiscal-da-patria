@@ -357,3 +357,30 @@ export const ROTULOS_CURTOS: Record<string, string> = {
 export function rotuloCurto(pauta: PautaConfig): string {
   return ROTULOS_CURTOS[pauta.slug] ?? pauta.rotuloPopular;
 }
+
+/**
+ * **Por que** a casa filtrada não tem voto registrado nesta pauta.
+ *
+ * Fonte: o bloco `senado` de cada pauta (curado e revalidado contra a API
+ * oficial em `scripts/fetch_senado.ts`): `nominal` (houve painel eletrônico),
+ * `simbolica` (o Senado apreciou sem registro individual) e `pendente`
+ * (nenhum registro até a data da última verificação).
+ *
+ * Usado quando a casa filtrada tem **zero** votos aplicáveis: em vez de listar
+ * centenas de "Sem voto individual", o app explica o motivo real do vazio.
+ */
+export function motivoSemVotoCasa(pauta: PautaConfig, casa: "CAMARA" | "SENADO"): string {
+  if (pauta.casa === "SENADO") {
+    return `A votação de ${pauta.materia} é auditada no Senado Federal — a Câmara dos Deputados não tem votação nominal registrada nesta matéria.`;
+  }
+  if (casa === "SENADO") {
+    if (pauta.senado?.status === "pendente") {
+      return "O Senado ainda não votou esta matéria: não há registro de votação nominal na fonte oficial (a proposta está na Câmara ou aguardando pauta no Senado).";
+    }
+    if (pauta.senado?.status === "simbolica") {
+      return "O Senado aprovou esta matéria em votação SIMBÓLICA: sem painel eletrônico não existe voto individual de senador para auditar.";
+    }
+    return "O Senado votou esta matéria, mas o voto individual não está disponível na fonte oficial.";
+  }
+  return "Não há votação nominal da Câmara dos Deputados registrada para esta matéria.";
+}

@@ -8,7 +8,7 @@ export function PautaPills({
   onSelecionar: (slug: string) => void;
 }) {
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-wrap gap-2" data-pautas-pills="1">
       {PAUTAS.map((p) => {
         const ativa = p.slug === selecionada;
         return (

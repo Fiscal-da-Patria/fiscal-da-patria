@@ -9,14 +9,17 @@ test.describe("Pills que quebram linha (visibilidade das 10 pautas)", () => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto("/");
 
-    // Todos os 10 botões existem e estão visíveis (não dependem de arrastar).
-    await expect(page.locator("button[aria-pressed]")).toHaveCount(PAUTAS.length);
+    // Todos os 11 botões existem e estão visíveis (não dependem de arrastar).
+    // Escopo no container das pills: a página tem outros botões com aria-pressed
+    // (ex.: "Ver só quem votou"), que não são pautas.
+    const pills = page.locator("[data-pautas-pills] button[aria-pressed]");
+    await expect(pills).toHaveCount(PAUTAS.length);
     for (const rotulo of PAUTAS) {
       await expect(page.getByRole("button", { name: rotulo })).toBeVisible();
     }
 
     // A caixa das pills quebra linha e não usa rolagem horizontal.
-    const caixa = page.locator("button[aria-pressed]").first().locator("xpath=..");
+    const caixa = pills.first().locator("xpath=..");
     await expect(caixa).toHaveClass(/flex-wrap/);
     await expect(caixa).not.toHaveClass(/overflow-x-auto/);
 

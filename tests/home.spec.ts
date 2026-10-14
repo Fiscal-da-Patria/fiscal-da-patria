@@ -25,8 +25,9 @@ test.describe("Home — estrutura e dados", () => {
 
   test("carrega a base completa e mostra o contador", async ({ page }) => {
     await esperarTodos(page);
+    // O contador mostra a paginação honesta: "Mostrando 20 de 594 parlamentar(es)".
     await expect(
-      page.getByText(new RegExp(`^${TOTAL_PARLAMENTARES} parlamentar\\(es\\)$`)),
+      page.getByText(new RegExp(`Mostrando \\d+ de ${TOTAL_PARLAMENTARES} parlamentar\\(es\\)`)),
     ).toBeVisible();
   });
 

@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { TOTAL_PARLAMENTARES, cards, esperarCards } from "./helpers";
+import { TOTAL_PARLAMENTARES, cards, carregarTodos, esperarCards } from "./helpers";
 
 test.describe("Filtros de busca e UF", () => {
   test.beforeEach(async ({ page }) => {
@@ -40,6 +40,7 @@ test.describe("Filtros de busca e UF", () => {
 
     await page.getByRole("button", { name: /Limpar filtros/i }).click();
     await expect(buscar(page)).toHaveValue("");
+    await carregarTodos(page);
     await expect.poll(async () => await cards(page).count(), { timeout: 15_000 }).toBe(TOTAL_PARLAMENTARES);
   });
 
@@ -50,6 +51,7 @@ test.describe("Filtros de busca e UF", () => {
     await page.getByRole("button", { name: /Limpar filtros/i }).click();
     await expect(page).toHaveURL(/\/$/);
     await expect(page.getByLabel("Filtrar por estado")).toHaveValue("TODOS");
+    await carregarTodos(page);
     await expect.poll(async () => await cards(page).count(), { timeout: 15_000 }).toBe(TOTAL_PARLAMENTARES);
   });
 
@@ -57,12 +59,14 @@ test.describe("Filtros de busca e UF", () => {
     await buscar(page).fill("Aécio");
     await expect.poll(async () => await cards(page).count(), { timeout: 8_000 }).toBeLessThan(10);
     await buscar(page).fill("");
+    await carregarTodos(page);
     await expect.poll(async () => await cards(page).count(), { timeout: 15_000 }).toBe(TOTAL_PARLAMENTARES);
   });
 
   test("filtro por UF=SP exclui outras UFs", async ({ page }) => {
     await page.getByLabel("Filtrar por estado").selectOption("SP");
     await page.waitForTimeout(500);
+    await carregarTodos(page);
     await expect.poll(async () => await cards(page).count(), { timeout: 8_000 }).toBeGreaterThan(30);
     await expect(page.locator("p", { hasText: /\u2022\s(?!SP)[A-Z]{2}$/ })).toHaveCount(0);
     await expect(page.getByText(/\u2022\sSP$/).first()).toBeVisible();

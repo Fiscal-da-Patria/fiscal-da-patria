@@ -24,8 +24,8 @@ export function SiteHeader() {
             href="/poderes"
             className="rounded-full px-2.5 py-1 text-[11px] font-semibold text-white/80 transition hover:bg-white/10 hover:text-white sm:px-3"
           >
-            <span className="sm:hidden">Poderes</span>
-            <span className="hidden sm:inline">Como Funciona</span>
+            <span className="sm:hidden">3 Poderes</span>
+            <span className="hidden sm:inline">Entenda os 3 Poderes</span>
           </Link>
           <Link
             href="/sobre"

@@ -1,5 +1,5 @@
 import { test, expect, type Page } from "@playwright/test";
-import { cards, esperarCards } from "./helpers";
+import { cards, carregarTodos } from "./helpers";
 
 /** Card de um deputado específico (o atributo data-nome é a chave estável). */
 const cardDe = (page: Page, nome: string) => page.locator(`[data-nome="${nome}"]`);
@@ -20,7 +20,7 @@ test.describe("Deep links (Dark Social)", () => {
 
   test("?dep inválido não quebra a página (mostra a lista normal)", async ({ page }) => {
     await page.goto("/?dep=999999999");
-    await esperarCards(page);
+    await carregarTodos(page);
     await expect(page.getByRole("dialog")).toHaveCount(0);
     await expect(cardDe(page, "Aécio Neves")).toBeVisible();
   });
@@ -40,7 +40,7 @@ test.describe("Deep links (Dark Social)", () => {
 
   test("abrir e fechar o dossiê mantém a barra de endereço copiável", async ({ page }) => {
     await page.goto("/");
-    await esperarCards(page);
+    await carregarTodos(page);
     await cardDe(page, "Aécio Neves").getByRole("button", { name: "Ver dossiê" }).click();
     await expect(page).toHaveURL(/\?deputado=camara-74646$/);
 

@@ -78,13 +78,13 @@ test.describe("Entenda os Poderes — educação cívica", () => {
 
   test("acessível pelo menu superior e pelo rodapé", async ({ page }) => {
     await page.goto("/");
-    await page.locator("header").getByRole("link", { name: /Como Funciona/i }).click();
+    await page.locator("header").getByRole("link", { name: /Entenda os 3 Poderes/i }).click();
     await expect(page).toHaveURL(/\/poderes$/);
     await expect(page.getByRole("heading", { name: "Entenda os Poderes" })).toBeVisible();
 
     await page.goto("/");
     await expect(
-      page.locator("footer").getByRole("link", { name: /Entenda os 3 Poderes e Leis/i }),
+      page.locator("footer").getByRole("link", { name: /Entenda os 3 Poderes/i }),
     ).toHaveAttribute("href", "/poderes");
   });
 

@@ -13,7 +13,7 @@ import { ParlamentarCard } from "@/components/ParlamentarCard";
 import { DossieModal } from "@/components/DossieModal";
 import { CargoTabs } from "@/components/CargoTabs";
 import { GraficoPartidos } from "@/components/GraficoPartidos";
-import { PAUTAS, urlFonteOficial } from "@/lib/pautas";
+import { PAUTAS, motivoSemVotoCasa, urlFonteOficial } from "@/lib/pautas";
 import { bannerOrdem, rotulosOrdem } from "@/lib/parlamentares";
 import { mensagemPauta } from "@/lib/share";
 import {
@@ -24,6 +24,9 @@ import {
   type Ordem,
 } from "@/lib/parlamentares";
 import type { ParlamentarConsolidado } from "@/types/parlamentar";
+
+/** Quantos parlamentares a lista mostra por vez (o resto vem em "Carregar mais"). */
+const POR_PAGINA = 20;
 
 export default function HomePage() {
   const [dados, setDados] = useState<ParlamentarConsolidado[]>([]);
@@ -37,6 +40,13 @@ export default function HomePage() {
   const [dossie, setDossie] = useState<ParlamentarConsolidado | null>(null);
   /** Mostra só quem tem voto registrado na matéria ativa (tira o ruído de "Sem voto"). */
   const [soVotaram, setSoVotaram] = useState(false);
+  /**
+   * Quando a casa filtrada **não votou** a matéria, a lista fica vazia por padrão
+   * (em vez de 81 cards de "Sem voto individual"). Este botão reexibe a casa toda.
+   */
+  const [mostrarSemVoto, setMostrarSemVoto] = useState(false);
+  /** Cards visíveis por vez na lista (o resto vem em "Carregar mais"). */
+  const [visiveis, setVisiveis] = useState(POR_PAGINA);
 
   /* eslint-disable react-hooks/set-state-in-effect -- estado inicial sincronizado com a URL de compartilhamento (?pauta= / ?deputado=) */
   useEffect(() => {
@@ -109,12 +119,6 @@ export default function HomePage() {
     [dados, cargo],
   );
 
-  /** Base efetiva da lista: aplica "só quem votou" quando ligado. */
-  const baseVisivel = useMemo(
-    () => (soVotaram ? porCargo.filter((p) => p.votos[pautaSel] !== "NAO_APLICAVEL") : porCargo),
-    [porCargo, soVotaram, pautaSel],
-  );
-
   /** Quantos da casa filtrada têm voto registrado nesta matéria + o total da casa. */
   const aplicaveisNaCasa = comVotoNaPauta[cargo];
   const totalDaCasa =
@@ -123,6 +127,19 @@ export default function HomePage() {
       : cargo === "DEPUTADO"
         ? contagens.DEPUTADO
         : contagens.TODOS;
+  /** A casa filtrada não votou a matéria (zero votos nominais aplicáveis)? */
+  const semVotoNaCasa = aplicaveisNaCasa === 0;
+
+  /**
+   * Base efetiva da lista. Quando a casa inteira não votou a matéria, a lista fica
+   * vazia por padrão (o aviso explica o motivo real do vazio) — listar 81 cards de
+   * "Sem voto individual" é ruído, não informação. O botão "ver a casa toda"
+   * liga `mostrarSemVoto`.
+   */
+  const baseVisivel = useMemo(() => {
+    if (semVotoNaCasa && !mostrarSemVoto) return [];
+    return soVotaram ? porCargo.filter((p) => p.votos[pautaSel] !== "NAO_APLICAVEL") : porCargo;
+  }, [porCargo, soVotaram, pautaSel, semVotoNaCasa, mostrarSemVoto]);
 
   const distribuicao = useMemo(() => distribuirPorPauta(baseVisivel, pautaSel), [
     baseVisivel,
@@ -137,11 +154,19 @@ export default function HomePage() {
     [filtrados, pautaSel, ordem],
   );
   const pautaAtual = PAUTAS.find((p) => p.slug === pautaSel) ?? PAUTAS[0];
+  /** Motivo (do dado curado do Senado) de a casa filtrada não ter voto aqui. */
+  const motivoCasa = motivoSemVotoCasa(pautaAtual, cargo === "SENADOR" ? "SENADO" : "CAMARA");
+  /** Fatia da lista que vai para a tela (paginação de 20 em 20). */
+  const listadosVisiveis = useMemo(() => listados.slice(0, visiveis), [listados, visiveis]);
 
-  // Ao trocar a pauta, volta para a ordenação padrão (piores votos primeiro).
+  // Ao trocar a pauta, volta para a ordenação padrão (piores votos primeiro)
+  // e reinicia a lista: outra matéria, outra história (não faz sentido manter
+  // a paginação nem o "ver a casa toda" da matéria anterior).
   function selecionarPauta(slug: string) {
     setPautaSel(slug);
     setOrdem("piores");
+    setVisiveis(POR_PAGINA);
+    setMostrarSemVoto(false);
   }
 
   // Mantém a URL compartilhável: ?deputado=<id> enquanto um dossiê está aberto.
@@ -170,6 +195,8 @@ export default function HomePage() {
     setCargo("TODOS");
     setSoVotaram(false);
     setOrdem("piores");
+    setVisiveis(POR_PAGINA);
+    setMostrarSemVoto(false);
     window.history.replaceState(null, "", window.location.pathname);
   }
 
@@ -177,8 +204,13 @@ export default function HomePage() {
     <div className="flex min-h-screen flex-col">
       <SiteHeader />
 
-      <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-6 sm:px-6">
-        <section className="mb-6">
+      <main className="mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 py-6 sm:px-6">
+        {/*
+          Ordem visual no CELULAR (order-*) ≠ ordem no desktop (DOM):
+          no celular a lista de parlamentares sobe para antes dos gráficos —
+          ninguém deve rolar 3 telas de gráfico para ver o voto de um deputado.
+        */}
+        <section className="order-1 mb-6 md:order-none">
           <h2 className="text-2xl font-black tracking-tight text-titulo sm:text-3xl">
             Veja como o seu deputado e o seu senador votaram nas pautas que mexem no seu bolso
           </h2>
@@ -187,9 +219,22 @@ export default function HomePage() {
             nominais oficiais da Câmara e do Senado em linguagem popular. Cada dossiê traz o link
             para a fonte.
           </p>
+          <blockquote
+            data-manifesto="1"
+            className="mt-4 max-w-2xl border-l-4 border-dourado pl-3 text-sm font-semibold italic leading-relaxed text-titulo"
+          >
+            &ldquo;Patriota de verdade não idolatra político; patriota de verdade fiscaliza os fatos
+            para proteger a sua pátria.&rdquo;{" "}
+            <Link
+              href="/sobre"
+              className="align-baseline text-[11px] font-bold not-italic text-corpo underline decoration-dotted underline-offset-2 hover:text-titulo"
+            >
+              Sobre nós
+            </Link>
+          </blockquote>
         </section>
 
-        <section className="mb-8">
+        <section className="order-2 mb-8 md:order-none">
           <PautaPills selecionada={pautaSel} onSelecionar={selecionarPauta} />
           <div className="mt-3 space-y-4">
             <div className="rounded-2xl border border-borda bg-superficie p-5 shadow-sm">
@@ -244,24 +289,28 @@ export default function HomePage() {
                 className="mt-3 w-full px-3 py-2 text-xs"
               />
             </div>
-            <div className="grid gap-4 md:grid-cols-2 md:items-start">
-              <Hemiciclo
-                distribuicao={distribuicao}
-                pautaSlug={pautaSel}
-                rotulo={
-                  cargo === "SENADOR"
-                    ? "Senado Federal"
-                    : cargo === "DEPUTADO"
-                      ? "Câmara dos Deputados"
-                      : "Congresso Nacional"
-                }
-              />
-              <GraficoPartidos parlamentares={filtrados} pautaSlug={pautaSel} />
-            </div>
           </div>
         </section>
 
-        <section className="mb-4">
+        {/* Gráficos (hemiciclo + partidos): no celular vêm DEPOIS da lista (order-7). */}
+        <section className="order-7 mb-8 md:order-none">
+          <div className="grid gap-4 md:grid-cols-2 md:items-start">
+            <Hemiciclo
+              distribuicao={distribuicao}
+              pautaSlug={pautaSel}
+              rotulo={
+                cargo === "SENADOR"
+                  ? "Senado Federal"
+                  : cargo === "DEPUTADO"
+                    ? "Câmara dos Deputados"
+                    : "Congresso Nacional"
+              }
+            />
+            <GraficoPartidos parlamentares={filtrados} pautaSlug={pautaSel} />
+          </div>
+        </section>
+
+        <section className="order-3 mb-4 md:order-none">
           <CargoTabs
             selecionado={cargo}
             contagens={contagens}
@@ -270,39 +319,69 @@ export default function HomePage() {
               DEPUTADO: ` · ${comVotoNaPauta.DEPUTADO} votaram`,
               SENADOR: ` · ${comVotoNaPauta.SENADOR} votaram`,
             }}
-            onSelecionar={setCargo}
+            onSelecionar={(novo) => {
+              setCargo(novo);
+              setVisiveis(POR_PAGINA);
+            }}
           />
         </section>
 
-        {aplicaveisNaCasa < totalDaCasa && (
+        {(semVotoNaCasa || aplicaveisNaCasa < totalDaCasa) && (
           <section
             data-aviso-casa="1"
-            className="mb-4 rounded-xl border border-dourado/50 bg-dourado/5 p-3"
+            className="order-4 mb-4 rounded-xl border border-dourado/50 bg-dourado/5 p-3 md:order-none"
           >
             <p className="text-[11px] leading-relaxed text-corpo">
               <strong className="text-titulo">
-                {aplicaveisNaCasa === 0
-                  ? "Esta casa ainda não votou esta matéria."
+                {semVotoNaCasa
+                  ? cargo === "SENADOR"
+                    ? "O Senado ainda não votou esta matéria."
+                    : cargo === "DEPUTADO"
+                      ? "A Câmara ainda não votou esta matéria."
+                      : "Nenhuma votação nominal registrada nesta matéria."
                   : `Votação parcial nesta casa (${aplicaveisNaCasa} de ${totalDaCasa}).`}
               </strong>{" "}
-              {aplicaveisNaCasa === 0 && pautaAtual.casa === "SENADO"
-                ? "A matéria é auditada no Senado — a Câmara não tem votação nominal registrada nesta pauta."
-                : "Quem não votou aparece como “Sem voto individual”: o Senado aprova a maioria por votação simbólica, a matéria pode estar pendente na outra casa, ou o parlamentar não estava em exercício na sessão."}
+              {semVotoNaCasa
+                ? motivoCasa
+                : "Quem não votou aparece como “Sem voto individual” — normalmente porque não estava em exercício na sessão, faltou àquela votação específica ou a matéria segue pendente na outra casa."}
             </p>
             <div className="mt-2 flex flex-wrap gap-2">
-              <button
-                type="button"
-                onClick={() => setSoVotaram(true)}
-                aria-pressed={soVotaram}
-                data-so-votaram="1"
-                className="rounded-full border border-borda bg-superficie px-2.5 py-1 text-[11px] font-bold text-titulo transition hover:border-dourado"
-              >
-                {soVotaram ? "👁️ Mostrando só quem votou" : "👁️ Ver só quem votou nesta matéria"}
-              </button>
+              {semVotoNaCasa ? (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMostrarSemVoto((v) => !v);
+                    setVisiveis(POR_PAGINA);
+                  }}
+                  aria-pressed={mostrarSemVoto}
+                  data-ver-sem-voto="1"
+                  className="rounded-full border border-borda bg-superficie px-2.5 py-1 text-[11px] font-bold text-titulo transition hover:border-dourado"
+                >
+                  {mostrarSemVoto
+                    ? "🙈 Ocultar quem não votou"
+                    : `👁️ Ver os ${totalDaCasa} de qualquer forma`}
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => {
+                    setSoVotaram(true);
+                    setVisiveis(POR_PAGINA);
+                  }}
+                  aria-pressed={soVotaram}
+                  data-so-votaram="1"
+                  className="rounded-full border border-borda bg-superficie px-2.5 py-1 text-[11px] font-bold text-titulo transition hover:border-dourado"
+                >
+                  {soVotaram ? "👁️ Mostrando só quem votou" : "👁️ Ver só quem votou nesta matéria"}
+                </button>
+              )}
               {cargo !== "TODOS" && (
                 <button
                   type="button"
-                  onClick={() => setCargo(cargo === "SENADOR" ? "DEPUTADO" : "SENADOR")}
+                  onClick={() => {
+                    setCargo(cargo === "SENADOR" ? "DEPUTADO" : "SENADOR");
+                    setVisiveis(POR_PAGINA);
+                  }}
                   data-trocar-casa="1"
                   className="rounded-full border border-borda bg-superficie px-2.5 py-1 text-[11px] font-bold text-titulo transition hover:border-dourado"
                 >
@@ -313,22 +392,31 @@ export default function HomePage() {
           </section>
         )}
 
-        <section className="mb-6 flex flex-col gap-3 xl:flex-row xl:items-center">
+        <section className="order-5 mb-6 flex flex-col gap-3 md:order-none xl:flex-row xl:items-center">
           <div className="flex-1">
             <BuscaFiltros
               busca={busca}
               uf={uf}
               ordem={ordem}
               rotulos={rotulosOrdem(pautaAtual)}
-              onBusca={setBusca}
-              onUf={setUf}
-              onOrdem={setOrdem}
+              onBusca={(valor) => {
+                setBusca(valor);
+                setVisiveis(POR_PAGINA);
+              }}
+              onUf={(valor) => {
+                setUf(valor);
+                setVisiveis(POR_PAGINA);
+              }}
+              onOrdem={(valor) => {
+                setOrdem(valor);
+                setVisiveis(POR_PAGINA);
+              }}
             />
           </div>
           <WhatsAppShareButton className="w-full px-4 py-2.5 text-sm xl:w-auto" />
         </section>
 
-        <section>
+        <section className="order-6 md:order-none">
           {carregando ? (
             <div role="status" aria-live="polite" className="flex flex-col items-center gap-3 py-16">
               <Loader2 className="h-6 w-6 animate-spin text-dourado" aria-hidden />
@@ -347,6 +435,29 @@ export default function HomePage() {
                 className="mt-4 inline-flex items-center gap-2 rounded-xl border border-borda bg-superficie px-4 py-2 text-xs font-bold text-titulo shadow-sm transition hover:border-dourado focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dourado"
               >
                 <RotateCcw className="h-3.5 w-3.5" aria-hidden /> Recarregar
+              </button>
+            </div>
+          ) : semVotoNaCasa && !mostrarSemVoto ? (
+            <div
+              data-lista-vazia-casa="1"
+              className="rounded-xl border border-borda bg-superficie p-10 text-center"
+            >
+              <p className="text-sm font-semibold text-titulo">
+                Nada para listar aqui — e isso já é informação.
+              </p>
+              <p className="mx-auto mt-1 max-w-lg text-xs leading-relaxed text-corpo">
+                {motivoCasa} O Fiscal da Pátria só mostra voto registrado na fonte oficial: nada de
+                “voto suposto”.
+              </p>
+              <button
+                type="button"
+                onClick={() => {
+                  setMostrarSemVoto(true);
+                  setVisiveis(POR_PAGINA);
+                }}
+                className="mt-4 inline-flex items-center gap-2 rounded-xl border border-borda bg-superficie px-4 py-2 text-xs font-bold text-titulo shadow-sm transition hover:border-dourado focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dourado"
+              >
+                👁️ Ver os {totalDaCasa} de qualquer forma
               </button>
             </div>
           ) : filtrados.length === 0 ? (
@@ -372,8 +483,8 @@ export default function HomePage() {
                 <p className="rounded-lg border border-dourado/40 bg-dourado/10 px-3 py-1.5 text-xs font-semibold text-titulo">
                   {bannerOrdem(ordem, pautaAtual)}
                 </p>
-                <p className="shrink-0 text-xs font-medium text-corpo">
-                  {listados.length} parlamentar(es)
+                <p className="shrink-0 text-xs font-medium text-corpo" data-contador="1">
+                  Mostrando {listadosVisiveis.length} de {listados.length} parlamentar(es)
                 </p>
               </div>
               <p className="mb-3 text-[11px] text-corpo">
@@ -384,7 +495,7 @@ export default function HomePage() {
                 — só entram as votações com voto individual.
               </p>
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                {listados.map((p) => (
+                {listadosVisiveis.map((p) => (
                   <ParlamentarCard
                     key={p.id}
                     p={p}
@@ -393,6 +504,23 @@ export default function HomePage() {
                   />
                 ))}
               </div>
+
+              {listadosVisiveis.length < listados.length && (
+                <div className="mt-6 flex flex-col items-center gap-2">
+                  <p className="text-[11px] text-corpo" aria-live="polite">
+                    Faltam {listados.length - listadosVisiveis.length} de {listados.length} para ver
+                    todo mundo — carregamos de {POR_PAGINA} em {POR_PAGINA}.
+                  </p>
+                  <button
+                    type="button"
+                    data-carregar-mais="1"
+                    onClick={() => setVisiveis((v) => v + POR_PAGINA)}
+                    className="inline-flex items-center gap-2 rounded-xl bg-verde-mata px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-verde-bandeira focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dourado"
+                  >
+                    ⬇️ Carregar mais {Math.min(POR_PAGINA, listados.length - listadosVisiveis.length)}
+                  </button>
+                </div>
+              )}
             </>
           )}
         </section>
