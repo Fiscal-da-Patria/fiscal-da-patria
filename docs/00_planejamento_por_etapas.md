@@ -209,6 +209,14 @@
 - **Guarda permanente:** `tests/api-dados.spec.ts` passou a travar a ementa (36h semanais + em 10 anos) e o rótulo — se alguém "arredondar" o dado no futuro, o teste quebra.
 - **Achado de atualização (pendente de decisão):** a mesma API informa situação **"Transformado em Norma Jurídica"** em **16/10/2026**, enquanto o nosso JSON (verificado em 12/10/2026) ainda diz **"Senado: pendente"** para essa pauta. Ou seja, o dado do app está **4 dias atrasado** para essa matéria — recomenda-se rodar `npm run update-data` (o pipeline revalida Câmara/Senado/TSE) e revisar os testes que assumem "0 senadores votaram" nessa pauta.
 
+### Verificação factual — PEC 221/2019 x PEC 8/2025 (escala 6x1) ✅
+- **Dúvida levantada:** "a PEC do 6x1 não é a PEC 8/2025?" — conferido **na fonte oficial** (API de Dados Abertos da Câmara + tramitações, em 17/10/2026).
+- **São duas matérias diferentes, com relação entre elas:**
+  - **PEC 221/2019** (a do **6x1**, que auditamos): *"reduzindo a jornada de trabalho a 36 horas semanais em 10 anos"*. Aprovada no Plenário da Câmara em **27/05/2026** (472 × 22) e **promulgada como Emenda Constitucional 141/2026** (DOU de **16/10/2026**).
+  - **PEC 8/2025**: *"redução da jornada de trabalho para **quatro dias por semana**"* — matéria **distinta** (semana de 4 dias, não o fim do 6x1). Foi **apensada à PEC 221/2019** em 09/02/2026 e, com a aprovação da principal, ficou **prejudicada** (art. 191 do RICD) e **arquivada** em 27/05/2026.
+- **Conclusão:** o app está auditando a matéria certa (**PEC 221/2019 → EC 141/2026**). A confusão é natural porque a 8/2025 corria **apensada** a ela.
+- **Pendência de dados (mantida):** o JSON foi verificado em 12/10/2026 e ainda diz "Senado: pendente" para a 221/2019, quando a matéria já virou **EC 141/2026** (16/10/2026). O caminho correto é rodar **`npm run update-data`** (o pipeline consulta Câmara e Senado e reescreve o JSON) — e então revisar os testes que assumem "0 senadores votaram" nesta pauta.
+
 ## Decisões-chave (registro)
 1. **Pautas:** as 7 do PRD, com IDs reais e **curadoria manual** da votação-chave.
 2. **Inversão semântica** centralizada (`aplicarInversao`) — Blindagem: **NÃO = pró-cidadão**.
