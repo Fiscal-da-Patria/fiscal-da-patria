@@ -202,6 +202,13 @@
 - **Fluxo:** o **mesmo `ShareModal`** foi generalizado (`alvo` = parlamentar **ou** bancada) — prévia, **Compartilhar** (Web Share API com arquivo no celular; download + WhatsApp no desktop), **Baixar PNG** e **Copiar link**. O texto do Zap é factual: *"🚨 PL na Câmara: 40 de 44 (Apoiou isenção). Matéria: PEC 45/2019 — … Recorte: …"* + link `?pauta=…&busca=PL`.
 - **Verificação:** unidade em `tests/partidos.spec.ts` (contagem, desempate, "3 de 4" = 75%, empate, bancada sem voto) + `tests/compartilhar-partido.spec.ts` (5 botões por padrão, prévia com partido/matéria/contagem/recorte, PNG válido, copiar link, cabe em 360px, bancada sem votação nominal) + `axe` no modal da bancada (claro/escuro).
 
+### Verificação factual — PEC 221/2019 (fim da escala 6x1) ✅
+- **Dúvida levantada:** "não é 40 horas?" — conferido **na fonte oficial** (API de Dados Abertos da Câmara, `proposicoes?siglaTipo=PEC&numero=221&ano=2019`, em 17/10/2026).
+- **Ementa literal:** *"Altera o Art. 7º inciso XII da constituição Federal, **reduzindo a jornada de trabalho a 36 horas semanais em 10 anos**."* → o dado do app estava **correto** (36h, e não 40h). As 40h que circulam vêm da **jornada de 40h do setor público** / de outras propostas — não desta matéria.
+- **Rótulo ajustado para ficar auto-explicativo:** "Fim da escala 6x1 (36h em 10 anos)" — deixa claro que é uma **redução gradual**, não um limite imediato (o texto oficial diz "em 10 anos").
+- **Guarda permanente:** `tests/api-dados.spec.ts` passou a travar a ementa (36h semanais + em 10 anos) e o rótulo — se alguém "arredondar" o dado no futuro, o teste quebra.
+- **Achado de atualização (pendente de decisão):** a mesma API informa situação **"Transformado em Norma Jurídica"** em **16/10/2026**, enquanto o nosso JSON (verificado em 12/10/2026) ainda diz **"Senado: pendente"** para essa pauta. Ou seja, o dado do app está **4 dias atrasado** para essa matéria — recomenda-se rodar `npm run update-data` (o pipeline revalida Câmara/Senado/TSE) e revisar os testes que assumem "0 senadores votaram" nessa pauta.
+
 ## Decisões-chave (registro)
 1. **Pautas:** as 7 do PRD, com IDs reais e **curadoria manual** da votação-chave.
 2. **Inversão semântica** centralizada (`aplicarInversao`) — Blindagem: **NÃO = pró-cidadão**.

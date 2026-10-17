@@ -1,5 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { SLUGS, TOTAL_DEPUTADOS, TOTAL_PARLAMENTARES, TOTAL_SENADORES } from "./helpers";
+import { PAUTAS } from "../src/lib/pautas";
 
 interface Parlamentar {
   id: string;
@@ -94,5 +95,18 @@ test.describe("Dados servidos — integridade e anti-desinformação", () => {
   test("rota inexistente retorna 404", async ({ request }) => {
     const res = await request.get("/rota-que-nao-existe");
     expect(res.status()).toBe(404);
+  });
+});
+
+test.describe("Conferência factual das pautas (anti-desinformação)", () => {
+  test("escala 6x1 mantém o texto oficial: PEC 221/2019, 36h em 10 anos", () => {
+    const pauta = PAUTAS.find((p) => p.slug === "fim_escala_6x1");
+
+    expect(pauta?.materia).toBe("PEC 221/2019");
+    // Texto literal da ementa oficial (API de Dados Abertos, conferido em 17/10/2026).
+    expect(pauta?.ementaOficial).toMatch(/36 horas semanais/i);
+    expect(pauta?.ementaOficial).toMatch(/em 10 anos/i);
+    // O rótulo popular não pode prometer carga/prazo diferentes do oficial.
+    expect(pauta?.rotuloPopular).toMatch(/36h em 10 anos/);
   });
 });

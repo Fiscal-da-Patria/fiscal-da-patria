@@ -9,7 +9,7 @@ export const PAUTAS = [
   "Cobrar imposto dos super-ricos",
   "Teto para o juro do cartão",
   "Piso salarial da enfermagem",
-  "Fim da escala 6x1 (jornada de 36 horas)",
+  "Fim da escala 6x1 (36h em 10 anos)",
   "Aposentadoria dos agentes de saúde e de endemias",
   "Lei mais dura contra o crime organizado",
   "Aliviar o preço da energia (choque internacional)",

@@ -150,7 +150,7 @@ export const PAUTAS: PautaConfig[] = [
   },
   {
     slug: 'fim_escala_6x1',
-    rotuloPopular: 'Fim da escala 6x1 (jornada de 36 horas)',
+    rotuloPopular: 'Fim da escala 6x1 (36h em 10 anos)',
     ementaOficial:
       'Altera o art. 7º, inciso XII, da Constituição Federal, reduzindo a jornada de trabalho a 36 horas semanais, em 10 anos.',
     materia: 'PEC 221/2019',
