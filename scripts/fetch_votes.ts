@@ -149,7 +149,6 @@ async function main(): Promise<void> {
           : `https://www.camara.leg.br/internet/deputado/bandep/${d.id}.jpg`,
       email: d.email ?? '',
       urlPerfilOficial: `https://www.camara.leg.br/deputados/${d.id}`,
-      pontuacaoCivica: 0,
       votosEleicao: votosTse.get(chaveTse('DEPUTADO', d.nome, d.siglaUf)) ?? 0,
       votos: {},
       votosOriginais: {},
@@ -234,7 +233,6 @@ async function main(): Promise<void> {
       uf: s.uf,
       fotoUrl: s.fotoUrl,
       urlPerfilOficial: s.urlPerfilOficial,
-      pontuacaoCivica: 0,
       votosEleicao: votosTse.get(chaveTse('SENADOR', s.nome, s.uf)) ?? 0,
       votos: { ...s.votos },
       votosOriginais: { ...s.votosOriginais },
@@ -255,25 +253,8 @@ async function main(): Promise<void> {
     lista.push(p);
   }
 
-  // ---------------------------------------------------------------------------
-  // 4) Índice de Alinhamento Cívico — só sobre as pautas APLICÁVEIS
-  // ---------------------------------------------------------------------------
-  for (const p of lista) {
-    let pontos = 0;
-    let aplicaveis = 0;
-    for (const pauta of PAUTAS) {
-      const a = p.votos[pauta.slug];
-      if (a === 'NAO_APLICAVEL') continue; // não havia voto individual a julgar
-      aplicaveis++;
-      if (a === 'FAVORAVEL') pontos += 1;
-      else if (a === 'ABSTENCAO') pontos += 0.3;
-    }
-    p.pontuacaoCivica = aplicaveis > 0 ? Math.round((pontos / aplicaveis) * 100) : 0;
-  }
-
-  lista.sort(
-    (a, b) => b.pontuacaoCivica - a.pontuacaoCivica || a.nome.localeCompare(b.nome, 'pt-BR'),
-  );
+  // O app não usa nota de alinhamento: a saída fica em ordem alfabética (determinística).
+  lista.sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR'));
 
   // ---------------------------------------------------------------------------
   // 5) Saída
