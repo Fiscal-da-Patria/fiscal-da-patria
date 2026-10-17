@@ -19,7 +19,6 @@ function fake(
     fotoUrl: "/fotos/1.jpg",
     email: "",
     urlPerfilOficial: "https://www.camara.leg.br/deputados/1",
-    pontuacaoCivica: 0,
     votosEleicao,
     votos: { [SLUG]: alinhamento },
     votosOriginais: {},

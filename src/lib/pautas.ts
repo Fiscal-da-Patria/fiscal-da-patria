@@ -336,29 +336,6 @@ export function rotuloFactual(slug: string, alinhamento: string): string | null 
 }
 
 /**
- * Nome POPULAR CURTO da pauta — para listas densas (dossiê), sem quebrar linha
- * no celular. O identificador oficial (PEC/PL) vai na linha secundária.
- */
-export const ROTULOS_CURTOS: Record<string, string> = {
-  cesta_basica: 'Comida sem Imposto',
-  igualdade_salarial: 'Salário Igual',
-  fim_blindagem: 'Fim da Blindagem',
-  ir_isento: 'Salário Livre de IR',
-  super_ricos: 'Imposto dos Super-Ricos',
-  teto_juro_cartao: 'Teto do Juro do Cartão',
-  piso_enfermagem: 'Piso da Enfermagem',
-  fim_escala_6x1: 'Fim da Escala 6x1',
-  aposentadoria_agentes_saude: 'Aposentadoria dos Agentes',
-  crime_organizado: 'Rigor contra o Crime',
-  preco_energia: 'Alívio na Conta de Luz',
-};
-
-/** Rótulo curto da pauta (fallback: o rótulo popular completo). */
-export function rotuloCurto(pauta: PautaConfig): string {
-  return ROTULOS_CURTOS[pauta.slug] ?? pauta.rotuloPopular;
-}
-
-/**
  * **O que isso muda no dia a dia** — uma frase curta e concreta por pauta.
  *
  * Regra anti-desinformação: cada frase é uma tradução **direta do texto oficial**

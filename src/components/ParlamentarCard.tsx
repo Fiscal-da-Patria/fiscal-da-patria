@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { PAUTAS } from "@/lib/pautas";
+import { ExternalLink, Share2 } from "lucide-react";
+import { PAUTAS, urlFonteOficial } from "@/lib/pautas";
 import {
   COR_ALINHAMENTO,
   numeroCompacto,
@@ -7,23 +8,32 @@ import {
   rotuloCargo,
   textoDaCor,
 } from "@/lib/parlamentares";
-import type { AlinhamentoVoto, ParlamentarConsolidado } from "@/types/parlamentar";
+import type { AlinhamentoVoto, PautaConfig, ParlamentarConsolidado } from "@/types/parlamentar";
 
 export function ParlamentarCard({
   p,
-  pautaSel,
-  onAbrir,
+  pauta,
+  onCompartilhar,
+  focado = false,
 }: {
   p: ParlamentarConsolidado;
-  pautaSel: string;
-  onAbrir: () => void;
+  pauta: PautaConfig;
+  onCompartilhar: () => void;
+  /** Veio de um deep link `?deputado=` — ganha destaque visual. */
+  focado?: boolean;
 }) {
+  const pautaSel = pauta.slug;
   const alinhamento: AlinhamentoVoto = p.votos[pautaSel] ?? "AUSENTE";
+  const bruto = p.votosOriginais?.[pautaSel];
+  const motivo = p.motivos?.[pautaSel];
 
   return (
     <div
       data-nome={p.nome}
-      className="flex flex-col justify-between rounded-2xl border border-borda bg-superficie p-4 shadow-sm transition hover:shadow-md"
+      data-focado={focado ? "1" : undefined}
+      className={`flex flex-col justify-between rounded-2xl border bg-superficie p-4 shadow-sm transition hover:shadow-md ${
+        focado ? "border-2 border-dourado ring-2 ring-dourado/25" : "border-borda"
+      }`}
     >
       <div>
         <div className="mb-3 flex items-center gap-3">
@@ -92,34 +102,35 @@ export function ParlamentarCard({
           >
             {rotuloAlinhamento(alinhamento, pautaSel)}
           </span>
-        </div>
-
-        <div className="mb-4">
-          <div className="mb-1 flex items-center justify-between text-[11px] font-medium text-corpo">
-            <span>Alinhamento cívico</span>
-            <span
-              className="font-bold text-titulo"
-              title="Como é calculado: só contam as votações com voto individual — a favor = 1 ponto, abstenção = 0,3, contra/ausente = 0. Pautas sem voto individual (votação simbólica ou pendente na outra casa) não entram na conta."
-            >
-              {p.pontuacaoCivica}%
-            </span>
-          </div>
-          <div className="h-1.5 overflow-hidden rounded-full bg-trilha">
-            <div
-              className="h-full rounded-full bg-dourado"
-              style={{ width: `${p.pontuacaoCivica}%` }}
-            />
-          </div>
+          {!bruto && motivo && (
+            <p className="mt-1 text-[10px] leading-snug text-corpo" title={motivo}>
+              {motivo}
+            </p>
+          )}
         </div>
       </div>
 
-      <button
-        type="button"
-        onClick={onAbrir}
-        className="w-full rounded-lg bg-trilha py-2 text-xs font-semibold text-titulo transition hover:bg-verde-mata hover:text-white"
-      >
-        Ver dossiê
-      </button>
+      <div className="flex items-center gap-2">
+        <a
+          href={urlFonteOficial(pauta)}
+          target="_blank"
+          rel="noreferrer"
+          data-fonte-card={pauta.slug}
+          title={`${pauta.materia} — fonte oficial`}
+          className="inline-flex flex-1 items-center justify-center gap-1 rounded-lg border border-borda py-2 text-[11px] font-semibold text-corpo transition hover:border-dourado hover:text-titulo"
+        >
+          <ExternalLink className="h-3.5 w-3.5" aria-hidden /> Fonte oficial
+        </a>
+        <button
+          type="button"
+          onClick={onCompartilhar}
+          data-compartilhar-card="1"
+          aria-label={`Compartilhar o voto de ${p.nome} em ${pauta.materia}`}
+          className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-verde-mata py-2 text-[11px] font-bold text-white transition hover:bg-verde-bandeira"
+        >
+          <Share2 className="h-3.5 w-3.5" aria-hidden /> Compartilhar
+        </button>
+      </div>
     </div>
   );
 }

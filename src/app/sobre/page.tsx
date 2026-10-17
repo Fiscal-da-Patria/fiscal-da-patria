@@ -168,39 +168,38 @@ export default function SobrePage() {
           </div>
         </section>
 
-        {/* Seção 3.5 — metodologia do Alinhamento Cívico (âncora pública) */}
+        {/* Seção 3.5 — como ler o voto (âncora pública; sem nota/porcentagem) */}
         <section id="metodologia" className="mb-10 scroll-mt-24">
           <h2 className="flex items-center gap-2 text-xl font-bold text-titulo sm:text-2xl">
-            <Calculator className="h-5 w-5 shrink-0 text-dourado" /> Como calculamos o Alinhamento
-            Cívico
+            <Calculator className="h-5 w-5 shrink-0 text-dourado" /> Como ler o voto
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-corpo">
-            A nota (<strong>0 a 100%</strong>) mostra o quanto o parlamentar{" "}
-            <strong>apoiou as propostas</strong> auditadas (rótulo verde) ou as{" "}
-            <strong>rejeitou</strong> (rótulo vermelho). Ela é calculada{" "}
-            <strong>apenas sobre as votações em que houve voto individual</strong> — ninguém é
-            penalizado por uma votação que não existiu.
+            Cada card mostra <strong className="text-titulo">um voto, de uma matéria</strong>, com o
+            rótulo factual do que foi votado — sem nota, sem ranking de opinião. Para comparar as
+            outras pautas, basta trocar a matéria no topo da página.
           </p>
 
           <ul className="mt-4 space-y-1.5 text-sm text-corpo">
             <li>
-              <strong className="text-titulo">Apoiou a proposta</strong> (rótulo verde) = 1 ponto
+              <strong className="text-titulo">Apoiou</strong> (verde) — votou a favor do que a
+              matéria propõe.
             </li>
             <li>
-              <strong className="text-titulo">Abstenção</strong> = 0,3 ponto
+              <strong className="text-titulo">Rejeitou</strong> (vermelho) — votou contra o que a
+              matéria propõe.
             </li>
             <li>
-              <strong className="text-titulo">Rejeitou a proposta</strong> (rótulo vermelho) = 0
-              ponto
+              <strong className="text-titulo">Abstenção</strong> — estava na sessão e não votou nem
+              sim nem não.
             </li>
             <li>
-              <strong className="text-titulo">Ausente</strong> (estava em exercício e não registrou
-              voto) = 0 ponto
+              <strong className="text-titulo">Ausente</strong> — estava em exercício e não registrou
+              voto.
             </li>
             <li>
-              <strong className="text-titulo">Sem voto individual</strong> — votação simbólica ou
-              matéria ainda não apreciada pela outra casa —{" "}
-              <strong className="text-titulo">não entra na conta</strong>
+              <strong className="text-titulo">Sem voto individual</strong> — a casa não teve votação
+              nominal (votação simbólica) ou a matéria ainda não foi apreciada por ela. O motivo
+              aparece no próprio card.
             </li>
           </ul>
           <p className="mt-3 text-[13px] leading-relaxed text-corpo">
@@ -212,17 +211,11 @@ export default function SobrePage() {
             de valor.
           </p>
 
-          <div className="mt-4 rounded-xl border border-borda bg-superficie p-4 text-sm text-corpo">
+          <div className="mt-4 rounded-xl border border-borda bg-superficie p-4 text-[13px] leading-relaxed text-corpo">
             <p>
-              <strong className="text-titulo">Fórmula:</strong> (pontos ÷ votações aplicáveis) × 100.
-            </p>
-            <p className="mt-2 text-[13px]">
-              <strong className="text-titulo">Exemplo real:</strong> o senador Romário tem{" "}
-              <strong>4 votações aplicáveis</strong> das 11 pautas — apoiou a proposta em 2, rejeitou
-              em 1 e não registrou voto em 1. Logo: 2 ÷ 4 ={" "}
-              <strong className="text-titulo">50%</strong>. As 7 pautas em que o Senado não teve voto
-              individual (aprovadas por votação simbólica ou ainda pendentes){" "}
-              <strong>não entram na conta</strong>.
+              <strong className="text-titulo">Por que não tem nota?</strong> Nota e ranking viram
+              torcida. O Fiscal da Pátria mostra o <strong className="text-titulo">fato</strong> — a
+              matéria, o voto registrado e o link da fonte — e deixa a conclusão com você.
             </p>
           </div>
 

@@ -31,10 +31,15 @@ test.describe("Home — estrutura e dados", () => {
     ).toBeVisible();
   });
 
-  test("cards exibem foto, alinhamento cívico e mini-barras", async ({ page }) => {
+  test("cards exibem foto, o voto factual e as mini-barras das 11 pautas", async ({ page }) => {
     await esperarTodos(page);
-    await expect(page.getByText("Alinhamento cívico").first()).toBeVisible();
     await expect(page.locator('img[src^="/fotos/"]').first()).toBeVisible();
+    await expect(
+      page.getByText(/(Apoiou|Rejeitou) isenção|Abstenção|Ausente|Sem voto individual/).first(),
+    ).toBeVisible();
+    // Cada card tem a fonte oficial e a ação de compartilhar.
+    await expect(page.locator("[data-fonte-card]").first()).toBeVisible();
+    await expect(page.locator("[data-compartilhar-card]").first()).toBeVisible();
   });
 
   test("hemiciclo com legenda completa", async ({ page }) => {

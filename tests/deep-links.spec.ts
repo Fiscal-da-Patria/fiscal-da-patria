@@ -5,17 +5,18 @@ import { cards, carregarTodos } from "./helpers";
 const cardDe = (page: Page, nome: string) => page.locator(`[data-nome="${nome}"]`);
 
 test.describe("Deep links (Dark Social)", () => {
-  test("?dep=<id> abre o dossiê e normaliza a URL para ?deputado=", async ({ page }) => {
+  test("?dep=<id> filtra pela pessoa e normaliza a URL para ?deputado=", async ({ page }) => {
     await page.goto("/?dep=74646");
-    const dialog = page.getByRole("dialog");
-    await expect(dialog).toBeVisible({ timeout: 30_000 });
-    await expect(dialog.getByRole("heading", { name: /Aécio Neves/i }).first()).toBeVisible();
+    await expect(page.getByPlaceholder(/Buscar por nome/i)).toHaveValue(/Aécio Neves/i, {
+      timeout: 30_000,
+    });
     await expect(page).toHaveURL(/\?deputado=camara-74646$/);
+    await expect(page.locator('[data-focado="1"]')).toContainText("Aécio Neves");
   });
 
   test("?id=<id> funciona como alias", async ({ page }) => {
     await page.goto("/?id=74646");
-    await expect(page.getByRole("dialog")).toBeVisible({ timeout: 30_000 });
+    await expect(page.locator('[data-focado="1"]')).toBeVisible({ timeout: 30_000 });
   });
 
   test("?dep inválido não quebra a página (mostra a lista normal)", async ({ page }) => {
@@ -38,10 +39,12 @@ test.describe("Deep links (Dark Social)", () => {
     await expect.poll(async () => await cards(page).count(), { timeout: 30_000 }).toBeGreaterThan(0);
   });
 
-  test("abrir e fechar o dossiê mantém a barra de endereço copiável", async ({ page }) => {
+  test("abrir e fechar o compartilhamento mantém a barra de endereço copiável", async ({
+    page,
+  }) => {
     await page.goto("/");
     await carregarTodos(page);
-    await cardDe(page, "Aécio Neves").getByRole("button", { name: "Ver dossiê" }).click();
+    await cardDe(page, "Aécio Neves").locator("[data-compartilhar-card]").click();
     await expect(page).toHaveURL(/\?deputado=camara-74646$/);
 
     await page.getByRole("dialog").getByRole("button", { name: "Fechar" }).click();

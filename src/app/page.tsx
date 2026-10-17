@@ -10,7 +10,7 @@ import { Hemiciclo } from "@/components/Hemiciclo";
 import { PautaPills } from "@/components/PautaPills";
 import { BuscaFiltros } from "@/components/BuscaFiltros";
 import { ParlamentarCard } from "@/components/ParlamentarCard";
-import { DossieModal } from "@/components/DossieModal";
+import { ShareModal } from "@/components/ShareModal";
 import { CargoTabs } from "@/components/CargoTabs";
 import { GraficoPartidos } from "@/components/GraficoPartidos";
 import { PAUTAS, exemploPratico, motivoSemVotoCasa, urlFonteOficial } from "@/lib/pautas";
@@ -37,7 +37,10 @@ export default function HomePage() {
   const [busca, setBusca] = useState("");
   const [uf, setUf] = useState("TODOS");
   const [cargo, setCargo] = useState<CargoFiltro>("TODOS");
-  const [dossie, setDossie] = useState<ParlamentarConsolidado | null>(null);
+  /** Parlamentar com o modal de compartilhamento aberto. */
+  const [share, setShare] = useState<ParlamentarConsolidado | null>(null);
+  /** Deep link `?deputado=` — destaca o card da pessoa e rola até ele. */
+  const [focadoId, setFocadoId] = useState<string | null>(null);
   /** Mostra só quem tem voto registrado na matéria ativa (tira o ruído de "Sem voto"). */
   const [soVotaram, setSoVotaram] = useState(false);
   /** Cards visíveis por vez na lista (o resto vem em "Carregar mais"). */
@@ -77,8 +80,10 @@ export default function HomePage() {
               p.id.endsWith(`-${depParam}`),
           );
           if (alvo) {
-            setDossie(alvo);
-            // Normaliza o link (?dep= / ?id= → ?deputado=) para virar um endereço copiável.
+            // Link antigo de dossiê continua funcionando: filtra pela pessoa,
+            // destaca o card e normaliza a URL (?dep= / ?id= → ?deputado=).
+            setBusca(alvo.nome);
+            setFocadoId(alvo.id);
             sincronizarUrl(alvo.id);
           }
         }
@@ -170,13 +175,13 @@ export default function HomePage() {
     window.history.replaceState(null, "", query ? `/?${query}` : window.location.pathname);
   }
 
-  function abrirDossie(p: ParlamentarConsolidado) {
-    setDossie(p);
+  function abrirCompartilhar(p: ParlamentarConsolidado) {
+    setShare(p);
     sincronizarUrl(p.id);
   }
 
-  function fecharDossie() {
-    setDossie(null);
+  function fecharCompartilhar() {
+    setShare(null);
     sincronizarUrl(null);
   }
 
@@ -188,8 +193,17 @@ export default function HomePage() {
     setSoVotaram(false);
     setOrdem("piores");
     setVisiveis(POR_PAGINA);
+    setFocadoId(null);
     window.history.replaceState(null, "", window.location.pathname);
   }
+
+  // Deep link ?deputado=: rola até o card destacado assim que a lista aparece.
+  useEffect(() => {
+    if (!focadoId) return;
+    document
+      .querySelector('[data-focado="1"]')
+      ?.scrollIntoView({ block: "center", behavior: "smooth" });
+  }, [focadoId, listados]);
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -228,7 +242,10 @@ export default function HomePage() {
         <section className="order-2 mb-8 md:order-none">
           <PautaPills selecionada={pautaSel} onSelecionar={selecionarPauta} />
           <div className="mt-3 space-y-4">
-            <div className="rounded-2xl border border-borda bg-superficie p-5 shadow-sm">
+            <div
+              data-pauta-card="1"
+              className="rounded-2xl border border-borda bg-superficie p-5 shadow-sm"
+            >
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <p className="text-[11px] font-bold uppercase tracking-wider text-corpo">
                   Pauta selecionada
@@ -460,20 +477,14 @@ export default function HomePage() {
                   Mostrando {listadosVisiveis.length} de {listados.length} parlamentar(es)
                 </p>
               </div>
-              <p className="mb-3 text-[11px] text-corpo">
-                Como o <strong className="text-titulo">Alinhamento Cívico</strong> é calculado?{" "}
-                <Link href="/sobre#metodologia" className="font-semibold underline">
-                  Ver a metodologia
-                </Link>{" "}
-                — só entram as votações com voto individual.
-              </p>
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                 {listadosVisiveis.map((p) => (
                   <ParlamentarCard
                     key={p.id}
                     p={p}
-                    pautaSel={pautaSel}
-                    onAbrir={() => abrirDossie(p)}
+                    pauta={pautaAtual}
+                    focado={focadoId === p.id}
+                    onCompartilhar={() => abrirCompartilhar(p)}
                   />
                 ))}
               </div>
@@ -501,8 +512,8 @@ export default function HomePage() {
 
       <SiteFooter />
 
-      {dossie && (
-        <DossieModal parlamentar={dossie} onFechar={fecharDossie} pautaSel={pautaSel} />
+      {share && (
+        <ShareModal parlamentar={share} pauta={pautaAtual} onFechar={fecharCompartilhar} />
       )}
     </div>
   );

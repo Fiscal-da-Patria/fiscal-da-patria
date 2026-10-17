@@ -96,7 +96,7 @@ export function mensagemParlamentarNaPauta(
   if (voto.bruto && voto.alinhamento !== "NAO_APLICAVEL") {
     linhas.push(`Voto registrado na fonte oficial: ${ROTULO_VOTO_BRUTO[voto.bruto]}.`);
   }
-  linhas.push("", "Veja o dossiê completo: 👇", urlParlamentarNaPauta(p.id, pauta.slug));
+  linhas.push("", "Veja o voto aqui: 👇", urlParlamentarNaPauta(p.id, pauta.slug));
   return linhas.join("\n");
 }
 
@@ -107,15 +107,14 @@ export function mensagemParlamentar(p: {
   partido: string;
   uf: string;
   cargo: string;
-  pontuacaoCivica: number;
 }): string {
   const cargo = p.cargo === "SENADOR" ? "senador" : "deputado federal";
   return [
     `Olha como ${p.nome} (${p.partido}-${p.uf}), ${cargo}, votou nas pautas que mexem no seu bolso. 👀`,
     "",
-    `Alinhamento cívico: ${p.pontuacaoCivica}%. Dados oficiais da Câmara dos Deputados e do Senado Federal.`,
+    "Cada card mostra a matéria e o voto registrado, com link para a fonte oficial.",
     "",
-    "Veja o dossiê completo: 👇",
+    "Confira: 👇",
     urlDeputado(p.id),
   ].join("\n");
 }

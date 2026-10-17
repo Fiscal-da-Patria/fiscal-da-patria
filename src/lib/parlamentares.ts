@@ -51,25 +51,6 @@ export function rotuloAlinhamento(a: AlinhamentoVoto, pautaSlug?: string): strin
   return ROTULO_ALINHAMENTO[a];
 }
 
-/** Tom visual do voto (para badges compactos e linhas atenuadas). */
-export type TomVoto = 'apoio' | 'divergencia' | 'neutro';
-
-/** Resumo compacto de um voto: emoji + verbo curto + tom visual. */
-export function resumoVoto(a: AlinhamentoVoto): { texto: string; emoji: string; tom: TomVoto } {
-  switch (a) {
-    case 'FAVORAVEL':
-      return { texto: 'Apoiou', emoji: '🟢', tom: 'apoio' };
-    case 'CONTRA':
-      return { texto: 'Rejeitou', emoji: '🔴', tom: 'divergencia' };
-    case 'ABSTENCAO':
-      return { texto: 'Abstenção', emoji: '⚪', tom: 'neutro' };
-    case 'NAO_APLICAVEL':
-      return { texto: 'Sem voto', emoji: '⚪', tom: 'neutro' };
-    default:
-      return { texto: 'Ausente', emoji: '⚪', tom: 'neutro' };
-  }
-}
-
 export const COR_ALINHAMENTO: Record<AlinhamentoVoto, string> = {
   FAVORAVEL: '#1b4d3e',
   CONTRA: '#b91c1c',
@@ -147,62 +128,6 @@ export const ROTULO_VOTO_BRUTO: Record<VotoCanonico, string> = {
   OBSTRUCAO: 'Obstrução',
   AUSENTE: 'sem voto registrado',
 };
-
-/**
- * Detalha **como** o Alinhamento Cívico foi calculado — para ficar visível na ficha.
- *
- * Regra: só contam as votações com **voto individual**.
- *   A favor = 1 ponto · Abstenção = 0,3 · Contra = 0 · Ausente = 0 ·
- *   `NAO_APLICAVEL` (votação simbólica/pendente na casa de origem) **não entra**.
- * Percentual = pontos ÷ votações aplicáveis.
- */
-export interface ExplicacaoPontuacao {
-  percentual: number;
-  pontos: number;
-  aplicaveis: number;
-  total: number;
-  favoraveis: number;
-  abstencoes: number;
-  contras: number;
-  ausentes: number;
-  semVoto: number;
-  detalhe: string;
-}
-
-export function explicarPontuacao(p: ParlamentarConsolidado): ExplicacaoPontuacao {
-  const valores = Object.values(p.votos);
-  const contar = (alvo: AlinhamentoVoto) => valores.filter((v) => v === alvo).length;
-
-  const favoraveis = contar('FAVORAVEL');
-  const abstencoes = contar('ABSTENCAO');
-  const contras = contar('CONTRA');
-  const ausentes = contar('AUSENTE');
-  const semVoto = contar('NAO_APLICAVEL');
-
-  const aplicaveis = favoraveis + abstencoes + contras + ausentes;
-  const pontos = favoraveis * 1 + abstencoes * 0.3;
-  const percentual = aplicaveis > 0 ? Math.round((pontos / aplicaveis) * 100) : 0;
-
-  const detalhe =
-    `Conta: ${favoraveis} a favor × 1 + ${abstencoes} abstenção × 0,3 = ` +
-    `${pontos.toString().replace('.', ',')} ponto(s) ÷ ${aplicaveis} votações aplicáveis ` +
-    `(de ${valores.length}) = ${percentual}%. ` +
-    `${semVoto} pauta(s) sem voto individual não entram na conta; ` +
-    `${contras} contra e ${ausentes} ausente(s) valem 0.`;
-
-  return {
-    percentual,
-    pontos,
-    aplicaveis,
-    total: valores.length,
-    favoraveis,
-    abstencoes,
-    contras,
-    ausentes,
-    semVoto,
-    detalhe,
-  };
-}
 
 /**
  * Abrevia números grandes em linguagem popular:

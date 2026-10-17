@@ -76,23 +76,19 @@ test.describe("Congresso: cargo, abas e votos do Senado", () => {
     expect(nomes[0]).toBe(campeao);
   });
 
-  test("dossiê de senador: casa de origem, perfil oficial e situação no Senado", async ({
-    page,
-  }) => {
+  test("senador: card traz o cargo, a fonte oficial e o rótulo do voto", async ({ page }) => {
     await page.goto("/");
     await esperarCards(page);
     await page.getByRole("button", { name: /Senadores \(81\)/ }).click();
-    await cards(page).first().click();
+    await carregarTodos(page);
 
-    const dialog = page.getByRole("dialog");
-    await expect(dialog).toBeVisible();
-    await expect(dialog.getByText(/Senador da República/).first()).toBeVisible();
-    await expect(dialog.getByRole("link", { name: /Perfil oficial no Senado/i })).toHaveAttribute(
-      "href",
-      /senado\.leg\.br/,
-    );
-    // Transparência: a ficha explica a votação simbólica do Senado.
-    await expect(dialog.getByText(/simbólica/i).first()).toBeVisible();
+    const card = cards(page).filter({ hasText: "Senador da República" }).first();
+    await expect(card).toBeVisible();
+    await expect(card.locator('[data-cargo="SENADOR"]')).toBeVisible();
+    await expect(card.locator("[data-fonte-card]")).toHaveAttribute("href", /camara\.leg\.br/);
+    await expect(
+      card.getByText(/(Apoiou|Rejeitou) isenção|Abstenção|Ausente|Sem voto individual/),
+    ).toBeVisible();
   });
 
   test("pauta auditada no Senado: a Câmara mostra o aviso em vez de 513 cards sem voto", async ({

@@ -30,10 +30,10 @@ for (const rota of rotas) {
   }
 }
 
-test("Acessibilidade (axe) — dossiê aberto", async ({ page }) => {
+test("Acessibilidade (axe) — modal de compartilhamento", async ({ page }) => {
   await page.goto("/");
   await esperarCards(page);
-  await page.getByRole("button", { name: "Ver dossiê" }).first().click();
+  await page.locator("[data-compartilhar-card]").first().click();
   await page.getByRole("dialog").waitFor();
 
   const { violations } = await new AxeBuilder({ page }).analyze();

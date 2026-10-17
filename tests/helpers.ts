@@ -35,9 +35,9 @@ export const TOTAL_SENADORES = 81;
 /** Congresso Nacional completo (Câmara + Senado). */
 export const TOTAL_PARLAMENTARES = TOTAL_DEPUTADOS + TOTAL_SENADORES;
 
-/** Botões "Ver dossiê" = um por card de deputado. */
+/** Cards de parlamentar (o atributo data-nome é a chave estável). */
 export function cards(page: Page) {
-  return page.getByRole("button", { name: "Ver dossiê" });
+  return page.locator("[data-nome]");
 }
 
 /** Espera aparecer o primeiro card (dados carregados via fetch). */
@@ -69,10 +69,10 @@ export async function esperarTodos(page: Page): Promise<void> {
     .toBe(TOTAL_PARLAMENTARES);
 }
 
-/** Abre o dossiê do primeiro deputado e retorna o modal. */
-export async function abrirPrimeiroDossie(page: Page) {
+/** Abre o modal de compartilhamento do primeiro card e retorna o dialog. */
+export async function abrirCompartilhar(page: Page) {
   await esperarCards(page);
-  await cards(page).first().click();
+  await page.locator("[data-compartilhar-card]").first().click();
   const dialog = page.getByRole("dialog");
   await expect(dialog).toBeVisible();
   return dialog;

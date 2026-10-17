@@ -22,14 +22,16 @@ test.describe("Responsividade — Mobile (390x844)", () => {
     expect(largura).toBeGreaterThan(300);
   });
 
-  test("dossiê e carteirinha utilizáveis no mobile", async ({ page }) => {
+  test("compartilhamento utilizável no mobile", async ({ page }) => {
     await page.goto("/");
     await esperarCards(page);
-    await cards(page).first().click();
-    await expect(page.getByRole("dialog")).toBeVisible();
-    await expect(
-      page.getByRole("button", { name: /Exportar cartão \(PNG 9:16\)/i }),
-    ).toBeVisible();
+    await page.locator("[data-compartilhar-card]").first().click();
+
+    const dialog = page.getByRole("dialog");
+    await expect(dialog).toBeVisible();
+    await expect(dialog.locator("[data-share-card]")).toBeVisible();
+    await expect(dialog.locator('[data-baixar-imagem="1"]')).toBeVisible();
+    await expect(dialog.locator('[data-compartilhar="1"]')).toBeVisible();
   });
 
   test("página Sobre legível no mobile", async ({ page }) => {

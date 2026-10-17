@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { PAUTAS, TOTAL_PARLAMENTARES, abrirPrimeiroDossie, esperarCards } from "./helpers";
+import { PAUTAS, TOTAL_PARLAMENTARES, abrirCompartilhar, esperarCards } from "./helpers";
 
 /** Extrai um parâmetro de uma URL de compartilhamento. */
 const param = (href: string, chave: string) => new URL(href).searchParams.get(chave) ?? "";
@@ -59,17 +59,18 @@ test.describe("Compartilhar a PAUTA como assunto central", () => {
     expect(texto).toContain("/?pauta=crime_organizado");
   });
 
-  test("dossiê: cada pauta tem seu próprio botão de enviar no Zap (foco na matéria)", async ({
+  test("cada card compartilha a matéria ativa (texto factual + deep link dos dois)", async ({
     page,
+    context,
   }) => {
+    await context.grantPermissions(["clipboard-read", "clipboard-write"], {
+      origin: "http://localhost:3000",
+    });
     await page.goto("/");
-    const dialog = await abrirPrimeiroDossie(page);
+    const dialog = await abrirCompartilhar(page);
+    await dialog.locator('[data-copiar-link="1"]').click();
 
-    const botoes = dialog.getByRole("link", { name: /Enviar esta votação/i });
-    await expect(botoes).toHaveCount(11);
-
-    const primeiro = (await botoes.first().getAttribute("href")) as string;
-    const texto = param(primeiro, "text");
+    const texto = await page.evaluate(() => navigator.clipboard.readText());
     // A pauta é o assunto central + o voto do parlamentar específico + deep link dos dois.
     expect(texto).toMatch(/Comida sem imposto/i);
     expect(texto).toMatch(/PEC 45\/2019/);
@@ -77,15 +78,15 @@ test.describe("Compartilhar a PAUTA como assunto central", () => {
     expect(texto).toMatch(/\?deputado=(camara|senado)-\d+&pauta=cesta_basica/);
   });
 
-  test("dossiê: cartão exportável da pauta ativa (4:5)", async ({ page }) => {
+  test("a imagem 4:5 traz a matéria ativa e o botão de baixar", async ({ page }) => {
     await page.goto("/");
-    const dialog = await abrirPrimeiroDossie(page);
+    const dialog = await abrirCompartilhar(page);
 
-    await expect(dialog.getByText(/Cartão da pauta · PEC 45\/2019/i)).toBeVisible();
-    await expect(
-      dialog.getByRole("button", { name: /Exportar cartão da pauta \(PNG 4:5\)/i }),
-    ).toBeVisible();
-    await expect(dialog.getByText(/Comida sem imposto \(Cesta Básica\)/i).first()).toBeVisible();
+    const cartao = dialog.locator("[data-share-card]");
+    await expect(cartao).toBeVisible();
+    await expect(cartao).toContainText("PEC 45/2019");
+    await expect(cartao).toContainText(/Comida sem imposto \(Cesta Básica\)/i);
+    await expect(dialog.locator('[data-baixar-imagem="1"]')).toBeVisible();
   });
 });
 

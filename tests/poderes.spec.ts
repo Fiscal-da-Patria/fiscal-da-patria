@@ -283,15 +283,6 @@ test.describe("Âncoras, responsividade e atalhos contextuais", () => {
     await expect(atalho).toHaveAttribute("href", "/poderes#regua");
     await expect(atalho).toContainText(/aprovar uma PEC/i);
 
-    // O mesmo atalho aparece dentro do dossiê, colado na votação em destaque.
-    await page.getByRole("button", { name: "Ver dossiê" }).first().click();
-    const dialog = page.getByRole("dialog");
-    await expect(dialog).toBeVisible();
-    const atalhoDialogo = dialog.locator('[data-ajuda-quorum="pec"]');
-    await expect(atalhoDialogo).toHaveAttribute("href", "/poderes#regua");
-    await expect(atalhoDialogo).toContainText(/aprovar uma PEC/i);
-    await dialog.getByRole("button", { name: "Fechar" }).click();
-
     // Pauta que é projeto de lei: o atalho muda de destino e de texto.
     await page.goto("/?pauta=igualdade_salarial");
     await esperarCards(page);

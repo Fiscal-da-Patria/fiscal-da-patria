@@ -80,8 +80,6 @@ export interface ParlamentarConsolidado {
   email?: string;
   /** Perfil oficial na casa de origem (camara.leg.br / senado.leg.br). */
   urlPerfilOficial: string;
-  /** Índice de Alinhamento Cívico (0 a 100). */
-  pontuacaoCivica: number;
   /** Votos nominais recebidos na urna (TSE). 0 quando desconhecido. */
   votosEleicao: number;
   /** Alinhamento por slug da pauta (matriz densa: todas as pautas presentes). */

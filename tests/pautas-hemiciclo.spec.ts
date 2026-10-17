@@ -17,13 +17,15 @@ test.describe("Pautas e hemiciclo", () => {
   });
 
   test("card da pauta mostra rótulo, ementa e link oficial", async ({ page }) => {
-    const link = page.getByRole("link", { name: /fonte oficial/i });
+    const card = page.locator('[data-pauta-card="1"]');
+    await expect(card.getByText("Pauta selecionada")).toBeVisible();
+
+    const link = card.getByRole("link", { name: /fonte oficial/i });
     await expect(link).toBeVisible();
     await expect(link).toHaveAttribute(
       "href",
       /camara\.leg\.br\/proposicoesWeb\/fichadetramitacao\?idProposicao=\d+/,
     );
-    await expect(page.getByText("Pauta selecionada")).toBeVisible();
   });
 
   test("trocar de pauta troca a matéria exibida", async ({ page }) => {

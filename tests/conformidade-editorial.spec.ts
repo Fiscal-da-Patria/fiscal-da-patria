@@ -1,5 +1,6 @@
 import { test, expect } from "@playwright/test";
-import { cards, carregarTodos, esperarCards } from "./helpers";
+import { carregarTodos, esperarCards } from "./helpers";
+import { mensagemParlamentarNaPauta } from "../src/lib/share";
 
 /** Termos PROIBIDOS na interface visível (conformidade editorial/jurídica). */
 const PROIBIDOS = [/contra o cidadão/i, /a favor do cidadão/i, /pior voto/i, /melhor voto/i];
@@ -23,16 +24,21 @@ test.describe("Conformidade editorial — rótulos factuais", () => {
     });
   }
 
-  test("nenhum termo proibido no dossiê aberto", async ({ page }) => {
+  test("nenhum termo proibido nos cards e no compartilhamento", async ({ page }) => {
     await page.goto("/");
     await esperarCards(page);
-    await cards(page).first().click();
 
+    const cardTexto = await page.locator("[data-nome]").first().innerText();
+    for (const termo of PROIBIDOS) {
+      expect(cardTexto, `termo proibido no card (${termo})`).not.toMatch(termo);
+    }
+
+    await page.locator("[data-compartilhar-card]").first().click();
     const dialog = page.getByRole("dialog");
     await expect(dialog).toBeVisible();
     const texto = await dialog.innerText();
     for (const termo of PROIBIDOS) {
-      expect(texto, `termo proibido no dossiê (${termo})`).not.toMatch(termo);
+      expect(texto, `termo proibido no compartilhamento (${termo})`).not.toMatch(termo);
     }
   });
 
@@ -75,20 +81,17 @@ test.describe("Conformidade editorial — rótulos factuais", () => {
     await expect(page.getByText(/Mostrando primeiro quem Apoiou blindagem/i)).toBeVisible();
   });
 
-  test("as mensagens de compartilhamento também são factuais", async ({ page }) => {
-    await page.goto("/");
-    await esperarCards(page);
-    await page.getByRole("button", { name: /Fim da escala 6x1/i }).click();
-    await cards(page).first().click();
-
-    const href = (await page
-      .getByRole("dialog")
-      .getByRole("link", { name: /Enviar esta votação/i })
-      .first()
-      .getAttribute("href")) as string;
-    const texto = new URL(href).searchParams.get("text") ?? "";
+  test("as mensagens de compartilhamento também são factuais", async () => {
+    // Unidade: é a mesma função que monta o texto do cartão no modal.
+    const texto = mensagemParlamentarNaPauta(
+      { id: "camara-1", nome: "Fulano", partido: "XX", uf: "RJ", cargo: "DEPUTADO" },
+      { slug: "cesta_basica", rotuloPopular: "Comida sem imposto", materia: "PEC 45/2019" },
+      { alinhamento: "CONTRA", bruto: "NAO" },
+    );
 
     for (const termo of PROIBIDOS) expect(texto).not.toMatch(termo);
     expect(texto).toMatch(/Apoiou |Rejeitou |se absteve|não tem voto/);
+    expect(texto).toMatch(/PEC 45\/2019/);
+    expect(texto).toMatch(/\?deputado=camara-1&pauta=cesta_basica/);
   });
 });

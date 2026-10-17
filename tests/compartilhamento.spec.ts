@@ -80,16 +80,24 @@ test.describe("Compartilhamento (Dark Social)", () => {
     });
   });
 
-  test("dossiê: barra com deep link focado no deputado", async ({ page }) => {
+  test("compartilhamento: 'Copiar link' leva o deep link do parlamentar e da pauta", async ({
+    page,
+    context,
+  }) => {
+    await context.grantPermissions(["clipboard-read", "clipboard-write"], {
+      origin: "http://localhost:3000",
+    });
     await page.goto("/");
     await esperarCards(page);
-    await page.getByRole("button", { name: "Ver dossiê" }).first().click();
+    await page.locator("[data-compartilhar-card]").first().click();
 
     const dialog = page.getByRole("dialog");
-    const tg = dialog.getByRole("link", { name: "Telegram" });
-    const href = (await tg.getAttribute("href")) as string;
-    expect(param(href, "url")).toMatch(/fiscaldapatria\.org\.br\/\?deputado=(camara|senado)-\d+/);
-    expect(param(href, "text")).toMatch(/votou nas pautas/);
+    await dialog.locator('[data-copiar-link="1"]').click();
+    await expect(dialog.getByRole("button", { name: /Copiado! ✓/ })).toBeVisible();
+
+    const copiado = await page.evaluate(() => navigator.clipboard.readText());
+    expect(copiado).toMatch(/Nesta votação/);
+    expect(copiado).toMatch(/fiscaldapatria\.org\.br\/\?deputado=(camara|senado)-\d+&pauta=/);
   });
 
   test("Web Share aparece apenas quando o navegador suporta", async ({ page }) => {
@@ -100,15 +108,16 @@ test.describe("Compartilhamento (Dark Social)", () => {
     else await expect(botao).toHaveCount(0);
   });
 
-  test("deep link ?deputado=<id> abre o dossiê automaticamente", async ({ page }) => {
+  test("deep link ?deputado=<id> filtra e destaca o card", async ({ page }) => {
     await page.goto("/?deputado=74646");
-    const dialog = page.getByRole("dialog");
-    await expect(dialog).toBeVisible({ timeout: 30_000 });
-    await expect(dialog.getByRole("heading", { name: /Aécio Neves/i }).first()).toBeVisible();
-    await expect(dialog.getByRole("link", { name: /Perfil oficial/i })).toHaveAttribute(
-      "href",
-      /deputados\/74646/,
-    );
+    await expect(page.getByPlaceholder(/Buscar por nome/i)).toHaveValue(/Aécio Neves/i, {
+      timeout: 30_000,
+    });
+    const focado = page.locator('[data-focado="1"]');
+    await expect(focado).toBeVisible();
+    await expect(focado).toContainText("Aécio Neves");
+    // A fonte oficial agora vive no próprio card.
+    await expect(focado.locator("[data-fonte-card]")).toHaveAttribute("href", /camara\.leg\.br/);
   });
 
   test("deep link ?pauta=<slug> pré-seleciona a pauta", async ({ page }) => {

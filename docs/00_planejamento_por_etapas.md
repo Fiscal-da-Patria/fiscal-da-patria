@@ -26,9 +26,10 @@
 | 17 | Página "Entenda os Poderes" | Educação cívica: os 3 Poderes + Câmara × Senado | ✅ |
 | 18 | Régua dos votos + Linha do tempo | Quóruns (PEC 308/49 · PLP 257/41 · PL) e o funil legislativo em 5 passos | ✅ |
 | 19 | Revisão de leitura e usabilidade | Manifesto no topo · rótulo único · rodapé único · casa sem voto · lista 20 em 20 | ✅ |
-| 20 | Deploy | Publicação (Vercel/Cloudflare Pages) + domínio | ⏳ próxima |
-| 21 | Otimização de fotos (WebP) | Reduzir o peso de `public/fotos` | ⏳ backlog |
-| 22 | OG dinâmico / Kit por estado | Crescimento e viralidade | ⏳ backlog |
+| 20 | Simplificação: sem dossiê/nota + cartão de compartilhamento | Um botão por card gera a imagem (nome, partido, matéria, voto) | ✅ |
+| 21 | Deploy | Publicação (Vercel/Cloudflare Pages) + domínio | ⏳ próxima |
+| 22 | Otimização de fotos (WebP) | Reduzir o peso de `public/fotos` | ⏳ backlog |
+| 23 | OG dinâmico / Kit por estado | Crescimento e viralidade | ⏳ backlog |
 
 ## Registro por etapa
 
@@ -180,6 +181,16 @@
 - **Botão "ver de qualquer forma" removido:** se a casa não votou, o aviso (com o motivo real) **já é a resposta** — não há mais caminho para listar centenas de cards vazios. O estado vazio aponta o caminho certo: "escolha a outra casa nas abas acima". O estado `mostrarSemVoto` foi removido do código.
 - **"No dia a dia": exemplificação por pauta:** cada matéria ganhou uma frase curta e concreta do efeito prático (`EXEMPLOS_PRATICOS` + `exemploPratico()`), exibida no card da pauta na home e no dossiê (`data-exemplo-pratico`). Regra anti-desinformação: cada frase é tradução **direta da ementa oficial** — sem número, prazo ou efeito que não esteja na matéria. O título popular segue com impacto; o exemplo dá o "e daí?".
 - **Verificação:** `tsc` e `lint` limpos; specs de poderes, ordenação, casa-sem-voto, cargo e home ajustados (o teste da régua passou a medir o carrossel por `scrollWidth`/`clientWidth` e o teste do cargo passou a esperar o **aviso** em vez de cards vazios).
+
+### Etapa 20 — Simplificação: sem dossiê, sem nota; cartão de compartilhamento ✅
+- **Decisão de produto:** o **dossiê** (modal com as 11 pautas, placar, filtros e carteirinha 9:16) saiu. No lugar, **um botão "Compartilhar" por card** que abre a **prévia da imagem** e oferece *Compartilhar* (menu do sistema no celular), *Baixar PNG* e *Copiar link*. Menos tela, mais viralidade.
+- **A nota de "Alinhamento Cívico" saiu do produto** (era 0–100% no card). Saíram também a barra de %, a seção de fórmula em `/sobre#metodologia` (virou **"Como ler o voto"**, com o porquê de não ter nota), a linha da home que apontava a fórmula, o campo `pontuacaoCivica` do tipo/pipeline e a função `explicarPontuacao()`. A ordenação "divergentes/favoráveis" **nunca dependeu da nota** e segue idêntica.
+- **A imagem (1080×1350, PNG 4:5)** — `ShareCard` — tem, nesta ordem: selo "Votação na Câmara/Senado" → **matéria (PEC/PL)** → **rótulo popular** → **"No dia a dia: …"** → **foto, nome, cargo • partido-UF** → **veredito factual colorido + "Voto registrado: SIM/NÃO"** (ou o motivo, quando não houve voto individual) → **fonte oficial** e o domínio do site.
+- **`ShareModal`:** prévia + ações; no celular usa a **Web Share API com arquivo** (`canShare({ files })`), no desktop baixa o PNG e abre o WhatsApp com o texto factual + deep link. Fecha com ESC, X e clique fora (`role="dialog"`, `aria-modal`, `aria-labelledby`).
+- **Regra do `.clinerules` preservada:** todo card passa a ter o **link da proposição oficial** (`data-fonte-card` → `camara.leg.br`), já que o dossiê era o único lugar com ele. O **motivo** do "sem voto individual" (votação simbólica/pendente) aparece no próprio card.
+- **Deep links antigos continuam funcionando:** `?deputado=…&pauta=…` agora **filtra pela pessoa** e **destaca o card** (`data-focado`) com rolagem até ele (antes abria o dossiê).
+- **Removidos:** `DossieModal.tsx`, `CitizenBadgeCard.tsx`, `CardPauta.tsx`, `explicarPontuacao`, `pontuacaoCivica` (tipo + pipeline) e os specs `dossie-carteirinha`/`pontuacao`.
+- **Testes:** novo `tests/compartilhar.spec.ts` (prévia com nome/partido/matéria/voto, PNG válido, copiar link com deep link, fechar por ESC/X/clique fora, fonte oficial em cada card e deep link com destaque); `helpers.cards()` deixou de contar "Ver dossiê" e passou a usar `[data-nome]`; atualizados `acessibilidade` (axe no modal), `cargo`, `compartilhamento`, `conformidade-editorial` (card + modal), `deep-links`, `poderes`, `pauta-partido` e `responsividade`.
 
 ## Decisões-chave (registro)
 1. **Pautas:** as 7 do PRD, com IDs reais e **curadoria manual** da votação-chave.
