@@ -118,3 +118,30 @@ export function mensagemParlamentar(p: {
     urlDeputado(p.id),
   ].join("\n");
 }
+
+/**
+ * Texto para compartilhar o cartão de **uma bancada** (partido).
+ *
+ * Factual: contagem + rótulo do voto + recorte + link da pauta já filtrado pela
+ * sigla (o campo de busca aceita partido).
+ */
+export function mensagemPartido(
+  linha: { partido: string },
+  resumo: { contagem: string; rotulo: string } | null,
+  pauta: { slug: string; rotuloPopular: string; materia: string; casa: "CAMARA" | "SENADO" },
+  recorte: string,
+): string {
+  const casa = pauta.casa === "SENADO" ? "Senado" : "Câmara";
+  const manchete = resumo
+    ? `${resumo.contagem} (${resumo.rotulo})`
+    : "sem votação nominal registrada";
+  return [
+    `🚨 ${linha.partido} na ${casa}: ${manchete}.`,
+    "",
+    `Matéria: ${pauta.materia} — ${pauta.rotuloPopular}.`,
+    `Recorte: ${recorte}.`,
+    "",
+    "Veja o voto de cada parlamentar: 👇",
+    `${SITE_URL}/?pauta=${encodeURIComponent(pauta.slug)}&busca=${encodeURIComponent(linha.partido)}`,
+  ].join("\n");
+}

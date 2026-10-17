@@ -192,6 +192,16 @@
 - **Removidos:** `DossieModal.tsx`, `CitizenBadgeCard.tsx`, `CardPauta.tsx`, `explicarPontuacao`, `pontuacaoCivica` (tipo + pipeline) e os specs `dossie-carteirinha`/`pontuacao`.
 - **Testes:** novo `tests/compartilhar.spec.ts` (prévia com nome/partido/matéria/voto, PNG válido, copiar link com deep link, fechar por ESC/X/clique fora, fonte oficial em cada card e deep link com destaque); `helpers.cards()` deixou de contar "Ver dossiê" e passou a usar `[data-nome]`; atualizados `acessibilidade` (axe no modal), `cargo`, `compartilhamento`, `conformidade-editorial` (card + modal), `deep-links`, `poderes`, `pauta-partido` e `responsividade`.
 
+### Etapa 20.1 — Cartão compartilhável por bancada (partido) ✅
+- **Pedido:** compartilhar o voto **por partido** (as 5 maiores já visíveis), com a mesma clareza do cartão do parlamentar.
+- **Fonte única de dados:** novo `src/lib/partidos.ts` — `agregarPorPartido()` (contagem por alinhamento, total da bancada, `comVoto`) e `resumoPartido()` (manchete factual). O **`GraficoPartidos`** passou a usar esse helper (mesma ordenação e mesmos números de antes) e o cartão usa **exatamente** a mesma função — gráfico e imagem nunca divergem.
+- **A manchete é factual e explícita:** `"40 de 44"` (sempre sobre quem **tinha voto individual**) + o rótulo do voto (`Apoiou isenção` / `Rejeitou blindagem` nas pautas invertidas). **Empate é empate** (não escolhe lado) e bancada **sem votação nominal** gera a mensagem honesta em vez de uma imagem vazia.
+- **`ShareCardPartido` (1080×1350):** selo da casa → matéria + rótulo popular → **sigla grande + "N deputados/senadores" + o recorte** → **"X de N" + veredito** + "% de quem votou" → **barra empilhada** com a composição (Apoiou · Rejeitou · Abstenção · Ausente · Sem voto individual) → fonte oficial + domínio.
+- **Recorte declarado:** o cartão mostra "Recorte: Congresso Nacional" (ou "Senado Federal · UF: SP · Busca: PL"), porque o gráfico respeita os filtros da tela — os números da imagem sempre batem com o que está à vista.
+- **Onde fica o botão:** cada linha do gráfico ganhou um ícone de compartilhar (`data-compartilhar-partido="PL"`, `aria-label` completo). As **5 maiores** aparecem por padrão; em "ver todos os N partidos", todas ganham o botão.
+- **Fluxo:** o **mesmo `ShareModal`** foi generalizado (`alvo` = parlamentar **ou** bancada) — prévia, **Compartilhar** (Web Share API com arquivo no celular; download + WhatsApp no desktop), **Baixar PNG** e **Copiar link**. O texto do Zap é factual: *"🚨 PL na Câmara: 40 de 44 (Apoiou isenção). Matéria: PEC 45/2019 — … Recorte: …"* + link `?pauta=…&busca=PL`.
+- **Verificação:** unidade em `tests/partidos.spec.ts` (contagem, desempate, "3 de 4" = 75%, empate, bancada sem voto) + `tests/compartilhar-partido.spec.ts` (5 botões por padrão, prévia com partido/matéria/contagem/recorte, PNG válido, copiar link, cabe em 360px, bancada sem votação nominal) + `axe` no modal da bancada (claro/escuro).
+
 ## Decisões-chave (registro)
 1. **Pautas:** as 7 do PRD, com IDs reais e **curadoria manual** da votação-chave.
 2. **Inversão semântica** centralizada (`aplicarInversao`) — Blindagem: **NÃO = pró-cidadão**.

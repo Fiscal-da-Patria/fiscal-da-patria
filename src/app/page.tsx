@@ -10,10 +10,11 @@ import { Hemiciclo } from "@/components/Hemiciclo";
 import { PautaPills } from "@/components/PautaPills";
 import { BuscaFiltros } from "@/components/BuscaFiltros";
 import { ParlamentarCard } from "@/components/ParlamentarCard";
-import { ShareModal } from "@/components/ShareModal";
+import { ShareModal, type AlvoCompartilhar } from "@/components/ShareModal";
 import { CargoTabs } from "@/components/CargoTabs";
 import { GraficoPartidos } from "@/components/GraficoPartidos";
 import { PAUTAS, exemploPratico, motivoSemVotoCasa, urlFonteOficial } from "@/lib/pautas";
+import type { LinhaPartido } from "@/lib/partidos";
 import { bannerOrdem, rotulosOrdem } from "@/lib/parlamentares";
 import { mensagemPauta } from "@/lib/share";
 import {
@@ -37,8 +38,8 @@ export default function HomePage() {
   const [busca, setBusca] = useState("");
   const [uf, setUf] = useState("TODOS");
   const [cargo, setCargo] = useState<CargoFiltro>("TODOS");
-  /** Parlamentar com o modal de compartilhamento aberto. */
-  const [share, setShare] = useState<ParlamentarConsolidado | null>(null);
+  /** O que está aberto no modal de compartilhamento (parlamentar ou bancada). */
+  const [alvo, setAlvo] = useState<AlvoCompartilhar | null>(null);
   /** Deep link `?deputado=` — destaca o card da pessoa e rola até ele. */
   const [focadoId, setFocadoId] = useState<string | null>(null);
   /** Mostra só quem tem voto registrado na matéria ativa (tira o ruído de "Sem voto"). */
@@ -158,6 +159,24 @@ export default function HomePage() {
   /** Fatia da lista que vai para a tela (paginação de 20 em 20). */
   const listadosVisiveis = useMemo(() => listados.slice(0, visiveis), [listados, visiveis]);
 
+  /**
+   * Recorte atual (casa + UF + busca) — o cartão de bancada **declara** isso,
+   * para nunca mostrar números que não batem com o que está na tela.
+   */
+  const recorte = [
+    cargo === "SENADOR"
+      ? "Senado Federal"
+      : cargo === "DEPUTADO"
+        ? "Câmara dos Deputados"
+        : "Congresso Nacional",
+    uf !== "TODOS" ? `UF: ${uf}` : null,
+    busca.trim() ? `Busca: ${busca.trim()}` : null,
+  ]
+    .filter(Boolean)
+    .join(" · ");
+  const cargoLabel =
+    cargo === "SENADOR" ? "senadores" : cargo === "DEPUTADO" ? "deputados" : "parlamentares";
+
   // Ao trocar a pauta, volta para a ordenação padrão (piores votos primeiro)
   // e reinicia a lista: outra matéria, outra história.
   function selecionarPauta(slug: string) {
@@ -176,12 +195,16 @@ export default function HomePage() {
   }
 
   function abrirCompartilhar(p: ParlamentarConsolidado) {
-    setShare(p);
+    setAlvo({ tipo: "parlamentar", parlamentar: p });
     sincronizarUrl(p.id);
   }
 
+  function abrirCompartilharPartido(linha: LinhaPartido) {
+    setAlvo({ tipo: "partido", linha });
+  }
+
   function fecharCompartilhar() {
-    setShare(null);
+    setAlvo(null);
     sincronizarUrl(null);
   }
 
@@ -320,7 +343,11 @@ export default function HomePage() {
                     : "Congresso Nacional"
               }
             />
-            <GraficoPartidos parlamentares={filtrados} pautaSlug={pautaSel} />
+            <GraficoPartidos
+              parlamentares={filtrados}
+              pautaSlug={pautaSel}
+              onCompartilhar={abrirCompartilharPartido}
+            />
           </div>
         </section>
 
@@ -512,8 +539,14 @@ export default function HomePage() {
 
       <SiteFooter />
 
-      {share && (
-        <ShareModal parlamentar={share} pauta={pautaAtual} onFechar={fecharCompartilhar} />
+      {alvo && (
+        <ShareModal
+          alvo={alvo}
+          pauta={pautaAtual}
+          recorte={recorte}
+          cargoLabel={cargoLabel}
+          onFechar={fecharCompartilhar}
+        />
       )}
     </div>
   );

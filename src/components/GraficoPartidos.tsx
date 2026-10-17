@@ -1,26 +1,13 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp, Share2 } from "lucide-react";
 import { COR_ALINHAMENTO, rotuloAlinhamento } from "@/lib/parlamentares";
-import type { AlinhamentoVoto, ParlamentarConsolidado } from "@/types/parlamentar";
-
-const ORDEM: AlinhamentoVoto[] = [
-  "FAVORAVEL",
-  "CONTRA",
-  "ABSTENCAO",
-  "AUSENTE",
-  "NAO_APLICAVEL",
-];
+import { ORDEM_VOTOS, agregarPorPartido, type LinhaPartido } from "@/lib/partidos";
+import type { ParlamentarConsolidado } from "@/types/parlamentar";
 
 /** Quantos partidos aparecem antes de clicar em "ver todos". */
 const LIMITE = 5;
-
-interface LinhaPartido {
-  partido: string;
-  contagem: Record<AlinhamentoVoto, number>;
-  total: number;
-}
 
 /**
  * "Como cada partido votou" na pauta ativa.
@@ -35,39 +22,16 @@ interface LinhaPartido {
 export function GraficoPartidos({
   parlamentares,
   pautaSlug,
+  onCompartilhar,
 }: {
   parlamentares: ParlamentarConsolidado[];
   pautaSlug: string;
+  /** Abre o cartão compartilhável da bancada (opcional). */
+  onCompartilhar?: (linha: LinhaPartido) => void;
 }) {
   const [expandido, setExpandido] = useState(false);
-  const porPartido = new Map<string, Record<AlinhamentoVoto, number>>();
-
-  for (const p of parlamentares) {
-    const partido = p.partido?.trim() || "SEM PARTIDO";
-    const acc =
-      porPartido.get(partido) ??
-      ({ FAVORAVEL: 0, CONTRA: 0, ABSTENCAO: 0, AUSENTE: 0, NAO_APLICAVEL: 0 } as Record<
-        AlinhamentoVoto,
-        number
-      >);
-    acc[p.votos[pautaSlug] ?? "AUSENTE"] += 1;
-    porPartido.set(partido, acc);
-  }
-
-  const linhas: LinhaPartido[] = [...porPartido.entries()]
-    .map(([partido, contagem]) => ({
-      partido,
-      contagem,
-      total: ORDEM.reduce((s, k) => s + contagem[k], 0),
-    }))
-    .sort(
-      (a, b) =>
-        // 1º: partidos com mais votos (bancada maior ganha visibilidade)
-        b.total - a.total ||
-        // 2º: desempate → quem mais votou CONTRA o cidadão
-        b.contagem.CONTRA - a.contagem.CONTRA ||
-        a.partido.localeCompare(b.partido, "pt-BR"),
-    );
+  // Fonte única: a mesma função gera a manchete do cartão por partido.
+  const linhas = agregarPorPartido(parlamentares, pautaSlug);
 
   const totalGeral = linhas.reduce((s, l) => s + l.total, 0);
   const comVoto = linhas.reduce((s, l) => s + (l.total - l.contagem.NAO_APLICAVEL), 0);
@@ -103,10 +67,24 @@ export function GraficoPartidos({
       )}
 
       <ul className="space-y-3">
-        {visiveis.map(({ partido, contagem, total }) => (
+        {visiveis.map(({ partido, contagem, total, comVoto }) => (
           <li key={partido}>
             <div className="flex flex-wrap items-baseline justify-between gap-x-2 text-[11px]">
-              <span className="font-bold text-titulo">{partido}</span>
+              <span className="flex items-center gap-1.5 font-bold text-titulo">
+                {partido}
+                {onCompartilhar && (
+                  <button
+                    type="button"
+                    onClick={() => onCompartilhar({ partido, contagem, total, comVoto })}
+                    data-compartilhar-partido={partido}
+                    aria-label={`Compartilhar o cartão do ${partido} nesta matéria`}
+                    title={`Compartilhar como o ${partido} votou`}
+                    className="rounded-md border border-borda p-1 text-corpo transition hover:border-dourado hover:text-titulo focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dourado"
+                  >
+                    <Share2 className="h-3 w-3" aria-hidden />
+                  </button>
+                )}
+              </span>
               <span className="text-corpo">
                 {contagem.CONTRA > 0 ? (
                   <strong className="font-bold text-contra-texto">
@@ -126,9 +104,9 @@ export function GraficoPartidos({
             <div
               className="mt-1 flex h-3 w-full overflow-hidden rounded-full bg-trilha"
               role="img"
-              aria-label={`${partido}: ${ORDEM.map((k) => `${rotuloAlinhamento(k, pautaSlug)} ${contagem[k]}`).join(", ")}`}
+              aria-label={`${partido}: ${ORDEM_VOTOS.map((k) => `${rotuloAlinhamento(k, pautaSlug)} ${contagem[k]}`).join(", ")}`}
             >
-              {ORDEM.map((k) =>
+              {ORDEM_VOTOS.map((k) =>
                 contagem[k] > 0 ? (
                   <span
                     key={k}
@@ -167,7 +145,7 @@ export function GraficoPartidos({
       )}
 
       <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 border-t border-borda pt-3 text-[11px] text-corpo">
-        {ORDEM.map((k) => (
+        {ORDEM_VOTOS.map((k) => (
           <span key={k} className="inline-flex items-center gap-1.5">
             <span
               className="inline-block h-2.5 w-2.5 rounded-full"

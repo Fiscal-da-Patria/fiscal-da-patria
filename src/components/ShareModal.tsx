@@ -4,33 +4,67 @@ import { useEffect, useRef, useState } from "react";
 import { toPng } from "html-to-image";
 import { Download, Link2, Send, X } from "lucide-react";
 import { ShareCard } from "./ShareCard";
-import { mensagemParlamentarNaPauta, urlParlamentarNaPauta, urlWhatsApp } from "@/lib/share";
+import { ShareCardPartido } from "./ShareCardPartido";
+import { SITE_URL, mensagemParlamentarNaPauta, mensagemPartido, urlParlamentarNaPauta, urlWhatsApp } from "@/lib/share";
+import { resumoPartido, type LinhaPartido } from "@/lib/partidos";
 import type { AlinhamentoVoto, PautaConfig, ParlamentarConsolidado } from "@/types/parlamentar";
 
+/** O que está sendo compartilhado: um parlamentar ou uma bancada. */
+export type AlvoCompartilhar =
+  | { tipo: "parlamentar"; parlamentar: ParlamentarConsolidado }
+  | { tipo: "partido"; linha: LinhaPartido };
+
 /**
- * Prévia + ações de compartilhamento de **um voto**.
+ * Prévia + ações de compartilhamento (um voto ou uma bancada).
  *
  * A imagem (1080×1350) sai daqui pronta para o WhatsApp; no celular usamos a
  * Web Share API com arquivo (menu do sistema) e no desktop caímos para o
  * download + WhatsApp Web com o texto factual.
  */
 export function ShareModal({
-  parlamentar,
+  alvo,
   pauta,
+  recorte = "",
+  cargoLabel = "parlamentares",
   onFechar,
 }: {
-  parlamentar: ParlamentarConsolidado;
+  alvo: AlvoCompartilhar;
   pauta: PautaConfig;
+  /** "Congresso Nacional" · "Senado Federal · UF: SP" (cartão de bancada). */
+  recorte?: string;
+  /** "deputados" · "senadores" · "parlamentares" (cartão de bancada). */
+  cargoLabel?: string;
   onFechar: () => void;
 }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [gerando, setGerando] = useState(false);
   const [copiado, setCopiado] = useState(false);
 
-  const alinhamento: AlinhamentoVoto = parlamentar.votos[pauta.slug] ?? "AUSENTE";
-  const bruto = parlamentar.votosOriginais?.[pauta.slug];
-  const texto = mensagemParlamentarNaPauta(parlamentar, pauta, { alinhamento, bruto });
-  const link = urlParlamentarNaPauta(parlamentar.id, pauta.slug);
+  const texto =
+    alvo.tipo === "parlamentar"
+      ? mensagemParlamentarNaPauta(alvo.parlamentar, pauta, {
+          alinhamento: (alvo.parlamentar.votos[pauta.slug] ?? "AUSENTE") as AlinhamentoVoto,
+          bruto: alvo.parlamentar.votosOriginais?.[pauta.slug],
+        })
+      : mensagemPartido(alvo.linha, resumoPartido(alvo.linha, pauta.slug), pauta, recorte);
+
+  const link =
+    alvo.tipo === "parlamentar"
+      ? urlParlamentarNaPauta(alvo.parlamentar.id, pauta.slug)
+      : `${SITE_URL}/?pauta=${encodeURIComponent(pauta.slug)}&busca=${encodeURIComponent(
+          alvo.linha.partido,
+        )}`;
+
+  const nomeBase = alvo.tipo === "parlamentar" ? alvo.parlamentar.nome : alvo.linha.partido;
+  const titulo = alvo.tipo === "parlamentar" ? "Compartilhar o voto" : "Compartilhar o partido";
+  const descricao =
+    alvo.tipo === "parlamentar"
+      ? "A imagem vai com nome, partido, matéria e voto. Confira antes de enviar."
+      : "A imagem vai com o partido, a matéria e como a bancada votou. Confira antes de enviar.";
+  const tituloShare =
+    alvo.tipo === "parlamentar"
+      ? `Voto de ${alvo.parlamentar.nome}`
+      : `${alvo.linha.partido} — ${pauta.materia}`;
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -41,7 +75,7 @@ export function ShareModal({
   }, [onFechar]);
 
   const nomeArquivo = () =>
-    `Fiscal_da_Patria_${parlamentar.nome.replace(/\s+/g, "_")}_${pauta.materia.replace(
+    `Fiscal_da_Patria_${nomeBase.replace(/\s+/g, "_")}_${pauta.materia.replace(
       /[^\w]+/g,
       "-",
     )}.png`;
@@ -87,7 +121,7 @@ export function ShareModal({
         if (nav.canShare?.({ files: [arquivo] })) {
           await navigator.share({
             files: [arquivo],
-            title: `Voto de ${parlamentar.nome}`,
+            title: tituloShare,
             text: texto,
           });
           return;
@@ -127,11 +161,9 @@ export function ShareModal({
         <div className="mb-3 flex items-start justify-between gap-3">
           <div>
             <h2 id="share-titulo" className="text-base font-black text-titulo">
-              Compartilhar o voto
+              {titulo}
             </h2>
-            <p className="mt-0.5 text-[11px] leading-relaxed text-corpo">
-              A imagem vai com nome, partido, matéria e voto. Confira antes de enviar.
-            </p>
+            <p className="mt-0.5 text-[11px] leading-relaxed text-corpo">{descricao}</p>
           </div>
           <button
             type="button"
@@ -144,7 +176,17 @@ export function ShareModal({
         </div>
 
         <div className="flex justify-center rounded-xl bg-fundo-neutro p-1">
-          <ShareCard parlamentar={parlamentar} pauta={pauta} ref={cardRef} />
+          {alvo.tipo === "parlamentar" ? (
+            <ShareCard parlamentar={alvo.parlamentar} pauta={pauta} ref={cardRef} />
+          ) : (
+            <ShareCardPartido
+              linha={alvo.linha}
+              pauta={pauta}
+              recorte={recorte}
+              cargoLabel={cargoLabel}
+              ref={cardRef}
+            />
+          )}
         </div>
 
         <div className="mt-4 grid gap-2">
