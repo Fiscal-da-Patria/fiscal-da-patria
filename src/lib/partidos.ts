@@ -1,6 +1,12 @@
 import { rotuloAlinhamento } from './parlamentares';
 import type { AlinhamentoVoto, ParlamentarConsolidado } from '../types/parlamentar';
 
+/**
+ * Quantas bancadas entram no recorte principal: lista colapsada do gráfico e
+ * cartão compartilhável do top 5. Fonte única do "5" na interface.
+ */
+export const TOP_BANCADAS = 5;
+
 /** Ordem canônica dos segmentos (gráfico, legenda e cartão compartilhável). */
 export const ORDEM_VOTOS: AlinhamentoVoto[] = [
   'FAVORAVEL',

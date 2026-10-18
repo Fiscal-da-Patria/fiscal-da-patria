@@ -3,6 +3,7 @@
  * Módulo puro (sem JSX): importável por componentes e por testes.
  */
 import { ROTULO_VOTO_BRUTO } from './parlamentares';
+import { TOP_BANCADAS, resumoPartido, type LinhaPartido } from './partidos';
 import { rotuloFactual } from './pautas';
 import type { AlinhamentoVoto, VotoCanonico } from '../types/parlamentar';
 
@@ -52,6 +53,25 @@ export function urlPauta(slug: string): string {
 /** Deep link que abre o dossiê JÁ posicionado na pauta (matéria em destaque). */
 export function urlParlamentarNaPauta(id: string, slug: string): string {
   return `${SITE_URL}/?deputado=${encodeURIComponent(id)}&pauta=${encodeURIComponent(slug)}`;
+}
+
+/** Filtros que definem o recorte dos números exibidos no cartão. */
+export interface FiltrosRecorte {
+  cargo?: string;
+  uf?: string;
+  busca?: string;
+}
+
+/**
+ * Deep link da pauta **com o mesmo recorte** que gerou os números do cartão.
+ * Sem isso, o destinatário abriria outra base e veria números diferentes.
+ */
+export function urlRecorte(slug: string, filtros: FiltrosRecorte = {}): string {
+  const params = new URLSearchParams({ pauta: slug });
+  if (filtros.cargo && filtros.cargo !== "TODOS") params.set("cargo", filtros.cargo);
+  if (filtros.uf && filtros.uf !== "TODOS") params.set("uf", filtros.uf);
+  if (filtros.busca?.trim()) params.set("busca", filtros.busca.trim());
+  return `${SITE_URL}/?${params.toString()}`;
 }
 
 /**
@@ -122,26 +142,59 @@ export function mensagemParlamentar(p: {
 /**
  * Texto para compartilhar o cartão de **uma bancada** (partido).
  *
- * Factual: contagem + rótulo do voto + recorte + link da pauta já filtrado pela
- * sigla (o campo de busca aceita partido).
+ * Factual: contagem + rótulo do voto + recorte + link já com o recorte aplicado
+ * (o mesmo que gerou os números do cartão).
  */
 export function mensagemPartido(
   linha: { partido: string },
   resumo: { contagem: string; rotulo: string } | null,
-  pauta: { slug: string; rotuloPopular: string; materia: string; casa: "CAMARA" | "SENADO" },
+  pauta: { slug: string; rotuloPopular: string; materia: string },
   recorte: string,
+  link: string,
 ): string {
-  const casa = pauta.casa === "SENADO" ? "Senado" : "Câmara";
   const manchete = resumo
     ? `${resumo.contagem} (${resumo.rotulo})`
     : "sem votação nominal registrada";
   return [
-    `🚨 ${linha.partido} na ${casa}: ${manchete}.`,
+    `🚨 ${linha.partido} na votação de ${pauta.materia}: ${manchete}.`,
     "",
     `Matéria: ${pauta.materia} — ${pauta.rotuloPopular}.`,
     `Recorte: ${recorte}.`,
     "",
     "Veja o voto de cada parlamentar: 👇",
-    `${SITE_URL}/?pauta=${encodeURIComponent(pauta.slug)}&busca=${encodeURIComponent(linha.partido)}`,
+    link,
+  ].join("\n");
+}
+
+/**
+ * Texto para compartilhar o cartão do **top 5 de bancadas**.
+ *
+ * Factual: lista as maiores bancadas do recorte com a manchete "X de N"
+ * (sempre sobre quem tinha voto individual) e o link do mesmo recorte.
+ */
+export function mensagemTop5(
+  linhas: LinhaPartido[],
+  pauta: { slug: string; rotuloPopular: string; materia: string },
+  recorte: string,
+  link: string,
+): string {
+  const top = linhas.slice(0, TOP_BANCADAS);
+  if (top.length === 0) return mensagemPauta(pauta);
+
+  return [
+    `🚨 Top ${top.length} maiores bancadas — ${pauta.rotuloPopular}`,
+    "",
+    ...top.map((linha) => {
+      const resumo = resumoPartido(linha, pauta.slug);
+      return `• ${linha.partido}: ${
+        resumo ? `${resumo.contagem} (${resumo.rotulo})` : "sem votação nominal"
+      }`;
+    }),
+    "",
+    `Matéria: ${pauta.materia}.`,
+    `Recorte: ${recorte}.`,
+    "",
+    "Veja como cada partido votou: 👇",
+    link,
   ].join("\n");
 }

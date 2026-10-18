@@ -25,7 +25,7 @@ export function CargoTabs({
   ];
 
   return (
-    <div className="flex flex-wrap gap-2" aria-label="Filtrar por cargo">
+    <div role="group" className="flex flex-wrap gap-2" aria-label="Filtrar por cargo">
       {abas.map((aba) => {
         const ativa = selecionado === aba.valor;
         const Icone = aba.valor === "SENADOR" ? Landmark : Users;
@@ -34,7 +34,7 @@ export function CargoTabs({
             key={aba.valor}
             type="button"
             onClick={() => onSelecionar(aba.valor)}
-            aria-current={ativa ? "true" : undefined}
+            aria-pressed={ativa}
             data-cargo-tab={aba.valor}
             className={`inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-xs font-bold transition ${
               ativa

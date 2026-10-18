@@ -18,14 +18,16 @@ const geistMono = Geist_Mono({
  */
 export const metadata: Metadata = {
   metadataBase: new URL("https://fiscaldapatria.org.br"),
-  title: "Fiscal da Pátria — Veja como seu deputado votou",
+  title: "Fiscal da Pátria — Veja como seu deputado e senador votaram",
   description:
-    "Veja como seu deputado votou no prato de comida e na blindagem de políticos. Auditoria cívica das votações nominais da Câmara dos Deputados, em linguagem popular e sempre com link para a fonte oficial.",
+    "Veja como seu deputado e seu senador votaram no prato de comida e na blindagem de políticos. Auditoria cívica das votações nominais da Câmara dos Deputados e do Senado Federal, em linguagem popular e sempre com link para a fonte oficial.",
   applicationName: "Fiscal da Pátria",
   authors: [{ name: "Fiscal da Pátria" }],
   keywords: [
     "votações Câmara dos Deputados",
+    "votações Senado Federal",
     "como votou meu deputado",
+    "como votou meu senador",
     "transparência pública",
     "dados abertos",
     "auditoria cívica",
@@ -41,7 +43,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Fiscal da Pátria",
     description:
-      "Veja como seu deputado votou no prato de comida e na blindagem de políticos. Só fatos da Câmara, sem pedido de voto.",
+      "Veja como seu deputado e seu senador votaram no prato de comida e na blindagem de políticos. Só fatos da Câmara e do Senado, sem pedido de voto.",
     url: "/",
     siteName: "Fiscal da Pátria",
     locale: "pt_BR",
@@ -51,15 +53,15 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Fiscal da Pátria — Veja como seu deputado votou no prato de comida e na blindagem de políticos",
+        alt: "Fiscal da Pátria — Veja como seu deputado e senador votaram no prato de comida e na blindagem de políticos",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Fiscal da Pátria — Veja como seu deputado votou",
+    title: "Fiscal da Pátria — Veja como seu deputado e senador votaram",
     description:
-      "No prato de comida, no salário livre de IR e na blindagem de políticos: veja como cada deputado votou. Dados oficiais da Câmara.",
+      "No prato de comida, no salário livre de IR e na blindagem de políticos: veja como cada deputado e senador votou. Dados oficiais da Câmara e do Senado.",
     images: ["/og-image.png"],
   },
   robots: { index: true, follow: true },

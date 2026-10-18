@@ -1,13 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { ChevronDown, ChevronUp, Share2 } from "lucide-react";
-import { COR_ALINHAMENTO, rotuloAlinhamento } from "@/lib/parlamentares";
-import { ORDEM_VOTOS, agregarPorPartido, type LinhaPartido } from "@/lib/partidos";
+import { BarraVotos } from "@/components/BarraVotos";
+import { COR_GRAFICO, rotuloAlinhamento } from "@/lib/parlamentares";
+import {
+  ORDEM_VOTOS,
+  TOP_BANCADAS,
+  agregarPorPartido,
+  type LinhaPartido,
+} from "@/lib/partidos";
 import type { ParlamentarConsolidado } from "@/types/parlamentar";
-
-/** Quantos partidos aparecem antes de clicar em "ver todos". */
-const LIMITE = 5;
 
 /**
  * "Como cada partido votou" na pauta ativa.
@@ -18,27 +21,34 @@ const LIMITE = 5;
  * Ordenação: **partidos com mais votos primeiro** (bancada maior no topo) e, no
  * **desempate**, quem mais votou **CONTRA o cidadão**.
  * Lista colapsada em 5 partidos, com "ver todos" (evita excesso de informação).
+ * O ícone de compartilhar no título gera o cartão do **top 5 de bancadas**.
  */
 export function GraficoPartidos({
   parlamentares,
   pautaSlug,
   onCompartilhar,
+  onCompartilharTop5,
 }: {
   parlamentares: ParlamentarConsolidado[];
   pautaSlug: string;
   /** Abre o cartão compartilhável da bancada (opcional). */
   onCompartilhar?: (linha: LinhaPartido) => void;
+  /** Abre o cartão compartilhável do top 5 de bancadas (opcional). */
+  onCompartilharTop5?: (linhas: LinhaPartido[]) => void;
 }) {
   const [expandido, setExpandido] = useState(false);
   // Fonte única: a mesma função gera a manchete do cartão por partido.
-  const linhas = agregarPorPartido(parlamentares, pautaSlug);
+  const linhas = useMemo(
+    () => agregarPorPartido(parlamentares, pautaSlug),
+    [parlamentares, pautaSlug],
+  );
 
   const totalGeral = linhas.reduce((s, l) => s + l.total, 0);
   const comVoto = linhas.reduce((s, l) => s + (l.total - l.contagem.NAO_APLICAVEL), 0);
 
   // Lista vazia (a casa filtrada não votou a matéria): mostramos o estado vazio
   // em vez de sumir com o bloco — o usuário precisa saber por que não há barras.
-  const visiveis = expandido ? linhas : linhas.slice(0, LIMITE);
+  const visiveis = expandido ? linhas : linhas.slice(0, TOP_BANCADAS);
 
   const pct = (n: number, base: number) => (base > 0 ? Math.round((n / base) * 100) : 0);
 
@@ -48,7 +58,21 @@ export function GraficoPartidos({
       className="rounded-2xl border border-borda bg-superficie p-4 shadow-sm"
     >
       <div className="mb-3 flex flex-wrap items-baseline justify-between gap-2">
-        <h3 className="text-sm font-bold text-titulo">Como cada partido votou</h3>
+        <div className="flex items-center gap-1.5">
+          <h2 className="text-sm font-bold text-titulo">Como cada partido votou</h2>
+          {onCompartilharTop5 && linhas.length > 0 && (
+            <button
+              type="button"
+              onClick={() => onCompartilharTop5(linhas.slice(0, TOP_BANCADAS))}
+              data-compartilhar-top5="1"
+              aria-label={`Compartilhar o cartão das ${TOP_BANCADAS} maiores bancadas nesta matéria`}
+              title={`Compartilhar o top ${TOP_BANCADAS} das bancadas`}
+              className="rounded-md border border-borda p-1.5 text-corpo transition hover:border-dourado hover:text-titulo focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dourado"
+            >
+              <Share2 className="h-4 w-4" aria-hidden />
+            </button>
+          )}
+        </div>
         <p className="text-[11px] text-corpo">
           {totalGeral} parlamentar(es) • maiores bancadas primeiro (desempate: quem{" "}
           {rotuloAlinhamento("CONTRA", pautaSlug).toLowerCase()})
@@ -79,15 +103,15 @@ export function GraficoPartidos({
                     data-compartilhar-partido={partido}
                     aria-label={`Compartilhar o cartão do ${partido} nesta matéria`}
                     title={`Compartilhar como o ${partido} votou`}
-                    className="rounded-md border border-borda p-1 text-corpo transition hover:border-dourado hover:text-titulo focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dourado"
+                    className="rounded-md border border-borda p-1.5 text-corpo transition hover:border-dourado hover:text-titulo focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dourado"
                   >
-                    <Share2 className="h-3 w-3" aria-hidden />
+                    <Share2 className="h-3.5 w-3.5" aria-hidden />
                   </button>
                 )}
               </span>
               <span className="text-corpo">
                 {contagem.CONTRA > 0 ? (
-                  <strong className="font-bold text-contra-texto">
+                  <strong className="font-mono font-bold text-contra-texto">
                     {pct(contagem.CONTRA, total)}% — {rotuloAlinhamento("CONTRA", pautaSlug)}
                   </strong>
                 ) : (
@@ -95,36 +119,27 @@ export function GraficoPartidos({
                     Nenhum caso de “{rotuloAlinhamento("CONTRA", pautaSlug)}”
                   </span>
                 )}
-                <span className="text-corpo-fraco">
+                <span className="font-mono text-corpo-fraco">
                   {" "}
-                  • {total} ({pct(total, totalGeral)}% da Casa)
+                  • {total} ({pct(total, totalGeral)}% do recorte)
                 </span>
               </span>
             </div>
-            <div
-              className="mt-1 flex h-3 w-full overflow-hidden rounded-full bg-trilha"
-              role="img"
-              aria-label={`${partido}: ${ORDEM_VOTOS.map((k) => `${rotuloAlinhamento(k, pautaSlug)} ${contagem[k]}`).join(", ")}`}
-            >
-              {ORDEM_VOTOS.map((k) =>
-                contagem[k] > 0 ? (
-                  <span
-                    key={k}
-                    className="h-full"
-                    style={{
-                      width: `${(contagem[k] / total) * 100}%`,
-                      backgroundColor: COR_ALINHAMENTO[k],
-                    }}
-                    title={`${rotuloAlinhamento(k, pautaSlug)}: ${contagem[k]}`}
-                  />
-                ) : null,
-              )}
-            </div>
+            <BarraVotos
+              contagem={contagem}
+              total={total}
+              cores={COR_GRAFICO}
+              className="mt-1 h-3 bg-trilha"
+              rotulo={`${partido}: ${ORDEM_VOTOS.map(
+                (k) => `${rotuloAlinhamento(k, pautaSlug)} ${contagem[k]}`,
+              ).join(", ")}`}
+              tituloDe={(k, n) => `${rotuloAlinhamento(k, pautaSlug)}: ${n}`}
+            />
           </li>
         ))}
       </ul>
 
-      {linhas.length > LIMITE && (
+      {linhas.length > TOP_BANCADAS && (
         <button
           type="button"
           onClick={() => setExpandido((v) => !v)}
@@ -149,7 +164,7 @@ export function GraficoPartidos({
           <span key={k} className="inline-flex items-center gap-1.5">
             <span
               className="inline-block h-2.5 w-2.5 rounded-full"
-              style={{ backgroundColor: COR_ALINHAMENTO[k] }}
+              style={{ backgroundColor: COR_GRAFICO[k] }}
             />
             {rotuloAlinhamento(k, pautaSlug)}
           </span>

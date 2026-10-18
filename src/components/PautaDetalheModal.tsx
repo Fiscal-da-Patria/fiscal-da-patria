@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
 import {
   ArrowRight,
   BadgeCheck,
@@ -13,6 +12,7 @@ import {
   X,
   XCircle,
 } from "lucide-react";
+import { Modal } from "./Modal";
 import type { PautaConfig } from "@/types/parlamentar";
 
 /** Ícones dos pontos explicativos (na ordem em que aparecem). */
@@ -32,14 +32,6 @@ export function PautaDetalheModal({
   pauta: PautaConfig;
   onFechar: () => void;
 }) {
-  useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onFechar();
-    };
-    window.addEventListener("keydown", handler);
-    return () => window.removeEventListener("keydown", handler);
-  }, [onFechar]);
-
   if (!pauta.pontosExplicativos?.length) return null;
 
   const dataBR = (iso?: string) => (iso ? iso.split("-").reverse().join("/") : "");
@@ -53,19 +45,8 @@ export function PautaDetalheModal({
   const arquivada = pauta.status === "ARQUIVADA";
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-black/60 p-3 backdrop-blur-sm sm:items-center sm:p-4"
-      onClick={onFechar}
-      role="presentation"
-    >
-      <div
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="titulo-pauta-detalhe"
-        data-pauta-detalhe="1"
-        onClick={(e) => e.stopPropagation()}
-        className="my-auto w-full max-w-2xl rounded-2xl border border-borda bg-superficie p-5 shadow-xl sm:p-6"
-      >
+    <Modal aoFechar={onFechar} rotuloId="titulo-pauta-detalhe" largura="max-w-2xl">
+      <div data-pauta-detalhe="1" className="p-5 sm:p-6">
         <div className="flex items-start justify-between gap-3">
           <div>
             {pauta.status && (
@@ -218,7 +199,7 @@ export function PautaDetalheModal({
           </a>
         </div>
       </div>
-    </div>
+    </Modal>
   );
 }
 

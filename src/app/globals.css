@@ -15,6 +15,28 @@
   --contra-texto: #991b1b; /* Vermelho legível sobre fundo claro (AA) */
   --borda: rgba(0, 0, 0, 0.06); /* Bordas finas */
   --trilha: rgba(0, 0, 0, 0.05); /* Trilha de barras */
+  /* Cores dos gráficos (barras, dots e legendas) */
+  --cor-voto-favoravel: #1b4d3e;
+  --cor-voto-contra: #b91c1c;
+  --cor-voto-abstencao: #64748b;
+  --cor-voto-ausente: #cbd5e1;
+  --cor-voto-nao-aplicavel: #94a3b8;
+
+  /* Faixa de status do card (fundo + texto). No escuro, só o verde clareia:
+     #1b4d3e sumiria na superfície #12211c. */
+  --status-favoravel-bg: #1b4d3e;
+  --status-favoravel-texto: #ffffff;
+  --status-contra-bg: #b91c1c;
+  --status-contra-texto: #ffffff;
+  --status-abstencao-bg: #64748b;
+  --status-abstencao-texto: #ffffff;
+  --status-ausente-bg: #cbd5e1;
+  --status-ausente-texto: #0f2f1d;
+  --status-nao-aplicavel-bg: #94a3b8;
+  --status-nao-aplicavel-texto: #0f2f1d;
+
+  /* Anel de foco acessível (verde no claro; dourado no escuro). */
+  --foco: #0f2f1d;
 }
 
 .dark {
@@ -27,6 +49,17 @@
   --contra-texto: #fca5a5; /* Vermelho legível sobre fundo escuro (AA) */
   --borda: rgba(255, 255, 255, 0.12);
   --trilha: rgba(255, 255, 255, 0.12);
+  /* No escuro, o verde/vermelho precisam clarear para não sumir no fundo */
+  --cor-voto-favoravel: #4caf82;
+  --cor-voto-contra: #ef4444;
+  --cor-voto-abstencao: #94a3b8;
+  --cor-voto-ausente: #64748b;
+  --cor-voto-nao-aplicavel: #94a3b8;
+
+  --status-favoravel-bg: #4caf82;
+  --status-favoravel-texto: #0f2f1d;
+
+  --foco: #d9a726;
 }
 
 @theme inline {
@@ -59,6 +92,25 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+/* Foco visível e consistente em todo o app. */
+:where(a, button, input, select, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--foco);
+  outline-offset: 2px;
+}
+
+/* Modal nativo: o backdrop fica no top-layer, acima do header sticky. */
+.modal-civico::backdrop {
+  background: rgba(15, 47, 29, 0.6);
+  backdrop-filter: blur(4px);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .modal-civico::backdrop {
+    backdrop-filter: none;
+    background: rgba(15, 47, 29, 0.8);
+  }
 }
 

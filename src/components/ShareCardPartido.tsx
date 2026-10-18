@@ -1,7 +1,13 @@
 "use client";
 
 import { ShieldCheck } from "lucide-react";
-import { COR_ALINHAMENTO, rotuloAlinhamento, textoDaCor } from "@/lib/parlamentares";
+import { BarraVotos } from "@/components/BarraVotos";
+import {
+  COR_ALINHAMENTO,
+  COR_GRAFICO_CARTAO,
+  rotuloAlinhamento,
+  textoDaCor,
+} from "@/lib/parlamentares";
 import { ORDEM_VOTOS, resumoPartido, type LinhaPartido } from "@/lib/partidos";
 import type { PautaConfig } from "@/types/parlamentar";
 
@@ -28,17 +34,16 @@ export function ShareCardPartido({
   ref: React.Ref<HTMLDivElement>;
 }) {
   const resumo = resumoPartido(linha, pauta.slug);
-  const casa = pauta.casa === "SENADO" ? "Senado" : "Câmara";
 
   return (
     <div
       ref={ref}
       data-share-card="1"
-      className="flex h-[375px] w-[300px] flex-col justify-between overflow-hidden rounded-2xl bg-verde-mata p-4 text-white shadow-xl"
+      className="flex aspect-[4/5] w-[300px] max-w-full flex-col justify-between overflow-hidden rounded-2xl bg-verde-mata p-4 text-white shadow-xl"
     >
       <div className="flex items-center justify-between">
         <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-dourado">
-          <ShieldCheck className="h-3.5 w-3.5" /> Votação na {casa}
+          <ShieldCheck className="h-3.5 w-3.5" /> Votação nominal
         </span>
         <span className="rounded-full border border-white/20 px-1.5 py-0.5 text-[9px] text-white/70">
           Fiscal da Pátria
@@ -66,7 +71,7 @@ export function ShareCardPartido({
 
       {resumo ? (
         <div className="rounded-xl bg-white/5 px-3 py-2 text-center">
-          <p className="text-[26px] font-black leading-none text-white">{resumo.contagem}</p>
+          <p className="font-mono text-[26px] font-black leading-none text-white">{resumo.contagem}</p>
           <p
             className="mt-1 inline-flex rounded-md px-2 py-0.5 text-[11px] font-bold"
             style={{
@@ -79,7 +84,7 @@ export function ShareCardPartido({
             {resumo.rotulo}
           </p>
           {!resumo.empate && (
-            <p className="mt-1 text-[9px] text-white/70">
+            <p className="mt-1 font-mono text-[9px] text-white/70">
               {resumo.percentual}% de quem tinha voto individual
             </p>
           )}
@@ -94,20 +99,12 @@ export function ShareCardPartido({
       )}
 
       <div>
-        <div className="flex h-3 w-full overflow-hidden rounded-full bg-white/15">
-          {ORDEM_VOTOS.map((k) =>
-            linha.contagem[k] > 0 ? (
-              <span
-                key={k}
-                className="h-full"
-                style={{
-                  width: `${(linha.contagem[k] / linha.total) * 100}%`,
-                  backgroundColor: COR_ALINHAMENTO[k],
-                }}
-              />
-            ) : null,
-          )}
-        </div>
+        <BarraVotos
+          contagem={linha.contagem}
+          total={linha.total}
+          cores={COR_GRAFICO_CARTAO}
+          className="h-3 bg-white/15"
+        />
         <p className="mt-1 text-[9px] leading-snug text-white/80">
           {ORDEM_VOTOS.filter((k) => linha.contagem[k] > 0)
             .map((k) => `${rotuloAlinhamento(k, pauta.slug)} ${linha.contagem[k]}`)

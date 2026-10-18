@@ -27,8 +27,9 @@ export function BuscaFiltros({
           type="search"
           value={busca}
           onChange={(e) => onBusca(e.target.value)}
-          placeholder="Buscar por nome ou partido…"
-          className="w-full rounded-xl border border-borda bg-superficie py-2.5 pl-9 pr-3 text-sm text-titulo shadow-sm outline-none transition focus:border-dourado focus:ring-2 focus:ring-dourado/20"
+          aria-label="Buscar parlamentar por nome, partido ou estado"
+          placeholder="Buscar por nome, partido ou estado…"
+          className="w-full rounded-xl border border-borda bg-superficie py-2.5 pl-9 pr-3 text-sm text-titulo shadow-sm outline-none transition focus:border-dourado focus:ring-2 focus:ring-dourado/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dourado"
         />
       </div>
       <div className="relative w-full sm:w-40">
@@ -37,7 +38,7 @@ export function BuscaFiltros({
           value={uf}
           onChange={(e) => onUf(e.target.value)}
           aria-label="Filtrar por estado"
-          className="w-full appearance-none rounded-xl border border-borda bg-superficie py-2.5 pl-9 pr-8 text-sm font-medium text-titulo shadow-sm outline-none transition focus:border-dourado"
+          className="w-full appearance-none rounded-xl border border-borda bg-superficie py-2.5 pl-9 pr-8 text-sm font-medium text-titulo shadow-sm outline-none transition focus:border-dourado focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dourado"
         >
           {UFS.map((u) => (
             <option key={u} value={u}>
@@ -56,7 +57,7 @@ export function BuscaFiltros({
             value={ordem}
             onChange={(e) => onOrdem(e.target.value as Ordem)}
             aria-label="Ordenar a lista"
-            className="w-full appearance-none rounded-xl border border-borda bg-superficie py-2.5 pl-9 pr-8 text-sm font-medium text-titulo shadow-sm outline-none transition focus:border-dourado"
+            className="w-full appearance-none rounded-xl border border-borda bg-superficie py-2.5 pl-9 pr-8 text-sm font-medium text-titulo shadow-sm outline-none transition focus:border-dourado focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dourado"
           >
             {(Object.keys(rotulos) as Ordem[]).map((o) => (
               <option key={o} value={o}>

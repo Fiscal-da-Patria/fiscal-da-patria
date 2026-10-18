@@ -59,6 +59,51 @@ export const COR_ALINHAMENTO: Record<AlinhamentoVoto, string> = {
   NAO_APLICAVEL: '#94a3b8',
 };
 
+/**
+ * Fundo e texto da faixa de status do card — acompanham o tema (o verde
+ * escuro some na superfície escura). Os cartões compartilháveis continuam
+ * usando `COR_ALINHAMENTO`, pois têm fundo verde fixo.
+ */
+export const COR_STATUS: Record<AlinhamentoVoto, string> = {
+  FAVORAVEL: 'var(--status-favoravel-bg)',
+  CONTRA: 'var(--status-contra-bg)',
+  ABSTENCAO: 'var(--status-abstencao-bg)',
+  AUSENTE: 'var(--status-ausente-bg)',
+  NAO_APLICAVEL: 'var(--status-nao-aplicavel-bg)',
+};
+
+export const TEXTO_STATUS: Record<AlinhamentoVoto, string> = {
+  FAVORAVEL: 'var(--status-favoravel-texto)',
+  CONTRA: 'var(--status-contra-texto)',
+  ABSTENCAO: 'var(--status-abstencao-texto)',
+  AUSENTE: 'var(--status-ausente-texto)',
+  NAO_APLICAVEL: 'var(--status-nao-aplicavel-texto)',
+};
+
+/**
+ * Cores de **gráficos** (barras, assentos e dots) — acompanham o tema via CSS
+ * variables. O verde escuro do status não serve no fundo escuro.
+ */
+export const COR_GRAFICO: Record<AlinhamentoVoto, string> = {
+  FAVORAVEL: 'var(--cor-voto-favoravel)',
+  CONTRA: 'var(--cor-voto-contra)',
+  ABSTENCAO: 'var(--cor-voto-abstencao)',
+  AUSENTE: 'var(--cor-voto-ausente)',
+  NAO_APLICAVEL: 'var(--cor-voto-nao-aplicavel)',
+};
+
+/**
+ * Cores para os cartões compartilháveis, que têm fundo verde-mata FIXO em
+ * qualquer tema — por isso usam a paleta clara de contraste sobre escuro.
+ */
+export const COR_GRAFICO_CARTAO: Record<AlinhamentoVoto, string> = {
+  FAVORAVEL: '#4caf82',
+  CONTRA: '#ef4444',
+  ABSTENCAO: '#94a3b8',
+  AUSENTE: '#cbd5e1',
+  NAO_APLICAVEL: '#94a3b8',
+};
+
 /** Texto em cor legível sobre o fundo da cor do alinhamento. */
 export function textoDaCor(a: AlinhamentoVoto): string {
   return a === 'AUSENTE' || a === 'NAO_APLICAVEL' ? '#0f2f1d' : '#ffffff';

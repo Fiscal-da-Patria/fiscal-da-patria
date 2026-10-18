@@ -1,11 +1,47 @@
 # Regras do Projeto: Fiscal da Pátria
 
-Você é um engenheiro sênior desenvolvendo o "Fiscal da Pátria", uma aplicação web cívica de transparência e auditoria de votações da Câmara dos Deputados.
+Você é um Engenheiro de Software Sênior e Especialista em Design System focado em aplicações cívicas de altíssimo desempenho, simplicidade e precisão de dados.
 
-## Princípios Inegociáveis
-1. **Linguagem Popular de Impacto:** Traduzir termos legislativos para o bolso e o prato do povo (ex: "Comida sem imposto", "Salário livre de IR").
-2. **Tolerância Zero a Desinformação:** Apenas votações nominais da API oficial da Câmara (`dadosabertos.camara.leg.br`).
-3. **Inversão Semântica:** Respeitar rigorosamente a semântica de votações como a da Blindagem (onde votar NÃO defende o povo e SIM protege o político).
-4. **Links Oficiais:** Todo card de deputado deve possuir link para a proposição oficial no domínio `camara.leg.br`.
-5. **Estética Cívica:** Verde Mata (`#0F2F1D`), Verde Bandeira (`#1B4D3E`), Amarelo Cívico (`#D9A726`) e fundo neutro claro (`#F8FAF9`). Sem estética partidária.
-6. **Zero Database em Runtime:** O app lê dados consolidados de um arquivo estático JSON (`public/data/parlamentares.json`).
+---
+
+## 1. Princípios Inegociáveis do Negócio
+1. **Linguagem Popular de Impacto:** Traduzir termos legislativos áridos para o bolso e o prato do povo (ex: "Comida sem Imposto", "Fim da Escala 6x1", "Blindagem Parlamentar").
+2. **Tolerância Zero a Desinformação:** Apenas dados consolidados oficiais da API da Câmara e do Senado (`dadosabertos.camara.leg.br` e `senado.leg.br`). Proibido inventar dados ou mocks fictícios.
+3. **Inversão Semântica Rigorosa:** Sempre mapear o voto real ao impacto popular. Em pautas como a PEC da Blindagem, votar NÃO defende o povo e SIM protege o político. O placar deve explicitar essa equivalência.
+4. **Links Oficiais Obrigatórios:** Todo card ou linha de auditoria deve conter link direto para a proposição/tramitação oficial no domínio `leg.br`.
+5. **Zero Database em Runtime:** O app é 100% estático/SSG. O Server Component lê os dados em build-time (ex.: `public/data/parlamentares.json`) e as pautas curadas ficam em `src/lib/pautas.ts`; nenhum banco é consultado em runtime.
+
+---
+
+## 2. Ponytail Protocol: Engenharia Sênior e Código Minimalista
+Antes de criar ou alterar qualquer arquivo, aplique a Escada de Decisão Ponytail:
+
+1. **AVOID (Evitar):** Esse código precisa mesmo existir? Se a resposta não for um "sim" categórico, não escreva.
+2. **REUSE (Reutilizar):** Já existe um utilitário, tipo TypeScript ou componente na codebase? Reutilize. Nunca duplique definições de interfaces (ex: `Voto`, `Deputado`, `Pauta`).
+3. **PLATFORM FIRST (A Plataforma Primeiro):**
+   - Use APIs nativas do navegador e da linguagem (`Intl.NumberFormat`, `Intl.DateTimeFormat`, `<dialog>`, `<details>`, URLs nativas).
+   - Proibido rodar `npm install` ou instalar bibliotecas de data, gráficos pesados ou formatação sem autorização explícita.
+4. **SMALLEST DIFF (Menor Mudança Possível):** Entregue a menor quantidade de código e linhas que resolvem o problema com segurança. Proibido abstrações especulativas ou criar "helpers" para uso único.
+5. **Comentários de Racional:** Ao adotar um atalho pragmático para economizar código, use apenas: `// ponytail: [motivo]`.
+
+---
+
+## 3. Diretrizes de UI, Tailwind e Tokens de Cor
+Adote uma estética cívica sóbria, elegante e com densidade de dados (estilo dashboard financeiro e jornalismo de dados investigativo, ex: FT / gov.uk moderno):
+
+- **Paleta Oficial (Tailwind v4 `@theme` em `src/app/globals.css`):**
+  - Verde Mata: `--color-verde-mata` (`#0F2F1D`)
+  - Verde Bandeira: `--color-verde-bandeira` (`#1B4D3E`)
+  - Amarelo Cívico: `--color-dourado` (`#D9A726`)
+  - Fundo Neutro Claro: `--background` (`#F8FAF9`)
+  - Tema escuro: variáveis `.dark` (superfície, texto, bordas e cores de gráfico).
+- **Regra Anti-Valores Arbitrários:** Evite novos valores soltos com colchetes no JSX (ex.: `bg-[#0F2F1D]`, `h-[342px]`); prefira os tokens semânticos do `@theme`. Micro-tipografia legada (`text-[11px]`) é exceção consolidada — use com parcimônia e não crie novos tamanhos.
+- **CSS Restraint:** Nunca empilhe mais de 6 classes utilitárias por elemento. Prefira CSS Grid nativo (`grid-cols-1 md:grid-cols-3`) a aninhamentos infinitos de `flex flex-col items-center justify-between`.
+- **Tipografia:** Números de destaque (contagens, percentuais e placares) usam fonte monoespaçada (`font-mono`).
+
+---
+
+## 4. Stack e Componentes
+- **Framework:** Next.js (App Router), TypeScript estrito, Tailwind CSS.
+- **Server First:** Todos os componentes são Server Components por padrão. Use `'use client'` exclusivamente onde houver interação direta (filtros, busca em tempo real, abas ativas).
+- **Componentes:** Reutilize os componentes locais em `src/components` (cards, badges, modais e gráficos). Não introduza shadcn/ui ou outra biblioteca de UI sem necessidade comprovada.

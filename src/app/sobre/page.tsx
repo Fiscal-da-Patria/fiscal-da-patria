@@ -24,7 +24,10 @@ export default function SobrePage() {
     <div className="flex min-h-screen flex-col">
       <SiteHeader />
 
-      <main className="mx-auto w-full max-w-3xl flex-1 px-4 py-10 sm:px-6">
+      <main
+        id="conteudo"
+        className="mx-auto w-full max-w-3xl flex-1 scroll-mt-20 px-4 py-10 sm:px-6"
+      >
         <Link
           href="/"
           className="inline-flex items-center gap-1.5 text-sm font-semibold text-corpo transition hover:text-titulo"
@@ -43,8 +46,8 @@ export default function SobrePage() {
           <p className="mt-3 text-base leading-relaxed text-corpo">
             O <strong>Fiscal da Pátria</strong> é uma plataforma cívica, independente e estritamente
             apartidária de auditoria parlamentar. Nossa missão é traduzir o comportamento legislativo
-            da Câmara dos Deputados em dados acessíveis, diretos e visualmente compreensíveis pelo
-            eleitor comum.
+            da Câmara dos Deputados e do Senado Federal em dados acessíveis, diretos e visualmente
+            compreensíveis pelo eleitor comum.
           </p>
           <p className="mt-3 text-sm leading-relaxed text-corpo">
             Traduzimos votações de grande repercussão para uma linguagem prática e conectada ao
@@ -77,7 +80,8 @@ export default function SobrePage() {
             O Fiscal da Pátria não analisa discursos inflamados no plenário, cortes editados para redes
             sociais ou promessas de campanha. Nosso trabalho limita-se a um dado oficial e auditável:{" "}
             <strong>
-              o registro nominal do voto registrado no painel eletrônico da Câmara dos Deputados
+              o registro nominal do voto no painel eletrônico da Câmara dos Deputados e do Senado
+              Federal, quando houve votação nominal
             </strong>
             .
           </p>
@@ -253,17 +257,27 @@ export default function SobrePage() {
               <ShieldCheck className="h-6 w-6 text-titulo" />
               <h3 className="mt-3 text-sm font-bold text-titulo">Fonte oficial e auditável</h3>
               <p className="mt-1 text-sm leading-relaxed text-corpo">
-                Todo card possui link direto para a matéria correspondente no portal oficial da Câmara
-                dos Deputados.
+                Todo card possui link direto para a matéria correspondente no portal oficial da casa
+                onde a votação ocorreu (Câmara dos Deputados ou Senado Federal).
               </p>
-              <a
-                href="https://www.camara.leg.br"
-                target="_blank"
-                rel="noreferrer"
-                className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-corpo hover:underline"
-              >
-                camara.leg.br <ExternalLink className="h-3 w-3" />
-              </a>
+              <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1">
+                <a
+                  href="https://www.camara.leg.br"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1 text-xs font-semibold text-corpo hover:underline"
+                >
+                  camara.leg.br <ExternalLink className="h-3 w-3" />
+                </a>
+                <a
+                  href="https://www.senado.leg.br"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1 text-xs font-semibold text-corpo hover:underline"
+                >
+                  senado.leg.br <ExternalLink className="h-3 w-3" />
+                </a>
+              </div>
             </div>
             <div className="rounded-2xl border border-borda bg-superficie p-5">
               <HeartHandshake className="h-6 w-6 text-titulo" />

@@ -41,7 +41,7 @@ export function ShareCard({
     <div
       ref={ref}
       data-share-card="1"
-      className="flex h-[375px] w-[300px] flex-col justify-between overflow-hidden rounded-2xl bg-verde-mata p-4 text-white shadow-xl"
+      className="flex aspect-[4/5] w-[300px] max-w-full flex-col justify-between overflow-hidden rounded-2xl bg-verde-mata p-4 text-white shadow-xl"
     >
       <div className="flex items-center justify-between">
         <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-dourado">
