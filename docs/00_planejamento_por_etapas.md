@@ -28,9 +28,10 @@
 | 19 | Revisão de leitura e usabilidade | Manifesto no topo · rótulo único · rodapé único · casa sem voto · lista 20 em 20 | ✅ |
 | 20 | Simplificação: sem dossiê/nota + cartão de compartilhamento | Um botão por card gera a imagem (nome, partido, matéria, voto) | ✅ |
 | 21 | Escala 6x1 promulgada (EC 141/2026) | Dados definitivos das duas Casas + card "O que foi aprovado?" | ✅ |
-| 22 | Deploy | Publicação (Vercel/Cloudflare Pages) + domínio | ⏳ próxima |
-| 23 | Otimização de fotos (WebP) | Reduzir o peso de `public/fotos` | ⏳ backlog |
-| 24 | OG dinâmico / Kit por estado | Crescimento e viralidade | ⏳ backlog |
+| 22 | Desfecho de todas as pautas | 10 normas verificadas + blindagem arquivada, com detalhamento | ✅ |
+| 23 | Deploy | Publicação (Vercel/Cloudflare Pages) + domínio | ⏳ próxima |
+| 24 | Otimização de fotos (WebP) | Reduzir o peso de `public/fotos` | ⏳ backlog |
+| 25 | OG dinâmico / Kit por estado | Crescimento e viralidade | ⏳ backlog |
 
 ## Registro por etapa
 
@@ -232,6 +233,30 @@
 - **Card "O que foi aprovado?"** (`PautaDetalheModal`): selo **PROMULGADA em 16/10/2026**, norma, resumo, **placares oficiais** das duas Casas (com a nota de que o painel inclui quem deixou o mandato), os 4 pontos com ícones, a ressalva e o link para ler a EC no Planalto. Abre pelo botão no card da matéria (só existe em pauta com texto verificado), fecha por ESC, X ou clique fora.
 - **Verificação:** `tests/escala-6x1.spec.ts` (4 casos: JSON 75/1/5, aba com 76 votaram e Mourão no topo, conteúdo do modal, fechamento/ausência em pauta sem texto) + `api-dados` (guarda factual da EC: ementa, datas, placares e 4 pontos) + **axe no modal em claro e escuro** (0 violações críticas/sérias). `tsc` e `lint` limpos.
 - ⚠️ **Placar oficial × lista em exercício:** o painel da sessão (461×19) inclui parlamentares que já deixaram o mandato; a lista mostra os **513 em exercício** (452×18). O modal declara isso explicitamente para a soma menor não parecer erro.
+
+### Etapa 22 — Desfecho de todas as pautas (10 normas + 1 arquivada) ✅
+- **Pergunta que originou:** "tem mais alguma aprovada? alguma emenda que precisa de detalhamento?" — conferido **cada** pauta nas APIs oficiais (Câmara), no Senado e no Planalto.
+- **O que cada uma virou (número e data conferidos na fonte):**
+  | Pauta | Norma | Data | Placar oficial (Câmara / Senado) |
+  |---|---|---|---|
+  | Cesta Básica | **EC 132/2023** (+ LC 214/2025, art. 125) | 20/12/2023 | 375×113 / 53×24 |
+  | Igualdade salarial | **Lei 14.611/2023** | 03/07/2023 | 325×36 / simbólica |
+  | Fim da blindagem | **Arquivada** pela CCJ do Senado | 24/09/2025 | 314×168 / rejeitada por inconstitucionalidade |
+  | Salário livre de IR | **Lei 15.270/2025** | 26/11/2025 | 493×0 / simbólica |
+  | Super-ricos | **Lei 14.754/2023** | 12/12/2023 | 323×119 / simbólica |
+  | Teto do cartão | **Lei 14.690/2023** | 03/10/2023 | 349×24 / simbólica |
+  | Piso da enfermagem | **Lei 14.434/2022** | 04/08/2022 | 449×12 / simbólica |
+  | Escala 6x1 | **EC 141/2026** | 16/10/2026 | 461×19 / 75×1 |
+  | Agentes de saúde | **EC 140/2026** | 16/10/2026 | 2 turnos / 73×1 |
+  | Crime organizado | **Lei 15.358/2026** | 24/03/2026 | 370×110 / 64×0 |
+  | Combustíveis | **LC 235/2026** | 27/08/2026 | 318×113 / 61×2 |
+- **Correções factuais que a conferência revelou:**
+  1. **Blindagem:** o app usava o 2º turno (`2270800-160`, 344×133), mas o texto final foi a **emenda aglutinativa** de 17/09/2025 (`2270800-175`, **314×168**). Trocado. E o Senado **não está pendente**: a CCJ rejeitou por inconstitucionalidade em 24/09/2025 e arquivou (matéria 170519). Novo status `arquivada`, com texto próprio no aviso.
+  2. **Cesta Básica:** o painel oficial do Senado é **53×24** (não 48×22 — esse era o recorte dos senadores em exercício). A nota foi corrigida e o modal mostra o painel oficial.
+  3. **Combustíveis:** a lei é sobre **impostos de combustíveis** (diesel, biodiesel, gasolina, etanol, querosene), **não** sobre tarifa de energia elétrica. O rótulo virou "Aliviar o preço dos combustíveis" e o card tem a ressalva "não é conta de luz".
+- **UI:** todas as 11 pautas têm o botão **"O que foi aprovado?"** (na arquivada, **"O que aconteceu com a proposta?"**), com **4 ou 3 pontos** verificados, placares oficiais, ressalva quando o texto tem exceções e link para o Planalto (ou para a matéria no Senado, no caso arquivado).
+- **Modelo:** `status` agora aceita `PROMULGADA | SANCIONADA | ARQUIVADA`; novos campos `dataSancao`, `dataArquivamento` e `VotacaoSenado.status = 'arquivada'`. O pipeline reexecutado gravou a blindagem com 294×156 entre os 513 em exercício.
+- **Verificação:** `tests/pauta-detalhe.spec.ts` (lei sancionada, emenda da cesta, blindagem arquivada, combustíveis), guarda em `api-dados` para **todas** as pautas (status, norma, data, link e 3+ pontos) + números/datas das normas + blindagem arquivada. `tsc` e `lint` limpos.
 
 ## Decisões-chave (registro)
 1. **Pautas:** as 7 do PRD, com IDs reais e **curadoria manual** da votação-chave.

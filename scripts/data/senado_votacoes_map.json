@@ -1,6 +1,6 @@
 {
   "_descricao": "Auditoria do mapeamento das pautas do MVP para as votações nominais do Senado Federal. Gerado por scripts/fetch_senado.ts.",
-  "_verificadoEm": "2026-10-17T23:54:02.094Z",
+  "_verificadoEm": "2026-10-18T00:47:09.323Z",
   "_metodo": "Lista de senadores (/senador/lista/atual.json) + votos individuais (/votacao JSON ou /plenario/lista/votacao XML do dia).",
   "votacoes": [
     {
@@ -84,20 +84,20 @@
     {
       "pauta": "fim_blindagem",
       "materia": "PEC 3/2021",
-      "status": "pendente",
-      "nota": "Nenhum registro de votação nominal no Senado até 12/10/2026."
+      "status": "arquivada",
+      "nota": "A Câmara aprovou em 17/09/2025 e enviou ao Senado (PEC 3-C/2021). A CCJ do Senado rejeitou a proposta por inconstitucionalidade em 24/09/2025 e a matéria foi arquivada — não houve votação nominal no plenário."
     },
     {
       "pauta": "ir_isento",
       "materia": "PL 1087/2025",
-      "status": "pendente",
-      "nota": "Nenhum registro de votação nominal no Senado até 12/10/2026."
+      "status": "simbolica",
+      "nota": "O Senado aprovou a matéria em votação simbólica (sem voto individual). Virou a Lei 15.270/2025."
     },
     {
       "pauta": "super_ricos",
       "materia": "PL 4173/2023",
-      "status": "pendente",
-      "nota": "Nenhum registro de votação nominal no Senado até 12/10/2026."
+      "status": "simbolica",
+      "nota": "O Senado aprovou a matéria em votação simbólica (sem voto individual). Virou a Lei 14.754/2023."
     },
     {
       "pauta": "teto_juro_cartao",

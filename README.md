@@ -75,8 +75,27 @@ public/           og-image.png (1200x630), favicon.ico, apple-touch-icon.png,
 10. Lei mais dura contra o crime organizado — PL 5582/2025
 11. Aliviar o preço da energia (choque internacional) — PLP 114/2026
 
-> Os senadores ficam `NAO_APLICAVEL` (com motivo visível na ficha) nas pautas 1–8, e os deputados nas 9–11:
+> Os senadores ficam `NAO_APLICAVEL` (com motivo visível no card) nas pautas 1–8, e os deputados nas 9–11:
 > cada pauta é auditada na casa onde houve **votação nominal**.
+
+## O que virou cada pauta (verificado na fonte oficial)
+| Pauta | Norma | Data | Placar oficial (Câmara / Senado) |
+|---|---|---|---|
+| Comida sem imposto | **EC 132/2023** + LC 214/2025 | 20/12/2023 | 375×113 / 53×24 |
+| Salário igual | **Lei 14.611/2023** | 03/07/2023 | 325×36 / simbólica |
+| Fim da blindagem | **Arquivada** (CCJ do Senado) | 24/09/2025 | 314×168 / rejeitada por inconstitucionalidade |
+| Salário livre de IR | **Lei 15.270/2025** | 26/11/2025 | 493×0 / simbólica |
+| Super-ricos | **Lei 14.754/2023** | 12/12/2023 | 323×119 / simbólica |
+| Teto do cartão | **Lei 14.690/2023** | 03/10/2023 | 349×24 / simbólica |
+| Piso da enfermagem | **Lei 14.434/2022** | 04/08/2022 | 449×12 / simbólica |
+| Fim da Escala 6x1 | **EC 141/2026** | 16/10/2026 | 461×19 / 75×1 |
+| Agentes de saúde | **EC 140/2026** | 16/10/2026 | 2 turnos / 73×1 |
+| Crime organizado | **Lei 15.358/2026** | 24/03/2026 | 370×110 / 64×0 |
+| Combustíveis | **LC 235/2026** | 27/08/2026 | 318×113 / 61×2 |
+
+> Em todas as pautas o botão **"O que foi aprovado?"** (ou **"O que aconteceu com a proposta?"** no caso arquivado)
+> abre a explicação factual: norma, data, placares oficiais, pontos do texto e link para o Planalto.
+> **Fora do plenário:** o placar oficial inclui quem já deixou o mandato; a lista mostra os **em exercício** — o card explica a diferença.
 
 ## Compartilhar (o voto e a matéria no centro)
 - **No card da pauta** (home): botão **"📲 Compartilhar esta votação"** → *"🚨 Votação no Congresso: Comida sem imposto (Cesta Básica)…"* + link `/?pauta=cesta_basica`.
@@ -104,7 +123,10 @@ hemiciclo**, abaixo do card da matéria. Calculado no cliente, sem requisição 
 ## Senado: por que existe `NAO_APLICAVEL`
 O Senado aprova a maioria das matérias por **votação simbólica** — não há voto individual registrado.
 Das 8 pautas auditadas na Câmara, **duas** tiveram votação nominal no Senado:
-**PEC 45/2019** (08/11/2023, 48 SIM × 22 NÃO) e **PEC 221/2019** (14/10/2026, 75 SIM × 1 NÃO, nos dois turnos).
+**PEC 45/2019** (08/11/2023, 53 SIM × 24 NÃO, nos dois turnos) e **PEC 221/2019** (14/10/2026, 75 SIM × 1 NÃO, nos dois turnos).
+Na **PEC 3/2021** (blindagem) o Senado **não votou no plenário**: a CCJ rejeitou a proposta por
+inconstitucionalidade em **24/09/2025** e a matéria foi **arquivada** — o app mostra esse desfecho,
+não "ausência" nem "pendente".
 Marcar os demais senadores como "Ausente" seria **desinformação**, então o app usa um estado próprio,
 `NAO_APLICAVEL`, com o motivo escrito no card (votação simbólica, matéria pendente ou votação em outra casa).
 O mesmo vale para os deputados nas pautas do Senado. A verificação é reexecutável:
@@ -142,7 +164,7 @@ candidatos ou órgãos estatais. Regras de transformação (inversão semântica
 - Os documentos originais em `.docx` ficam preservados em `docs/_originais/`.
 
 ## Testes E2E (Playwright)
-Suíte completa (**157 testes**) que valida o front no Chrome: render/dados, **Congresso (594: 513 deputados + 81 senadores)**, **abas e badges por cargo**, filtros (**inclui estado vazio com "Limpar filtros"**), pautas/hemiciclo (**11 pautas**), **ordenação por gravidade com desempate pelos mais votados**, **compartilhamento por parlamentar e por bancada (imagem 4:5, prévia, PNG e link)**, **WhatsApp/Telegram/X/Copiar**, **deep links**, **OpenGraph / ícones / manifest PWA**, **rodapé jurídico**, **dark mode**, página `/sobre`, **`/poderes` (régua dos votos + linha do tempo)**, **escala 6x1 → EC 141/2026 (dados e card explicativo)**, integridade dos dados (**inclui a regra de ouro: votação simbólica do Senado nunca vira "Ausente"**) e **acessibilidade (axe) em claro e escuro** — além de responsividade mobile.
+Suíte completa (**164 testes**) que valida o front no Chrome: render/dados, **Congresso (594: 513 deputados + 81 senadores)**, **abas e badges por cargo**, filtros (**inclui estado vazio com "Limpar filtros"**), pautas/hemiciclo (**11 pautas**), **ordenação por gravidade com desempate pelos mais votados**, **compartilhamento por parlamentar e por bancada (imagem 4:5, prévia, PNG e link)**, **WhatsApp/Telegram/X/Copiar**, **deep links**, **OpenGraph / ícones / manifest PWA**, **rodapé jurídico**, **dark mode**, página `/sobre`, **`/poderes` (régua dos votos + linha do tempo)**, **desfecho das 11 pautas (leis, emendas e a blindagem arquivada)**, integridade dos dados (**inclui a regra de ouro: votação simbólica do Senado nunca vira "Ausente"**) e **acessibilidade (axe) em claro e escuro** — além de responsividade mobile.
 ```bash
 npm run test:e2e     # sobe o dev server e roda os specs em tests/
 ```

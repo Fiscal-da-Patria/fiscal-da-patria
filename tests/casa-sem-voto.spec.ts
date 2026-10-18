@@ -11,7 +11,7 @@ test.describe("Pautas sem voto na casa filtrada (clareza do dado)", () => {
     // A contagem das abas é por MATÉRIA: só depois de trocar a pauta ela reflete 0 no Senado
     await page.getByRole("button", { name: /Fim da blindagem de políticos/i }).click();
     await expect(
-      page.getByRole("button", { name: /Deputados Federais \(513\) · 447 votaram/ }),
+      page.getByRole("button", { name: /Deputados Federais \(513\) · 450 votaram/ }),
     ).toBeVisible();
     await expect(page.getByRole("button", { name: /Senadores \(81\) · 0 votaram/ })).toBeVisible();
 
@@ -19,7 +19,7 @@ test.describe("Pautas sem voto na casa filtrada (clareza do dado)", () => {
 
     const aviso = page.locator('[data-aviso-casa="1"]');
     await expect(aviso).toBeVisible();
-    await expect(aviso).toContainText(/ainda não votou esta matéria/i);
+    await expect(aviso).toContainText(/arquivada no Senado/i);
 
     await expect(
       page.getByTestId("grafico-partidos").getByText(/Nenhum voto individual nesta casa/i),
@@ -73,15 +73,15 @@ test.describe("Pautas sem voto na casa filtrada (clareza do dado)", () => {
     // Sem votos na casa, o app explica o motivo — e não lista 81 "Sem voto individual".
     const vazio = page.locator('[data-lista-vazia-casa="1"]');
     await expect(vazio).toBeVisible();
-    await expect(vazio).toContainText(/Senado ainda não votou esta matéria/i);
+    await expect(vazio).toContainText(/arquivada/i);
     await expect(page.locator("[data-nome]")).toHaveCount(0);
     await expect(page.locator('[data-carregar-mais="1"]')).toHaveCount(0);
     // Decisão de produto: não existe mais atalho para reexibir a casa vazia.
     await expect(page.locator('[data-ver-sem-voto="1"]')).toHaveCount(0);
     await expect(page.locator('[data-so-votaram="1"]')).toHaveCount(0);
 
-    // O caminho é a outra casa: na Câmara, esta pauta tem votação (447 votaram).
-    await page.getByRole("button", { name: /Deputados Federais \(513\) · 447 votaram/ }).click();
+    // O caminho é a outra casa: na Câmara, esta pauta tem votação (450 votaram).
+    await page.getByRole("button", { name: /Deputados Federais \(513\) · 450 votaram/ }).click();
     await carregarTodos(page);
     await expect.poll(async () => await cards(page).count(), { timeout: 15_000 }).toBe(513);
   });

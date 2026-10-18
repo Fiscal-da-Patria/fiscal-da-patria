@@ -36,9 +36,10 @@ export interface VotacaoSenado {
   /**
    * - `nominal`   → houve votação nominal (existe voto individual por senador);
    * - `simbolica` → o Senado apreciou a matéria SEM registro individual de voto;
-   * - `pendente`  → sem registro de votação nominal até a geração dos dados.
+   * - `pendente`  → sem registro de votação nominal até a geração dos dados;
+   * - `arquivada` → a matéria foi arquivada no Senado (ex.: rejeição na CCJ).
    */
-  status: 'nominal' | 'simbolica' | 'pendente';
+  status: 'nominal' | 'simbolica' | 'pendente' | 'arquivada';
   /** Explicação curta, factual e auditável, exibida na ficha do parlamentar. */
   nota: string;
   /** Link oficial da matéria no domínio senado.leg.br (quando a matéria tem página pública lá). */
@@ -68,11 +69,15 @@ export interface PautaConfig {
    * Situação da matéria após a tramitação. Só é preenchida quando há uma
    * verificação oficial (ex.: PEC 221/2019 → EC 141/2026).
    */
-  status?: 'PROMULGADA';
+  status?: 'PROMULGADA' | 'SANCIONADA' | 'ARQUIVADA';
   /** Norma jurídica resultante (ex.: "Emenda Constitucional 141/2026"). */
   normaOficial?: string;
-  /** Data de promulgação/publicação no Diário Oficial (AAAA-MM-DD). */
+  /** Data de promulgação da PEC (AAAA-MM-DD). */
   dataPromulgacao?: string;
+  /** Data de sanção da lei (AAAA-MM-DD). */
+  dataSancao?: string;
+  /** Data de arquivamento da proposta (AAAA-MM-DD). */
+  dataArquivamento?: string;
   /** Link oficial da norma (planalto.gov.br). */
   urlNorma?: string;
   /** Placar final na Câmara, como consta na fonte oficial. */

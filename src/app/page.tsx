@@ -288,12 +288,18 @@ export default function HomePage() {
                   Pauta selecionada
                 </p>
                 <div className="flex flex-wrap items-center gap-1.5">
-                  {pautaAtual.status === "PROMULGADA" && (
+                  {pautaAtual.status && (
                     <span
                       data-norma-vigente="1"
-                      className="rounded border border-dourado/60 bg-dourado/15 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-titulo"
+                      className={`rounded border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-titulo ${
+                        pautaAtual.status === "ARQUIVADA"
+                          ? "border-dourado/60 bg-dourado/15"
+                          : "border-verde-bandeira/40 bg-verde-bandeira/10"
+                      }`}
                     >
-                      ✅ {pautaAtual.normaOficial}
+                      {pautaAtual.status === "ARQUIVADA"
+                        ? "⛔ Arquivada"
+                        : `✅ ${pautaAtual.normaOficial}`}
                     </span>
                   )}
                   <span
@@ -323,7 +329,9 @@ export default function HomePage() {
                   className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-dourado/60 bg-dourado/15 px-3 py-2 text-xs font-bold text-titulo shadow-sm transition hover:bg-dourado/25 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dourado"
                 >
                   <ScrollText className="h-3.5 w-3.5" aria-hidden />
-                  O que foi aprovado? Ver a explicação
+                  {pautaAtual.status === "ARQUIVADA"
+                    ? "O que aconteceu com a proposta?"
+                    : "O que foi aprovado? Ver a explicação"}
                 </button>
               ) : null}
               <a
@@ -410,11 +418,13 @@ export default function HomePage() {
             <p className="text-[11px] leading-relaxed text-corpo">
               <strong className="text-titulo">
                 {semVotoNaCasa
-                  ? cargo === "SENADOR"
-                    ? "O Senado ainda não votou esta matéria."
-                    : cargo === "DEPUTADO"
-                      ? "A Câmara ainda não votou esta matéria."
-                      : "Nenhuma votação nominal registrada nesta matéria."
+                  ? pautaAtual.senado?.status === "arquivada" && cargo === "SENADOR"
+                    ? "Esta proposta foi arquivada no Senado."
+                    : cargo === "SENADOR"
+                      ? "O Senado ainda não votou esta matéria."
+                      : cargo === "DEPUTADO"
+                        ? "A Câmara ainda não votou esta matéria."
+                        : "Nenhuma votação nominal registrada nesta matéria."
                   : `Votação parcial nesta casa (${aplicaveisNaCasa} de ${totalDaCasa}).`}
               </strong>{" "}
               {semVotoNaCasa

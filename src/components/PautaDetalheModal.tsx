@@ -11,6 +11,7 @@ import {
   Scale,
   Wallet,
   X,
+  XCircle,
 } from "lucide-react";
 import type { PautaConfig } from "@/types/parlamentar";
 
@@ -42,6 +43,14 @@ export function PautaDetalheModal({
   if (!pauta.pontosExplicativos?.length) return null;
 
   const dataBR = (iso?: string) => (iso ? iso.split("-").reverse().join("/") : "");
+  const dataStatus = pauta.dataPromulgacao ?? pauta.dataSancao ?? pauta.dataArquivamento;
+  const rotuloStatus =
+    pauta.status === "PROMULGADA"
+      ? "Promulgada"
+      : pauta.status === "SANCIONADA"
+        ? "Sancionada"
+        : "Arquivada";
+  const arquivada = pauta.status === "ARQUIVADA";
 
   return (
     <div
@@ -59,19 +68,30 @@ export function PautaDetalheModal({
       >
         <div className="flex items-start justify-between gap-3">
           <div>
-            {pauta.status === "PROMULGADA" && (
+            {pauta.status && (
               <p
                 data-status-norma="1"
-                className="inline-flex items-center gap-1 rounded-full border border-verde-bandeira/40 bg-verde-bandeira/10 px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-titulo"
+                className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-titulo ${
+                  arquivada
+                    ? "border-dourado/60 bg-dourado/15"
+                    : "border-verde-bandeira/40 bg-verde-bandeira/10"
+                }`}
               >
-                <BadgeCheck className="h-3.5 w-3.5" aria-hidden />
-                Promulgada
-                {pauta.dataPromulgacao ? ` em ${dataBR(pauta.dataPromulgacao)}` : ""}
+                {arquivada ? (
+                  <XCircle className="h-3.5 w-3.5" aria-hidden />
+                ) : (
+                  <BadgeCheck className="h-3.5 w-3.5" aria-hidden />
+                )}
+                {rotuloStatus}
+                {dataStatus ? ` em ${dataBR(dataStatus)}` : ""}
               </p>
             )}
+            <p className="mt-2 text-[11px] font-bold uppercase tracking-wider text-corpo">
+              {arquivada ? "O que aconteceu com a proposta" : "O que foi aprovado"}
+            </p>
             <h2
               id="titulo-pauta-detalhe"
-              className="mt-2 text-xl font-black leading-tight tracking-tight text-titulo sm:text-2xl"
+              className="mt-0.5 text-xl font-black leading-tight tracking-tight text-titulo sm:text-2xl"
             >
               {pauta.rotuloPopular}
             </h2>
@@ -105,7 +125,7 @@ export function PautaDetalheModal({
                   className="rounded-xl border border-borda bg-fundo-neutro p-3"
                 >
                   <p className="text-[10px] font-bold uppercase tracking-wider text-corpo">
-                    Placar oficial na Câmara
+                    Câmara dos Deputados
                   </p>
                   <p className="mt-0.5 text-sm font-semibold text-titulo">
                     {pauta.resultadoCamara}
@@ -118,7 +138,7 @@ export function PautaDetalheModal({
                   className="rounded-xl border border-borda bg-fundo-neutro p-3"
                 >
                   <p className="text-[10px] font-bold uppercase tracking-wider text-corpo">
-                    Placar oficial no Senado
+                    Senado Federal
                   </p>
                   <p className="mt-0.5 text-sm font-semibold text-titulo">
                     {pauta.resultadoSenado}
@@ -126,11 +146,13 @@ export function PautaDetalheModal({
                 </div>
               )}
             </div>
-            <p data-nota-placar="1" className="mt-1.5 text-[10px] leading-relaxed text-corpo">
-              O painel da sessão inclui quem já deixou o mandato. A lista abaixo mostra os{" "}
-              <strong className="text-titulo">parlamentares em exercício</strong> — por isso a
-              soma pode ser menor que o placar oficial.
-            </p>
+            {!arquivada && (
+              <p data-nota-placar="1" className="mt-1.5 text-[10px] leading-relaxed text-corpo">
+                O painel da sessão inclui quem já deixou o mandato. A lista abaixo mostra os{" "}
+                <strong className="text-titulo">parlamentares em exercício</strong> — por isso a
+                soma pode ser menor que o placar oficial.
+              </p>
+            )}
           </div>
         )}
 
@@ -172,6 +194,18 @@ export function PautaDetalheModal({
               className="inline-flex items-center gap-1.5 text-xs font-bold text-verde-bandeira underline decoration-dotted underline-offset-2 hover:text-titulo dark:text-dourado"
             >
               Ler a {pauta.normaOficial ?? "norma"} no Planalto
+              <ExternalLink className="h-3.5 w-3.5" aria-hidden />
+            </a>
+          )}
+          {!pauta.urlNorma && pauta.senado?.urlMateria && (
+            <a
+              href={pauta.senado.urlMateria}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-link-materia="1"
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-verde-bandeira underline decoration-dotted underline-offset-2 hover:text-titulo dark:text-dourado"
+            >
+              Ver a matéria no Senado
               <ExternalLink className="h-3.5 w-3.5" aria-hidden />
             </a>
           )}

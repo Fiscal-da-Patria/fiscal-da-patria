@@ -12,7 +12,7 @@ export const PAUTAS = [
   "Fim da Escala 6x1 / Jornada 5x2",
   "Aposentadoria dos agentes de saúde e de endemias",
   "Lei mais dura contra o crime organizado",
-  "Aliviar o preço da energia (choque internacional)",
+  "Aliviar o preço dos combustíveis (choque internacional)",
 ];
 
 /** Slugs internos das 11 pautas. */

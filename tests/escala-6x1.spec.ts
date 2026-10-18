@@ -91,7 +91,7 @@ test.describe("Escala 6x1 — PEC 221/2019 → EC 141/2026", () => {
     await expect(dlg).toBeHidden();
   });
 
-  test("modal fecha ao clicar fora e só existe em pauta com texto verificado", async ({ page }) => {
+  test("modal fecha ao clicar fora e troca de conteúdo com a pauta", async ({ page }) => {
     await page.goto("/?pauta=fim_escala_6x1");
     await esperarCards(page);
 
@@ -101,8 +101,11 @@ test.describe("Escala 6x1 — PEC 221/2019 → EC 141/2026", () => {
     await page.mouse.click(4, 4);
     await expect(dlg).toBeHidden();
 
-    // A Cesta Básica não tem (ainda) texto verificado: nada de botão vazio.
+    // Cada pauta concluída tem o próprio card — trocar a pauta troca o texto.
     await page.getByRole("button", { name: /Comida sem imposto \(Cesta Básica\)/ }).click();
-    await expect(page.locator('[data-abrir-detalhe="1"]')).toHaveCount(0);
+    await expect(page.locator('[data-abrir-detalhe="1"]')).toContainText(/O que foi aprovado/i);
+    await expect(page.locator('[data-norma-vigente="1"]')).toContainText(
+      "Emenda Constitucional 132/2023",
+    );
   });
 });
