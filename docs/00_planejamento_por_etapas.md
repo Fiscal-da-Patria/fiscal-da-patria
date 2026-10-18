@@ -30,9 +30,10 @@
 | 21 | Escala 6x1 promulgada (EC 141/2026) | Dados definitivos das duas Casas + card "O que foi aprovado?" | ✅ |
 | 22 | Desfecho de todas as pautas | 10 normas verificadas + blindagem arquivada, com detalhamento | ✅ |
 | 23 | Refresh visual, mobile e P0/P1 | A11y estrutural, 320px, status dark, escopo Câmara+Senado, card compacto, pills com Ver todas, carrossel com dots e testes | ✅ |
-| 24 | Deploy | Publicação (Vercel/Cloudflare Pages) + domínio | ⏳ próxima |
-| 25 | Otimização de fotos (WebP) | Reduzir o peso de `public/fotos` | ⏳ backlog |
-| 26 | OG dinâmico / Kit por estado | Crescimento e viralidade | ⏳ backlog |
+| 24 | Pauta das bets + ordem por interesse | PL 3626/2023 → Lei 14.790/2023; MP 1.394/2026; 12 pautas; 5 pills | ✅ |
+| 25 | Deploy | Publicação (Vercel/Cloudflare Pages) + domínio | ⏳ próxima |
+| 26 | Otimização de fotos (WebP) | Reduzir o peso de `public/fotos` | ⏳ backlog |
+| 27 | OG dinâmico / Kit por estado | Crescimento e viralidade | ⏳ backlog |
 
 ## Registro por etapa
 
@@ -274,6 +275,15 @@
 - **CTA do modal:** "Ver o que foi aprovado" / "Ver o que aconteceu com a proposta" em dourado sólido, chevron, 44px, `cursor-pointer` e `aria-haspopup="dialog"`.
 - **P1 mobile:** card compacto (foto + identidade + chip + ações em ícones), detalhes técnicos da pauta recolhíveis, filtros antes das abas, CTA primário para a lista, tipografia de leitura em 12px, `/sobre` sem share duplicado e rótulos "Sobre o projeto" unificados.
 - **Compressão do topo:** hero em 20px no mobile, faixa de auditoria em 1 linha (data só no desktop), ementa dentro de "Ver detalhes", aviso de votação parcial com `<details>` e pills **4 principais + "Ver todas as 11 pautas"**.
+- **Pendente (backlog):** deploy, fotos WebP e OG dinâmico.
+
+### Etapa 24 — Pauta das bets + ordem por interesse ✅
+- **Objetivo:** incluir a pauta das apostas de quota fixa e colocar as pautas de maior alcance no primeiro fold, sem transformar o app em palanque.
+- **Decisão editorial:** o voto de 2023 é o da **regulamentação** (PL 3626/2023), não o da proibição de 2026. `invertida: false`; os rótulos são **"Apoiou a regulamentação" / "Rejeitou a regulamentação"** — sem "contra o povo" e sem juízo sobre o mérito.
+- **Dados verificados:** Câmara, votação `2374400-110`, em 21/12/2023: **292 SIM × 114 NÃO × 1 ABST** (emendas do Senado; a redação final não teve painel nominal). Lei 14.790/2023 sancionada em **29/12/2023**. Senado: aprovação **simbólica** (sem voto individual). MP 1.394/2026, de **25/09/2026**, proibiu a exploração, oferta, intermediação e publicidade; a lei foi revogada em grande parte e a MP aguarda votação no Congresso (calendário da Câmara até 23/11/2026, prorrogável).
+- **Modelo/UI:** novo status **`REVOGADA`**, `dataRevogacao`, `normaRevogadora`, `urlNormaRevogadora`, `urlMateriaRevogadora` e `situacaoAtual`. O card mostra **"Revogada pela Medida Provisória 1.394/2026"**; o modal explica a lei, a MP e a votação pendente, com links para o Planalto e para a tramitação da MP.
+- **Ordem das pills:** **5 principais** — `cesta_basica`, `fim_escala_6x1`, `ir_isento`, `fim_blindagem`, `bets` — e o restante no "Ver todas as 12 pautas". A ordem editorial fica em `PautaPills` (`ORDEM_PILLS`), sem mexer na matriz de dados.
+- **Testes:** `api-dados` cobre a matriz densa de 12 slugs, a votação simbólica dos senadores em bets e a ausência de inversão; `pauta-detalhe` cobre o status revogado, o placar, a situação atual, a ressalva e os links oficiais. `tsc`, `lint`, `build` e a suíte E2E completos.
 - **Pendente (backlog):** deploy, fotos WebP e OG dinâmico.
 
 ## Decisões-chave (registro)

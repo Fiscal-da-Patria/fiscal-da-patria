@@ -1,7 +1,7 @@
 # Fiscal da Pátria
 
 Plataforma cívica de transparência e auditoria das votações nominais do **Congresso Nacional**:
-**513 deputados federais + 81 senadores (594 parlamentares)** em 11 pautas.
+**513 deputados federais + 81 senadores (594 parlamentares)** em 12 pautas.
 Traduz o comportamento legislativo em linguagem popular ("Comida sem imposto", "Salário livre de IR")
 e mostra como cada parlamentar votou — sempre com link para a fonte oficial da casa onde a votação ocorreu.
 
@@ -51,7 +51,7 @@ src/components/   Dashboard (ilha cliente), SiteHeader, SiteFooter, ThemeToggle,
                   Hemiciclo, PautaPills, BuscaFiltros, ParlamentarCard, PautaDetalheModal,
                   GraficoPartidos, BarraVotos, Modal, CarrosselMobile, ShareModal, ShareCard, ShareCardPartido,
                   ShareCardTop5, SocialShareBar, WhatsAppShareButton
-src/lib/          pautas (11 pautas + inversão), parlamentares, partidos, share
+src/lib/          pautas (12 pautas + inversão), parlamentares, partidos, share
 src/types/        contratos de dados
 scripts/          fetch_votes.ts (ingestão unificada), fetch_senado.ts, fetch_tse_votos.ts, fetch_fotos.ts
 public/data/      parlamentares.json (consolidado: 513 deputados + 81 senadores)
@@ -60,8 +60,8 @@ public/           og-image.png (1200x630), favicon.ico, apple-touch-icon.png,
                   icon-192.png, icon-512.png, manifest.webmanifest (PWA)
 ```
 
-## As 11 pautas do MVP
-**Auditadas na Câmara (8):**
+## As 12 pautas do MVP
+**Auditadas na Câmara (9):**
 1. Comida sem imposto (Cesta Básica) — PEC 45/2019
 2. Salário igual para trabalho igual — PL 1085/2023
 3. **Fim da blindagem de políticos** — PEC 3/2021 _(invertida)_
@@ -70,13 +70,14 @@ public/           og-image.png (1200x630), favicon.ico, apple-touch-icon.png,
 6. Teto para o juro do cartão — PL 2685/2022
 7. Piso salarial da enfermagem — PL 2564/2020
 8. **Fim da Escala 6x1 / Jornada 5x2** — PEC 221/2019 → **EC 141/2026** _(Câmara: 461 Sim × 19 Não; Senado: 75 Sim × 1 Não; promulgada em 16/10/2026)_
+9. **Bets: da regulamentação à proibição** — PL 3626/2023 → **Lei 14.790/2023**, revogada em grande parte pela **MP 1.394/2026** _(voto de 2023: 292 Sim × 114 Não × 1 Abstenção, sem inversão)_
 
 **Auditadas no Senado (3):**
-9. Aposentadoria dos agentes de saúde e de endemias — PEC 14/2021
-10. Lei mais dura contra o crime organizado — PL 5582/2025
-11. Aliviar o preço da energia (choque internacional) — PLP 114/2026
+10. Aposentadoria dos agentes de saúde e de endemias — PEC 14/2021
+11. Lei mais dura contra o crime organizado — PL 5582/2025
+12. Aliviar o preço da energia (choque internacional) — PLP 114/2026
 
-> Os senadores ficam `NAO_APLICAVEL` (com motivo visível no card) nas pautas 1–8, e os deputados nas 9–11:
+> Os senadores ficam `NAO_APLICAVEL` (com motivo visível no card) nas pautas 1–9, e os deputados nas 10–12:
 > cada pauta é auditada na casa onde houve **votação nominal**.
 
 ## O que virou cada pauta (verificado na fonte oficial)
@@ -90,12 +91,14 @@ public/           og-image.png (1200x630), favicon.ico, apple-touch-icon.png,
 | Teto do cartão | **Lei 14.690/2023** | 03/10/2023 | 349×24 / simbólica |
 | Piso da enfermagem | **Lei 14.434/2022** | 04/08/2022 | 449×12 / simbólica |
 | Fim da Escala 6x1 | **EC 141/2026** | 16/10/2026 | 461×19 / 75×1 |
+| Bets | **Lei 14.790/2023**, revogada em grande parte pela **MP 1.394/2026** | 29/12/2023 | 292×114 / simbólica |
 | Agentes de saúde | **EC 140/2026** | 16/10/2026 | 2 turnos / 73×1 |
 | Crime organizado | **Lei 15.358/2026** | 24/03/2026 | 370×110 / 64×0 |
 | Combustíveis | **LC 235/2026** | 27/08/2026 | 318×113 / 61×2 |
 
-> Em todas as pautas o botão **"O que foi aprovado?"** (ou **"O que aconteceu com a proposta?"** no caso arquivado)
-> abre a explicação factual: norma, data, placares oficiais, pontos do texto e link para o Planalto.
+> Em todas as pautas o botão **"O que foi aprovado?"** (ou **"O que aconteceu com a proposta?"** no caso arquivado
+> e **"O que aconteceu com a lei"** no caso revogado) abre a explicação factual: norma, data, placares oficiais,
+> pontos do texto e link para o Planalto.
 > **Fora do plenário:** o placar oficial inclui quem já deixou o mandato; a lista mostra os **em exercício** — o card explica a diferença.
 
 ## Compartilhar (o voto e a matéria no centro)
@@ -166,7 +169,7 @@ candidatos ou órgãos estatais. Regras de transformação (inversão semântica
 - Os documentos originais em `.docx` ficam preservados em `docs/_originais/`.
 
 ## Testes E2E (Playwright)
-Suíte completa (**200 testes**) que valida o front no Chrome: render/dados, **Congresso (594: 513 deputados + 81 senadores)**, **abas e badges por cargo**, filtros (**inclui estado vazio com "Limpar filtros"**), pautas/hemiciclo (**11 pautas**), **ordenação por gravidade com desempate pelos mais votados**, **compartilhamento por parlamentar, por bancada e top 5 (imagem 4:5, prévia, PNG e link)**, **WhatsApp/Telegram/X/Copiar**, **deep links**, **OpenGraph / ícones / manifest PWA**, **rodapé jurídico**, **dark mode**, página `/sobre`, **`/poderes` (régua dos votos + linha do tempo)**, **desfecho das 11 pautas (leis, emendas e a blindagem arquivada)**, integridade dos dados (**inclui a regra de ouro: votação simbólica do Senado nunca vira "Ausente"**) e **acessibilidade (axe) em claro e escuro**, **card compacto no mobile**, **detalhes da pauta recolhíveis**, **pills com "Ver todas"**, **carrossel com dots em /poderes e /sobre**, **visão geral em carrossel (partidos primeiro)** e **320px sem overflow**.
+Suíte completa (**203 testes**) que valida o front no Chrome: render/dados, **Congresso (594: 513 deputados + 81 senadores)**, **abas e badges por cargo**, filtros (**inclui estado vazio com "Limpar filtros"**), pautas/hemiciclo (**12 pautas**), **ordenação por gravidade com desempate pelos mais votados**, **compartilhamento por parlamentar, por bancada e top 5 (imagem 4:5, prévia, PNG e link)**, **WhatsApp/Telegram/X/Copiar**, **deep links**, **OpenGraph / ícones / manifest PWA**, **rodapé jurídico**, **dark mode**, página `/sobre`, **`/poderes` (régua dos votos + linha do tempo)**, **desfecho das 12 pautas (leis, emendas, a blindagem arquivada e a lei das bets revogada pela MP)**, integridade dos dados (**inclui a regra de ouro: votação simbólica do Senado nunca vira "Ausente"**) e **acessibilidade (axe) em claro e escuro**, **card compacto no mobile**, **detalhes da pauta recolhíveis**, **pills com "Ver todas"**, **carrossel com dots em /poderes e /sobre**, **visão geral em carrossel (partidos primeiro)** e **320px sem overflow**.
 ```bash
 npm run test:e2e     # sobe o dev server e roda os specs em tests/
 ```
