@@ -31,6 +31,7 @@
 | 22 | Desfecho de todas as pautas | 10 normas verificadas + blindagem arquivada, com detalhamento | ✅ |
 | 23 | Refresh visual, mobile e P0/P1 | A11y estrutural, 320px, status dark, escopo Câmara+Senado, card compacto, pills com Ver todas, carrossel com dots e testes | ✅ |
 | 24 | Pauta das bets + ordem por interesse | PL 3626/2023 → Lei 14.790/2023; MP 1.394/2026; 12 pautas; 5 pills | ✅ |
+| 24.1 | Timeline mobile vertical | Corrige cards de 3.225px e troca o carrossel por timeline vertical; 5 colunas no desktop | ✅ |
 | 25 | Deploy | Publicação (Vercel/Cloudflare Pages) + domínio | ⏳ próxima |
 | 26 | Otimização de fotos (WebP) | Reduzir o peso de `public/fotos` | ⏳ backlog |
 | 27 | OG dinâmico / Kit por estado | Crescimento e viralidade | ⏳ backlog |
@@ -285,6 +286,11 @@
 - **Ordem das pills:** **5 principais** — `cesta_basica`, `fim_escala_6x1`, `ir_isento`, `fim_blindagem`, `bets` — e o restante no "Ver todas as 12 pautas". A ordem editorial fica em `PautaPills` (`ORDEM_PILLS`), sem mexer na matriz de dados.
 - **Testes:** `api-dados` cobre a matriz densa de 12 slugs, a votação simbólica dos senadores em bets e a ausência de inversão; `pauta-detalhe` cobre o status revogado, o placar, a situação atual, a ressalva e os links oficiais. `tsc`, `lint`, `build` e a suíte E2E completos.
 - **Pendente (backlog):** deploy, fotos WebP e OG dinâmico.
+
+### Etapa 24.1 — Timeline mobile vertical ✅
+- **Causa:** os `<li>` usavam `w-[82%]` dentro de um `<ol>` com `w-max`; a porcentagem resolvia contra o max-content e cada card virava ~3.225px (trilho de 16.174px). No mobile só uma fatia do texto aparecia.
+- **Correção:** no mobile a timeline virou uma coluna vertical com linha à esquerda, ícone e card; no desktop continua `md:grid-cols-5` com a linha horizontal. O carrossel foi removido só dessa seção.
+- **Testes:** `poderes.spec` verifica empilhamento em 390px e 5 colunas em 1280px; `carrossel.spec` passou a cobrir 3 grupos. **205 testes verdes**, build/tsc/lint limpos.
 
 ## Decisões-chave (registro)
 1. **Pautas:** as 7 do PRD, com IDs reais e **curadoria manual** da votação-chave.

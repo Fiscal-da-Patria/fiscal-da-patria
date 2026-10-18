@@ -5,13 +5,12 @@ const grupos = [
   { rotulo: "Os três Poderes da República", total: 3 },
   { rotulo: "Câmara e Senado", total: 2 },
   { rotulo: "A régua dos votos", total: 3 },
-  { rotulo: "A linha do tempo de uma lei", total: 5 },
 ];
 
 test.describe("Carrossel com dots — grupos curados", () => {
   test.use({ viewport: { width: 390, height: 844 }, isMobile: true, hasTouch: true });
 
-  test("mostra os dots dos 4 grupos de /poderes e o ativo acompanha o toque", async ({ page }) => {
+  test("mostra os dots dos 3 grupos de /poderes e o ativo acompanha o toque", async ({ page }) => {
     await page.goto("/poderes");
 
     for (const grupo of grupos) {

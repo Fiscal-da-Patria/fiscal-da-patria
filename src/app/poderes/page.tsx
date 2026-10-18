@@ -518,49 +518,48 @@ export default function PoderesPage() {
             esse caminho que o Fiscal da Pátria acompanha, voto a voto.
           </p>
 
-          <CarrosselMobile
-            rotulo="A linha do tempo de uma lei"
-            total={ETAPAS.length}
-            trilhoClassName="-mr-4 mt-6 overflow-x-auto pr-4 pb-2 snap-x snap-mandatory md:mr-0 md:overflow-visible md:pr-0 md:pb-0"
-          >
-            <ol className="relative flex w-max gap-3 md:w-auto">
+          <div className="relative mt-6">
             <span
               aria-hidden
-              className="absolute left-0 top-[19px] h-0.5 w-full rounded-full bg-trilha"
+              className="absolute left-5 top-5 bottom-5 w-0.5 rounded-full bg-trilha md:hidden"
             />
-            {ETAPAS.map((etapa) => {
-              const Icone = etapa.icone;
-              return (
-                <li
-                  key={etapa.id}
-                  data-etapa={etapa.n}
-                  data-slide
-                  className="relative flex w-[82%] shrink-0 snap-start gap-4 md:w-auto md:flex-1 md:flex-col md:gap-3"
-                >
-                  <span className="z-10 grid h-10 w-10 shrink-0 place-items-center rounded-full border-2 border-dourado bg-superficie text-titulo shadow-sm">
-                    <Icone className="h-5 w-5" aria-hidden />
-                  </span>
-                  <div className="flex-1 rounded-2xl border border-borda bg-superficie p-4 shadow-sm">
-                    <p className="text-[10px] font-bold uppercase tracking-wider text-corpo">
-                      Passo {etapa.n} · {etapa.sub}
-                    </p>
-                    <h3 className="mt-1 text-sm font-black leading-snug text-titulo">
-                      {etapa.titulo}
-                    </h3>
-                    <ul className="mt-2 list-disc space-y-1 pl-4 text-xs leading-relaxed text-corpo">
-                      {etapa.pontos.map((ponto) => (
-                        <li key={ponto}>{ponto}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </li>
-              );
-            })}
+            <span
+              aria-hidden
+              className="absolute left-0 top-[19px] hidden h-0.5 w-full rounded-full bg-trilha md:block"
+            />
+            <ol
+              data-timeline="1"
+              className="relative flex flex-col gap-4 md:grid md:grid-cols-5 md:gap-3"
+            >
+              {ETAPAS.map((etapa) => {
+                const Icone = etapa.icone;
+                return (
+                  <li
+                    key={etapa.id}
+                    data-etapa={etapa.n}
+                    className="relative flex gap-3 md:flex-col md:gap-3"
+                  >
+                    <span className="z-10 grid h-10 w-10 shrink-0 place-items-center rounded-full border-2 border-dourado bg-superficie text-titulo shadow-sm">
+                      <Icone className="h-5 w-5" aria-hidden />
+                    </span>
+                    <div className="min-w-0 flex-1 rounded-2xl border border-borda bg-superficie p-4 shadow-sm">
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-corpo">
+                        Passo {etapa.n} · {etapa.sub}
+                      </p>
+                      <h3 className="mt-1 text-sm font-black leading-snug text-titulo">
+                        {etapa.titulo}
+                      </h3>
+                      <ul className="mt-2 list-disc space-y-1 pl-4 text-xs leading-relaxed text-corpo">
+                        {etapa.pontos.map((ponto) => (
+                          <li key={ponto}>{ponto}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </li>
+                );
+              })}
             </ol>
-          </CarrosselMobile>
-          <p className="mt-2 text-[11px] font-medium text-corpo md:hidden">
-            Arraste ou use os pontos para seguir o funil →
-          </p>
+          </div>
 
           <p className="mt-4 rounded-2xl border border-borda bg-superficie p-4 text-xs leading-relaxed text-corpo shadow-sm">
             <strong className="text-titulo">Dica de fiscal:</strong> quando um projeto empaca, o motivo

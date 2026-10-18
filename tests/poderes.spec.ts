@@ -155,6 +155,34 @@ test.describe("Linha do tempo do funil legislativo", () => {
     await page.goto("/poderes");
   });
 
+  test("no mobile as 5 etapas ficam empilhadas; no desktop viram 5 colunas", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("/poderes");
+
+    const etapas = page.locator("#linha-do-tempo [data-etapa]");
+    await expect(etapas).toHaveCount(5);
+
+    const mobile = await etapas.evaluateAll((els) =>
+      els.map((e) => e.getBoundingClientRect()),
+    );
+    expect(new Set(mobile.map((r) => Math.round(r.x))).size).toBe(1);
+    expect(mobile[1].top).toBeGreaterThan(mobile[0].top);
+
+    const timeline = page.locator("#linha-do-tempo [data-timeline]");
+    const rolagem = await timeline.evaluate((el) => ({
+      largura: el.clientWidth,
+      conteudo: el.scrollWidth,
+    }));
+    expect(rolagem.conteudo).toBeLessThanOrEqual(rolagem.largura + 1);
+
+    await page.setViewportSize({ width: 1280, height: 900 });
+    const desktop = await etapas.evaluateAll((els) =>
+      els.map((e) => e.getBoundingClientRect()),
+    );
+    expect(new Set(desktop.map((r) => Math.round(r.y))).size).toBe(1);
+    expect(new Set(desktop.map((r) => Math.round(r.x))).size).toBe(5);
+  });
+
   test("as 5 etapas aparecem na ordem, com comissões/CCJ, Casa revisora e derrubada do veto", async ({
     page,
   }) => {
@@ -233,7 +261,7 @@ test.describe("Âncoras, responsividade e atalhos contextuais", () => {
     expect((await funil.boundingBox())?.y ?? 9999).toBeLessThan(200);
   });
 
-  test("no mobile a régua e a timeline viram carrossel; no desktop, grade", async ({
+  test("no mobile a régua vira carrossel e a timeline fica vertical; no desktop, grade", async ({
     page,
   }) => {
     await page.goto("/poderes");
@@ -268,8 +296,13 @@ test.describe("Âncoras, responsividade e atalhos contextuais", () => {
     const etapasMobile = await page
       .locator("[data-etapa]")
       .evaluateAll((els) => els.map((e) => e.getBoundingClientRect()));
-    expect(Math.round(etapasMobile[0].y)).toBe(Math.round(etapasMobile[1].y)); // trilho horizontal
-    expect(etapasMobile[1].left).toBeGreaterThan(etapasMobile[0].left);
+    expect(Math.round(etapasMobile[0].x)).toBe(Math.round(etapasMobile[1].x)); // mesma coluna
+    expect(etapasMobile[1].top).toBeGreaterThan(etapasMobile[0].top); // empilhadas
+    expect(
+      await page
+        .locator("#linha-do-tempo [data-timeline]")
+        .evaluate((el) => el.scrollWidth <= el.clientWidth + 1),
+    ).toBe(true);
   });
 
   test("atalho contextual: PEC leva à régua; projeto de lei leva à linha do tempo", async ({
