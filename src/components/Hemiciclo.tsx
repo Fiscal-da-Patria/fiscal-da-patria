@@ -18,10 +18,13 @@ export const Hemiciclo = memo(function Hemiciclo({
   distribuicao,
   rotulo = "Congresso Nacional",
   pautaSlug,
+  compacto = false,
 }: {
   distribuicao: Record<AlinhamentoVoto, number>;
   rotulo?: string;
   pautaSlug?: string;
+  /** No mobile, esconde a legenda (o resumo acima já mostra os totais). */
+  compacto?: boolean;
 }) {
   const total = ORDEM_VOTOS.reduce((s, k) => s + distribuicao[k], 0);
 
@@ -54,7 +57,7 @@ export const Hemiciclo = memo(function Hemiciclo({
     <div
       data-testid="hemiciclo"
       data-assentos={total}
-      className="rounded-2xl border border-borda bg-superficie p-4 shadow-sm"
+      className="rounded-2xl border border-borda bg-superficie p-3 shadow-sm sm:p-4"
     >
       <div className="mb-2 flex items-baseline justify-between gap-2">
         <h2 className="text-xs font-bold text-titulo">Assentos no {rotulo}</h2>
@@ -82,7 +85,11 @@ export const Hemiciclo = memo(function Hemiciclo({
           ),
         )}
       </svg>
-      <div className="mt-3 flex flex-wrap justify-center gap-x-4 gap-y-1 text-xs font-medium">
+      <div
+        className={`mt-3 flex flex-wrap justify-center gap-x-4 gap-y-1 text-xs font-medium${
+          compacto ? " hidden lg:flex" : ""
+        }`}
+      >
         {ORDEM_VOTOS.map((k) => (
           <span key={k} className="inline-flex items-center gap-1.5 text-corpo">
             <span

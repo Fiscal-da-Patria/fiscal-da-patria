@@ -28,6 +28,8 @@ export function GraficoPartidos({
   pautaSlug,
   onCompartilhar,
   onCompartilharTop5,
+  limiteInicial,
+  compacto = false,
 }: {
   parlamentares: ParlamentarConsolidado[];
   pautaSlug: string;
@@ -35,6 +37,10 @@ export function GraficoPartidos({
   onCompartilhar?: (linha: LinhaPartido) => void;
   /** Abre o cartão compartilhável do top 5 de bancadas (opcional). */
   onCompartilharTop5?: (linhas: LinhaPartido[]) => void;
+  /** No mobile, mostra só as N primeiras bancadas (o resto vem em "ver todos"). */
+  limiteInicial?: number;
+  /** Esconde a linha de contexto e a legenda no mobile; o resumo acima cobre. */
+  compacto?: boolean;
 }) {
   const [expandido, setExpandido] = useState(false);
   // Fonte única: a mesma função gera a manchete do cartão por partido.
@@ -48,6 +54,7 @@ export function GraficoPartidos({
 
   // Lista vazia (a casa filtrada não votou a matéria): mostramos o estado vazio
   // em vez de sumir com o bloco — o usuário precisa saber por que não há barras.
+  const limite = Math.max(1, Math.min(limiteInicial ?? TOP_BANCADAS, TOP_BANCADAS));
   const visiveis = expandido ? linhas : linhas.slice(0, TOP_BANCADAS);
 
   const pct = (n: number, base: number) => (base > 0 ? Math.round((n / base) * 100) : 0);
@@ -73,7 +80,7 @@ export function GraficoPartidos({
             </button>
           )}
         </div>
-        <p className="text-xs text-corpo">
+        <p className={`text-xs text-corpo${compacto ? " hidden lg:block" : ""}`}>
           {totalGeral} parlamentar(es) • maiores bancadas primeiro (desempate: quem{" "}
           {rotuloAlinhamento("CONTRA", pautaSlug).toLowerCase()})
         </p>
@@ -91,8 +98,10 @@ export function GraficoPartidos({
       )}
 
       <ul className="space-y-3">
-        {visiveis.map(({ partido, contagem, total, comVoto }) => (
-          <li key={partido}>
+        {visiveis.map(({ partido, contagem, total, comVoto }, i) => {
+          const oculta = compacto && !expandido && i >= limite;
+          return (
+            <li key={partido} className={oculta ? "hidden lg:block" : ""}>
             <div className="flex flex-wrap items-baseline justify-between gap-x-2 text-xs">
               <span className="flex items-center gap-1.5 font-bold text-titulo">
                 {partido}
@@ -135,8 +144,9 @@ export function GraficoPartidos({
               ).join(", ")}`}
               tituloDe={(k, n) => `${rotuloAlinhamento(k, pautaSlug)}: ${n}`}
             />
-          </li>
-        ))}
+            </li>
+          );
+        })}
       </ul>
 
       {linhas.length > TOP_BANCADAS && (
@@ -159,7 +169,9 @@ export function GraficoPartidos({
         </button>
       )}
 
-      <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 border-t border-borda pt-3 text-xs text-corpo">
+      <div
+        className={`mt-4 flex flex-wrap gap-x-4 gap-y-1 border-t border-borda pt-3 text-xs text-corpo${compacto ? " hidden lg:flex" : ""}`}
+      >
         {ORDEM_VOTOS.map((k) => (
           <span key={k} className="inline-flex items-center gap-1.5">
             <span

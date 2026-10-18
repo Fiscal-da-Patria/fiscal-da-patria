@@ -12,12 +12,15 @@ import { useId, useRef, useState, type ReactNode } from "react";
 export function CarrosselMobile({
   rotulo,
   total,
+  rotulos,
   trilhoClassName,
   dotsClassName = "md:hidden",
   children,
 }: {
   rotulo: string;
   total: number;
+  /** Rótulos curtos dos slides (ex.: ["Partidos", "Congresso"]). */
+  rotulos?: string[];
   trilhoClassName: string;
   /** Breakpoint em que os dots somem (ex.: `md:hidden` ou `sm:hidden`). */
   dotsClassName?: string;
@@ -82,7 +85,7 @@ export function CarrosselMobile({
         {children}
       </div>
       <div
-        className={`mt-3 flex items-center justify-center gap-0.5 ${dotsClassName}`}
+        className={`mt-2 flex items-center justify-center gap-0.5 ${dotsClassName}`}
         role="group"
         aria-label={`Navegação do carrossel: ${rotulo}`}
       >
@@ -107,6 +110,16 @@ export function CarrosselMobile({
           );
         })}
       </div>
+      {rotulos && rotulos.length === total && (
+        <p className="mt-0.5 text-center text-xs text-corpo">
+          {rotulos.map((r, i) => (
+            <span key={r} className={i === ativo ? "font-bold text-titulo" : ""}>
+              {i > 0 ? " · " : ""}
+              {r}
+            </span>
+          ))}
+        </p>
+      )}
     </div>
   );
 }

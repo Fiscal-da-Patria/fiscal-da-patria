@@ -8,6 +8,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { WhatsAppShareButton } from "@/components/WhatsAppShareButton";
 import { PautaDetalheModal } from "@/components/PautaDetalheModal";
 import { Hemiciclo } from "@/components/Hemiciclo";
+import { CarrosselMobile } from "@/components/CarrosselMobile";
 import { PautaPills } from "@/components/PautaPills";
 import { BuscaFiltros } from "@/components/BuscaFiltros";
 import { ParlamentarCard } from "@/components/ParlamentarCard";
@@ -16,7 +17,7 @@ import { CargoTabs } from "@/components/CargoTabs";
 import { GraficoPartidos } from "@/components/GraficoPartidos";
 import { PAUTAS, exemploPratico, motivoSemVotoCasa, urlFonteOficial } from "@/lib/pautas";
 import type { LinhaPartido } from "@/lib/partidos";
-import { UFS, bannerOrdem, rotulosOrdem } from "@/lib/parlamentares";
+import { COR_GRAFICO, UFS, bannerOrdem, rotuloAlinhamento, rotulosOrdem } from "@/lib/parlamentares";
 import { mensagemPauta } from "@/lib/share";
 import {
   distribuirPorPauta,
@@ -455,33 +456,71 @@ export function Dashboard({
           </a>
         </nav>
 
-        {/* Gráficos (hemiciclo + partidos): no celular vêm DEPOIS da lista (order-7). */}
-        <section
-          id="graficos"
-          className="order-7 mb-8 scroll-mt-20 md:order-none"
-        >
-          <div className="grid gap-4 lg:grid-cols-2 lg:items-start">
-            <Hemiciclo
-              distribuicao={distribuicao}
-              pautaSlug={pautaSel}
-              rotulo={
-                cargo === "SENADOR"
-                  ? "Senado Federal"
-                  : cargo === "DEPUTADO"
-                    ? "Câmara dos Deputados"
-                    : "Congresso Nacional"
-              }
-            />
-            <GraficoPartidos
-              parlamentares={filtrados}
-              pautaSlug={pautaSel}
-              onCompartilhar={abrirCompartilharPartido}
-              onCompartilharTop5={abrirCompartilharTop5}
-            />
+        {/* Visão geral: no mobile, carrossel (partido primeiro); no desktop, lado a lado. */}
+        <section id="graficos" className="order-3 mb-3 scroll-mt-20 md:order-none">
+          <div className="mb-1 flex flex-wrap items-baseline justify-between gap-2">
+            <h2 className="text-base font-black text-titulo">Visão geral dos votos</h2>
+            <p className="hidden text-xs text-corpo lg:block">Partido primeiro; o hemiciclo traz o plenário.</p>
           </div>
+
+          <div className="mb-2 flex flex-wrap items-center gap-x-3 gap-y-1 rounded-xl border border-borda bg-superficie px-3 py-1 text-xs text-corpo">
+            <strong className="text-titulo">Placar do recorte:</strong>
+            {(["FAVORAVEL", "CONTRA", "ABSTENCAO", "AUSENTE", "NAO_APLICAVEL"] as const).map((a) => (
+              <span key={a} className="inline-flex items-center gap-1.5">
+                <span
+                  className={
+                    a === "NAO_APLICAVEL"
+                      ? "inline-block h-2.5 w-2.5 rounded-full border-2"
+                      : "inline-block h-2.5 w-2.5 rounded-full"
+                  }
+                  style={
+                    a === "NAO_APLICAVEL"
+                      ? { borderColor: COR_GRAFICO[a] }
+                      : { backgroundColor: COR_GRAFICO[a] }
+                  }
+                  aria-hidden
+                />
+                <strong className="font-mono text-titulo">{distribuicao[a]}</strong>{" "}
+                {rotuloAlinhamento(a, pautaSel)}
+              </span>
+            ))}
+          </div>
+
+          <CarrosselMobile
+            rotulo="Visão geral dos votos"
+            total={2}
+            rotulos={["Partidos", "Congresso"]}
+            dotsClassName="lg:hidden"
+            trilhoClassName="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 lg:mx-0 lg:grid lg:grid-cols-2 lg:overflow-visible lg:px-0 lg:pb-0"
+          >
+            <div data-slide className="w-[92%] shrink-0 snap-start lg:order-2 lg:w-auto">
+              <GraficoPartidos
+                compacto
+                limiteInicial={3}
+                parlamentares={filtrados}
+                pautaSlug={pautaSel}
+                onCompartilhar={abrirCompartilharPartido}
+                onCompartilharTop5={abrirCompartilharTop5}
+              />
+            </div>
+            <div data-slide className="w-[92%] shrink-0 snap-start lg:order-1 lg:w-auto">
+              <Hemiciclo
+                distribuicao={distribuicao}
+                pautaSlug={pautaSel}
+                compacto
+                rotulo={
+                  cargo === "SENADOR"
+                    ? "Senado Federal"
+                    : cargo === "DEPUTADO"
+                      ? "Câmara dos Deputados"
+                      : "Congresso Nacional"
+                }
+              />
+            </div>
+          </CarrosselMobile>
         </section>
 
-        <section className="order-4 mb-4 md:order-none">
+        <section className="order-5 mb-4 md:order-none">
           <CargoTabs
             selecionado={cargo}
             contagens={contagens}
@@ -500,7 +539,7 @@ export function Dashboard({
         {(semVotoNaCasa || aplicaveisNaCasa < totalDaCasa) && (
           <section
             data-aviso-casa="1"
-            className="order-5 mb-4 rounded-xl border border-dourado/50 bg-dourado/5 p-3 md:order-none"
+            className="order-6 mb-4 rounded-xl border border-dourado/50 bg-dourado/5 p-3 md:order-none"
           >
             <p className="text-xs leading-relaxed text-corpo">
               <strong className="text-titulo">
@@ -569,7 +608,7 @@ export function Dashboard({
           </section>
         )}
 
-        <section className="order-3 mb-6 md:order-none xl:flex xl:items-center xl:gap-3">
+        <section className="order-4 mb-6 md:order-none xl:flex xl:items-center xl:gap-3">
           <div className="flex-1">
             <BuscaFiltros
               busca={busca}
@@ -596,7 +635,7 @@ export function Dashboard({
           </div>
         </section>
 
-        <section id="lista" className="order-6 scroll-mt-20 md:order-none">
+        <section id="lista" className="order-7 scroll-mt-20 md:order-none">
           <h2 className="sr-only">Lista de parlamentares</h2>
           {semVotoNaCasa ? (
             <div
