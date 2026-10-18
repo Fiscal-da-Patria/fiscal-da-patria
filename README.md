@@ -49,7 +49,7 @@ npm run fetch-fotos    # baixa as fotos oficiais para public/fotos/
 src/app/          layout e home (Server Component que lê o JSON no build); /sobre e /poderes
 src/components/   Dashboard (ilha cliente), SiteHeader, SiteFooter, ThemeToggle, CargoTabs,
                   Hemiciclo, PautaPills, BuscaFiltros, ParlamentarCard, PautaDetalheModal,
-                  GraficoPartidos, BarraVotos, Modal, ShareModal, ShareCard, ShareCardPartido,
+                  GraficoPartidos, BarraVotos, Modal, CarrosselMobile, ShareModal, ShareCard, ShareCardPartido,
                   ShareCardTop5, SocialShareBar, WhatsAppShareButton
 src/lib/          pautas (11 pautas + inversão), parlamentares, partidos, share
 src/types/        contratos de dados
@@ -166,7 +166,7 @@ candidatos ou órgãos estatais. Regras de transformação (inversão semântica
 - Os documentos originais em `.docx` ficam preservados em `docs/_originais/`.
 
 ## Testes E2E (Playwright)
-Suíte completa (**190 testes**) que valida o front no Chrome: render/dados, **Congresso (594: 513 deputados + 81 senadores)**, **abas e badges por cargo**, filtros (**inclui estado vazio com "Limpar filtros"**), pautas/hemiciclo (**11 pautas**), **ordenação por gravidade com desempate pelos mais votados**, **compartilhamento por parlamentar, por bancada e top 5 (imagem 4:5, prévia, PNG e link)**, **WhatsApp/Telegram/X/Copiar**, **deep links**, **OpenGraph / ícones / manifest PWA**, **rodapé jurídico**, **dark mode**, página `/sobre`, **`/poderes` (régua dos votos + linha do tempo)**, **desfecho das 11 pautas (leis, emendas e a blindagem arquivada)**, integridade dos dados (**inclui a regra de ouro: votação simbólica do Senado nunca vira "Ausente"**) e **acessibilidade (axe) em claro e escuro**, **card compacto no mobile**, **detalhes da pauta recolhíveis** e **320px sem overflow**.
+Suíte completa (**195 testes**) que valida o front no Chrome: render/dados, **Congresso (594: 513 deputados + 81 senadores)**, **abas e badges por cargo**, filtros (**inclui estado vazio com "Limpar filtros"**), pautas/hemiciclo (**11 pautas**), **ordenação por gravidade com desempate pelos mais votados**, **compartilhamento por parlamentar, por bancada e top 5 (imagem 4:5, prévia, PNG e link)**, **WhatsApp/Telegram/X/Copiar**, **deep links**, **OpenGraph / ícones / manifest PWA**, **rodapé jurídico**, **dark mode**, página `/sobre`, **`/poderes` (régua dos votos + linha do tempo)**, **desfecho das 11 pautas (leis, emendas e a blindagem arquivada)**, integridade dos dados (**inclui a regra de ouro: votação simbólica do Senado nunca vira "Ausente"**) e **acessibilidade (axe) em claro e escuro**, **card compacto no mobile**, **detalhes da pauta recolhíveis**, **carrossel com dots em /poderes e /sobre** e **320px sem overflow**.
 ```bash
 npm run test:e2e     # sobe o dev server e roda os specs em tests/
 ```

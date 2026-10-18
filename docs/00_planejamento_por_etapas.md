@@ -29,7 +29,7 @@
 | 20 | Simplificação: sem dossiê/nota + cartão de compartilhamento | Um botão por card gera a imagem (nome, partido, matéria, voto) | ✅ |
 | 21 | Escala 6x1 promulgada (EC 141/2026) | Dados definitivos das duas Casas + card "O que foi aprovado?" | ✅ |
 | 22 | Desfecho de todas as pautas | 10 normas verificadas + blindagem arquivada, com detalhamento | ✅ |
-| 23 | Refresh visual, mobile e P0/P1 | A11y estrutural, 320px, status dark, escopo Câmara+Senado, card compacto e testes | ✅ |
+| 23 | Refresh visual, mobile e P0/P1 | A11y estrutural, 320px, status dark, escopo Câmara+Senado, card compacto, carrossel com dots e testes | ✅ |
 | 24 | Deploy | Publicação (Vercel/Cloudflare Pages) + domínio | ⏳ próxima |
 | 25 | Otimização de fotos (WebP) | Reduzir o peso de `public/fotos` | ⏳ backlog |
 | 26 | OG dinâmico / Kit por estado | Crescimento e viralidade | ⏳ backlog |
@@ -265,9 +265,10 @@
 - **P0 fechado:** `/sobre` passou a citar **Câmara dos Deputados e Senado Federal** e a linkar `senado.leg.br`; copy antiga de "dossiê" removida; hierarquia de headings; `aria-label` nas navs; **skip link**; foco global; `role="group"`; contador com `aria-live`.
 - **Mobile:** rótulos curtos nas pills (nome acessível completo), header compacto, cartões compartilháveis `aspect-[4/5] max-w-full` e top 5 compacto abaixo de 360px; testes em **320px** sem overflow e sem corte.
 - **Dark mode:** tokens `--status-*`; o verde clareia no escuro com texto escuro e contraste AA medido por teste.
-- **Testes:** `data-hidratado` no Dashboard + `esperarCards()` esperando a hidratação (resolveu a corrida do "Copiar Link"); **190 testes verdes**, `build`, `tsc` e `lint` limpos.
+- **Testes:** `data-hidratado` no Dashboard + `esperarCards()` esperando a hidratação (resolveu a corrida do "Copiar Link"); **195 testes verdes**, `build`, `tsc` e `lint` limpos.
 - **Métricas (P1):** home mobile **5.307px**; primeiro card em **~1,8 telas** (chip de status y≈1575 = 1,87). Antes do P1: 7.010px / 2,12 telas; antes do refresh: 7.049px / 2,24.
 - **Acabamento P2:** tokens de WhatsApp/Telegram, legenda **oca** para "Sem voto individual", voto bruto no card (SIM/NÃO/Abstenção) e faixa de auditoria no hero (parlamentares, pautas, 100% fonte oficial e data do JSON).
+- **Carrossel com dots:** `/poderes` (3 Poderes, Câmara×Senado, régua e timeline) e `/sobre` (3 compromissos) usam scroll-snap nativo com dots acessíveis no mobile; o desktop mantém a grade.
 - **P1 mobile:** card compacto (foto + identidade + chip + ações em ícones), detalhes técnicos da pauta recolhíveis, filtros antes das abas, CTA primário para a lista, tipografia de leitura em 12px, `/sobre` sem share duplicado e rótulos "Sobre o projeto" unificados.
 - **Pendente (backlog):** deploy, fotos WebP e OG dinâmico.
 
