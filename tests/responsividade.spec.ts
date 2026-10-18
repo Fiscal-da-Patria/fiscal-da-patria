@@ -8,7 +8,9 @@ test.describe("Responsividade — Mobile (390x844)", () => {
     await page.goto("/");
     await expect(page.getByRole("link", { name: "Sobre", exact: true })).toBeVisible();
     // no mobile, a versão longa não existe no nome acessível
-    await expect(page.getByRole("link", { name: "Sobre o Projeto" })).toHaveCount(0);
+    await expect(
+      page.locator("header").getByRole("link", { name: "Sobre o projeto" }),
+    ).toHaveCount(0);
   });
 
   test("grade de deputados em coluna única", async ({ page }) => {
@@ -20,6 +22,30 @@ test.describe("Responsividade — Mobile (390x844)", () => {
         (el) => (el.closest("div.rounded-2xl") as HTMLElement).getBoundingClientRect().width,
       );
     expect(largura).toBeGreaterThan(300);
+  });
+
+  test("card compacto no mobile", async ({ page }) => {
+    await page.goto("/");
+    await esperarCards(page);
+    const altura = (await cards(page).first().boundingBox())?.height ?? 0;
+    expect(altura).toBeLessThan(160);
+  });
+
+  test("detalhes da pauta recolhem no mobile", async ({ page }) => {
+    await page.goto("/");
+    await esperarCards(page);
+    const situacao = page.getByText(/Situação no Senado:/);
+    await expect(situacao).toBeHidden();
+    await page.getByRole("button", { name: /Ver detalhes da votação/i }).click();
+    await expect(situacao).toBeVisible();
+  });
+
+  test("filtros vêm antes das abas de cargo no mobile", async ({ page }) => {
+    await page.goto("/");
+    await esperarCards(page);
+    const filtros = await page.getByLabel("Filtrar por estado").boundingBox();
+    const abas = await page.locator('[data-cargo-tab="TODOS"]').boundingBox();
+    expect(filtros?.y ?? 0).toBeLessThan(abas?.y ?? 0);
   });
 
   test("atalhos mobile levam para a lista e para os gráficos", async ({ page }) => {

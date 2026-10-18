@@ -43,7 +43,7 @@ test.describe("Página Sobre Nós (Manifesto Cívico)", () => {
 
   test("navegação home → sobre → home", async ({ page }) => {
     await page.goto("/");
-    await page.getByRole("link", { name: "Sobre o Projeto" }).click();
+    await page.locator("header").getByRole("link", { name: "Sobre o projeto" }).click();
     await expect(page).toHaveURL(/\/sobre$/);
     await page.getByRole("link", { name: /Voltar para a fiscalização/i }).first().click();
     await expect(page).toHaveURL(/\/$/);
@@ -52,7 +52,7 @@ test.describe("Página Sobre Nós (Manifesto Cívico)", () => {
 
   test("navegação pelo link do rodapé", async ({ page }) => {
     await page.goto("/");
-    await page.getByRole("link", { name: /Manifesto Cívico/i }).click();
+    await page.locator("footer").getByRole("link", { name: /Sobre o projeto/i }).click();
     await expect(page).toHaveURL(/\/sobre$/);
   });
 });

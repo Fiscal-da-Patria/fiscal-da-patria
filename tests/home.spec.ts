@@ -25,9 +25,9 @@ test.describe("Home — estrutura e dados", () => {
     await context.close();
   });
 
-  test("header: marca, link 'Sobre o Projeto' e selo", async ({ page }) => {
+  test("header: marca, link 'Sobre o projeto' e selo", async ({ page }) => {
     await expect(page.getByRole("link", { name: /Fiscal da Pátria/i }).first()).toBeVisible();
-    const sobre = page.getByRole("link", { name: "Sobre o Projeto" });
+    const sobre = page.locator("header").getByRole("link", { name: "Sobre o projeto" });
     await expect(sobre).toBeVisible();
     await expect(sobre).toHaveAttribute("href", "/sobre");
     await expect(page.getByText("Dados oficiais")).toBeVisible();
@@ -116,7 +116,7 @@ test.describe("Home — estrutura e dados", () => {
   });
 
   test("rodapé com o link do manifesto", async ({ page }) => {
-    const link = page.getByRole("link", { name: /Manifesto Cívico/i });
+    const link = page.locator("footer").getByRole("link", { name: /Sobre o projeto/i });
     await expect(link).toBeVisible();
     await expect(link).toHaveAttribute("href", "/sobre");
     await expect(page.getByText(/Não há pedido de voto/i)).toBeVisible();
