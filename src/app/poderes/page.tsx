@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { CarrosselMobile } from "@/components/CarrosselMobile";
 
 export const metadata: Metadata = {
   title: "Entenda os Poderes | Fiscal da Pátria",
@@ -257,14 +258,19 @@ export default function PoderesPage() {
         {/* Diagrama dos 3 Poderes */}
         <section className="mt-10">
           <h2 className="sr-only">Os três Poderes da República</h2>
-          {/* No celular: carrossel de cards (arrasta para o lado). No desktop: grade. */}
-          <div className="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 md:mx-0 md:grid md:grid-cols-3 md:overflow-visible md:px-0 md:pb-0">
+          {/* No celular: carrossel com dots; no desktop: grade. */}
+          <CarrosselMobile
+            rotulo="Os três Poderes da República"
+            total={PODERES.length}
+            trilhoClassName="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 md:mx-0 md:grid md:grid-cols-3 md:overflow-visible md:px-0 md:pb-0"
+          >
             {PODERES.map((poder) => {
               const Icone = ICONES[poder.id];
               return (
                 <article
                   key={poder.id}
                   data-poder={poder.id}
+                  data-slide
                   className={`flex w-[82%] shrink-0 snap-start flex-col rounded-2xl border bg-superficie p-5 shadow-sm md:w-auto ${
                     poder.destaque
                       ? "border-2 border-dourado ring-2 ring-verde-bandeira/20 md:-mt-2 md:mb-2"
@@ -319,9 +325,9 @@ export default function PoderesPage() {
                 </article>
               );
             })}
-          </div>
+          </CarrosselMobile>
           <p className="mt-2 text-[11px] font-medium text-corpo md:hidden">
-            Arraste para o lado para ver os outros cards →
+            Arraste ou use os pontos para ver os outros cards →
           </p>
         </section>
 
@@ -336,9 +342,15 @@ export default function PoderesPage() {
             coisas diferentes.
           </p>
 
-          <div className="-mx-4 mt-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0">
+          <CarrosselMobile
+            rotulo="Câmara e Senado"
+            total={2}
+            dotsClassName="sm:hidden"
+            trilhoClassName="-mx-4 mt-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0"
+          >
             <article
               data-casa="camara"
+              data-slide
               className="w-[82%] shrink-0 snap-start rounded-2xl border border-borda bg-superficie p-5 shadow-sm sm:w-auto"
             >
               <span className="inline-flex items-center gap-2 rounded-full border border-verde-bandeira/40 bg-verde-bandeira/10 px-3 py-1 text-[11px] font-bold text-titulo">
@@ -356,6 +368,7 @@ export default function PoderesPage() {
 
             <article
               data-casa="senado"
+              data-slide
               className="w-[82%] shrink-0 snap-start rounded-2xl border border-borda bg-superficie p-5 shadow-sm sm:w-auto"
             >
               <span className="inline-flex items-center gap-2 rounded-full border border-dourado/50 bg-dourado/10 px-3 py-1 text-[11px] font-bold text-titulo">
@@ -369,9 +382,9 @@ export default function PoderesPage() {
                 <strong className="text-titulo">equilíbrio da Federação</strong>.
               </p>
             </article>
-          </div>
+          </CarrosselMobile>
           <p className="mt-2 text-[11px] font-medium text-corpo sm:hidden">
-            Arraste para o lado para ver o outro card →
+            Arraste ou use os pontos para ver o outro card →
           </p>
         </section>
 
@@ -387,13 +400,18 @@ export default function PoderesPage() {
             um projeto comum.
           </p>
 
-          <div className="-mx-4 mt-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 md:mx-0 md:grid md:grid-cols-3 md:overflow-visible md:px-0 md:pb-0">
+          <CarrosselMobile
+            rotulo="A régua dos votos"
+            total={QUORUNS.length}
+            trilhoClassName="-mx-4 mt-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 md:mx-0 md:grid md:grid-cols-3 md:overflow-visible md:px-0 md:pb-0"
+          >
             {QUORUNS.map((quorum) => {
               const Icone = quorum.icone;
               return (
                 <article
                   key={quorum.id}
                   data-quorum={quorum.id}
+                  data-slide
                   className="flex w-[82%] shrink-0 snap-start flex-col rounded-2xl border border-borda bg-superficie p-5 shadow-sm md:w-auto"
                 >
                   <div className="flex items-center gap-2">
@@ -465,9 +483,9 @@ export default function PoderesPage() {
                 </article>
               );
             })}
-          </div>
+          </CarrosselMobile>
           <p className="mt-2 text-[11px] font-medium text-corpo md:hidden">
-            Arraste para o lado para ver os outros cards →
+            Arraste ou use os pontos para ver os outros cards →
           </p>
 
           <p className="mt-4 rounded-2xl border border-borda bg-superficie p-4 text-xs leading-relaxed text-corpo shadow-sm">
@@ -500,7 +518,12 @@ export default function PoderesPage() {
             esse caminho que o Fiscal da Pátria acompanha, voto a voto.
           </p>
 
-          <ol className="relative -mx-4 mt-6 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-2 md:mx-0 md:overflow-visible md:px-0 md:pb-0">
+          <CarrosselMobile
+            rotulo="A linha do tempo de uma lei"
+            total={ETAPAS.length}
+            trilhoClassName="-mx-4 mt-6 overflow-x-auto px-4 pb-2 snap-x snap-mandatory md:mx-0 md:overflow-visible md:px-0 md:pb-0"
+          >
+            <ol className="relative flex w-max gap-3 md:w-auto">
             <span
               aria-hidden
               className="absolute left-0 top-[19px] h-0.5 w-full rounded-full bg-trilha"
@@ -511,6 +534,7 @@ export default function PoderesPage() {
                 <li
                   key={etapa.id}
                   data-etapa={etapa.n}
+                  data-slide
                   className="relative flex w-[82%] shrink-0 snap-start gap-4 md:w-auto md:flex-1 md:flex-col md:gap-3"
                 >
                   <span className="z-10 grid h-10 w-10 shrink-0 place-items-center rounded-full border-2 border-dourado bg-superficie text-titulo shadow-sm">
@@ -532,9 +556,10 @@ export default function PoderesPage() {
                 </li>
               );
             })}
-          </ol>
+            </ol>
+          </CarrosselMobile>
           <p className="mt-2 text-[11px] font-medium text-corpo md:hidden">
-            Arraste para o lado para seguir o funil →
+            Arraste ou use os pontos para seguir o funil →
           </p>
 
           <p className="mt-4 rounded-2xl border border-borda bg-superficie p-4 text-xs leading-relaxed text-corpo shadow-sm">

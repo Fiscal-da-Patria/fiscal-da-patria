@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
+import { CarrosselMobile } from "@/components/CarrosselMobile";
 
 export const metadata: Metadata = {
   title: "Sobre Nós — Manifesto Cívico | Fiscal da Pátria",
@@ -251,8 +252,16 @@ export default function SobrePage() {
           <h2 className="text-xl font-bold text-titulo sm:text-2xl">
             Nossos Compromissos de Transparência
           </h2>
-          <div className="mt-4 grid gap-4 sm:grid-cols-3">
-            <div className="rounded-2xl border border-borda bg-superficie p-5">
+          <CarrosselMobile
+            rotulo="Compromissos de Transparência"
+            total={3}
+            dotsClassName="sm:hidden"
+            trilhoClassName="-mx-4 mt-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:grid sm:grid-cols-3 sm:overflow-visible sm:px-0 sm:pb-0"
+          >
+            <div
+              data-slide
+              className="w-[82%] shrink-0 snap-start rounded-2xl border border-borda bg-superficie p-5 sm:w-auto"
+            >
               <ShieldCheck className="h-6 w-6 text-titulo" />
               <h3 className="mt-3 text-sm font-bold text-titulo">Fonte oficial e auditável</h3>
               <p className="mt-1 text-sm leading-relaxed text-corpo">
@@ -278,7 +287,10 @@ export default function SobrePage() {
                 </a>
               </div>
             </div>
-            <div className="rounded-2xl border border-borda bg-superficie p-5">
+            <div
+              data-slide
+              className="w-[82%] shrink-0 snap-start rounded-2xl border border-borda bg-superficie p-5 sm:w-auto"
+            >
               <HeartHandshake className="h-6 w-6 text-titulo" />
               <h3 className="mt-3 text-sm font-bold text-titulo">Independência financeira</h3>
               <p className="mt-1 text-sm leading-relaxed text-corpo">
@@ -286,7 +298,10 @@ export default function SobrePage() {
                 pública, partidária ou corporativa.
               </p>
             </div>
-            <div className="rounded-2xl border border-borda bg-superficie p-5">
+            <div
+              data-slide
+              className="w-[82%] shrink-0 snap-start rounded-2xl border border-borda bg-superficie p-5 sm:w-auto"
+            >
               <Scale className="h-6 w-6 text-titulo" />
               <h3 className="mt-3 text-sm font-bold text-titulo">Código e regras abertas</h3>
               <p className="mt-1 text-sm leading-relaxed text-corpo">
@@ -294,7 +309,7 @@ export default function SobrePage() {
                 no repositório do projeto.
               </p>
             </div>
-          </div>
+          </CarrosselMobile>
         </section>
 
 
