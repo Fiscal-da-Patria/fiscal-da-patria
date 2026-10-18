@@ -96,7 +96,7 @@ export function CarrosselMobile({
               aria-label={`Ir para o item ${i + 1} de ${total}: ${rotulo}`}
               aria-controls={id}
               aria-current={ativoAgora ? "true" : undefined}
-              className="grid h-11 w-8 place-items-center rounded-lg"
+              className="grid h-11 w-11 place-items-center rounded-lg"
             >
               <span
                 className={`h-1.5 rounded-full transition-all ${
