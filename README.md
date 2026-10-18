@@ -21,25 +21,48 @@ npm install
 npm run dev        # http://localhost:3000
 ```
 
-## Deploy estático (Cloudflare Pages)
-O site é 100% estático. `next.config.ts` usa `output: "export"` e `images.unoptimized: true`;
-`npm run build` (ou `npx next build`) gera a pasta **`out/`**.
+## Deploy estático (Cloudflare)
+O dashboard atual da Cloudflare unificou Pages em Workers. Para este site, o caminho recomendado é
+**Workers Static Assets**: o `out/` gerado pelo Next é servido como asset estático, sem código de servidor.
 
-1. **GitHub primeiro:** a Cloudflare Pages com Git integration lê o repositório — ela não cria o código.
-   ```bash
-   git remote add origin https://github.com/<usuario>/<repo>.git
-   git branch -M main
-   git push -u origin main
-   ```
-2. **Cloudflare Pages:** Workers & Pages → Create → Pages → **Import an existing Git repository**.
-   - Framework preset: **Next.js (Static HTML Export)**
-   - Build command: **`npx next build`**
-   - Build output directory: **`out`**
-   - Production branch: **`main`**
-3. **Não use Direct Upload** se quiser deploy automático a cada commit: o Direct Upload não pode ser
-   convertido em Git integration depois; ele serve só para testes manuais do `out/`.
-4. Se o build reclamar de Node, defina `NODE_VERSION=22` nas variáveis do projeto (Next 16 exige Node 20.9+).
-5. `metadataBase` aponta para `https://fiscaldapatria.org.br`; ajuste se o primeiro deploy for em `*.pages.dev`.
+`next.config.ts` usa `output: "export"` e `images.unoptimized: true`; `npm run build` gera a pasta **`out/`**.
+
+### Workers Static Assets (recomendado)
+O arquivo `wrangler.jsonc` na raiz configura o Worker:
+
+```jsonc
+{
+  "name": "fiscal-da-patria",
+  "compatibility_date": "2026-10-18",
+  "assets": {
+    "directory": "./out/",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash"
+  }
+}
+```
+
+No Worker criado em **Workers & Pages → Create application**:
+
+| Campo | Valor |
+|---|---|
+| Build command | `npm run build` |
+| Deploy command | `npx wrangler deploy` |
+| Root directory | `/` |
+| Build variable | `NODE_VERSION=22` |
+| Build token | automático do Workers Builds |
+
+- `assets.directory: "./out/"` serve o export do Next.
+- `html_handling: "auto-trailing-slash"` faz `/sobre` servir `sobre.html` e `/poderes` servir `poderes.html`.
+- `not_found_handling: "404-page"` usa o `404.html` do export.
+- O `name` do `wrangler.jsonc` precisa ser o mesmo nome do Worker no dashboard.
+- Cada push na `main` dispara build + deploy automático.
+- `metadataBase` aponta para `https://fiscaldapatria.org.br`; ajuste se o primeiro deploy for em `*.workers.dev`.
+
+### Pages (legado, se ainda disponível)
+Se a conta ainda exibir o fluxo antigo de Pages: framework preset **Next.js (Static HTML Export)**,
+build command **`npx next build`**, output directory **`out`** e production branch **`main`**.
+Não use Direct Upload se quiser deploy automático: ele não pode ser convertido em Git integration depois.
 
 > `cacheComponents`/PPR **não** são compatíveis com `output: "export"` — o build falha com
 > `Invariant: PPR cannot be enabled in export mode`. Por isso essa opção foi removida do `next.config.ts`.
@@ -81,6 +104,7 @@ public/data/      parlamentares.json (consolidado: 513 deputados + 81 senadores)
 public/fotos/     fotos oficiais dos deputados e senadores
 public/           og-image.png (1200x630), favicon.ico, apple-touch-icon.png,
                   icon-192.png, icon-512.png, manifest.webmanifest (PWA)
+wrangler.jsonc    Worker Static Assets da Cloudflare (serve out/)
 ```
 
 ## As 12 pautas do MVP

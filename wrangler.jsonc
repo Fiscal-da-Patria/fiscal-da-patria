@@ -1,0 +1,11 @@
+{
+  // Cloudflare Workers Static Assets: serve o export estático do Next (`out/`).
+  // O `name` precisa ser o mesmo do Worker criado no dashboard.
+  "name": "fiscal-da-patria",
+  "compatibility_date": "2026-10-18",
+  "assets": {
+    "directory": "./out/",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash"
+  }
+}
