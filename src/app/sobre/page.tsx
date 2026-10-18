@@ -256,7 +256,7 @@ export default function SobrePage() {
             rotulo="Compromissos de Transparência"
             total={3}
             dotsClassName="sm:hidden"
-            trilhoClassName="-mx-4 mt-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:grid sm:grid-cols-3 sm:overflow-visible sm:px-0 sm:pb-0"
+            trilhoClassName="-mr-4 mt-4 flex snap-x snap-mandatory gap-4 overflow-x-auto pr-4 pb-2 sm:mr-0 sm:grid sm:grid-cols-3 sm:overflow-visible sm:pr-0 sm:pb-0"
           >
             <div
               data-slide

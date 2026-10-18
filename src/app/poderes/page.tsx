@@ -262,7 +262,7 @@ export default function PoderesPage() {
           <CarrosselMobile
             rotulo="Os três Poderes da República"
             total={PODERES.length}
-            trilhoClassName="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 md:mx-0 md:grid md:grid-cols-3 md:overflow-visible md:px-0 md:pb-0"
+            trilhoClassName="-mr-4 flex snap-x snap-mandatory gap-4 overflow-x-auto pr-4 pb-2 md:mr-0 md:grid md:grid-cols-3 md:overflow-visible md:pr-0 md:pb-0"
           >
             {PODERES.map((poder) => {
               const Icone = ICONES[poder.id];
@@ -346,7 +346,7 @@ export default function PoderesPage() {
             rotulo="Câmara e Senado"
             total={2}
             dotsClassName="sm:hidden"
-            trilhoClassName="-mx-4 mt-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0"
+            trilhoClassName="-mr-4 mt-5 flex snap-x snap-mandatory gap-4 overflow-x-auto pr-4 pb-2 sm:mr-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:pr-0 sm:pb-0"
           >
             <article
               data-casa="camara"
@@ -403,7 +403,7 @@ export default function PoderesPage() {
           <CarrosselMobile
             rotulo="A régua dos votos"
             total={QUORUNS.length}
-            trilhoClassName="-mx-4 mt-5 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 md:mx-0 md:grid md:grid-cols-3 md:overflow-visible md:px-0 md:pb-0"
+            trilhoClassName="-mr-4 mt-5 flex snap-x snap-mandatory gap-4 overflow-x-auto pr-4 pb-2 md:mr-0 md:grid md:grid-cols-3 md:overflow-visible md:pr-0 md:pb-0"
           >
             {QUORUNS.map((quorum) => {
               const Icone = quorum.icone;
@@ -521,7 +521,7 @@ export default function PoderesPage() {
           <CarrosselMobile
             rotulo="A linha do tempo de uma lei"
             total={ETAPAS.length}
-            trilhoClassName="-mx-4 mt-6 overflow-x-auto px-4 pb-2 snap-x snap-mandatory md:mx-0 md:overflow-visible md:px-0 md:pb-0"
+            trilhoClassName="-mr-4 mt-6 overflow-x-auto pr-4 pb-2 snap-x snap-mandatory md:mr-0 md:overflow-visible md:pr-0 md:pb-0"
           >
             <ol className="relative flex w-max gap-3 md:w-auto">
             <span

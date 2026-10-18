@@ -491,7 +491,7 @@ export function Dashboard({
             total={2}
             rotulos={["Partidos", "Congresso"]}
             dotsClassName="lg:hidden"
-            trilhoClassName="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 lg:mx-0 lg:grid lg:grid-cols-2 lg:overflow-visible lg:px-0 lg:pb-0"
+            trilhoClassName="-mr-4 flex snap-x snap-mandatory gap-4 overflow-x-auto pr-4 pb-2 lg:mr-0 lg:grid lg:grid-cols-2 lg:overflow-visible lg:pr-0 lg:pb-0"
           >
             <div data-slide className="w-[92%] shrink-0 snap-start lg:order-2 lg:w-auto">
               <GraficoPartidos
