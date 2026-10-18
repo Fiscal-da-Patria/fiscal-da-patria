@@ -22,6 +22,26 @@ test("captura visual — cartão compartilhável do top 5", async ({ page }) => 
   await page.getByRole("dialog").screenshot({ path: `${DIR}/share-top5.png` });
 });
 
+test("captura visual — /poderes mobile com carrossel", async ({ browser }) => {
+  const context = await browser.newContext({
+    viewport: { width: 390, height: 844 },
+    isMobile: true,
+    hasTouch: true,
+  });
+  const page = await context.newPage();
+
+  await page.goto("/poderes");
+  await page.screenshot({ path: `${DIR}/poderes-mobile.png`, fullPage: true });
+
+  const dots = page.getByRole("group", {
+    name: "Navegação do carrossel: Os três Poderes da República",
+  });
+  await dots.scrollIntoViewIfNeeded();
+  await page.screenshot({ path: `${DIR}/poderes-carrossel.png` });
+
+  await context.close();
+});
+
 test("capturas visuais — tema escuro", async ({ page }) => {
   await page.goto("/");
   await esperarCards(page);
