@@ -106,6 +106,24 @@ test.describe("Compartilhar o voto (imagem 4:5)", () => {
     expect((cartao?.x ?? 0) + (cartao?.width ?? 0)).toBeLessThanOrEqual(360);
   });
 
+  test("cabe na tela de 320px, sem rolagem horizontal", async ({ page }) => {
+    await page.setViewportSize({ width: 320, height: 568 });
+    await page.goto("/");
+    const dialog = await abrirCompartilhar(page);
+
+    expect(await dialog.evaluate((el) => el.scrollWidth > el.clientWidth + 1)).toBe(false);
+
+    const cartao = dialog.locator("[data-share-card]");
+    const caixa = await cartao.boundingBox();
+    expect((caixa?.x ?? 0) + (caixa?.width ?? 0)).toBeLessThanOrEqual(320);
+
+    const ajuste = await cartao.evaluate((el) => ({
+      scrollHeight: el.scrollHeight,
+      clientHeight: el.clientHeight,
+    }));
+    expect(ajuste.scrollHeight).toBeLessThanOrEqual(ajuste.clientHeight + 1);
+  });
+
   test("deep link ?deputado= filtra pela pessoa e destaca o card", async ({ page }) => {
     await page.goto("/?deputado=74646");
 

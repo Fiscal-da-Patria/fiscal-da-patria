@@ -12,7 +12,9 @@ test.describe("Pautas e hemiciclo", () => {
       const pill = page.getByRole("button", { name: rotulo });
       await pill.click();
       await expect(pill).toHaveAttribute("aria-pressed", "true");
-      await expect(page.locator('button[aria-pressed="true"]')).toHaveCount(1);
+      await expect(
+        page.locator('[data-pautas-pills] button[aria-pressed="true"]'),
+      ).toHaveCount(1);
     }
   });
 

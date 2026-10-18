@@ -22,6 +22,9 @@ test.describe("Página Sobre Nós (Manifesto Cívico)", () => {
     await expect(page.getByText(/Independência financeira/i)).toBeVisible();
     await expect(page.getByText(/Código e regras abertas/i)).toBeVisible();
     await expect(page.getByText(/Patriota de verdade não idolatra/i)).toBeVisible();
+    await expect(
+      page.getByText(/Câmara dos Deputados e do Senado Federal/i).first(),
+    ).toBeVisible();
   });
 
   test("botões de voltar apontam para a fiscalização", async ({ page }) => {
@@ -30,10 +33,12 @@ test.describe("Página Sobre Nós (Manifesto Cívico)", () => {
     await expect(voltar.first()).toHaveAttribute("href", "/");
   });
 
-  test("link para o portal oficial da Câmara", async ({ page }) => {
-    const link = page.locator('a[href="https://www.camara.leg.br"]');
-    await expect(link.first()).toBeVisible();
-    await expect(link.first()).toHaveAttribute("target", "_blank");
+  test("links para os portais oficiais da Câmara e do Senado", async ({ page }) => {
+    for (const href of ["https://www.camara.leg.br", "https://www.senado.leg.br"]) {
+      const link = page.locator(`a[href="${href}"]`).first();
+      await expect(link).toBeVisible();
+      await expect(link).toHaveAttribute("target", "_blank");
+    }
   });
 
   test("navegação home → sobre → home", async ({ page }) => {

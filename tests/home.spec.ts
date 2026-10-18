@@ -15,8 +15,18 @@ test.describe("Home — estrutura e dados", () => {
     ).toBeVisible();
   });
 
+  test("o HTML já entrega os cards sem depender de fetch no cliente", async ({ browser }) => {
+    const context = await browser.newContext({ javaScriptEnabled: false });
+    const page = await context.newPage();
+    const resposta = await page.goto("/");
+    expect(resposta?.status()).toBe(200);
+    await expect(page.locator("[data-nome]").first()).toBeVisible();
+    await expect(page.getByText(/Carregando os dados/i)).toHaveCount(0);
+    await context.close();
+  });
+
   test("header: marca, link 'Sobre o Projeto' e selo", async ({ page }) => {
-    await expect(page.getByRole("heading", { name: /Fiscal da Pátria/i })).toBeVisible();
+    await expect(page.getByRole("link", { name: /Fiscal da Pátria/i }).first()).toBeVisible();
     const sobre = page.getByRole("link", { name: "Sobre o Projeto" });
     await expect(sobre).toBeVisible();
     await expect(sobre).toHaveAttribute("href", "/sobre");
@@ -31,7 +41,7 @@ test.describe("Home — estrutura e dados", () => {
     ).toBeVisible();
   });
 
-  test("cards exibem foto, o voto factual e as mini-barras das 11 pautas", async ({ page }) => {
+  test("cards exibem foto, o voto factual e as ações", async ({ page }) => {
     await esperarTodos(page);
     await expect(page.locator('img[src^="/fotos/"]').first()).toBeVisible();
     await expect(
@@ -56,7 +66,7 @@ test.describe("Home — estrutura e dados", () => {
       await expect(page.getByRole("button", { name: rotulo })).toBeVisible();
     }
     await expect(page.getByRole("button", { name: PAUTAS[0] })).toHaveAttribute("aria-pressed", "true");
-    await expect(page.locator('button[aria-pressed="true"]')).toHaveCount(1);
+    await expect(page.locator('[data-pautas-pills] button[aria-pressed="true"]')).toHaveCount(1);
   });
 
   test("filtros presentes: busca e UF", async ({ page }) => {

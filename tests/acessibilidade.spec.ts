@@ -26,6 +26,12 @@ for (const rota of rotas) {
         (v) => v.impact === "critical" || v.impact === "serious",
       );
       expect(serias.map((v) => `${v.id}:${v.impact}`)).toEqual([]);
+
+      // Estrutura de navegação: headings em ordem e landmarks com nome único.
+      const estruturais = violations.filter(
+        (v) => v.id === "heading-order" || v.id === "landmark-unique",
+      );
+      expect(estruturais.map((v) => `${v.id}:${v.impact}`)).toEqual([]);
     });
   }
 }
@@ -56,7 +62,7 @@ function relatar(rotulo: string, serias: AchadoAxe[]) {
   );
 }
 
-test("Acessibilidade (axe) — modal de compartilhamento (parlamentar e bancada)", async ({
+test("Acessibilidade (axe) — modal de compartilhamento (parlamentar, bancada e top 5)", async ({
   page,
 }) => {
   await page.goto("/");
@@ -77,6 +83,15 @@ test("Acessibilidade (axe) — modal de compartilhamento (parlamentar e bancada)
   ({ violations } = await new AxeBuilder({ page }).analyze());
   serias = violations.filter((v) => v.impact === "critical" || v.impact === "serious");
   relatar("compartilhar/bancada", serias);
+  expect(serias.map((v) => `${v.id}:${v.impact}`)).toEqual([]);
+  await page.getByRole("dialog").getByRole("button", { name: "Fechar" }).click();
+
+  // Cartão do top 5 de bancadas.
+  await page.locator("[data-compartilhar-top5]").click();
+  await page.getByRole("dialog").waitFor();
+  ({ violations } = await new AxeBuilder({ page }).analyze());
+  serias = violations.filter((v) => v.impact === "critical" || v.impact === "serious");
+  relatar("compartilhar/top5", serias);
   expect(serias.map((v) => `${v.id}:${v.impact}`)).toEqual([]);
 });
 

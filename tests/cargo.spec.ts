@@ -111,7 +111,7 @@ test.describe("Congresso: cargo, abas e votos do Senado", () => {
   test("deep link ?cargo=SENADOR abre já filtrado", async ({ page }) => {
     await page.goto("/?cargo=SENADOR");
     await expect(page.getByRole("button", { name: /Senadores \(81\)/ })).toHaveAttribute(
-      "aria-current",
+      "aria-pressed",
       "true",
     );
     await carregarTodos(page);

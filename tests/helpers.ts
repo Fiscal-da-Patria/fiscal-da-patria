@@ -40,8 +40,9 @@ export function cards(page: Page) {
   return page.locator("[data-nome]");
 }
 
-/** Espera aparecer o primeiro card (dados carregados via fetch). */
+/** Espera a hidratação do Dashboard e o primeiro card. */
 export async function esperarCards(page: Page): Promise<void> {
+  await expect(page.locator('[data-hidratado="1"]')).toHaveCount(1, { timeout: 30_000 });
   await expect(cards(page).first()).toBeVisible({ timeout: 30_000 });
 }
 

@@ -1,5 +1,5 @@
 import { test, expect, type Page } from "@playwright/test";
-import { cards, carregarTodos } from "./helpers";
+import { cards, carregarTodos, esperarCards } from "./helpers";
 
 /** Card de um deputado específico (o atributo data-nome é a chave estável). */
 const cardDe = (page: Page, nome: string) => page.locator(`[data-nome="${nome}"]`);
@@ -57,6 +57,15 @@ test.describe("Deep links (Dark Social)", () => {
     await expect(page.getByPlaceholder(/Buscar por nome/i)).toHaveValue("PSDB");
     await expect(
       page.getByRole("button", { name: /Fim da blindagem de políticos/i }),
+    ).toHaveAttribute("aria-pressed", "true");
+  });
+
+  test("deep link de UF + cargo", async ({ page }) => {
+    await page.goto("/?pauta=cesta_basica&cargo=SENADOR&uf=SP");
+    await esperarCards(page);
+    await expect(page.getByLabel("Filtrar por estado")).toHaveValue("SP");
+    await expect(
+      page.getByRole("button", { name: /Senadores \(81\)/ }),
     ).toHaveAttribute("aria-pressed", "true");
   });
 });

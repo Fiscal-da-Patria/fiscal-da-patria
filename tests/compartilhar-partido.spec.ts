@@ -68,7 +68,7 @@ test.describe("Compartilhar o cartão de uma bancada", () => {
     await expect(dialog.getByRole("button", { name: /Copiado! ✓/ })).toBeVisible();
 
     const texto = await page.evaluate(() => navigator.clipboard.readText());
-    expect(texto).toMatch(/PL na Câmara:/);
+    expect(texto).toMatch(/PL na votação de PEC 45\/2019:/);
     expect(texto).toMatch(/PEC 45\/2019/);
     expect(texto).toMatch(/Recorte: Congresso Nacional/);
     expect(texto).toMatch(/\?pauta=cesta_basica&busca=PL/);
