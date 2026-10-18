@@ -69,7 +69,7 @@ export interface PautaConfig {
    * Situação da matéria após a tramitação. Só é preenchida quando há uma
    * verificação oficial (ex.: PEC 221/2019 → EC 141/2026).
    */
-  status?: 'PROMULGADA' | 'SANCIONADA' | 'ARQUIVADA';
+  status?: 'PROMULGADA' | 'SANCIONADA' | 'ARQUIVADA' | 'REVOGADA';
   /** Norma jurídica resultante (ex.: "Emenda Constitucional 141/2026"). */
   normaOficial?: string;
   /** Data de promulgação da PEC (AAAA-MM-DD). */
@@ -78,6 +78,16 @@ export interface PautaConfig {
   dataSancao?: string;
   /** Data de arquivamento da proposta (AAAA-MM-DD). */
   dataArquivamento?: string;
+  /** Data em que a norma foi revogada por outra norma (AAAA-MM-DD). */
+  dataRevogacao?: string;
+  /** Norma que revogou a lei (ex.: "Medida Provisória 1.394/2026"). */
+  normaRevogadora?: string;
+  /** Link oficial da norma revogadora (planalto.gov.br). */
+  urlNormaRevogadora?: string;
+  /** Link oficial da tramitação da norma revogadora no Congresso. */
+  urlMateriaRevogadora?: string;
+  /** Situação atual da matéria, em linguagem factual (ex.: "MP em vigor; Congresso vai votar"). */
+  situacaoAtual?: string;
   /** Link oficial da norma (planalto.gov.br). */
   urlNorma?: string;
   /** Placar final na Câmara, como consta na fonte oficial. */

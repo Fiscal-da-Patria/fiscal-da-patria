@@ -35,14 +35,22 @@ export function PautaDetalheModal({
   if (!pauta.pontosExplicativos?.length) return null;
 
   const dataBR = (iso?: string) => (iso ? iso.split("-").reverse().join("/") : "");
-  const dataStatus = pauta.dataPromulgacao ?? pauta.dataSancao ?? pauta.dataArquivamento;
+  const dataStatus =
+    pauta.dataRevogacao ??
+    pauta.dataPromulgacao ??
+    pauta.dataSancao ??
+    pauta.dataArquivamento;
   const rotuloStatus =
     pauta.status === "PROMULGADA"
       ? "Promulgada"
       : pauta.status === "SANCIONADA"
         ? "Sancionada"
-        : "Arquivada";
+        : pauta.status === "REVOGADA"
+          ? "Revogada"
+          : "Arquivada";
   const arquivada = pauta.status === "ARQUIVADA";
+  const revogada = pauta.status === "REVOGADA";
+  const encerrada = arquivada || revogada;
 
   return (
     <Modal aoFechar={onFechar} rotuloId="titulo-pauta-detalhe" largura="max-w-2xl">
@@ -53,12 +61,12 @@ export function PautaDetalheModal({
               <p
                 data-status-norma="1"
                 className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-titulo ${
-                  arquivada
+                  encerrada
                     ? "border-dourado/60 bg-dourado/15"
                     : "border-verde-bandeira/40 bg-verde-bandeira/10"
                 }`}
               >
-                {arquivada ? (
+                {encerrada ? (
                   <XCircle className="h-3.5 w-3.5" aria-hidden />
                 ) : (
                   <BadgeCheck className="h-3.5 w-3.5" aria-hidden />
@@ -68,7 +76,11 @@ export function PautaDetalheModal({
               </p>
             )}
             <p className="mt-2 text-[11px] font-bold uppercase tracking-wider text-corpo">
-              {arquivada ? "O que aconteceu com a proposta" : "O que foi aprovado"}
+              {arquivada
+                ? "O que aconteceu com a proposta"
+                : revogada
+                  ? "O que aconteceu com a lei"
+                  : "O que foi aprovado"}
             </p>
             <h2
               id="titulo-pauta-detalhe"
@@ -94,6 +106,15 @@ export function PautaDetalheModal({
         {pauta.resumoFactual && (
           <p className="mt-4 rounded-xl border border-dourado/40 bg-dourado/5 p-3 text-sm leading-relaxed text-titulo">
             {pauta.resumoFactual}
+          </p>
+        )}
+
+        {pauta.situacaoAtual && (
+          <p
+            data-situacao-atual="1"
+            className="mt-2 rounded-xl border border-verde-bandeira/30 bg-verde-bandeira/5 p-3 text-xs leading-relaxed text-corpo"
+          >
+            <strong className="text-titulo">Situação atual:</strong> {pauta.situacaoAtual}
           </p>
         )}
 
@@ -187,6 +208,30 @@ export function PautaDetalheModal({
               className="inline-flex items-center gap-1.5 text-xs font-bold text-verde-bandeira underline decoration-dotted underline-offset-2 hover:text-titulo dark:text-dourado"
             >
               Ver a matéria no Senado
+              <ExternalLink className="h-3.5 w-3.5" aria-hidden />
+            </a>
+          )}
+          {pauta.urlNormaRevogadora && (
+            <a
+              href={pauta.urlNormaRevogadora}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-link-norma-revogadora="1"
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-verde-bandeira underline decoration-dotted underline-offset-2 hover:text-titulo dark:text-dourado"
+            >
+              Ler a {pauta.normaRevogadora ?? "norma revogadora"} no Planalto
+              <ExternalLink className="h-3.5 w-3.5" aria-hidden />
+            </a>
+          )}
+          {pauta.urlMateriaRevogadora && (
+            <a
+              href={pauta.urlMateriaRevogadora}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-link-materia-revogadora="1"
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-verde-bandeira underline decoration-dotted underline-offset-2 hover:text-titulo dark:text-dourado"
+            >
+              Ver a tramitação da MP na Câmara
               <ExternalLink className="h-3.5 w-3.5" aria-hidden />
             </a>
           )}

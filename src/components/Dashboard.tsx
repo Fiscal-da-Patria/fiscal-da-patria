@@ -341,14 +341,16 @@ export function Dashboard({
                     <span
                       data-norma-vigente="1"
                       className={`rounded border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-titulo ${
-                        pautaAtual.status === "ARQUIVADA"
+                        pautaAtual.status === "ARQUIVADA" || pautaAtual.status === "REVOGADA"
                           ? "border-dourado/60 bg-dourado/15"
                           : "border-verde-bandeira/40 bg-verde-bandeira/10"
                       }`}
                     >
                       {pautaAtual.status === "ARQUIVADA"
                         ? "⛔ Arquivada"
-                        : `✅ ${pautaAtual.normaOficial}`}
+                        : pautaAtual.status === "REVOGADA"
+                          ? `⛔ Revogada pela ${pautaAtual.normaRevogadora}`
+                          : `✅ ${pautaAtual.normaOficial}`}
                     </span>
                   )}
                   <span
@@ -381,7 +383,9 @@ export function Dashboard({
                     <ScrollText className="h-4 w-4 shrink-0" aria-hidden />
                     {pautaAtual.status === "ARQUIVADA"
                       ? "Ver o que aconteceu com a proposta"
-                      : "Ver o que foi aprovado"}
+                      : pautaAtual.status === "REVOGADA"
+                        ? "Ver o que aconteceu com a lei"
+                        : "Ver o que foi aprovado"}
                   </span>
                   <ChevronRight className="h-4 w-4 shrink-0" aria-hidden />
                 </button>
@@ -550,11 +554,13 @@ export function Dashboard({
                 {semVotoNaCasa
                   ? pautaAtual.senado?.status === "arquivada" && cargo === "SENADOR"
                     ? "Esta proposta foi arquivada no Senado."
-                    : cargo === "SENADOR"
-                      ? "O Senado ainda não votou esta matéria."
-                      : cargo === "DEPUTADO"
-                        ? "A Câmara ainda não votou esta matéria."
-                        : "Nenhuma votação nominal registrada nesta matéria."
+                    : pautaAtual.senado?.status === "simbolica" && cargo === "SENADOR"
+                      ? "O Senado aprovou esta matéria em votação simbólica."
+                      : cargo === "SENADOR"
+                        ? "O Senado ainda não votou esta matéria."
+                        : cargo === "DEPUTADO"
+                          ? "Não há votação nominal da Câmara nesta matéria."
+                          : "Nenhuma votação nominal registrada nesta matéria."
                   : `Votação parcial nesta casa (${aplicaveisNaCasa} de ${totalDaCasa}).`}
               </strong>
               {semVotoNaCasa ? <> {motivoCasa}</> : null}

@@ -13,13 +13,34 @@ const ROTULOS_CURTOS: Record<string, string> = {
   teto_juro_cartao: "Teto do cartão",
   piso_enfermagem: "Piso da enfermagem",
   fim_escala_6x1: "Fim da escala 6x1",
+  bets: "Bets",
   aposentadoria_agentes_saude: "Agentes de saúde",
   crime_organizado: "Crime organizado",
   preco_energia: "Combustíveis",
 };
 
 /** Quantas pautas ficam visíveis antes do botão "Ver todas" no celular. */
-const PRINCIPAIS = 4;
+const PRINCIPAIS = 5;
+
+/** Ordem editorial das pills: interesse público primeiro, sem alterar a matriz de dados. */
+const ORDEM_PILLS = [
+  "cesta_basica",
+  "fim_escala_6x1",
+  "ir_isento",
+  "fim_blindagem",
+  "bets",
+  "igualdade_salarial",
+  "piso_enfermagem",
+  "teto_juro_cartao",
+  "crime_organizado",
+  "preco_energia",
+  "super_ricos",
+  "aposentadoria_agentes_saude",
+];
+
+const PAUTAS_PILLS = ORDEM_PILLS.map((slug) => PAUTAS.find((p) => p.slug === slug)).filter(
+  (p): p is (typeof PAUTAS)[number] => Boolean(p),
+);
 
 export function PautaPills({
   selecionada,
@@ -29,7 +50,7 @@ export function PautaPills({
   onSelecionar: (slug: string) => void;
 }) {
   const [mostrarTodas, setMostrarTodas] = useState(false);
-  const base = new Set(PAUTAS.slice(0, PRINCIPAIS).map((p) => p.slug));
+  const base = new Set(PAUTAS_PILLS.slice(0, PRINCIPAIS).map((p) => p.slug));
 
   return (
     <div>
@@ -40,7 +61,7 @@ export function PautaPills({
         className="flex flex-wrap gap-1.5 sm:gap-2"
         data-pautas-pills="1"
       >
-        {PAUTAS.map((p) => {
+        {PAUTAS_PILLS.map((p) => {
           const ativa = p.slug === selecionada;
           const visivelNoMobile = base.has(p.slug) || p.slug === selecionada;
           const oculta = !mostrarTodas && !visivelNoMobile;

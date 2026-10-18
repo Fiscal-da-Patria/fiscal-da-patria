@@ -4,11 +4,11 @@
  * Monta `public/data/parlamentares.json` com o **Congresso Nacional**:
  *   - 513 deputados federais em exercício   (API oficial da Câmara);
  *   - 81 senadores em exercício             (Senado — dados abertos);
- *   - 10 pautas: 7 auditadas na Câmara + 3 auditadas no Senado.
+ *   - 12 pautas: 9 auditadas na Câmara + 3 auditadas no Senado.
  *
  * Regras inegociáveis (Tolerância Zero a Desinformação):
  *   - apenas fontes oficiais; **nenhum mock**; falha ⇒ aborta SEM sobrescrever;
- *   - `votos`: matriz densa de alinhamento (todas as 10 pautas presentes);
+ *   - `votos`: matriz densa de alinhamento (todas as 12 pautas presentes);
  *   - `votosOriginais`: voto bruto registrado na fonte (auditoria);
  *   - `motivos`: texto curto quando **não existe voto individual a auditar**
  *     (pauta de outra casa, votação simbólica do Senado, sem registro);

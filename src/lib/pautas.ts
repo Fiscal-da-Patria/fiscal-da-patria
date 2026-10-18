@@ -1,8 +1,8 @@
 import type { AlinhamentoVoto, PautaConfig, VotoCanonico } from '../types/parlamentar';
 
 /**
- * As **11 pautas** oficiais do MVP (fonte: docs/01_prd_visao_geral.md / PRD):
- *   8 auditadas na Câmara + 3 auditadas no Senado Federal.
+ * As **12 pautas** oficiais do MVP (fonte: docs/01_prd_visao_geral.md / PRD):
+ *   9 auditadas na Câmara + 3 auditadas no Senado Federal.
  *   A escala 6x1 (PEC 221/2019) tem painel nominal nas **duas** Casas e virou a
  *   Emenda Constitucional 141/2026 (promulgada em 16/10/2026).
  *
@@ -381,6 +381,64 @@ export const PAUTAS: PautaConfig[] = [
       },
     ],
   },
+  {
+    slug: 'bets',
+    rotuloPopular: 'Bets: da regulamentação à proibição',
+    ementaOficial:
+      'Dispõe sobre a modalidade lotérica denominada apostas de quota fixa; altera as Leis nºs 5.768, de 20 de dezembro de 1971, e 13.756, de 12 de dezembro de 2018, e a Medida Provisória nº 2.158-35, de 24 de agosto de 2001; revoga dispositivos do Decreto-Lei nº 204, de 27 de fevereiro de 1967; e dá outras providências.',
+    materia: 'PL 3626/2023',
+    // Voto de 2023 sobre a REGULAMENTAÇÃO (não sobre a proibição de 2026).
+    // SIM = apoiou a regulamentação; NÃO = rejeitou a regulamentação.
+    invertida: false,
+    casa: 'CAMARA',
+    idProposicao: 2374400,
+    // Votação final das emendas do Senado na Câmara: 292 SIM × 114 NÃO × 1 ABST.
+    votacaoId: '2374400-110',
+    senado: {
+      codigoSessaoVotacao: 0,
+      dataSessao: '',
+      descricao: '',
+      status: 'simbolica',
+      nota: 'O Senado aprovou a matéria em votação simbólica (sem voto individual). Virou a Lei 14.790/2023.',
+      urlMateria: 'https://www25.senado.leg.br/web/atividade/materias/-/materia/160197',
+    },
+    status: 'REVOGADA',
+    normaOficial: 'Lei 14.790/2023',
+    dataSancao: '2023-12-29',
+    dataRevogacao: '2026-09-25',
+    normaRevogadora: 'Medida Provisória 1.394/2026',
+    urlNorma: 'https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2023/lei/l14790.htm',
+    urlNormaRevogadora:
+      'https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2026/mpv/mpv1394.htm',
+    urlMateriaRevogadora:
+      'https://www.camara.leg.br/proposicoesWeb/fichadetramitacao?idProposicao=2647155',
+    situacaoAtual:
+      'Proibição em vigor por MP 1.394/2026; o Congresso ainda vai votar a medida (calendário atual até 23/11/2026, prorrogável).',
+    resultadoCamara: '292 SIM / 114 NÃO / 1 ABST — emendas do Senado em 21/12/2023',
+    resultadoSenado: 'Aprovada por votação simbólica (sem painel nominal)',
+    resumoFactual:
+      'A Lei 14.790/2023 regulamentou as apostas de quota fixa, inclusive eventos virtuais de jogos on-line, com autorizações, tributação e regras de publicidade. Em 25/09/2026, a MP 1.394/2026 proibiu a exploração, a oferta, a intermediação e a publicidade das bets no país; a lei foi revogada em grande parte e a MP aguarda votação no Congresso.',
+    ressalva:
+      'O placar de 292 SIM × 114 NÃO é o da votação final das emendas do Senado na Câmara, em 21/12/2023 — não de um destaque específico sobre jogos virtuais. A MP 1.394/2026 está em vigor, mas depende de votação no Congresso; o app não projeta votos futuros.',
+    pontosExplicativos: [
+      {
+        titulo: '2023: o Congresso regulamentou as bets',
+        texto:
+          'O PL 3626/2023 regulamentou a modalidade de apostas de quota fixa, inclusive sobre eventos virtuais de jogos on-line. A Câmara aprovou as emendas do Senado em 21/12/2023 (292 SIM × 114 NÃO × 1 ABST); a redação final não teve painel nominal. A lei foi sancionada em 29/12/2023 como Lei 14.790/2023.',
+      },
+      {
+        titulo: '2026: o Executivo proibiu as bets',
+        texto:
+          'A MP 1.394/2026, de 25/09/2026, proibiu a exploração, a oferta, a intermediação e a publicidade das apostas de quota fixa. O governo alega endividamento e problemas de saúde mental nas famílias. A MP deu 10 dias para sites e aplicativos saírem do ar (prazo de retirada voluntária em 05/10/2026, 23h59) e 30 dias para extinguir as autorizações; os bancos devolveram saldos entre 9 e 14/10/2026, e depois a Caixa assumiu os valores não sacados.',
+      },
+      {
+        titulo: 'O Congresso ainda vai votar a MP',
+        texto:
+          'A MP está em vigor, mas precisa ser aprovada pela Câmara e pelo Senado. Até 18/10/2026 não havia votação nominal registrada; o calendário da Câmara vai até 23/11/2026 (prorrogável por mais 60 dias). O placar de 2023 mostra quem apoiou ou rejeitou a regulamentação; ele não antecipa como cada parlamentar votará a MP.',
+      },
+    ],
+  },
+
   // ---------------------------------------------------------------------------
   // Pautas auditadas no SENADO (votação nominal real no plenário do Senado).
   // Para os deputados, o voto fica `NAO_APLICAVEL` com motivo explicando o escopo.
@@ -604,6 +662,7 @@ export const ROTULOS_FACTUAIS: Record<string, { apoio: string; divergente: strin
   teto_juro_cartao: { apoio: 'Apoiou teto', divergente: 'Rejeitou teto' },
   piso_enfermagem: { apoio: 'Apoiou piso', divergente: 'Rejeitou piso' },
   fim_escala_6x1: { apoio: 'Apoiou fim do 6x1', divergente: 'Rejeitou fim do 6x1' },
+  bets: { apoio: 'Apoiou a regulamentação', divergente: 'Rejeitou a regulamentação' },
   aposentadoria_agentes_saude: {
     apoio: 'Apoiou aposentadoria',
     divergente: 'Rejeitou aposentadoria',
@@ -649,6 +708,8 @@ export const EXEMPLOS_PRATICOS: Record<string, string> = {
     'fixa um piso salarial nacional para enfermeiros, técnicos, auxiliares e parteiras.',
   fim_escala_6x1:
     'acaba com a escala 6x1: jornada de 40 horas e 2 dias de descanso por semana, sem reduzir salário.',
+  bets:
+    'as bets foram regulamentadas em 2023 e proibidas por MP em 2026; o Congresso ainda vai votar a proibição.',
   aposentadoria_agentes_saude:
     'aposentadoria com regra especial para agentes de saúde e de combate às endemias.',
   crime_organizado:

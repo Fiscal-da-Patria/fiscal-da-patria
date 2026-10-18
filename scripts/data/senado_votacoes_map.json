@@ -1,6 +1,6 @@
 {
   "_descricao": "Auditoria do mapeamento das pautas do MVP para as votações nominais do Senado Federal. Gerado por scripts/fetch_senado.ts.",
-  "_verificadoEm": "2026-10-18T00:47:09.323Z",
+  "_verificadoEm": "2026-10-18T18:57:36.728Z",
   "_metodo": "Lista de senadores (/senador/lista/atual.json) + votos individuais (/votacao JSON ou /plenario/lista/votacao XML do dia).",
   "votacoes": [
     {
@@ -110,6 +110,12 @@
       "materia": "PL 2564/2020",
       "status": "simbolica",
       "nota": "O Senado aprovou a matéria em votação simbólica (sem voto individual). Virou a Lei 14.434/2022."
+    },
+    {
+      "pauta": "bets",
+      "materia": "PL 3626/2023",
+      "status": "simbolica",
+      "nota": "O Senado aprovou a matéria em votação simbólica (sem voto individual). Virou a Lei 14.790/2023."
     }
   ]
 }
