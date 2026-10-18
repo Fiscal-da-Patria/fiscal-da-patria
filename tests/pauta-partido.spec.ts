@@ -4,16 +4,23 @@ import { PAUTAS, TOTAL_PARLAMENTARES, abrirCompartilhar, esperarCards } from "./
 /** Extrai um parâmetro de uma URL de compartilhamento. */
 const param = (href: string, chave: string) => new URL(href).searchParams.get(chave) ?? "";
 
-test.describe("Pills que quebram linha (visibilidade das 10 pautas)", () => {
-  test("nenhuma pauta fica escondida em scroll horizontal no mobile", async ({ page }) => {
+test.describe("Pills: 4 principais + Ver todas no mobile", () => {
+  test("expande as 11 sem rolagem horizontal", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto("/");
 
-    // Todos os 11 botões existem e estão visíveis (não dependem de arrastar).
-    // Escopo no container das pills: a página tem outros botões com aria-pressed
-    // (ex.: "Ver só quem votou"), que não são pautas.
     const pills = page.locator("[data-pautas-pills] button[aria-pressed]");
     await expect(pills).toHaveCount(PAUTAS.length);
+    await expect(pills.nth(0)).toBeVisible();
+    await expect(pills.nth(4)).toBeHidden();
+
+    const toggle = page.locator('button[aria-controls="lista-pautas"]');
+    await expect(toggle).toBeVisible();
+    await expect(toggle).toHaveAttribute("aria-expanded", "false");
+    await toggle.click();
+    await expect(toggle).toHaveAttribute("aria-expanded", "true");
+    await expect(toggle).toContainText(/Mostrar menos/i);
+
     for (const rotulo of PAUTAS) {
       await expect(page.getByRole("button", { name: rotulo })).toBeVisible();
     }
@@ -23,11 +30,21 @@ test.describe("Pills que quebram linha (visibilidade das 10 pautas)", () => {
     await expect(caixa).toHaveClass(/flex-wrap/);
     await expect(caixa).not.toHaveClass(/overflow-x-auto/);
 
-    // Última pauta (a do Senado) realmente cabe na tela.
+    // Última pauta (a do Senado) realmente cabe na tela depois de expandir.
     const ultima = page.getByRole("button", { name: PAUTAS[PAUTAS.length - 1] });
     const cx = await ultima.boundingBox();
     expect(cx).not.toBeNull();
     expect((cx?.x ?? 0) + (cx?.width ?? 0)).toBeLessThanOrEqual(390);
+  });
+
+  test("deep link de pauta fora das 4 mantém a ativa visível", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("/?pauta=fim_escala_6x1");
+    await esperarCards(page);
+
+    const ativa = page.locator('[data-pautas-pills] button[aria-pressed="true"]');
+    await expect(ativa).toBeVisible();
+    await expect(ativa).toContainText(/Fim da escala 6x1/i);
   });
 });
 

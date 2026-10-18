@@ -35,7 +35,7 @@ test.describe("Home — estrutura e dados", () => {
 
   test("faixa de auditoria mostra totais e data de atualização", async ({ page }) => {
     await expect(page.getByText(`${TOTAL_PARLAMENTARES} parlamentares`)).toBeVisible();
-    await expect(page.getByText(`${PAUTAS.length} pautas`)).toBeVisible();
+    await expect(page.getByText(`${PAUTAS.length} pautas`, { exact: true })).toBeVisible();
     await expect(page.getByText("100% fonte oficial")).toBeVisible();
     await expect(page.getByText(/Atualizado em \d{2}\/\d{2}\/\d{4}/)).toBeVisible();
   });
