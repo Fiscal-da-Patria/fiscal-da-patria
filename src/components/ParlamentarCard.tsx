@@ -3,6 +3,7 @@ import { ExternalLink, Share2 } from "lucide-react";
 import { urlFonteOficial } from "@/lib/pautas";
 import {
   COR_STATUS,
+  ROTULO_VOTO_BRUTO,
   TEXTO_STATUS,
   numeroCompacto,
   rotuloAlinhamento,
@@ -34,6 +35,10 @@ export function ParlamentarCard({
   const alinhamento: AlinhamentoVoto = p.votos[pautaSel] ?? "AUSENTE";
   const bruto = p.votosOriginais?.[pautaSel];
   const motivo = p.motivos?.[pautaSel];
+  const votoBruto =
+    bruto === "SIM" || bruto === "NAO" || bruto === "ABSTENCAO"
+      ? ROTULO_VOTO_BRUTO[bruto]
+      : null;
 
   return (
     <div
@@ -93,13 +98,18 @@ export function ParlamentarCard({
         className="mt-3 flex min-h-12 flex-col items-center justify-center gap-1 text-center"
       >
         <span
-          className="flex w-full items-center justify-center rounded-md px-3 py-1.5 text-[11px] font-bold"
+          className="flex w-full items-center justify-center gap-1.5 rounded-md px-3 py-1.5 text-[11px] font-bold"
           style={{
             backgroundColor: COR_STATUS[alinhamento],
             color: TEXTO_STATUS[alinhamento],
           }}
         >
           {rotuloAlinhamento(alinhamento, pautaSel)}
+          {votoBruto && (
+            <span className="rounded bg-black/15 px-1 font-mono text-[9px] uppercase tracking-wide">
+              {votoBruto}
+            </span>
+          )}
         </span>
         {!bruto && motivo && (
           <p className="line-clamp-2 text-[10px] leading-tight text-corpo" title={motivo}>

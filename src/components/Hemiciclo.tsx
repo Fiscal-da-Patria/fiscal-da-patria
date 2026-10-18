@@ -66,16 +66,36 @@ export const Hemiciclo = memo(function Hemiciclo({
         aria-label={`Distribuição dos votos no ${rotulo}`}
         className="mx-auto block w-full max-w-md"
       >
-        {assentos.map((s, i) => (
-          <circle key={i} cx={s.x} cy={s.y} r={1.7} fill={COR_GRAFICO[s.a]} />
-        ))}
+        {assentos.map((s, i) =>
+          s.a === "NAO_APLICAVEL" ? (
+            <circle
+              key={i}
+              cx={s.x}
+              cy={s.y}
+              r={1.7}
+              fill="none"
+              stroke={COR_GRAFICO[s.a]}
+              strokeWidth={0.7}
+            />
+          ) : (
+            <circle key={i} cx={s.x} cy={s.y} r={1.7} fill={COR_GRAFICO[s.a]} />
+          ),
+        )}
       </svg>
       <div className="mt-3 flex flex-wrap justify-center gap-x-4 gap-y-1 text-[11px] font-medium">
         {ORDEM_VOTOS.map((k) => (
           <span key={k} className="inline-flex items-center gap-1.5 text-corpo">
             <span
-              className="inline-block h-2.5 w-2.5 rounded-full"
-              style={{ backgroundColor: COR_GRAFICO[k] }}
+              className={
+                k === "NAO_APLICAVEL"
+                  ? "inline-block h-2.5 w-2.5 rounded-full border-2"
+                  : "inline-block h-2.5 w-2.5 rounded-full"
+              }
+              style={
+                k === "NAO_APLICAVEL"
+                  ? { borderColor: COR_GRAFICO[k] }
+                  : { backgroundColor: COR_GRAFICO[k] }
+              }
             />
             {rotuloAlinhamento(k, pautaSlug)}: <strong className="font-mono text-titulo">{distribuicao[k]}</strong>
           </span>

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
-import { ExternalLink, Info, RotateCcw, ScrollText } from "lucide-react";
+import { Clock, ExternalLink, Info, RotateCcw, ScrollText } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { WhatsAppShareButton } from "@/components/WhatsAppShareButton";
@@ -54,7 +54,14 @@ function Manifesto() {
   );
 }
 
-export function Dashboard({ dados }: { dados: ParlamentarConsolidado[] }) {
+export function Dashboard({
+  dados,
+  atualizadoEm,
+}: {
+  dados: ParlamentarConsolidado[];
+  /** Data de atualização do JSON, formatada no Server Component. */
+  atualizadoEm: string;
+}) {
   const [pautaSel, setPautaSel] = useState<string>(PAUTAS[0].slug);
   const [ordem, setOrdem] = useState<Ordem>("piores");
   const [busca, setBusca] = useState("");
@@ -284,6 +291,22 @@ export function Dashboard({ dados }: { dados: ParlamentarConsolidado[] }) {
             nominais oficiais da Câmara e do Senado em linguagem popular. Cada card traz o link
             para a fonte oficial.
           </p>
+          <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] font-medium text-corpo">
+            <span>
+              <strong className="font-mono text-titulo">{dados.length}</strong> parlamentares
+            </span>
+            <span>
+              <strong className="font-mono text-titulo">{PAUTAS.length}</strong> pautas
+            </span>
+            <span>
+              <strong className="font-mono text-titulo">100%</strong> fonte oficial
+            </span>
+            {atualizadoEm && (
+              <span className="inline-flex items-center gap-1">
+                <Clock className="h-3 w-3" aria-hidden /> Atualizado em {atualizadoEm}
+              </span>
+            )}
+          </div>
           <blockquote
             data-manifesto="1"
             className="mt-4 hidden max-w-2xl border-l-4 border-dourado pl-3 text-sm font-semibold italic leading-relaxed text-titulo sm:block"

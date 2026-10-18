@@ -222,7 +222,7 @@ export function ShareModal({
             onClick={compartilhar}
             disabled={gerando}
             data-compartilhar="1"
-            className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-4 py-2.5 text-sm font-bold text-[#052e16] transition hover:bg-[#20ba59] disabled:opacity-60"
+            className="inline-flex items-center justify-center gap-2 rounded-xl bg-whatsapp px-4 py-2.5 text-sm font-bold text-whatsapp-texto transition hover:bg-whatsapp-escuro disabled:opacity-60"
           >
             <Send className="h-4 w-4" aria-hidden />
             {gerando ? "Gerando imagem…" : "Compartilhar"}

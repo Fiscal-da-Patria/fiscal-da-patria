@@ -78,6 +78,13 @@
   --color-dourado: #d9a726; /* Amarelo Cívico */
   --color-fundo-neutro: var(--background);
 
+  /* Cores de marca do compartilhamento (fixas nos dois temas) */
+  --color-whatsapp: #25d366;
+  --color-whatsapp-escuro: #20ba59;
+  --color-whatsapp-texto: #052e16;
+  --color-telegram: #0077b5;
+  --color-telegram-escuro: #006699;
+
   /* Estados de voto */
   --color-favoravel: #1b4d3e;
   --color-contra: #b91c1c;

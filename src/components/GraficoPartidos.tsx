@@ -163,8 +163,16 @@ export function GraficoPartidos({
         {ORDEM_VOTOS.map((k) => (
           <span key={k} className="inline-flex items-center gap-1.5">
             <span
-              className="inline-block h-2.5 w-2.5 rounded-full"
-              style={{ backgroundColor: COR_GRAFICO[k] }}
+              className={
+                k === "NAO_APLICAVEL"
+                  ? "inline-block h-2.5 w-2.5 rounded-full border-2"
+                  : "inline-block h-2.5 w-2.5 rounded-full"
+              }
+              style={
+                k === "NAO_APLICAVEL"
+                  ? { borderColor: COR_GRAFICO[k] }
+                  : { backgroundColor: COR_GRAFICO[k] }
+              }
             />
             {rotuloAlinhamento(k, pautaSlug)}
           </span>

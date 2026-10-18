@@ -52,7 +52,7 @@ export function SocialShareBar({
         href={urlWhatsApp(mensagem)}
         target="_blank"
         rel="noopener noreferrer"
-        className={`${BTN} bg-[#25D366] text-[#052e16] hover:bg-[#20ba59]`}
+        className={`${BTN} bg-whatsapp text-whatsapp-texto hover:bg-whatsapp-escuro`}
       >
         <Send className="h-4 w-4 shrink-0" aria-hidden /> WhatsApp
       </a>
@@ -62,7 +62,7 @@ export function SocialShareBar({
         href={urlTelegram(mensagem, url)}
         target="_blank"
         rel="noopener noreferrer"
-        className={`${BTN} bg-[#0077b5] text-white hover:bg-[#006699]`}
+        className={`${BTN} bg-telegram text-white hover:bg-telegram-escuro`}
       >
         <Send className="h-4 w-4 shrink-0" aria-hidden /> Telegram
       </a>
