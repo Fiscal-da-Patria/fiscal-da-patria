@@ -188,7 +188,7 @@ export function ShareModal({
             <h2 id="share-titulo" className="text-base font-black text-titulo">
               {titulo}
             </h2>
-            <p className="mt-0.5 text-[11px] leading-relaxed text-corpo">{descricao}</p>
+            <p className="mt-0.5 text-xs leading-relaxed text-corpo">{descricao}</p>
           </div>
           <button
             type="button"
@@ -249,7 +249,7 @@ export function ShareModal({
           </div>
         </div>
 
-        <p className="mt-3 text-center text-[10px] leading-relaxed text-corpo">
+        <p className="mt-3 text-center text-xs leading-relaxed text-corpo">
           No celular, “Compartilhar” abre o menu do sistema com a imagem pronta. No computador, ela é
           baixada e o WhatsApp abre com o texto e o link.
         </p>

@@ -58,7 +58,7 @@ export const Hemiciclo = memo(function Hemiciclo({
     >
       <div className="mb-2 flex items-baseline justify-between gap-2">
         <h2 className="text-xs font-bold text-titulo">Assentos no {rotulo}</h2>
-        <p className="font-mono text-[11px] text-corpo">{total} assentos</p>
+        <p className="font-mono text-xs text-corpo">{total} assentos</p>
       </div>
       <svg
         viewBox="0 0 200 112"
@@ -82,7 +82,7 @@ export const Hemiciclo = memo(function Hemiciclo({
           ),
         )}
       </svg>
-      <div className="mt-3 flex flex-wrap justify-center gap-x-4 gap-y-1 text-[11px] font-medium">
+      <div className="mt-3 flex flex-wrap justify-center gap-x-4 gap-y-1 text-xs font-medium">
         {ORDEM_VOTOS.map((k) => (
           <span key={k} className="inline-flex items-center gap-1.5 text-corpo">
             <span

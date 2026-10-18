@@ -39,7 +39,7 @@ export function PautaPills({
             aria-pressed={ativa}
             aria-label={p.rotuloPopular}
             title={p.rotuloPopular}
-            className={`whitespace-nowrap rounded-full border px-3 py-1 text-[11px] font-semibold transition sm:px-3.5 sm:py-1.5 sm:text-xs ${
+            className={`whitespace-nowrap rounded-full border px-3 py-1 text-xs font-semibold transition sm:px-3.5 sm:py-1.5 sm:text-xs ${
               ativa
                 ? "border-verde-mata bg-verde-mata text-white"
                 : "border-borda bg-superficie text-corpo hover:border-verde-mata/40 hover:bg-trilha"

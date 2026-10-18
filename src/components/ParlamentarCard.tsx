@@ -14,10 +14,10 @@ import type { AlinhamentoVoto, PautaConfig, ParlamentarConsolidado } from "@/typ
 /**
  * Card da listagem.
  *
- * Layout em 3 blocos de altura previsível — cabeçalho (foto + identidade),
- * status da pauta (uma linha, centralizada) e ações no rodapé (sempre na
- * mesma base). O `h-full` + `mt-auto` mantêm todos os cards da linha
- * alinhados, mesmo quando o nome ou o motivo têm tamanhos diferentes.
+ * No celular, vira uma linha compacta: foto + identidade à esquerda, ações em
+ * ícones à direita e status como chip. No desktop (`sm:`), mantém os 3 blocos
+ * de altura previsível — cabeçalho, faixa de status e ações na base — para
+ * alinhar a grade. O `h-full` + `mt-auto` preservam essa base comum.
  */
 export function ParlamentarCard({
   p,
@@ -44,11 +44,11 @@ export function ParlamentarCard({
     <div
       data-nome={p.nome}
       data-focado={focado ? "1" : undefined}
-      className={`flex h-full flex-col rounded-2xl border bg-superficie p-3 shadow-sm transition hover:shadow-md sm:p-4 ${
+      className={`relative flex h-full flex-col rounded-2xl border bg-superficie p-3 pr-12 shadow-sm transition hover:shadow-md sm:p-4 sm:pr-4 ${
         focado ? "border-2 border-dourado ring-2 ring-dourado/25" : "border-borda"
       }`}
     >
-      {/* Cabeçalho: foto + nome + votos de urna + cargo/partido (1 linha) */}
+      {/* Cabeçalho: foto + nome + cargo/partido */}
       <div className="flex items-start gap-3">
         <Image
           src={p.fotoUrl}
@@ -56,7 +56,7 @@ export function ParlamentarCard({
           width={48}
           height={48}
           unoptimized
-          className="h-12 w-12 shrink-0 rounded-full border border-borda object-cover"
+          className="h-11 w-11 shrink-0 rounded-full border border-borda object-cover sm:h-12 sm:w-12"
         />
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2">
@@ -66,15 +66,15 @@ export function ParlamentarCard({
                 data-votos={p.votosEleicao}
                 title={`${p.votosEleicao.toLocaleString("pt-BR")} votos recebidos nas urnas (TSE)`}
                 aria-label={`${p.votosEleicao.toLocaleString("pt-BR")} votos recebidos nas urnas (TSE)`}
-                className="shrink-0 rounded-md border border-dourado/60 bg-dourado/15 px-1.5 py-0.5 font-mono text-[10px] font-bold text-titulo"
+                className="hidden shrink-0 items-center rounded-md border border-dourado/60 bg-dourado/15 px-1.5 py-0.5 font-mono text-[11px] font-bold text-titulo sm:inline-flex"
               >
-                🗳️ {numeroCompacto(p.votosEleicao)}
+                🗳️ {numeroCompacto(p.votosEleicao)} votos
               </span>
             )}
           </div>
           <div className="mt-1 flex min-w-0 items-center gap-1.5">
             <span
-              className={`whitespace-nowrap rounded px-1.5 py-0.5 text-[10px] font-bold ${
+              className={`whitespace-nowrap rounded px-1.5 py-0.5 text-[11px] font-bold ${
                 p.cargo === "SENADOR"
                   ? "border border-dourado/60 bg-dourado/15 text-titulo"
                   : "border border-verde-bandeira/40 bg-verde-bandeira/10 text-titulo"
@@ -83,22 +83,21 @@ export function ParlamentarCard({
             >
               {rotuloCargo(p.cargo)} • {p.uf}
             </span>
-            <span className="truncate text-[11px] text-corpo">{p.partido}</span>
+            <span className="truncate text-xs text-corpo">{p.partido}</span>
           </div>
         </div>
       </div>
 
       {/*
-        Status da pauta ativa: faixa horizontal de largura total (o “aprovou
-        ou não”). A altura mínima reserva o espaço do motivo nos cards que o
-        têm, para o bloco de ações começar na mesma altura em todos os cards.
+        Status: chip compacto no celular; faixa de largura total no desktop.
+        A altura mínima do desktop reserva o motivo para alinhar as ações.
       */}
       <div
         data-status-linha="1"
-        className="mt-3 flex min-h-12 flex-col items-center justify-center gap-1 text-center"
+        className="mt-2 flex flex-wrap items-center gap-1.5 sm:mt-3 sm:min-h-12 sm:flex-col sm:items-center sm:justify-center sm:gap-1 sm:text-center"
       >
         <span
-          className="flex w-full items-center justify-center gap-1.5 rounded-md px-3 py-1.5 text-[11px] font-bold"
+          className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-bold sm:w-full sm:justify-center sm:rounded-md sm:px-3 sm:py-1.5 sm:text-[11px]"
           style={{
             backgroundColor: COR_STATUS[alinhamento],
             color: TEXTO_STATUS[alinhamento],
@@ -111,36 +110,49 @@ export function ParlamentarCard({
             </span>
           )}
         </span>
+        {p.votosEleicao > 0 && (
+          <span className="font-mono text-[11px] font-semibold text-corpo sm:hidden">
+            🗳️ {numeroCompacto(p.votosEleicao)} votos
+          </span>
+        )}
         {!bruto && motivo && (
-          <p className="line-clamp-2 text-[10px] leading-tight text-corpo" title={motivo}>
+          <p
+            className="line-clamp-1 w-full text-xs leading-tight text-corpo sm:line-clamp-2 sm:text-[11px]"
+            title={motivo}
+          >
             {motivo}
           </p>
         )}
       </div>
 
-      {/* Ações sempre na base do card (mesma linha em toda a grade) */}
-      <div data-acoes-card="1" className="mt-auto grid grid-cols-2 gap-2 pt-2">
+      {/* Ações: ícones à direita no celular; rodapé em 2 colunas no desktop. */}
+      <div
+        data-acoes-card="1"
+        className="absolute right-3 top-3 flex flex-col gap-1 sm:static sm:mt-auto sm:grid sm:grid-cols-2 sm:gap-2 sm:pt-2"
+      >
         <a
           href={urlFonteOficial(pauta)}
           target="_blank"
           rel="noreferrer"
           data-fonte-card={pauta.slug}
           title={`${pauta.materia} — fonte oficial`}
-          className="inline-flex items-center justify-center gap-1 rounded-lg border border-borda py-2 text-[11px] font-semibold text-corpo transition hover:border-dourado hover:text-titulo"
+          aria-label={`Fonte oficial — ${pauta.materia}`}
+          className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-borda text-corpo transition hover:border-dourado hover:text-titulo sm:h-auto sm:w-auto sm:gap-1 sm:py-2 sm:text-[11px] sm:font-semibold"
         >
-          <ExternalLink className="h-3.5 w-3.5" aria-hidden /> Fonte oficial
+          <ExternalLink className="h-3.5 w-3.5" aria-hidden />
+          <span className="hidden sm:inline">Fonte oficial</span>
         </a>
         <button
           type="button"
           onClick={onCompartilhar}
           data-compartilhar-card="1"
           aria-label={`Compartilhar o voto de ${p.nome} em ${pauta.materia}`}
-          className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-verde-mata py-2 text-[11px] font-bold text-white transition hover:bg-verde-bandeira"
+          className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-verde-mata text-white transition hover:bg-verde-bandeira sm:h-auto sm:w-auto sm:gap-1.5 sm:py-2 sm:text-[11px] sm:font-bold"
         >
-          <Share2 className="h-3.5 w-3.5" aria-hidden /> Compartilhar
+          <Share2 className="h-3.5 w-3.5" aria-hidden />
+          <span className="hidden sm:inline">Compartilhar</span>
         </button>
       </div>
     </div>
   );
 }
-

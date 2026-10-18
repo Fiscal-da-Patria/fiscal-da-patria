@@ -73,7 +73,7 @@ export function GraficoPartidos({
             </button>
           )}
         </div>
-        <p className="text-[11px] text-corpo">
+        <p className="text-xs text-corpo">
           {totalGeral} parlamentar(es) • maiores bancadas primeiro (desempate: quem{" "}
           {rotuloAlinhamento("CONTRA", pautaSlug).toLowerCase()})
         </p>
@@ -82,7 +82,7 @@ export function GraficoPartidos({
       {comVoto === 0 && (
         <p
           data-grafico-vazio="1"
-          className="mb-3 rounded-xl border border-dourado/40 bg-dourado/5 p-3 text-[11px] leading-relaxed text-corpo"
+          className="mb-3 rounded-xl border border-dourado/40 bg-dourado/5 p-3 text-xs leading-relaxed text-corpo"
         >
           ⚠️ <strong className="text-titulo">Nenhum voto individual nesta casa para esta matéria</strong>{" "}
           — o Senado aprovou por votação simbólica, a matéria pode estar pendente na outra casa ou a
@@ -93,7 +93,7 @@ export function GraficoPartidos({
       <ul className="space-y-3">
         {visiveis.map(({ partido, contagem, total, comVoto }) => (
           <li key={partido}>
-            <div className="flex flex-wrap items-baseline justify-between gap-x-2 text-[11px]">
+            <div className="flex flex-wrap items-baseline justify-between gap-x-2 text-xs">
               <span className="flex items-center gap-1.5 font-bold text-titulo">
                 {partido}
                 {onCompartilhar && (
@@ -144,7 +144,7 @@ export function GraficoPartidos({
           type="button"
           onClick={() => setExpandido((v) => !v)}
           aria-expanded={expandido}
-          className="mt-3 inline-flex w-full items-center justify-center gap-1.5 rounded-xl border border-borda bg-fundo-neutro px-3 py-2 text-[11px] font-bold text-titulo transition hover:border-dourado focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dourado"
+          className="mt-3 inline-flex w-full items-center justify-center gap-1.5 rounded-xl border border-borda bg-fundo-neutro px-3 py-2 text-xs font-bold text-titulo transition hover:border-dourado focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dourado"
         >
           {expandido ? (
             <>
@@ -159,7 +159,7 @@ export function GraficoPartidos({
         </button>
       )}
 
-      <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 border-t border-borda pt-3 text-[11px] text-corpo">
+      <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1 border-t border-borda pt-3 text-xs text-corpo">
         {ORDEM_VOTOS.map((k) => (
           <span key={k} className="inline-flex items-center gap-1.5">
             <span

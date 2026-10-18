@@ -11,7 +11,6 @@ import {
 } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
-import { SocialShareBar } from "@/components/SocialShareBar";
 
 export const metadata: Metadata = {
   title: "Sobre Nós — Manifesto Cívico | Fiscal da Pátria",
@@ -298,15 +297,6 @@ export default function SobrePage() {
           </div>
         </section>
 
-        {/* Compartilhar */}
-        <section className="mb-10 rounded-2xl border border-borda bg-superficie p-6 text-center shadow-sm">
-          <p className="text-sm font-semibold text-titulo">
-            Ajude a espalhar a verdade: compartilhe com sua família e amigos.
-          </p>
-          <div className="mt-4">
-            <SocialShareBar />
-          </div>
-        </section>
 
         <div className="mt-10">
           <Link

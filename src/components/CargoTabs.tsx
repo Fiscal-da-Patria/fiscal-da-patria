@@ -2,9 +2,9 @@ import { Landmark, Users } from "lucide-react";
 import type { CargoFiltro } from "@/lib/parlamentares";
 
 /**
- * Filtro rápido por cargo (abas de alternância no topo da lista):
- * `Todos (594)` · `Deputados Federais (513)` · `Senadores (81)`.
- * As contagens vêm do dataset (nunca fixas no código).
+ * Filtro rápido por cargo (abas de alternância no topo da lista).
+ * No celular vira um segmented control de 3 colunas, com a contagem em uma
+ * segunda linha; no desktop mantém as pills arredondadas.
  */
 export function CargoTabs({
   selecionado,
@@ -25,7 +25,11 @@ export function CargoTabs({
   ];
 
   return (
-    <div role="group" className="flex flex-wrap gap-2" aria-label="Filtrar por cargo">
+    <div
+      role="group"
+      aria-label="Filtrar por cargo"
+      className="grid grid-cols-3 gap-1.5 sm:flex sm:flex-wrap sm:gap-2"
+    >
       {abas.map((aba) => {
         const ativa = selecionado === aba.valor;
         const Icone = aba.valor === "SENADOR" ? Landmark : Users;
@@ -36,14 +40,19 @@ export function CargoTabs({
             onClick={() => onSelecionar(aba.valor)}
             aria-pressed={ativa}
             data-cargo-tab={aba.valor}
-            className={`inline-flex items-center gap-1.5 rounded-full border px-3.5 py-1.5 text-xs font-bold transition ${
+            className={`flex min-w-0 flex-col items-center justify-center gap-0.5 rounded-xl border px-1.5 py-1.5 text-xs font-bold transition sm:inline-flex sm:flex-row sm:gap-1.5 sm:rounded-full sm:px-3.5 sm:py-1.5 ${
               ativa
                 ? "border-dourado bg-dourado/15 text-titulo"
                 : "border-borda bg-superficie text-corpo hover:border-dourado/50"
             }`}
           >
-            <Icone className="h-3.5 w-3.5" aria-hidden />
-            {aba.rotulo} ({contagens[aba.valor]}){extra?.[aba.valor] ?? ""}
+            <Icone className="h-3.5 w-3.5 shrink-0" aria-hidden />
+            <span className="flex min-w-0 flex-col items-center leading-tight sm:flex-row sm:items-baseline sm:gap-1">
+              <span className="text-center sm:whitespace-nowrap">{aba.rotulo}</span>
+              <span className="text-center font-mono text-[11px] font-semibold text-corpo">
+                ({contagens[aba.valor]}){extra?.[aba.valor] ?? ""}
+              </span>
+            </span>
           </button>
         );
       })}

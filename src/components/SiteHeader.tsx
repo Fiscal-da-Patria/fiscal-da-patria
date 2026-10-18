@@ -38,7 +38,7 @@ export function SiteHeader() {
             className="rounded-full px-2 py-1.5 text-[11px] font-semibold text-white/80 transition hover:bg-white/10 hover:text-white sm:px-3"
           >
             <span className="sm:hidden">Sobre</span>
-            <span className="hidden sm:inline">Sobre o Projeto</span>
+            <span className="hidden sm:inline">Sobre o projeto</span>
           </Link>
           <span className="hidden items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3 py-1 text-[11px] font-semibold sm:inline-flex">
             <ShieldCheck className="h-3.5 w-3.5 text-dourado" /> Dados oficiais

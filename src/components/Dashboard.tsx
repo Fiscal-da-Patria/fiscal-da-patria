@@ -71,6 +71,8 @@ export function Dashboard({
   const [alvo, setAlvo] = useState<AlvoCompartilhar | null>(null);
   /** Explicação "O que foi aprovado?" (só pautas com texto verificado). */
   const [detalheAberto, setDetalheAberto] = useState(false);
+  /** Detalhes técnicos da pauta (situação/ajuda) abertos no celular. */
+  const [mostrarDetalhesPauta, setMostrarDetalhesPauta] = useState(false);
   /** Deep link `?deputado=` — destaca o card da pessoa e rola até ele. */
   const [focadoId, setFocadoId] = useState<string | null>(null);
   /** Mostra só quem tem voto registrado na matéria ativa (tira o ruído de "Sem voto"). */
@@ -220,6 +222,7 @@ export function Dashboard({
     setOrdem("piores");
     setVisiveis(POR_PAGINA);
     setDetalheAberto(false);
+    setMostrarDetalhesPauta(false);
   }
 
   // Mantém a URL compartilhável: ?deputado=<id> enquanto um dossiê está aberto.
@@ -291,7 +294,7 @@ export function Dashboard({
             nominais oficiais da Câmara e do Senado em linguagem popular. Cada card traz o link
             para a fonte oficial.
           </p>
-          <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] font-medium text-corpo">
+          <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs font-medium text-corpo">
             <span>
               <strong className="font-mono text-titulo">{dados.length}</strong> parlamentares
             </span>
@@ -329,7 +332,7 @@ export function Dashboard({
               className="rounded-2xl border border-borda bg-superficie p-5 shadow-sm"
             >
               <div className="flex flex-wrap items-center justify-between gap-2">
-                <p className="text-[11px] font-bold uppercase tracking-wider text-corpo">
+                <p className="hidden text-[11px] font-bold uppercase tracking-wider text-corpo sm:block">
                   Pauta selecionada
                 </p>
                 <div className="flex flex-wrap items-center gap-1.5">
@@ -348,7 +351,7 @@ export function Dashboard({
                     </span>
                   )}
                   <span
-                    className={`rounded px-2 py-0.5 text-[10px] font-bold ${
+                    className={`hidden rounded px-2 py-0.5 text-[10px] font-bold sm:inline ${
                       pautaAtual.casa === "SENADO"
                         ? "border border-dourado/60 bg-dourado/15 text-titulo"
                         : "border border-verde-bandeira/40 bg-verde-bandeira/10 text-titulo"
@@ -362,7 +365,7 @@ export function Dashboard({
               <p className="mt-1 text-xs text-corpo">{pautaAtual.ementaOficial}</p>
               <p
                 data-exemplo-pratico={pautaAtual.slug}
-                className="mt-2 rounded-lg border border-dourado/40 bg-dourado/5 px-3 py-2 text-[11px] leading-relaxed text-titulo"
+                className="mt-2 rounded-lg bg-dourado/10 px-2.5 py-1.5 text-xs leading-relaxed text-titulo sm:border sm:border-dourado/40 sm:px-3 sm:py-2 sm:text-[11px]"
               >
                 <strong>No dia a dia:</strong> {exemploPratico(pautaAtual)}
               </p>
@@ -387,31 +390,46 @@ export function Dashboard({
               >
                 {pautaAtual.materia} — fonte oficial <ExternalLink className="h-3 w-3" />
               </a>
-              <p className="mt-2 text-xs">
-                <Link
-                  href={
-                    pautaAtual.materia.startsWith("PEC")
-                      ? "/poderes#regua"
-                      : "/poderes#linha-do-tempo"
-                  }
-                  data-ajuda-tramitacao={pautaAtual.materia.startsWith("PEC") ? "pec" : "lei"}
-                  className="inline-flex items-center gap-1 font-semibold text-corpo underline decoration-dotted underline-offset-2 transition hover:text-titulo"
-                >
-                  <Info className="h-3 w-3" aria-hidden />
-                  {pautaAtual.materia.startsWith("PEC")
-                    ? "O que é preciso para aprovar uma PEC?"
-                    : "Como uma lei é aprovada?"}
-                </Link>
-              </p>
-              <p className="mt-2 rounded-lg border border-borda bg-fundo-neutro px-3 py-2 text-[11px] text-corpo">
-                <strong className="text-titulo">Situação no Senado:</strong>{" "}
-                {pautaAtual.senado?.nota ?? "sem verificação registrada."}
-              </p>
+              <button
+                type="button"
+                onClick={() => setMostrarDetalhesPauta((v) => !v)}
+                aria-expanded={mostrarDetalhesPauta}
+                aria-controls="detalhes-pauta"
+                className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-corpo underline decoration-dotted underline-offset-2 sm:hidden"
+              >
+                {mostrarDetalhesPauta ? "Ocultar detalhes da votação" : "Ver detalhes da votação"}
+              </button>
+              <div
+                id="detalhes-pauta"
+                className={mostrarDetalhesPauta ? "mt-2" : "mt-2 hidden sm:block"}
+              >
+                <p className="text-xs">
+                  <Link
+                    href={
+                      pautaAtual.materia.startsWith("PEC")
+                        ? "/poderes#regua"
+                        : "/poderes#linha-do-tempo"
+                    }
+                    data-ajuda-tramitacao={pautaAtual.materia.startsWith("PEC") ? "pec" : "lei"}
+                    className="inline-flex items-center gap-1 font-semibold text-corpo underline decoration-dotted underline-offset-2 transition hover:text-titulo"
+                  >
+                    <Info className="h-3 w-3" aria-hidden />
+                    {pautaAtual.materia.startsWith("PEC")
+                      ? "O que é preciso para aprovar uma PEC?"
+                      : "Como uma lei é aprovada?"}
+                  </Link>
+                </p>
+                <p className="mt-2 rounded-lg border border-borda bg-fundo-neutro px-3 py-2 text-xs text-corpo">
+                  <strong className="text-titulo">Situação no Senado:</strong>{" "}
+                  {pautaAtual.senado?.nota ?? "sem verificação registrada."}
+                </p>
+              </div>
               <WhatsAppShareButton
                 mensagem={mensagemPauta(pautaAtual)}
-                rotulo="📲 Compartilhar esta votação"
+                rotulo="Compartilhar esta votação"
                 titulo={`Enviar no WhatsApp a votação de ${pautaAtual.materia}`}
-                className="mt-3 w-full px-3 py-2 text-xs"
+                variante="secundario"
+                className="mt-3 w-full px-3 py-2 text-xs sm:w-auto"
               />
             </div>
           </div>
@@ -425,9 +443,9 @@ export function Dashboard({
         >
           <a
             href="#lista"
-            className="rounded-xl border border-borda bg-superficie px-3 py-2 text-center text-xs font-bold text-titulo shadow-sm transition hover:border-dourado"
+            className="rounded-xl bg-verde-mata px-3 py-2 text-center text-xs font-bold text-white shadow-sm transition hover:bg-verde-bandeira"
           >
-            📋 Lista de votos
+            Ver lista de votos
           </a>
           <a
             href="#graficos"
@@ -463,7 +481,7 @@ export function Dashboard({
           </div>
         </section>
 
-        <section className="order-3 mb-4 md:order-none">
+        <section className="order-4 mb-4 md:order-none">
           <CargoTabs
             selecionado={cargo}
             contagens={contagens}
@@ -482,7 +500,7 @@ export function Dashboard({
         {(semVotoNaCasa || aplicaveisNaCasa < totalDaCasa) && (
           <section
             data-aviso-casa="1"
-            className="order-4 mb-4 rounded-xl border border-dourado/50 bg-dourado/5 p-3 md:order-none"
+            className="order-5 mb-4 rounded-xl border border-dourado/50 bg-dourado/5 p-3 md:order-none"
           >
             <p className="text-[11px] leading-relaxed text-corpo">
               <strong className="text-titulo">
@@ -533,7 +551,7 @@ export function Dashboard({
           </section>
         )}
 
-        <section className="order-5 mb-6 flex flex-col gap-3 md:order-none xl:flex-row xl:items-center">
+        <section className="order-3 mb-6 md:order-none xl:flex xl:items-center xl:gap-3">
           <div className="flex-1">
             <BuscaFiltros
               busca={busca}
@@ -554,7 +572,10 @@ export function Dashboard({
               }}
             />
           </div>
-          <WhatsAppShareButton className="w-full px-4 py-2.5 text-sm xl:w-auto" />
+          {/* Desktop: atalho viral; no celular o card da pauta concentra o compartilhamento. */}
+          <div className="hidden xl:block">
+            <WhatsAppShareButton className="w-auto px-4 py-2.5 text-sm" />
+          </div>
         </section>
 
         <section id="lista" className="order-6 scroll-mt-20 md:order-none">

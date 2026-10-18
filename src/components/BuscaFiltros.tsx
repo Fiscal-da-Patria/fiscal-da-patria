@@ -1,4 +1,4 @@
-import { ArrowUpDown, MapPin, Search } from "lucide-react";
+import { ArrowUpDown, ChevronDown, MapPin, Search } from "lucide-react";
 import { ROTULOS_ORDEM, UFS, type Ordem } from "@/lib/parlamentares";
 
 export function BuscaFiltros({
@@ -46,6 +46,10 @@ export function BuscaFiltros({
             </option>
           ))}
         </select>
+        <ChevronDown
+          className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-corpo-fraco"
+          aria-hidden
+        />
       </div>
       <div className="flex w-full items-center gap-2 sm:w-auto">
         <span className="hidden shrink-0 text-[11px] font-bold uppercase tracking-wider text-corpo sm:inline">
@@ -65,6 +69,10 @@ export function BuscaFiltros({
               </option>
             ))}
           </select>
+          <ChevronDown
+            className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-corpo-fraco"
+            aria-hidden
+          />
         </div>
       </div>
     </div>
