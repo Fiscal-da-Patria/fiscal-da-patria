@@ -32,7 +32,7 @@ test.describe("Dados servidos — integridade e anti-desinformação", () => {
           ? /^\/fotos\/sen-\d+\.jpg$/
           : /^(\/fotos\/\d+\.jpg|https?:\/\/.+)$/, // deputado pode cair no fallback remoto
       );
-      expect(Object.keys(p.votos).sort()).toEqual(slugsEsperados); // matriz densa (11 pautas)
+      expect(Object.keys(p.votos).sort()).toEqual(slugsEsperados); // matriz densa (12 pautas)
     }
   });
 
@@ -57,6 +57,25 @@ test.describe("Dados servidos — integridade e anti-desinformação", () => {
     expect(nao).toBeGreaterThan(0);
   });
 
+  test("bets: voto de 2023 é factual (SIM→FAVORAVEL, NÃO→CONTRA)", async ({ request }) => {
+    const dados = (await (await request.get("/data/parlamentares.json")).json()) as Parlamentar[];
+    let sim = 0;
+    let nao = 0;
+    for (const p of dados) {
+      const bruto = p.votosOriginais?.bets;
+      if (bruto === "SIM") {
+        expect(p.votos.bets).toBe("FAVORAVEL");
+        sim++;
+      }
+      if (bruto === "NAO") {
+        expect(p.votos.bets).toBe("CONTRA");
+        nao++;
+      }
+    }
+    expect(sim).toBeGreaterThan(0);
+    expect(nao).toBeGreaterThan(0);
+  });
+
   test("senador traz voto real do Senado só onde houve votação nominal", async ({ request }) => {
     const dados = (await (await request.get("/data/parlamentares.json")).json()) as Parlamentar[];
     const senadores = dados.filter((p) => p.cargo === "SENADOR");
@@ -70,7 +89,7 @@ test.describe("Dados servidos — integridade e anti-desinformação", () => {
     }
 
     // Pautas da Câmara aprovadas por votação SIMBÓLICA no Senado: nunca "AUSENTE".
-    const simbolicas = ["igualdade_salarial", "piso_enfermagem", "teto_juro_cartao"];
+    const simbolicas = ["igualdade_salarial", "piso_enfermagem", "teto_juro_cartao", "bets"];
     for (const p of senadores) {
       for (const slug of simbolicas) {
         expect(p.votos[slug]).toBe("NAO_APLICAVEL"); // nunca acusar falta de quem não votou
@@ -149,6 +168,7 @@ test.describe("Conferência factual das pautas (anti-desinformação)", () => {
       aposentadoria_agentes_saude: "Emenda Constitucional 140/2026",
       crime_organizado: "Lei 15.358/2026",
       preco_energia: "Lei Complementar 235/2026",
+      bets: "Lei 14.790/2023",
     };
     for (const [slug, norma] of Object.entries(esperado)) {
       expect(PAUTAS.find((p) => p.slug === slug)?.normaOficial, slug).toBe(norma);
@@ -162,5 +182,20 @@ test.describe("Conferência factual das pautas (anti-desinformação)", () => {
     expect(pauta?.senado?.status).toBe("arquivada");
     // Voto final da Câmara: emenda aglutinativa (314×168), não o 2º turno antigo.
     expect(pauta?.votacaoId).toBe("2270800-175");
+  });
+
+  test("bets: regulamentação de 2023 + MP 1.394/2026, sem inversão", () => {
+    const pauta = PAUTAS.find((p) => p.slug === "bets");
+
+    expect(pauta?.materia).toBe("PL 3626/2023");
+    expect(pauta?.invertida).toBe(false); // SIM = apoiou a regulamentação.
+    expect(pauta?.status).toBe("REVOGADA");
+    expect(pauta?.dataSancao).toBe("2023-12-29");
+    expect(pauta?.dataRevogacao).toBe("2026-09-25");
+    expect(pauta?.normaRevogadora).toBe("Medida Provisória 1.394/2026");
+    expect(pauta?.votacaoId).toBe("2374400-110");
+    expect(pauta?.resultadoCamara).toMatch(/292 SIM \/ 114 NÃO \/ 1 ABST/);
+    expect(pauta?.resultadoSenado).toMatch(/simbólica/i);
+    expect(pauta?.pontosExplicativos).toHaveLength(3);
   });
 });

@@ -25,6 +25,48 @@ test.describe("Pauta — o que foi aprovado", () => {
     await expect(dlg).toBeHidden();
   });
 
+  test("bets: lei revogada pela MP 1.394/2026, sem juízo sobre o voto de 2023", async ({ page }) => {
+    await page.goto("/?pauta=bets");
+    await esperarCards(page);
+
+    await expect(page.locator('[data-norma-vigente="1"]')).toContainText(
+      /Revogada pela Medida Provisória 1.394\/2026/i,
+    );
+    await expect(page.locator('[data-abrir-detalhe="1"]')).toContainText(
+      /Ver o que aconteceu com a lei/i,
+    );
+    await page.locator('[data-abrir-detalhe="1"]').click();
+
+    const dlg = page.getByRole("dialog");
+    await expect(dlg).toContainText(/Revogada em 25\/09\/2026/i);
+    await expect(dlg).toContainText(/292 SIM \/ 114 NÃO \/ 1 ABST/);
+    await expect(dlg).toContainText(/Lei 14.790\/2023/);
+    await expect(dlg).toContainText(/Situação atual:/i);
+    await expect(dlg).toContainText(/Congresso ainda vai votar/i);
+    await expect(dlg.locator('[data-ponto-explicativo="1"]')).toHaveCount(3);
+    await expect(dlg.locator('[data-ressalva="1"]')).toContainText(/não de um destaque específico/i);
+    await expect(dlg.locator('[data-link-norma="1"]')).toHaveAttribute(
+      "href",
+      /planalto\.gov\.br\/.*l14790/,
+    );
+    await expect(dlg.locator('[data-link-norma-revogadora="1"]')).toHaveAttribute(
+      "href",
+      /planalto\.gov\.br\/.*mpv1394/,
+    );
+    await expect(dlg.locator('[data-link-materia-revogadora="1"]')).toHaveAttribute(
+      "href",
+      /camara\.leg\.br\/.*2647155/,
+    );
+
+    // O Senado votou simbolicamente: o aviso não pode dizer que ele "ainda não votou".
+    await page.keyboard.press("Escape");
+    await expect(dlg).toBeHidden();
+    await page.getByRole("button", { name: /Senadores \(81\) · 0 votaram/ }).click();
+    const aviso = page.locator('[data-aviso-casa="1"]');
+    await expect(aviso).toContainText(/votação simbólica/i);
+    await expect(aviso).not.toContainText(/ainda não votou/i);
+  });
+
   test("emenda da cesta básica explica a EC 132/2023 e a LC 214/2025", async ({ page }) => {
     await page.goto("/?pauta=cesta_basica");
     await esperarCards(page);

@@ -74,7 +74,7 @@ test.describe("Home — estrutura e dados", () => {
     await expect(page.getByText(/Sem voto individual:/)).toBeVisible();
   });
 
-  test("11 pills de pauta, a primeira ativa", async ({ page }) => {
+  test("12 pills de pauta, a primeira ativa", async ({ page }) => {
     for (const rotulo of PAUTAS) {
       await expect(page.getByRole("button", { name: rotulo })).toBeVisible();
     }

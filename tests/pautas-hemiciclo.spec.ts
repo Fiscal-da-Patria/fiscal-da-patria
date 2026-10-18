@@ -7,7 +7,7 @@ test.describe("Pautas e hemiciclo", () => {
     await esperarCards(page);
   });
 
-  test("alternar entre as 11 pautas mantém só uma ativa", async ({ page }) => {
+  test("alternar entre as 12 pautas mantém só uma ativa", async ({ page }) => {
     for (const rotulo of PAUTAS) {
       const pill = page.getByRole("button", { name: rotulo });
       await pill.click();

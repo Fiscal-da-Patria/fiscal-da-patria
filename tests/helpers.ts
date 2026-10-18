@@ -1,6 +1,6 @@
 import { expect, type Page } from "@playwright/test";
 
-/** Rótulos populares das 11 pautas (8 auditadas na Câmara + 3 no Senado). */
+/** Rótulos populares das 12 pautas (9 auditadas na Câmara + 3 no Senado). */
 export const PAUTAS = [
   "Comida sem imposto (Cesta Básica)",
   "Salário igual para trabalho igual",
@@ -10,12 +10,13 @@ export const PAUTAS = [
   "Teto para o juro do cartão",
   "Piso salarial da enfermagem",
   "Fim da Escala 6x1 / Jornada 5x2",
+  "Bets: da regulamentação à proibição",
   "Aposentadoria dos agentes de saúde e de endemias",
   "Lei mais dura contra o crime organizado",
   "Aliviar o preço dos combustíveis (choque internacional)",
 ];
 
-/** Slugs internos das 11 pautas. */
+/** Slugs internos das 12 pautas. */
 export const SLUGS = [
   "cesta_basica",
   "igualdade_salarial",
@@ -25,6 +26,7 @@ export const SLUGS = [
   "teto_juro_cartao",
   "piso_enfermagem",
   "fim_escala_6x1",
+  "bets",
   "aposentadoria_agentes_saude",
   "crime_organizado",
   "preco_energia",

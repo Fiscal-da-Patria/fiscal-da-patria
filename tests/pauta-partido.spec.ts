@@ -4,15 +4,15 @@ import { PAUTAS, TOTAL_PARLAMENTARES, abrirCompartilhar, esperarCards } from "./
 /** Extrai um parâmetro de uma URL de compartilhamento. */
 const param = (href: string, chave: string) => new URL(href).searchParams.get(chave) ?? "";
 
-test.describe("Pills: 4 principais + Ver todas no mobile", () => {
-  test("expande as 11 sem rolagem horizontal", async ({ page }) => {
+test.describe("Pills: 5 principais + Ver todas no mobile", () => {
+  test("expande as 12 sem rolagem horizontal", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto("/");
 
     const pills = page.locator("[data-pautas-pills] button[aria-pressed]");
     await expect(pills).toHaveCount(PAUTAS.length);
     await expect(pills.nth(0)).toBeVisible();
-    await expect(pills.nth(4)).toBeHidden();
+    await expect(pills.nth(5)).toBeHidden();
 
     const toggle = page.locator('button[aria-controls="lista-pautas"]');
     await expect(toggle).toBeVisible();
@@ -37,14 +37,14 @@ test.describe("Pills: 4 principais + Ver todas no mobile", () => {
     expect((cx?.x ?? 0) + (cx?.width ?? 0)).toBeLessThanOrEqual(390);
   });
 
-  test("deep link de pauta fora das 4 mantém a ativa visível", async ({ page }) => {
+  test("deep link de pauta fora das 5 mantém a ativa visível", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
-    await page.goto("/?pauta=fim_escala_6x1");
+    await page.goto("/?pauta=igualdade_salarial");
     await esperarCards(page);
 
     const ativa = page.locator('[data-pautas-pills] button[aria-pressed="true"]');
     await expect(ativa).toBeVisible();
-    await expect(ativa).toContainText(/Fim da escala 6x1/i);
+    await expect(ativa).toContainText(/Salário igual/i);
   });
 });
 
