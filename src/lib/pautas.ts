@@ -1,8 +1,10 @@
 import type { AlinhamentoVoto, PautaConfig, VotoCanonico } from '../types/parlamentar';
 
 /**
- * As **10 pautas** oficiais do MVP (fonte: docs/01_prd_visao_geral.md / PRD):
- *   7 auditadas na Câmara + 3 auditadas no Senado Federal.
+ * As **11 pautas** oficiais do MVP (fonte: docs/01_prd_visao_geral.md / PRD):
+ *   8 auditadas na Câmara + 3 auditadas no Senado Federal.
+ *   A escala 6x1 (PEC 221/2019) tem painel nominal nas **duas** Casas e virou a
+ *   Emenda Constitucional 141/2026 (promulgada em 16/10/2026).
  *
  * As `votacaoId` (Câmara) foram curadas manualmente junto à API oficial
  * (`/proposicoes/{id}/votacoes`) para evitar confundir o texto-base com
@@ -150,23 +152,58 @@ export const PAUTAS: PautaConfig[] = [
   },
   {
     slug: 'fim_escala_6x1',
-    rotuloPopular: 'Fim da escala 6x1 (36h em 10 anos)',
+    rotuloPopular: 'Fim da Escala 6x1 / Jornada 5x2',
     ementaOficial:
-      'Altera o art. 7º, inciso XII, da Constituição Federal, reduzindo a jornada de trabalho a 36 horas semanais, em 10 anos.',
+      'Altera o art. 7º da Constituição Federal para reduzir a duração máxima semanal do trabalho e prever 2 (dois) dias de repouso semanal remunerado, sem qualquer redução salarial.',
     materia: 'PEC 221/2019',
     // SIM = acabar com a escala 6x1 (reduzir a jornada) → a favor do cidadão.
     invertida: false,
     casa: 'CAMARA',
     idProposicao: 2233802,
-    // 1º turno no plenário em 27/05/2026 (Sim 472 × Não 22 × Obstrução 1).
-    votacaoId: '2233802-424',
+    // 2º turno no plenário em 27/05/2026 (Sim 461 × Não 19 — Aprovada).
+    votacaoId: '2233802-438',
     senado: {
-      codigoSessaoVotacao: 0,
-      dataSessao: '',
-      descricao: '',
-      status: 'pendente',
-      nota: 'Nenhum registro de votação nominal no Senado até 12/10/2026.',
+      codigoSessaoVotacao: 7107,
+      dataSessao: '2026-10-14',
+      descricao:
+        'Votação nominal da Proposta de Emenda à Constituição nº 221, de 2019, em segundo turno.',
+      status: 'nominal',
+      nota: 'Votação nominal do Senado em 14/10/2026 (2º turno): 75 SIM × 1 NÃO. A matéria virou a Emenda Constitucional 141/2026.',
+      urlMateria: 'https://www25.senado.leg.br/web/atividade/materias/-/materia/174386',
     },
+    // Verificado no Planalto e nas APIs oficiais em 17/10/2026.
+    status: 'PROMULGADA',
+    normaOficial: 'Emenda Constitucional 141/2026',
+    dataPromulgacao: '2026-10-16',
+    urlNorma: 'https://www.planalto.gov.br/ccivil_03/constituicao/emendas/emc/emc141.htm',
+    resultadoCamara: '461 SIM / 19 NÃO — 2º turno em 27/05/2026',
+    resultadoSenado: '75 SIM / 1 NÃO — 2º turno em 14/10/2026',
+    resumoFactual:
+      'A Constituição passa a limitar a jornada a 8 horas diárias e 40 horas semanais, com 2 dias de repouso semanal remunerado (um deles preferencialmente aos domingos) e sem redução salarial. A transição começa em 16/12/2026 (teto de 42h) e termina em 16/12/2027 (40h).',
+    ressalva:
+      'O texto preserva regimes diferenciados: acordo ou convenção coletiva pode prever 2 dias de repouso na média do mês-calendário (art. 7º, § 2º) e lei pode tratar de jornadas especiais (§ 3º). Quem tem nível superior e recebe a partir de 2,5 vezes o teto do RGPS fica fora das regras de duração e controle de jornada (art. 8º).',
+    pontosExplicativos: [
+      {
+        titulo: 'Jornada de 40 horas (e não 36h)',
+        texto:
+          'A PEC 221/2019 nasceu pedindo 36h em 10 anos. O texto aprovado mudou a Constituição para 8h por dia e 40h por semana, com 2 dias de descanso (regime 5x2, preferencialmente com domingo). A mobilização de 2025 (PEC 8/2025, semana de 4 dias, com a Dep. Erika Hilton entre os proponentes) foi apensada. Relatores: Dep. Leo Prates (Câmara) e Sen. Omar Aziz (Senado).',
+      },
+      {
+        titulo: 'Cronograma oficial de transição (art. 6º)',
+        texto:
+          '16/12/2026 (2 meses após a publicação): o teto cai de 44h para 42h semanais. 16/12/2027: o teto definitivo passa a ser 40h. Desde 16/12/2026 também deixam de valer cláusulas de acordos coletivos incompatíveis com o novo descanso (art. 3º).',
+      },
+      {
+        titulo: 'Garantia salarial (art. 2º)',
+        texto:
+          'Proibição expressa de redução salarial nominal, proporcional ou de qualquer outra espécie — inclusive nos pisos salariais. A jornada cai, o salário não.',
+      },
+      {
+        titulo: 'Por que tramitou como PEC 221/2019?',
+        texto:
+          'Pela regra de apensamento, a proposta de 2025 foi anexada à PEC 221/2019, de Reginaldo Lopes (PT/MG), a mais antiga em tramitação. A norma saiu com o número da PEC de 2019 e virou a EC 141/2026.',
+      },
+    ],
   },
   // ---------------------------------------------------------------------------
   // Pautas auditadas no SENADO (votação nominal real no plenário do Senado).
@@ -358,7 +395,7 @@ export const EXEMPLOS_PRATICOS: Record<string, string> = {
   piso_enfermagem:
     'fixa um piso salarial nacional para enfermeiros, técnicos, auxiliares e parteiras.',
   fim_escala_6x1:
-    'reduz a jornada para 36 horas por semana em 10 anos — o fim do 6x1.',
+    'acaba com a escala 6x1: jornada de 40 horas e 2 dias de descanso por semana, sem reduzir salário.',
   aposentadoria_agentes_saude:
     'aposentadoria com regra especial para agentes de saúde e de combate às endemias.',
   crime_organizado:

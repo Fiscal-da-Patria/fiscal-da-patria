@@ -22,14 +22,15 @@
 | 13 | Acabamento do MVP V1 | OpenGraph, deep links, estados vazios, rodapé jurídico, ícones/PWA | ✅ |
 | 14 | Congresso completo (Câmara + Senado) | 594 parlamentares · 10 pautas · cargo/tabs · TSE 2018+2022 | ✅ |
 | 15 | Refinos de visibilidade e viralidade | Pills que quebram linha · pauta no Zap · cartão 4:5 · gráfico por partido | ✅ |
-| 16 | Pauta nova: fim da escala 6x1 | PEC 221/2019 auditada (472 Sim × 22 Não) — 11 pautas | ✅ |
+| 16 | Pauta nova: fim da escala 6x1 | PEC 221/2019 auditada — 11 pautas (depois promulgada: Etapa 21) | ✅ |
 | 17 | Página "Entenda os Poderes" | Educação cívica: os 3 Poderes + Câmara × Senado | ✅ |
 | 18 | Régua dos votos + Linha do tempo | Quóruns (PEC 308/49 · PLP 257/41 · PL) e o funil legislativo em 5 passos | ✅ |
 | 19 | Revisão de leitura e usabilidade | Manifesto no topo · rótulo único · rodapé único · casa sem voto · lista 20 em 20 | ✅ |
 | 20 | Simplificação: sem dossiê/nota + cartão de compartilhamento | Um botão por card gera a imagem (nome, partido, matéria, voto) | ✅ |
-| 21 | Deploy | Publicação (Vercel/Cloudflare Pages) + domínio | ⏳ próxima |
-| 22 | Otimização de fotos (WebP) | Reduzir o peso de `public/fotos` | ⏳ backlog |
-| 23 | OG dinâmico / Kit por estado | Crescimento e viralidade | ⏳ backlog |
+| 21 | Escala 6x1 promulgada (EC 141/2026) | Dados definitivos das duas Casas + card "O que foi aprovado?" | ✅ |
+| 22 | Deploy | Publicação (Vercel/Cloudflare Pages) + domínio | ⏳ próxima |
+| 23 | Otimização de fotos (WebP) | Reduzir o peso de `public/fotos` | ⏳ backlog |
+| 24 | OG dinâmico / Kit por estado | Crescimento e viralidade | ⏳ backlog |
 
 ## Registro por etapa
 
@@ -215,7 +216,22 @@
   - **PEC 221/2019** (a do **6x1**, que auditamos): *"reduzindo a jornada de trabalho a 36 horas semanais em 10 anos"*. Aprovada no Plenário da Câmara em **27/05/2026** (472 × 22) e **promulgada como Emenda Constitucional 141/2026** (DOU de **16/10/2026**).
   - **PEC 8/2025**: *"redução da jornada de trabalho para **quatro dias por semana**"* — matéria **distinta** (semana de 4 dias, não o fim do 6x1). Foi **apensada à PEC 221/2019** em 09/02/2026 e, com a aprovação da principal, ficou **prejudicada** (art. 191 do RICD) e **arquivada** em 27/05/2026.
 - **Conclusão:** o app está auditando a matéria certa (**PEC 221/2019 → EC 141/2026**). A confusão é natural porque a 8/2025 corria **apensada** a ela.
-- **Pendência de dados (mantida):** o JSON foi verificado em 12/10/2026 e ainda diz "Senado: pendente" para a 221/2019, quando a matéria já virou **EC 141/2026** (16/10/2026). O caminho correto é rodar **`npm run update-data`** (o pipeline consulta Câmara e Senado e reescreve o JSON) — e então revisar os testes que assumem "0 senadores votaram" nesta pauta.
+- **Pendência de dados (resolvida na Etapa 21):** o JSON dizia "Senado: pendente" para a 221/2019, quando a matéria já tinha virado **EC 141/2026** (16/10/2026). A Etapa 21 rodou o pipeline e gravou os votos definitivos.
+
+### Etapa 21 — Escala 6x1 promulgada: dados definitivos + card "O que foi aprovado?" ✅
+- **Fonte conferida antes de escrever** (17/10/2026): texto integral da **EC 141/2026** no Planalto, matéria **174386** no Senado e APIs das duas Casas. Nada foi parafraseado "de memória".
+- **Dados da pauta (`src/lib/pautas.ts`)** — `fim_escala_6x1`:
+  - título **"Fim da Escala 6x1 / Jornada 5x2"**; ementa = a da **EC 141/2026**; `materia` segue **PEC 221/2019**;
+  - `status: PROMULGADA`, `normaOficial: Emenda Constitucional 141/2026`, `dataPromulgacao: 2026-10-16`, link da norma no Planalto;
+  - **Câmara**: votação-chave passou do 1º para o **2º turno** (`2233802-438`, 27/05/2026 — **461 SIM × 19 NÃO**);
+  - **Senado**: `7107` (14/10/2026, **2º turno** — **75 SIM × 1 NÃO**; 1º turno idêntico), `status: nominal`;
+  - `resultadoCamara`, `resultadoSenado`, `resumoFactual` e **4 pontos explicativos** (40h × 36h, cronograma 42h/40h, garantia salarial, apensamento da PEC 8/2025) + **ressalva** (regimes diferenciados, art. 7º §2º/§3º e art. 8º).
+- **Pipeline reexecutado:** `fetch-senado` (81 senadores; 75 SIM × 1 NÃO × 5 sem voto registrado) e `update-data` (Câmara: 452 × 18 entre os 513 em exercício).
+- **Lista nominal:** na aba **Senadores**, o único contrário (**Hamilton Mourão, REPUBLICANOS-RS**) abre a lista na ordem padrão; na Câmara, os 18 contrários aparecem com os mais votados no topo.
+- **Contagem honesta:** as abas passaram a contar **voto registrado** (Sim/Não/Abstenção) — `AUSENTE` não infla mais o "votaram". Ex.: 6x1 no Senado = **76 de 81** (não 81); Cesta Básica no Senado = **70 de 81**.
+- **Card "O que foi aprovado?"** (`PautaDetalheModal`): selo **PROMULGADA em 16/10/2026**, norma, resumo, **placares oficiais** das duas Casas (com a nota de que o painel inclui quem deixou o mandato), os 4 pontos com ícones, a ressalva e o link para ler a EC no Planalto. Abre pelo botão no card da matéria (só existe em pauta com texto verificado), fecha por ESC, X ou clique fora.
+- **Verificação:** `tests/escala-6x1.spec.ts` (4 casos: JSON 75/1/5, aba com 76 votaram e Mourão no topo, conteúdo do modal, fechamento/ausência em pauta sem texto) + `api-dados` (guarda factual da EC: ementa, datas, placares e 4 pontos) + **axe no modal em claro e escuro** (0 violações críticas/sérias). `tsc` e `lint` limpos.
+- ⚠️ **Placar oficial × lista em exercício:** o painel da sessão (461×19) inclui parlamentares que já deixaram o mandato; a lista mostra os **513 em exercício** (452×18). O modal declara isso explicitamente para a soma menor não parecer erro.
 
 ## Decisões-chave (registro)
 1. **Pautas:** as 7 do PRD, com IDs reais e **curadoria manual** da votação-chave.

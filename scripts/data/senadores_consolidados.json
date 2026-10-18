@@ -1,8 +1,8 @@
 {
   "_fonte": "Senado Federal — Dados Abertos (legis.senado.leg.br/dadosabertos)",
-  "_geradoEm": "2026-10-12T23:15:15.075Z",
+  "_geradoEm": "2026-10-17T23:54:02.091Z",
   "_senadores": 81,
-  "_comVotoNominal": 79,
+  "_comVotoNominal": 81,
   "senadores": [
     {
       "id": "senado-5672",
@@ -17,12 +17,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5672",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
@@ -41,12 +43,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5982",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
@@ -65,11 +69,13 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/6358",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM"
       }
@@ -87,12 +93,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5967",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "AUSENTE"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "AUSENTE"
@@ -111,12 +119,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/6009",
       "votos": {
         "cesta_basica": "CONTRA",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "NAO",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
@@ -135,12 +145,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/4639",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
@@ -158,10 +170,12 @@
       "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador6336.jpg",
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/6336",
       "votos": {
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "preco_energia": "SIM"
       }
@@ -178,10 +192,12 @@
       "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador6295.jpg",
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/6295",
       "votos": {
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "preco_energia": "SIM"
       }
@@ -199,12 +215,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5936",
       "votos": {
         "cesta_basica": "CONTRA",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "AUSENTE"
       },
       "votosOriginais": {
         "cesta_basica": "NAO",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "AUSENTE"
@@ -223,12 +241,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5990",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "AUSENTE",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "AUSENTE",
         "preco_energia": "SIM"
@@ -247,12 +267,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/470",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
@@ -271,12 +293,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5973",
       "votos": {
         "cesta_basica": "AUSENTE",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "AUSENTE"
       },
       "votosOriginais": {
         "cesta_basica": "AUSENTE",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "AUSENTE"
@@ -295,12 +319,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/739",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
@@ -319,12 +345,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/6337",
       "votos": {
         "cesta_basica": "CONTRA",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "CONTRA"
       },
       "votosOriginais": {
         "cesta_basica": "NAO",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "NAO"
@@ -343,12 +371,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/475",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "AUSENTE"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "AUSENTE"
@@ -367,12 +397,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/6335",
       "votos": {
         "cesta_basica": "CONTRA",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "NAO",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
@@ -391,12 +423,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5998",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "AUSENTE",
         "crime_organizado": "AUSENTE",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "AUSENTE",
         "crime_organizado": "AUSENTE",
         "preco_energia": "SIM"
@@ -415,12 +449,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/3830",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "AUSENTE",
         "aposentadoria_agentes_saude": "AUSENTE",
         "crime_organizado": "AUSENTE",
         "preco_energia": "AUSENTE"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "AUSENTE",
         "aposentadoria_agentes_saude": "AUSENTE",
         "crime_organizado": "AUSENTE",
         "preco_energia": "AUSENTE"
@@ -439,12 +475,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5793",
       "votos": {
         "cesta_basica": "CONTRA",
+        "fim_escala_6x1": "AUSENTE",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "NAO",
+        "fim_escala_6x1": "AUSENTE",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
@@ -462,11 +500,13 @@
       "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5906.jpg",
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5906",
       "votos": {
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
@@ -485,12 +525,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/4994",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
@@ -509,12 +551,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/3777",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
@@ -533,12 +577,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/4642",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
@@ -557,12 +603,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5718",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "AUSENTE",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "AUSENTE",
         "preco_energia": "SIM"
@@ -581,12 +629,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/22",
       "votos": {
         "cesta_basica": "CONTRA",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "AUSENTE",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "NAO",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "AUSENTE",
         "preco_energia": "SIM"
@@ -605,12 +655,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5953",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
@@ -629,12 +681,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5917",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "AUSENTE"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "AUSENTE"
@@ -653,12 +707,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/345",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "AUSENTE",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "AUSENTE",
         "preco_energia": "SIM"
@@ -677,12 +733,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5894",
       "votos": {
         "cesta_basica": "CONTRA",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "AUSENTE",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "AUSENTE"
       },
       "votosOriginais": {
         "cesta_basica": "NAO",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "AUSENTE",
         "crime_organizado": "SIM",
         "preco_energia": "AUSENTE"
@@ -701,12 +759,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/6008",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "AUSENTE",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "AUSENTE",
         "preco_energia": "SIM"
@@ -725,12 +785,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/6341",
       "votos": {
         "cesta_basica": "CONTRA",
+        "fim_escala_6x1": "CONTRA",
         "aposentadoria_agentes_saude": "CONTRA",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "NAO",
+        "fim_escala_6x1": "NAO",
         "aposentadoria_agentes_saude": "NAO",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
@@ -749,12 +811,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5008",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "AUSENTE",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "AUSENTE",
         "preco_energia": "SIM"
@@ -773,12 +837,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5385",
       "votos": {
         "cesta_basica": "AUSENTE",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "AUSENTE",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
@@ -797,12 +863,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/6010",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
@@ -821,12 +889,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/4770",
       "votos": {
         "cesta_basica": "CONTRA",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "AUSENTE",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "NAO",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "AUSENTE",
         "preco_energia": "SIM"
@@ -845,12 +915,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/35",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "AUSENTE",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "AUSENTE",
         "preco_energia": "SIM"
@@ -869,12 +941,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/6340",
       "votos": {
         "cesta_basica": "CONTRA",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "NAO",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
@@ -893,12 +967,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/581",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
@@ -917,12 +993,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/4531",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "AUSENTE",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "AUSENTE",
         "preco_energia": "SIM"
@@ -941,12 +1019,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5895",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "AUSENTE"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "AUSENTE"
@@ -965,10 +1045,12 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/6342",
       "votos": {
         "cesta_basica": "CONTRA",
+        "fim_escala_6x1": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "NAO",
+        "fim_escala_6x1": "SIM",
         "crime_organizado": "SIM"
       }
     },
@@ -985,12 +1067,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/6369",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
@@ -1009,12 +1093,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/4811",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
@@ -1031,8 +1117,12 @@
       "fotoUrl": "/fotos/sen-5977.jpg",
       "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5977.jpg",
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5977",
-      "votos": {},
-      "votosOriginais": {}
+      "votos": {
+        "fim_escala_6x1": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "fim_escala_6x1": "SIM"
+      }
     },
     {
       "id": "senado-5926",
@@ -1047,12 +1137,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5926",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
@@ -1071,12 +1163,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/1186",
       "votos": {
         "cesta_basica": "CONTRA",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "NAO",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
@@ -1095,12 +1189,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/631",
       "votos": {
         "cesta_basica": "CONTRA",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "AUSENTE"
       },
       "votosOriginais": {
         "cesta_basica": "NAO",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "AUSENTE"
@@ -1119,12 +1215,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5376",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
@@ -1143,12 +1241,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/742",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "AUSENTE"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "AUSENTE"
@@ -1167,12 +1267,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/285",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "AUSENTE",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "AUSENTE",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
@@ -1191,12 +1293,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5422",
       "votos": {
         "cesta_basica": "AUSENTE",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "AUSENTE"
       },
       "votosOriginais": {
         "cesta_basica": "AUSENTE",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "AUSENTE"
@@ -1215,12 +1319,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5942",
       "votos": {
         "cesta_basica": "CONTRA",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "AUSENTE",
         "crime_organizado": "AUSENTE",
         "preco_energia": "AUSENTE"
       },
       "votosOriginais": {
         "cesta_basica": "NAO",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "AUSENTE",
         "crime_organizado": "AUSENTE",
         "preco_energia": "AUSENTE"
@@ -1239,12 +1345,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5985",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "AUSENTE",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "AUSENTE",
         "preco_energia": "SIM"
@@ -1263,12 +1371,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5525",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
@@ -1287,12 +1397,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5924",
       "votos": {
         "cesta_basica": "CONTRA",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "AUSENTE"
       },
       "votosOriginais": {
         "cesta_basica": "NAO",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "AUSENTE"
@@ -1311,12 +1423,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5523",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
@@ -1335,12 +1449,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/825",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
@@ -1359,12 +1475,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5502",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
@@ -1383,12 +1501,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5386",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
@@ -1407,12 +1527,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5012",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
@@ -1431,12 +1553,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/70",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "AUSENTE"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "AUSENTE"
@@ -1454,10 +1578,12 @@
       "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5207.jpg",
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5207",
       "votos": {
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "preco_energia": "SIM"
       }
@@ -1473,8 +1599,12 @@
       "fotoUrl": "/fotos/sen-5257.jpg",
       "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5257.jpg",
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5257",
-      "votos": {},
-      "votosOriginais": {}
+      "votos": {
+        "fim_escala_6x1": "FAVORAVEL"
+      },
+      "votosOriginais": {
+        "fim_escala_6x1": "SIM"
+      }
     },
     {
       "id": "senado-6025",
@@ -1488,10 +1618,12 @@
       "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador6025.jpg",
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/6025",
       "votos": {
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "preco_energia": "AUSENTE"
       },
       "votosOriginais": {
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "preco_energia": "AUSENTE"
       }
@@ -1509,12 +1641,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/4694",
       "votos": {
         "cesta_basica": "CONTRA",
+        "fim_escala_6x1": "AUSENTE",
         "aposentadoria_agentes_saude": "AUSENTE",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "AUSENTE"
       },
       "votosOriginais": {
         "cesta_basica": "NAO",
+        "fim_escala_6x1": "AUSENTE",
         "aposentadoria_agentes_saude": "AUSENTE",
         "crime_organizado": "SIM",
         "preco_energia": "AUSENTE"
@@ -1533,12 +1667,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5352",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
@@ -1557,12 +1693,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5322",
       "votos": {
         "cesta_basica": "CONTRA",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "AUSENTE",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "NAO",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "AUSENTE",
         "preco_energia": "SIM"
@@ -1580,9 +1718,11 @@
       "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5974.jpg",
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5974",
       "votos": {
+        "fim_escala_6x1": "FAVORAVEL",
         "preco_energia": "CONTRA"
       },
       "votosOriginais": {
+        "fim_escala_6x1": "SIM",
         "preco_energia": "NAO"
       }
     },
@@ -1599,12 +1739,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/6331",
       "votos": {
         "cesta_basica": "CONTRA",
+        "fim_escala_6x1": "AUSENTE",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "NAO",
+        "fim_escala_6x1": "AUSENTE",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
@@ -1623,12 +1765,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5988",
       "votos": {
         "cesta_basica": "CONTRA",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "NAO",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
@@ -1647,12 +1791,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5959",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
@@ -1671,12 +1817,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/4560",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
@@ -1695,12 +1843,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/6338",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "AUSENTE",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "AUSENTE",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
@@ -1719,12 +1869,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5736",
       "votos": {
         "cesta_basica": "CONTRA",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "NAO",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
@@ -1743,12 +1895,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5899",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "AUSENTE",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "AUSENTE",
         "preco_energia": "SIM"
@@ -1767,12 +1921,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5748",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
@@ -1791,12 +1947,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/1173",
       "votos": {
         "cesta_basica": "CONTRA",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "NAO",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
@@ -1815,12 +1973,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5411",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
@@ -1839,12 +1999,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5070",
       "votos": {
         "cesta_basica": "CONTRA",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "NAO",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
@@ -1863,12 +2025,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5783",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
@@ -1887,12 +2051,14 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/3806",
       "votos": {
         "cesta_basica": "FAVORAVEL",
+        "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "AUSENTE",
         "preco_energia": "AUSENTE"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
+        "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "AUSENTE",
         "preco_energia": "AUSENTE"

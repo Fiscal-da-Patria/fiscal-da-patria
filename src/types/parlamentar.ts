@@ -64,6 +64,27 @@ export interface PautaConfig {
   votacaoId?: string;
   /** Senado: situação da matéria correlata (nominal / simbólica / pendente). */
   senado?: VotacaoSenado;
+  /**
+   * Situação da matéria após a tramitação. Só é preenchida quando há uma
+   * verificação oficial (ex.: PEC 221/2019 → EC 141/2026).
+   */
+  status?: 'PROMULGADA';
+  /** Norma jurídica resultante (ex.: "Emenda Constitucional 141/2026"). */
+  normaOficial?: string;
+  /** Data de promulgação/publicação no Diário Oficial (AAAA-MM-DD). */
+  dataPromulgacao?: string;
+  /** Link oficial da norma (planalto.gov.br). */
+  urlNorma?: string;
+  /** Placar final na Câmara, como consta na fonte oficial. */
+  resultadoCamara?: string;
+  /** Placar final no Senado, como consta na fonte oficial. */
+  resultadoSenado?: string;
+  /** O que a norma aprovada faz, em linguagem popular e fiel ao texto. */
+  resumoFactual?: string;
+  /** Ponto que o resumo não pode omitir (regimes diferenciados, exceções legais). */
+  ressalva?: string;
+  /** Explicação objetiva do que foi aprovado (título + texto curto). */
+  pontosExplicativos?: { titulo: string; texto: string }[];
 }
 
 /** Registro consolidado de um parlamentar (item de public/data/parlamentares.json). */

@@ -46,12 +46,11 @@ npm run fetch-fotos    # baixa as fotos oficiais para public/fotos/
 
 ## Estrutura
 ```
-src/app/          layout, página inicial e estilos (paleta cívica)
 src/app/          layout, home, /sobre (manifesto) e /poderes (educação cívica)
-src/components/   SiteHeader, CargoTabs, Hemiciclo, PautaPills, BuscaFiltros,
-                  ParlamentarCard, DossieModal, CitizenBadgeCard, CardPauta,
-                  GraficoPartidos
-src/lib/          pautas (10 pautas + regra de inversão), parlamentares (helpers)
+src/components/   SiteHeader, SiteFooter, ThemeToggle, CargoTabs, Hemiciclo, PautaPills,
+                  BuscaFiltros, ParlamentarCard, PautaDetalheModal, GraficoPartidos,
+                  ShareModal, ShareCard, ShareCardPartido, SocialShareBar, WhatsAppShareButton
+src/lib/          pautas (11 pautas + inversão), parlamentares, partidos, share
 src/types/        contratos de dados
 scripts/          fetch_votes.ts (ingestão unificada), fetch_senado.ts, fetch_tse_votos.ts, fetch_fotos.ts
 public/data/      parlamentares.json (consolidado: 513 deputados + 81 senadores)
@@ -69,7 +68,7 @@ public/           og-image.png (1200x630), favicon.ico, apple-touch-icon.png,
 5. Cobrar imposto dos super-ricos — PL 4173/2023
 6. Teto para o juro do cartão — PL 2685/2022
 7. Piso salarial da enfermagem — PL 2564/2020
-8. **Fim da escala 6x1 (jornada de 36 horas)** — PEC 221/2019 _(plenário 27/05/2026: 472 Sim × 22 Não)_
+8. **Fim da Escala 6x1 / Jornada 5x2** — PEC 221/2019 → **EC 141/2026** _(Câmara: 461 Sim × 19 Não; Senado: 75 Sim × 1 Não; promulgada em 16/10/2026)_
 
 **Auditadas no Senado (3):**
 9. Aposentadoria dos agentes de saúde e de endemias — PEC 14/2021
@@ -79,11 +78,11 @@ public/           og-image.png (1200x630), favicon.ico, apple-touch-icon.png,
 > Os senadores ficam `NAO_APLICAVEL` (com motivo visível na ficha) nas pautas 1–8, e os deputados nas 9–11:
 > cada pauta é auditada na casa onde houve **votação nominal**.
 
-## Compartilhar focado na matéria (a pauta no centro)
-Cada matéria tem seu próprio texto pronto para o Zap:
+## Compartilhar (o voto e a matéria no centro)
 - **No card da pauta** (home): botão **"📲 Compartilhar esta votação"** → *"🚨 Votação no Congresso: Comida sem imposto (Cesta Básica)…"* + link `/?pauta=cesta_basica`.
-- **No dossiê**: botão **"Enviar esta votação"** em cada uma das 10 pautas → *"🚨 Comida sem imposto (PEC 45/2019) — nesta votação, Fulano (PL-RJ), deputado federal, votou CONTRA o cidadão. Voto registrado: NÃO."* + link `/?deputado=…&pauta=…`.
-- **Cartão da pauta** (PNG 1080×1350): a matéria no topo, o parlamentar e o veredito colorido — ideal para story/status.
+- **No card do parlamentar**: botão **Compartilhar** gera a imagem 4:5 com **foto, nome, partido/UF, matéria e o voto registrado** (prévia + Compartilhar/Baixar PNG/Copiar link).
+- **No gráfico por partido**: cada bancada tem o próprio cartão 4:5 ("X de N apoiaram/rejeitaram…"), sempre com o recorte declarado.
+- **O que foi aprovado?** (pautas concluídas): botão no card da matéria abre a explicação factual — status, norma, placares oficiais e os pontos do texto.
 
 ## Gráfico por partido
 O bloco **"Como cada partido votou"** mostra, para a pauta ativa, uma barra empilhada percentual por bancada
@@ -101,28 +100,29 @@ hemiciclo**, abaixo do card da matéria. Calculado no cliente, sem requisição 
 | ⚖️ Placar equilibrado (Intercalado) | 1 divergente, 1 favorável, 1 divergente… — dá visibilidade às **duas** pontas |
 | ✅ Favoráveis primeiro | quem apoiou a proposta no topo (mesmo desempate) |
 | 🗳️ Mais votados nas urnas | ignora o voto; ordena pela votação do TSE |
-| 🔤 Ordem alfabética (A-Z) | por nome |
 
 ## Senado: por que existe `NAO_APLICAVEL`
 O Senado aprova a maioria das matérias por **votação simbólica** — não há voto individual registrado.
-Das 7 pautas da Câmara, só a **PEC 45/2019** teve votação nominal no Senado (08/11/2023, 48 SIM × 22 NÃO).
-Marcar esses senadores como "Ausente" seria **desinformação**, então o app usa um estado próprio,
-`NAO_APLICAVEL`, com o motivo escrito na ficha ("aprovada em votação simbólica… Virou a Lei 14.611/2023").
+Das 8 pautas auditadas na Câmara, **duas** tiveram votação nominal no Senado:
+**PEC 45/2019** (08/11/2023, 48 SIM × 22 NÃO) e **PEC 221/2019** (14/10/2026, 75 SIM × 1 NÃO, nos dois turnos).
+Marcar os demais senadores como "Ausente" seria **desinformação**, então o app usa um estado próprio,
+`NAO_APLICAVEL`, com o motivo escrito no card (votação simbólica, matéria pendente ou votação em outra casa).
 O mesmo vale para os deputados nas pautas do Senado. A verificação é reexecutável:
 `scripts/data/senado_votacoes_map.json` guarda a auditoria (código da votação, data, totais e fonte).
+A contagem "votaram" nas abas considera apenas **voto registrado** (Sim/Não/Abstenção) — ausência não infla a participação.
 
 ## Deep links (Dark Social)
 A home aceita parâmetros na URL, então todo link colado no grupo já abre no lugar certo:
 
 | Link | Efeito |
 |---|---|
-| `/?deputado=camara-74646` (ou `?dep=74646` / `?id=`) | abre direto o dossiê (aceita o id antigo, só o número) |
+| `/?deputado=camara-74646` (ou `?dep=74646` / `?id=`) | entra com a busca da pessoa e **destaca o card** (aceita o id antigo, só o número) |
 | `/?busca=Aécio` (ou `?q=PSDB`) | entra com a lista já filtrada por nome/partido |
 | `/?pauta=fim_blindagem` | pré-seleciona a pauta |
 | `/?cargo=SENADOR` | abre já na aba dos 81 senadores |
 | `/?busca=PSDB&pauta=fim_blindagem` | combina busca + pauta |
 
-Abrir ou fechar um dossiê atualiza a barra de endereço, então o endereço visível é sempre copiável.
+Abrir ou fechar o compartilhamento de um parlamentar atualiza a barra de endereço, então o endereço visível é sempre copiável.
 
 ## Card no WhatsApp e ícones
 `public/og-image.png` (1200×630, paleta cívica) somada ao `metadata` de `src/app/layout.tsx` gera o card
@@ -142,7 +142,7 @@ candidatos ou órgãos estatais. Regras de transformação (inversão semântica
 - Os documentos originais em `.docx` ficam preservados em `docs/_originais/`.
 
 ## Testes E2E (Playwright)
-Suíte completa (**96 testes**) que valida o front no Chrome: render/dados, **Congresso (594: 513 deputados + 81 senadores)**, **abas e badges por cargo**, filtros (**inclui estado vazio com "Limpar filtros"**), pautas/hemiciclo (**10 pautas**), **ordenação por gravidade com desempate pelos mais votados**, dossiê, export da carteirinha, **compartilhamento (WhatsApp/Telegram/X/Copiar)**, **deep links**, **OpenGraph / ícones / manifest PWA**, **rodapé jurídico**, **dark mode**, página `/sobre`, integridade dos dados (**inclui a regra de ouro: votação simbólica do Senado nunca vira "Ausente"**) e **acessibilidade (axe) em claro e escuro** — além de responsividade mobile.
+Suíte completa (**157 testes**) que valida o front no Chrome: render/dados, **Congresso (594: 513 deputados + 81 senadores)**, **abas e badges por cargo**, filtros (**inclui estado vazio com "Limpar filtros"**), pautas/hemiciclo (**11 pautas**), **ordenação por gravidade com desempate pelos mais votados**, **compartilhamento por parlamentar e por bancada (imagem 4:5, prévia, PNG e link)**, **WhatsApp/Telegram/X/Copiar**, **deep links**, **OpenGraph / ícones / manifest PWA**, **rodapé jurídico**, **dark mode**, página `/sobre`, **`/poderes` (régua dos votos + linha do tempo)**, **escala 6x1 → EC 141/2026 (dados e card explicativo)**, integridade dos dados (**inclui a regra de ouro: votação simbólica do Senado nunca vira "Ausente"**) e **acessibilidade (axe) em claro e escuro** — além de responsividade mobile.
 ```bash
 npm run test:e2e     # sobe o dev server e roda os specs em tests/
 ```

@@ -7,7 +7,6 @@ interface Parlamentar {
   cargo: "DEPUTADO" | "SENADOR";
   urlPerfilOficial: string;
   fotoUrl: string;
-  pontuacaoCivica: number;
   votos: Record<string, string>;
   votosOriginais?: Record<string, string>;
   motivos?: Record<string, string>;
@@ -33,9 +32,7 @@ test.describe("Dados servidos — integridade e anti-desinformação", () => {
           ? /^\/fotos\/sen-\d+\.jpg$/
           : /^(\/fotos\/\d+\.jpg|https?:\/\/.+)$/, // deputado pode cair no fallback remoto
       );
-      expect(p.pontuacaoCivica).toBeGreaterThanOrEqual(0);
-      expect(p.pontuacaoCivica).toBeLessThanOrEqual(100);
-      expect(Object.keys(p.votos).sort()).toEqual(slugsEsperados); // matriz densa (10 pautas)
+      expect(Object.keys(p.votos).sort()).toEqual(slugsEsperados); // matriz densa (11 pautas)
     }
   });
 
@@ -99,14 +96,22 @@ test.describe("Dados servidos — integridade e anti-desinformação", () => {
 });
 
 test.describe("Conferência factual das pautas (anti-desinformação)", () => {
-  test("escala 6x1 mantém o texto oficial: PEC 221/2019, 36h em 10 anos", () => {
+  test("escala 6x1: PEC 221/2019 virou a EC 141/2026 (40h, 2 dias de descanso)", () => {
     const pauta = PAUTAS.find((p) => p.slug === "fim_escala_6x1");
 
     expect(pauta?.materia).toBe("PEC 221/2019");
-    // Texto literal da ementa oficial (API de Dados Abertos, conferido em 17/10/2026).
-    expect(pauta?.ementaOficial).toMatch(/36 horas semanais/i);
-    expect(pauta?.ementaOficial).toMatch(/em 10 anos/i);
-    // O rótulo popular não pode prometer carga/prazo diferentes do oficial.
-    expect(pauta?.rotuloPopular).toMatch(/36h em 10 anos/);
+    expect(pauta?.normaOficial).toBe("Emenda Constitucional 141/2026");
+    expect(pauta?.status).toBe("PROMULGADA");
+    expect(pauta?.dataPromulgacao).toBe("2026-10-16");
+    // Ementa literal da EC 141/2026 (Planalto, conferida em 17/10/2026).
+    expect(pauta?.ementaOficial).toMatch(/2 \(dois\) dias de repouso semanal remunerado/i);
+    expect(pauta?.resumoFactual).toMatch(/40 horas semanais/i);
+    expect(pauta?.resumoFactual).toMatch(/16\/12\/2026/);
+    expect(pauta?.resumoFactual).toMatch(/16\/12\/2027/);
+    // Placar oficial das duas Casas (painel nominal).
+    expect(pauta?.resultadoCamara).toMatch(/461 SIM \/ 19 NÃO/);
+    expect(pauta?.resultadoSenado).toMatch(/75 SIM \/ 1 NÃO/);
+    // 4 pontos explicativos, como publicado no modal.
+    expect(pauta?.pontosExplicativos).toHaveLength(4);
   });
 });

@@ -80,3 +80,20 @@ test("Acessibilidade (axe) — modal de compartilhamento (parlamentar e bancada)
   expect(serias.map((v) => `${v.id}:${v.impact}`)).toEqual([]);
 });
 
+for (const tema of temas) {
+  test(`Acessibilidade (axe) — modal "O que foi aprovado?" — tema ${tema}`, async ({ page }) => {
+    await page.goto("/?pauta=fim_escala_6x1");
+    await esperarCards(page);
+    await definirTema(page, tema);
+
+    await page.locator('[data-abrir-detalhe="1"]').click();
+    await page.getByRole("dialog").waitFor();
+
+    const { violations } = await new AxeBuilder({ page }).analyze();
+    const serias = violations.filter((v) => v.impact === "critical" || v.impact === "serious");
+    relatar(`detalhe-pauta/${tema}`, serias);
+    expect(serias.map((v) => `${v.id}:${v.impact}`)).toEqual([]);
+  });
+}
+
+

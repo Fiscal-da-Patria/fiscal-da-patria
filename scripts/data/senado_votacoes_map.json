@@ -1,6 +1,6 @@
 {
   "_descricao": "Auditoria do mapeamento das pautas do MVP para as votações nominais do Senado Federal. Gerado por scripts/fetch_senado.ts.",
-  "_verificadoEm": "2026-10-12T23:15:15.079Z",
+  "_verificadoEm": "2026-10-17T23:54:02.094Z",
   "_metodo": "Lista de senadores (/senador/lista/atual.json) + votos individuais (/votacao JSON ou /plenario/lista/votacao XML do dia).",
   "votacoes": [
     {
@@ -16,6 +16,20 @@
       "abstencoes": 0,
       "outros": 3,
       "fonte": "https://legis.senado.leg.br/dadosabertos/plenario/lista/votacao/20231108 (painel XML)"
+    },
+    {
+      "pauta": "fim_escala_6x1",
+      "materia": "PEC 221/2019",
+      "codigoSessaoVotacao": 7107,
+      "dataSessao": "2026-10-14",
+      "descricao": "Votação nominal da Proposta de Emenda à Constituição nº 221, de 2019, em segundo turno.",
+      "status": "nominal",
+      "registros": 81,
+      "sim": 75,
+      "nao": 1,
+      "abstencoes": 0,
+      "outros": 5,
+      "fonte": "https://legis.senado.leg.br/dadosabertos/votacao (catálogo JSON)"
     },
     {
       "pauta": "aposentadoria_agentes_saude",

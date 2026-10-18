@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
-import { ExternalLink, Info, Loader2, RotateCcw } from "lucide-react";
+import { ExternalLink, Info, Loader2, RotateCcw, ScrollText } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { WhatsAppShareButton } from "@/components/WhatsAppShareButton";
+import { PautaDetalheModal } from "@/components/PautaDetalheModal";
 import { Hemiciclo } from "@/components/Hemiciclo";
 import { PautaPills } from "@/components/PautaPills";
 import { BuscaFiltros } from "@/components/BuscaFiltros";
@@ -24,10 +25,18 @@ import {
   type CargoFiltro,
   type Ordem,
 } from "@/lib/parlamentares";
-import type { ParlamentarConsolidado } from "@/types/parlamentar";
+import type { AlinhamentoVoto, ParlamentarConsolidado } from "@/types/parlamentar";
 
 /** Quantos parlamentares a lista mostra por vez (o resto vem em "Carregar mais"). */
 const POR_PAGINA = 20;
+
+/**
+ * "Votou" = registrou voto individual (Sim, Não ou Abstenção).
+ * `AUSENTE` e `NAO_APLICAVEL` **não** contam: chamar ausência de voto seria
+ * inflar a participação — e a auditoria tem que bater com o painel oficial.
+ */
+const temVotoRegistrado = (v?: AlinhamentoVoto) =>
+  v === "FAVORAVEL" || v === "CONTRA" || v === "ABSTENCAO";
 
 export default function HomePage() {
   const [dados, setDados] = useState<ParlamentarConsolidado[]>([]);
@@ -40,6 +49,8 @@ export default function HomePage() {
   const [cargo, setCargo] = useState<CargoFiltro>("TODOS");
   /** O que está aberto no modal de compartilhamento (parlamentar ou bancada). */
   const [alvo, setAlvo] = useState<AlvoCompartilhar | null>(null);
+  /** Explicação "O que foi aprovado?" (só pautas com texto verificado). */
+  const [detalheAberto, setDetalheAberto] = useState(false);
   /** Deep link `?deputado=` — destaca o card da pessoa e rola até ele. */
   const [focadoId, setFocadoId] = useState<string | null>(null);
   /** Mostra só quem tem voto registrado na matéria ativa (tira o ruído de "Sem voto"). */
@@ -106,11 +117,13 @@ export default function HomePage() {
   /** Quantos parlamentares de cada casa têm voto NESTA matéria (≠ "Sem voto individual"). */
   const comVotoNaPauta = useMemo<Record<CargoFiltro, number>>(
     () => ({
-      TODOS: dados.filter((p) => p.votos[pautaSel] !== "NAO_APLICAVEL").length,
-      DEPUTADO: dados.filter((p) => p.cargo === "DEPUTADO" && p.votos[pautaSel] !== "NAO_APLICAVEL")
-        .length,
-      SENADOR: dados.filter((p) => p.cargo === "SENADOR" && p.votos[pautaSel] !== "NAO_APLICAVEL")
-        .length,
+      TODOS: dados.filter((p) => temVotoRegistrado(p.votos[pautaSel])).length,
+      DEPUTADO: dados.filter(
+        (p) => p.cargo === "DEPUTADO" && temVotoRegistrado(p.votos[pautaSel]),
+      ).length,
+      SENADOR: dados.filter(
+        (p) => p.cargo === "SENADOR" && temVotoRegistrado(p.votos[pautaSel]),
+      ).length,
     }),
     [dados, pautaSel],
   );
@@ -138,7 +151,7 @@ export default function HomePage() {
    */
   const baseVisivel = useMemo(() => {
     if (semVotoNaCasa) return [];
-    return soVotaram ? porCargo.filter((p) => p.votos[pautaSel] !== "NAO_APLICAVEL") : porCargo;
+    return soVotaram ? porCargo.filter((p) => temVotoRegistrado(p.votos[pautaSel])) : porCargo;
   }, [porCargo, soVotaram, pautaSel, semVotoNaCasa]);
 
   const distribuicao = useMemo(() => distribuirPorPauta(baseVisivel, pautaSel), [
@@ -183,6 +196,7 @@ export default function HomePage() {
     setPautaSel(slug);
     setOrdem("piores");
     setVisiveis(POR_PAGINA);
+    setDetalheAberto(false);
   }
 
   // Mantém a URL compartilhável: ?deputado=<id> enquanto um dossiê está aberto.
@@ -273,15 +287,25 @@ export default function HomePage() {
                 <p className="text-[11px] font-bold uppercase tracking-wider text-corpo">
                   Pauta selecionada
                 </p>
-                <span
-                  className={`rounded px-2 py-0.5 text-[10px] font-bold ${
-                    pautaAtual.casa === "SENADO"
-                      ? "border border-dourado/60 bg-dourado/15 text-titulo"
-                      : "border border-verde-bandeira/40 bg-verde-bandeira/10 text-titulo"
-                  }`}
-                >
-                  {pautaAtual.casa === "SENADO" ? "Votação no Senado" : "Votação na Câmara"}
-                </span>
+                <div className="flex flex-wrap items-center gap-1.5">
+                  {pautaAtual.status === "PROMULGADA" && (
+                    <span
+                      data-norma-vigente="1"
+                      className="rounded border border-dourado/60 bg-dourado/15 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-titulo"
+                    >
+                      ✅ {pautaAtual.normaOficial}
+                    </span>
+                  )}
+                  <span
+                    className={`rounded px-2 py-0.5 text-[10px] font-bold ${
+                      pautaAtual.casa === "SENADO"
+                        ? "border border-dourado/60 bg-dourado/15 text-titulo"
+                        : "border border-verde-bandeira/40 bg-verde-bandeira/10 text-titulo"
+                    }`}
+                  >
+                    {pautaAtual.casa === "SENADO" ? "Votação no Senado" : "Votação na Câmara"}
+                  </span>
+                </div>
               </div>
               <h3 className="mt-1 text-lg font-bold text-titulo">{pautaAtual.rotuloPopular}</h3>
               <p className="mt-1 text-xs text-corpo">{pautaAtual.ementaOficial}</p>
@@ -291,6 +315,17 @@ export default function HomePage() {
               >
                 <strong>No dia a dia:</strong> {exemploPratico(pautaAtual)}
               </p>
+              {pautaAtual.pontosExplicativos?.length ? (
+                <button
+                  type="button"
+                  data-abrir-detalhe="1"
+                  onClick={() => setDetalheAberto(true)}
+                  className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-dourado/60 bg-dourado/15 px-3 py-2 text-xs font-bold text-titulo shadow-sm transition hover:bg-dourado/25 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dourado"
+                >
+                  <ScrollText className="h-3.5 w-3.5" aria-hidden />
+                  O que foi aprovado? Ver a explicação
+                </button>
+              ) : null}
               <a
                 href={urlFonteOficial(pautaAtual)}
                 target="_blank"
@@ -547,6 +582,10 @@ export default function HomePage() {
           cargoLabel={cargoLabel}
           onFechar={fecharCompartilhar}
         />
+      )}
+
+      {detalheAberto && (
+        <PautaDetalheModal pauta={pautaAtual} onFechar={() => setDetalheAberto(false)} />
       )}
     </div>
   );
