@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { numeroCompacto } from "../src/lib/parlamentares";
-import { PAUTAS, TOTAL_PARLAMENTARES, esperarTodos } from "./helpers";
+import { PAUTAS, TOTAL_PARLAMENTARES, esperarCards, esperarTodos } from "./helpers";
 
 test.describe("Home — estrutura e dados", () => {
   test.beforeEach(async ({ page }) => {
@@ -31,6 +31,19 @@ test.describe("Home — estrutura e dados", () => {
     await expect(sobre).toBeVisible();
     await expect(sobre).toHaveAttribute("href", "/sobre");
     await expect(page.getByText("Dados oficiais")).toBeVisible();
+  });
+
+  test("faixa de auditoria mostra totais e data de atualização", async ({ page }) => {
+    await expect(page.getByText(`${TOTAL_PARLAMENTARES} parlamentares`)).toBeVisible();
+    await expect(page.getByText(`${PAUTAS.length} pautas`)).toBeVisible();
+    await expect(page.getByText("100% fonte oficial")).toBeVisible();
+    await expect(page.getByText(/Atualizado em \d{2}\/\d{2}\/\d{4}/)).toBeVisible();
+  });
+
+  test("card mostra o voto bruto ao lado do rótulo factual", async ({ page }) => {
+    await esperarCards(page);
+    const status = page.locator("[data-status-linha]").filter({ hasText: "Rejeitou isenção" }).first();
+    await expect(status).toContainText("NÃO");
   });
 
   test("carrega a base completa e mostra o contador", async ({ page }) => {
