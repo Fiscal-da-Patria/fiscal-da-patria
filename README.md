@@ -21,6 +21,29 @@ npm install
 npm run dev        # http://localhost:3000
 ```
 
+## Deploy estático (Cloudflare Pages)
+O site é 100% estático. `next.config.ts` usa `output: "export"` e `images.unoptimized: true`;
+`npm run build` (ou `npx next build`) gera a pasta **`out/`**.
+
+1. **GitHub primeiro:** a Cloudflare Pages com Git integration lê o repositório — ela não cria o código.
+   ```bash
+   git remote add origin https://github.com/<usuario>/<repo>.git
+   git branch -M main
+   git push -u origin main
+   ```
+2. **Cloudflare Pages:** Workers & Pages → Create → Pages → **Import an existing Git repository**.
+   - Framework preset: **Next.js (Static HTML Export)**
+   - Build command: **`npx next build`**
+   - Build output directory: **`out`**
+   - Production branch: **`main`**
+3. **Não use Direct Upload** se quiser deploy automático a cada commit: o Direct Upload não pode ser
+   convertido em Git integration depois; ele serve só para testes manuais do `out/`.
+4. Se o build reclamar de Node, defina `NODE_VERSION=22` nas variáveis do projeto (Next 16 exige Node 20.9+).
+5. `metadataBase` aponta para `https://fiscaldapatria.org.br`; ajuste se o primeiro deploy for em `*.pages.dev`.
+
+> `cacheComponents`/PPR **não** são compatíveis com `output: "export"` — o build falha com
+> `Invariant: PPR cannot be enabled in export mode`. Por isso essa opção foi removida do `next.config.ts`.
+
 ## Pipeline de dados (build-time)
 Os dados vêm da API oficial e são consolidados em arquivos estáticos:
 ```bash
@@ -35,8 +58,8 @@ npm run fetch-fotos    # baixa as fotos oficiais para public/fotos/
 | Script | Descrição |
 |---|---|
 | `npm run dev` | Servidor de desenvolvimento |
-| `npm run build` | Build de produção (inclui type-check) |
-| `npm run start` | Servidor de produção |
+| `npm run build` | Build de produção + export estático em `out/` (inclui type-check) |
+| `npm run start` | Servidor Node de produção (não se aplica ao export estático) |
 | `npm run lint` | ESLint |
 | `npm run update-data` | Ingestão unificada Câmara + Senado (API oficial) |
 | `npm run fetch-senado` | 81 senadores, fotos e votos nominais do Senado + auditoria |
