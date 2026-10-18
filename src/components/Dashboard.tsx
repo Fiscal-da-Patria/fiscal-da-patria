@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useState, useSyncExternalStore } from "react";
-import { Clock, ExternalLink, Info, RotateCcw, ScrollText } from "lucide-react";
+import { ChevronRight, Clock, ExternalLink, Info, RotateCcw, ScrollText } from "lucide-react";
 import { SiteHeader } from "@/components/SiteHeader";
 import { SiteFooter } from "@/components/SiteFooter";
 import { WhatsAppShareButton } from "@/components/WhatsAppShareButton";
@@ -374,12 +374,16 @@ export function Dashboard({
                   type="button"
                   data-abrir-detalhe="1"
                   onClick={() => setDetalheAberto(true)}
-                  className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-xl border border-dourado/60 bg-dourado/15 px-3 py-2 text-xs font-bold text-titulo shadow-sm transition hover:bg-dourado/25 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dourado"
+                  aria-haspopup="dialog"
+                  className="mt-2 flex min-h-11 w-full cursor-pointer items-center justify-between gap-3 rounded-xl bg-dourado px-3 py-2.5 text-left text-sm font-black text-verde-mata shadow-sm transition hover:bg-dourado/90 hover:shadow-md"
                 >
-                  <ScrollText className="h-3.5 w-3.5" aria-hidden />
-                  {pautaAtual.status === "ARQUIVADA"
-                    ? "O que aconteceu com a proposta?"
-                    : "O que foi aprovado? Ver a explicação"}
+                  <span className="inline-flex items-center gap-2">
+                    <ScrollText className="h-4 w-4 shrink-0" aria-hidden />
+                    {pautaAtual.status === "ARQUIVADA"
+                      ? "Ver o que aconteceu com a proposta"
+                      : "Ver o que foi aprovado"}
+                  </span>
+                  <ChevronRight className="h-4 w-4 shrink-0" aria-hidden />
                 </button>
               ) : null}
               <a
