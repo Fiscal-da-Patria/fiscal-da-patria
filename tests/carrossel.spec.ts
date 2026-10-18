@@ -78,6 +78,21 @@ test.describe("Carrossel com dots — grupos curados", () => {
     expect(hemiBox?.x ?? -1).toBeGreaterThanOrEqual(0);
   });
 
+  test("os cards do carrossel alinham com o conteúdo (x >= 16)", async ({ page }) => {
+    await page.goto("/");
+    await esperarCards(page);
+    const grafico = await page.getByTestId("grafico-partidos").boundingBox();
+    expect(grafico?.x ?? 0).toBeGreaterThanOrEqual(16);
+
+    await page.goto("/poderes");
+    const poder = await page.locator('[data-poder="legislativo"]').boundingBox();
+    expect(poder?.x ?? 0).toBeGreaterThanOrEqual(16);
+
+    await page.goto("/sobre");
+    const sobre = await page.locator("[data-slide]").first().boundingBox();
+    expect(sobre?.x ?? 0).toBeGreaterThanOrEqual(16);
+  });
+
   test("os carrosséis cabem em 320px", async ({ page }) => {
     await page.setViewportSize({ width: 320, height: 568 });
 
