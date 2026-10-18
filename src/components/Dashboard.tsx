@@ -286,7 +286,7 @@ export function Dashboard({
           ninguém deve rolar 3 telas de gráfico para ver o voto de um deputado.
         */}
         <section className="order-1 mb-6 md:order-none">
-          <h1 className="text-2xl font-black tracking-tight text-titulo sm:text-3xl">
+          <h1 className="text-xl font-black tracking-tight text-titulo sm:text-3xl">
             Veja como o seu deputado e o seu senador votaram nas pautas que mexem no seu bolso
           </h1>
           <p className="mt-2 max-w-2xl text-sm text-corpo">
@@ -305,7 +305,7 @@ export function Dashboard({
               <strong className="font-mono text-titulo">100%</strong> fonte oficial
             </span>
             {atualizadoEm && (
-              <span className="inline-flex items-center gap-1">
+              <span className="hidden items-center gap-1 sm:inline-flex">
                 <Clock className="h-3 w-3" aria-hidden /> Atualizado em {atualizadoEm}
               </span>
             )}
@@ -362,7 +362,6 @@ export function Dashboard({
                 </div>
               </div>
               <h2 className="mt-1 text-lg font-bold text-titulo">{pautaAtual.rotuloPopular}</h2>
-              <p className="mt-1 text-xs text-corpo">{pautaAtual.ementaOficial}</p>
               <p
                 data-exemplo-pratico={pautaAtual.slug}
                 className="mt-2 rounded-lg bg-dourado/10 px-2.5 py-1.5 text-xs leading-relaxed text-titulo sm:border sm:border-dourado/40 sm:px-3 sm:py-2 sm:text-[11px]"
@@ -403,6 +402,7 @@ export function Dashboard({
                 id="detalhes-pauta"
                 className={mostrarDetalhesPauta ? "mt-2" : "mt-2 hidden sm:block"}
               >
+                <p className="mb-2 text-xs text-corpo">{pautaAtual.ementaOficial}</p>
                 <p className="text-xs">
                   <Link
                     href={
@@ -502,7 +502,7 @@ export function Dashboard({
             data-aviso-casa="1"
             className="order-5 mb-4 rounded-xl border border-dourado/50 bg-dourado/5 p-3 md:order-none"
           >
-            <p className="text-[11px] leading-relaxed text-corpo">
+            <p className="text-xs leading-relaxed text-corpo">
               <strong className="text-titulo">
                 {semVotoNaCasa
                   ? pautaAtual.senado?.status === "arquivada" && cargo === "SENADOR"
@@ -513,11 +513,29 @@ export function Dashboard({
                         ? "A Câmara ainda não votou esta matéria."
                         : "Nenhuma votação nominal registrada nesta matéria."
                   : `Votação parcial nesta casa (${aplicaveisNaCasa} de ${totalDaCasa}).`}
-              </strong>{" "}
-              {semVotoNaCasa
-                ? motivoCasa
-                : "Quem não votou aparece como “Sem voto individual” — normalmente porque não estava em exercício na sessão, faltou àquela votação específica ou a matéria segue pendente na outra casa."}
+              </strong>
+              {semVotoNaCasa ? <> {motivoCasa}</> : null}
+              {!semVotoNaCasa && (
+                <span className="hidden sm:inline">
+                  {" "}
+                  Quem não votou aparece como “Sem voto individual” — normalmente porque não estava
+                  em exercício na sessão, faltou àquela votação específica ou a matéria segue
+                  pendente na outra casa.
+                </span>
+              )}
             </p>
+            {!semVotoNaCasa && (
+              <details className="mt-1 text-xs leading-relaxed text-corpo sm:hidden">
+                <summary className="cursor-pointer py-1 font-semibold text-titulo underline decoration-dotted underline-offset-2">
+                  Entenda a contagem
+                </summary>
+                <p className="mt-1">
+                  Quem não votou aparece como “Sem voto individual” — normalmente porque não estava
+                  em exercício na sessão, faltou àquela votação específica ou a matéria segue
+                  pendente na outra casa.
+                </p>
+              </details>
+            )}
             <div className="mt-2 flex flex-wrap gap-2">
               {/* Sem votos na casa, o aviso acima já explicou o motivo: nada de botão extra. */}
               {!semVotoNaCasa && (
