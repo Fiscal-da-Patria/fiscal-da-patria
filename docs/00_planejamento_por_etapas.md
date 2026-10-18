@@ -265,10 +265,11 @@
 - **P0 fechado:** `/sobre` passou a citar **Câmara dos Deputados e Senado Federal** e a linkar `senado.leg.br`; copy antiga de "dossiê" removida; hierarquia de headings; `aria-label` nas navs; **skip link**; foco global; `role="group"`; contador com `aria-live`.
 - **Mobile:** rótulos curtos nas pills (nome acessível completo), header compacto, cartões compartilháveis `aspect-[4/5] max-w-full` e top 5 compacto abaixo de 360px; testes em **320px** sem overflow e sem corte.
 - **Dark mode:** tokens `--status-*`; o verde clareia no escuro com texto escuro e contraste AA medido por teste.
-- **Testes:** `data-hidratado` no Dashboard + `esperarCards()` esperando a hidratação (resolveu a corrida do "Copiar Link"); **196 testes verdes**, `build`, `tsc` e `lint` limpos.
-- **Métricas (P1 + compressão):** home mobile **5.159px**; primeiro card em **~1,69 telas** (chip de status y≈1427). Antes da compressão: 5.307px / 1,87; antes do P1: 7.010px / 2,12; antes do refresh: 7.049px / 2,24.
+- **Testes:** `data-hidratado` no Dashboard + `esperarCards()` esperando a hidratação (resolveu a corrida do "Copiar Link"); **198 testes verdes**, `build`, `tsc` e `lint` limpos.
+- **Métricas (P1 + compressão + overview):** home mobile **4.775px**; primeiro card em **~2,30 telas** (y=1938), com o overview aberto. Sem o overview: 5.159px / 1,69; antes do P1: 7.010px / 2,12; antes do refresh: 7.049px / 2,24.
 - **Acabamento P2:** tokens de WhatsApp/Telegram, legenda **oca** para "Sem voto individual", voto bruto no card (SIM/NÃO/Abstenção) e faixa de auditoria no hero (parlamentares, pautas, 100% fonte oficial e data do JSON).
 - **Carrossel com dots:** `/poderes` (3 Poderes, Câmara×Senado, régua e timeline) e `/sobre` (3 compromissos) usam scroll-snap nativo com dots acessíveis no mobile; o desktop mantém a grade.
+- **Overview mobile:** home com carrossel **Partidos → Congresso**, resumo do placar do recorte e labels dos slides; no desktop os gráficos continuam lado a lado (hemiciclo à esquerda via `lg:order-1`).
 - **P1 mobile:** card compacto (foto + identidade + chip + ações em ícones), detalhes técnicos da pauta recolhíveis, filtros antes das abas, CTA primário para a lista, tipografia de leitura em 12px, `/sobre` sem share duplicado e rótulos "Sobre o projeto" unificados.
 - **Compressão do topo:** hero em 20px no mobile, faixa de auditoria em 1 linha (data só no desktop), ementa dentro de "Ver detalhes", aviso de votação parcial com `<details>` e pills **4 principais + "Ver todas as 11 pautas"**.
 - **Pendente (backlog):** deploy, fotos WebP e OG dinâmico.
