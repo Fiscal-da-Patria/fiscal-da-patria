@@ -7,9 +7,9 @@ e mostra como cada parlamentar votou — sempre com link para a fonte oficial da
 
 ## Princípios inegociáveis
 - **Linguagem popular** e impacto real no bolso/prato do cidadão.
-- **Tolerância zero a desinformação:** apenas votações nominais da API oficial (`dadosabertos.camara.leg.br`) e link para a fonte em cada card.
+- **Tolerância zero a desinformação:** apenas votações nominais das APIs oficiais (`dadosabertos.camara.leg.br` e `senado.leg.br`) e link para a fonte em cada card.
 - **Inversão semântica** respeitada (ex.: na PEC da Blindagem, votar **NÃO** é defender o povo).
-- **Zero database em runtime:** o app lê `public/data/parlamentares.json` (estático).
+- **Zero database em runtime:** o Server Component lê `public/data/parlamentares.json` em build-time (SSG); nenhum banco é consultado em runtime.
 - **Estética cívica**, sem viés partidário.
 
 ## Stack
@@ -46,10 +46,11 @@ npm run fetch-fotos    # baixa as fotos oficiais para public/fotos/
 
 ## Estrutura
 ```
-src/app/          layout, home, /sobre (manifesto) e /poderes (educação cívica)
-src/components/   SiteHeader, SiteFooter, ThemeToggle, CargoTabs, Hemiciclo, PautaPills,
-                  BuscaFiltros, ParlamentarCard, PautaDetalheModal, GraficoPartidos,
-                  ShareModal, ShareCard, ShareCardPartido, SocialShareBar, WhatsAppShareButton
+src/app/          layout e home (Server Component que lê o JSON no build); /sobre e /poderes
+src/components/   Dashboard (ilha cliente), SiteHeader, SiteFooter, ThemeToggle, CargoTabs,
+                  Hemiciclo, PautaPills, BuscaFiltros, ParlamentarCard, PautaDetalheModal,
+                  GraficoPartidos, BarraVotos, Modal, ShareModal, ShareCard, ShareCardPartido,
+                  ShareCardTop5, SocialShareBar, WhatsAppShareButton
 src/lib/          pautas (11 pautas + inversão), parlamentares, partidos, share
 src/types/        contratos de dados
 scripts/          fetch_votes.ts (ingestão unificada), fetch_senado.ts, fetch_tse_votos.ts, fetch_fotos.ts
@@ -100,17 +101,18 @@ public/           og-image.png (1200x630), favicon.ico, apple-touch-icon.png,
 ## Compartilhar (o voto e a matéria no centro)
 - **No card da pauta** (home): botão **"📲 Compartilhar esta votação"** → *"🚨 Votação no Congresso: Comida sem imposto (Cesta Básica)…"* + link `/?pauta=cesta_basica`.
 - **No card do parlamentar**: botão **Compartilhar** gera a imagem 4:5 com **foto, nome, partido/UF, matéria e o voto registrado** (prévia + Compartilhar/Baixar PNG/Copiar link).
-- **No gráfico por partido**: cada bancada tem o próprio cartão 4:5 ("X de N apoiaram/rejeitaram…"), sempre com o recorte declarado.
+- **No gráfico por partido**: o ícone de compartilhar ao lado do título gera **um cartão único com o top 5 de bancadas** (as 5 maiores do recorte, com a manchete factual de cada uma); cada bancada continua com o **seu cartão individual** ("X de N apoiaram/rejeitaram…"), sempre com o recorte declarado. O link compartilhado preserva **pauta + cargo + UF + busca** (ex.: `/?pauta=cesta_basica&cargo=SENADOR&uf=SP`).
 - **O que foi aprovado?** (pautas concluídas): botão no card da matéria abre a explicação factual — status, norma, placares oficiais e os pontos do texto.
 
 ## Gráfico por partido
 O bloco **"Como cada partido votou"** mostra, para a pauta ativa, uma barra empilhada percentual por bancada
 (a favor / contra / abstenção / ausente / sem voto individual), **ordenada pelos partidos com mais votos**
 (bancada maior primeiro) e, no **desempate**, por quem mais votou **CONTRA o cidadão**, com o **% de votos
-contrários** em destaque e a fatia da Casa ("132 (22% da Casa)").
+contrários** em destaque e a fatia do recorte ("132 (22% do recorte)").
 A lista vem **colapsada em 5 partidos**, com o botão "Ver todos os N partidos" (e "mostrar menos") para
 não virar um paredão de informação. Respeita os filtros de cargo, UF e busca — e fica **ao lado do
-hemiciclo**, abaixo do card da matéria. Calculado no cliente, sem requisição extra.
+hemiciclo**, abaixo do card da matéria. Os dados chegam prontos do Server Component; o gráfico é
+calculado no cliente sobre esses dados, **sem requisição extra**.
 
 ## Ordens disponíveis na lista
 | Ordem | O que faz |
@@ -164,7 +166,7 @@ candidatos ou órgãos estatais. Regras de transformação (inversão semântica
 - Os documentos originais em `.docx` ficam preservados em `docs/_originais/`.
 
 ## Testes E2E (Playwright)
-Suíte completa (**164 testes**) que valida o front no Chrome: render/dados, **Congresso (594: 513 deputados + 81 senadores)**, **abas e badges por cargo**, filtros (**inclui estado vazio com "Limpar filtros"**), pautas/hemiciclo (**11 pautas**), **ordenação por gravidade com desempate pelos mais votados**, **compartilhamento por parlamentar e por bancada (imagem 4:5, prévia, PNG e link)**, **WhatsApp/Telegram/X/Copiar**, **deep links**, **OpenGraph / ícones / manifest PWA**, **rodapé jurídico**, **dark mode**, página `/sobre`, **`/poderes` (régua dos votos + linha do tempo)**, **desfecho das 11 pautas (leis, emendas e a blindagem arquivada)**, integridade dos dados (**inclui a regra de ouro: votação simbólica do Senado nunca vira "Ausente"**) e **acessibilidade (axe) em claro e escuro** — além de responsividade mobile.
+Suíte completa (**185 testes**) que valida o front no Chrome: render/dados, **Congresso (594: 513 deputados + 81 senadores)**, **abas e badges por cargo**, filtros (**inclui estado vazio com "Limpar filtros"**), pautas/hemiciclo (**11 pautas**), **ordenação por gravidade com desempate pelos mais votados**, **compartilhamento por parlamentar e por bancada (imagem 4:5, prévia, PNG e link)**, **WhatsApp/Telegram/X/Copiar**, **deep links**, **OpenGraph / ícones / manifest PWA**, **rodapé jurídico**, **dark mode**, página `/sobre`, **`/poderes` (régua dos votos + linha do tempo)**, **desfecho das 11 pautas (leis, emendas e a blindagem arquivada)**, integridade dos dados (**inclui a regra de ouro: votação simbólica do Senado nunca vira "Ausente"**) e **acessibilidade (axe) em claro e escuro** — além de responsividade mobile.
 ```bash
 npm run test:e2e     # sobe o dev server e roda os specs em tests/
 ```
