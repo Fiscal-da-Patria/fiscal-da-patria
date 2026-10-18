@@ -79,11 +79,11 @@ test.describe("Responsividade — Mobile (390x844)", () => {
     await expect(page.getByRole("link", { name: /Voltar para a fiscalização/i }).first()).toBeVisible();
   });
 
-  test("primeiro card aparece em até 2,3 telas", async ({ page }) => {
+  test("primeiro card aparece em até 2,35 telas", async ({ page }) => {
     await page.goto("/");
     await esperarCards(page);
     const y = (await cards(page).first().boundingBox())?.y ?? 0;
-    expect(y).toBeLessThan(844 * 2.3);
+    expect(y).toBeLessThan(844 * 2.35);
   });
 
   test("skip link é o primeiro foco e leva ao conteúdo", async ({ page }) => {

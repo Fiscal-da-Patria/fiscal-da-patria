@@ -47,7 +47,7 @@ test.describe("Pauta — o que foi aprovado", () => {
 
     await expect(page.locator('[data-norma-vigente="1"]')).toContainText(/Arquivada/i);
     await expect(page.locator('[data-abrir-detalhe="1"]')).toContainText(
-      /O que aconteceu com a proposta/i,
+      /Ver o que aconteceu com a proposta/i,
     );
     await page.locator('[data-abrir-detalhe="1"]').click();
 
@@ -68,6 +68,19 @@ test.describe("Pauta — o que foi aprovado", () => {
     const aviso = page.locator('[data-aviso-casa="1"]');
     await expect(aviso).toContainText(/Esta proposta foi arquivada no Senado/i);
     await expect(cards(page)).toHaveCount(0);
+  });
+
+  test("botão 'Ver o que foi aprovado' tem affordance de ação", async ({ page }) => {
+    await page.goto("/?pauta=cesta_basica");
+    await esperarCards(page);
+
+    const botao = page.locator('[data-abrir-detalhe="1"]');
+    await expect(botao).toContainText(/Ver o que foi aprovado/i);
+    await expect(botao).toHaveAttribute("aria-haspopup", "dialog");
+
+    const caixa = await botao.boundingBox();
+    expect(caixa?.height ?? 0).toBeGreaterThanOrEqual(44);
+    await expect(botao).toHaveCSS("cursor", "pointer");
   });
 
   test("combustíveis: o texto não trata da conta de luz", async ({ page }) => {
