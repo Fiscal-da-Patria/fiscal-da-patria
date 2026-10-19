@@ -1,4 +1,5 @@
 import { test, expect, type Page } from "@playwright/test";
+import { SITE_URL } from "../src/lib/site";
 
 /** Lê o atributo `content` de uma meta tag (por `name` ou `property`). */
 async function meta(page: Page, attr: "name" | "property", chave: string) {
@@ -6,6 +7,10 @@ async function meta(page: Page, attr: "name" | "property", chave: string) {
 }
 
 test.describe("Card de compartilhamento (OpenGraph / X)", () => {
+  test("o domínio canônico do projeto é fiscaldapatria.org", () => {
+    expect(SITE_URL).toBe("https://fiscaldapatria.org");
+  });
+
   test("o WhatsApp encontra título, descrição e imagem absoluta", async ({ page }) => {
     await page.goto("/");
     await expect(page).toHaveTitle(/Fiscal da Pátria/);
@@ -18,7 +23,7 @@ test.describe("Card de compartilhamento (OpenGraph / X)", () => {
 
     // URL ABSOLUTA: sem isso o crawler não consegue montar a miniatura.
     expect(await meta(page, "property", "og:image")).toBe(
-      "https://fiscaldapatria.org.br/og-image.png",
+      `${SITE_URL}/og-image.png`,
     );
     expect(await meta(page, "property", "og:image:width")).toBe("1200");
     expect(await meta(page, "property", "og:image:height")).toBe("630");
@@ -29,14 +34,14 @@ test.describe("Card de compartilhamento (OpenGraph / X)", () => {
     await page.goto("/");
     expect(await meta(page, "name", "twitter:card")).toBe("summary_large_image");
     expect(await meta(page, "name", "twitter:image")).toBe(
-      "https://fiscaldapatria.org.br/og-image.png",
+      `${SITE_URL}/og-image.png`,
     );
   });
 
   test("a página /sobre também tem card OpenGraph", async ({ page }) => {
     await page.goto("/sobre");
     expect(await meta(page, "property", "og:image")).toBe(
-      "https://fiscaldapatria.org.br/og-image.png",
+      `${SITE_URL}/og-image.png`,
     );
   });
 });

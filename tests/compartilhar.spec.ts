@@ -1,5 +1,6 @@
 import { test, expect } from "@playwright/test";
 import fs from "node:fs";
+import { SITE_HOST } from "../src/lib/site";
 import { abrirCompartilhar, esperarCards } from "./helpers";
 
 test.describe("Compartilhar o voto (imagem 4:5)", () => {
@@ -14,7 +15,7 @@ test.describe("Compartilhar o voto (imagem 4:5)", () => {
     await expect(cartao).toContainText(/No dia a dia/i);
     await expect(cartao).toContainText(/Deputado Federal|Senador da República/i);
     await expect(cartao).toContainText(/camara\.leg\.br/);
-    await expect(cartao).toContainText(/fiscaldapatria\.org\.br/);
+    await expect(cartao).toContainText(SITE_HOST);
 
     // Nome + partido vêm do card que abriu o modal.
     const nome = (await page.locator("[data-nome]").first().getAttribute("data-nome")) ?? "";

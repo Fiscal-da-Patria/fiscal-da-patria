@@ -1,5 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { PAUTAS, TOTAL_PARLAMENTARES, abrirCompartilhar, esperarCards } from "./helpers";
+import { SITE_HOST } from "../src/lib/site";
 
 /** Extrai um parâmetro de uma URL de compartilhamento. */
 const param = (href: string, chave: string) => new URL(href).searchParams.get(chave) ?? "";
@@ -59,7 +60,7 @@ test.describe("Compartilhar a PAUTA como assunto central", () => {
     const texto = param((await btn.getAttribute("href")) as string, "text");
     expect(texto).toMatch(/Comida sem imposto/i);
     expect(texto).toMatch(/PEC 45\/2019/);
-    expect(texto).toContain("fiscaldapatria.org.br/?pauta=cesta_basica");
+    expect(texto).toContain(`${SITE_HOST}/?pauta=cesta_basica`);
   });
 
   test("trocar de pauta troca o texto compartilhado", async ({ page }) => {

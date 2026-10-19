@@ -1,5 +1,6 @@
 import { test, expect } from "@playwright/test";
 import fs from "node:fs";
+import { SITE_HOST } from "../src/lib/site";
 import { esperarCards } from "./helpers";
 
 test.describe("Compartilhar o top 5 de bancadas", () => {
@@ -43,7 +44,7 @@ test.describe("Compartilhar o top 5 de bancadas", () => {
     await expect(linhas.first()).toContainText(/Apoiou|Rejeitou|Abstenção|Ausente|Empate/);
 
     await expect(cartao).toContainText(/camara\.leg\.br/);
-    await expect(cartao).toContainText(/fiscaldapatria\.org\.br/);
+    await expect(cartao).toContainText(SITE_HOST);
 
     // Nenhuma bancada pode ficar cortada na imagem final (300×375 base).
     const caixa = await cartao.evaluate((el) => ({

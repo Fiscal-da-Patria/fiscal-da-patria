@@ -3,6 +3,7 @@
 import { ShieldCheck } from "lucide-react";
 import { BarraVotos } from "@/components/BarraVotos";
 import { COR_GRAFICO_CARTAO, rotuloAlinhamento } from "@/lib/parlamentares";
+import { SITE_HOST } from "@/lib/site";
 import { ORDEM_VOTOS, TOP_BANCADAS, resumoPartido, type LinhaPartido } from "@/lib/partidos";
 import type { PautaConfig } from "@/types/parlamentar";
 
@@ -92,7 +93,7 @@ export function ShareCardTop5({
       <div className="mt-1 border-t border-white/15 pt-1.5 text-center max-[359px]:pt-1">
         <p className="text-[8px] text-white/80">
           Fonte oficial • {pauta.casa === "SENADO" ? "senado.leg.br" : "camara.leg.br"} ·{" "}
-          <span className="font-bold text-dourado">fiscaldapatria.org.br</span>
+          <span className="font-bold text-dourado">{SITE_HOST}</span>
         </p>
       </div>
     </div>

@@ -10,6 +10,7 @@ import {
   rotuloCargo,
   textoDaCor,
 } from "@/lib/parlamentares";
+import { SITE_HOST } from "@/lib/site";
 import { exemploPratico } from "@/lib/pautas";
 import type { AlinhamentoVoto, PautaConfig, ParlamentarConsolidado } from "@/types/parlamentar";
 
@@ -104,7 +105,7 @@ export function ShareCard({
         <p className="text-[9px] text-white/80">
           Fonte oficial • {pauta.casa === "SENADO" ? "senado.leg.br" : "camara.leg.br"}
         </p>
-        <p className="text-[9px] font-bold text-dourado">fiscaldapatria.org.br</p>
+        <p className="text-[9px] font-bold text-dourado">{SITE_HOST}</p>
       </div>
     </div>
   );

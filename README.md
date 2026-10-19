@@ -57,7 +57,7 @@ No Worker criado em **Workers & Pages → Create application**:
 - `not_found_handling: "404-page"` usa o `404.html` do export.
 - O `name` do `wrangler.jsonc` precisa ser o mesmo nome do Worker no dashboard.
 - Cada push na `main` dispara build + deploy automático.
-- `metadataBase` aponta para `https://fiscaldapatria.org.br`; ajuste se o primeiro deploy for em `*.workers.dev`.
+- O domínio canônico fica em `src/lib/site.ts` (`SITE_URL`/`SITE_HOST`) e a rota correspondente em `wrangler.jsonc`; ajuste os dois se o primeiro deploy for em `*.workers.dev`.
 
 ### Pages (legado, se ainda disponível)
 Se a conta ainda exibir o fluxo antigo de Pages: framework preset **Next.js (Static HTML Export)**,

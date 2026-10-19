@@ -2,13 +2,14 @@
  * Mensagens e URLs de compartilhamento (Dark Social) — Fiscal da Pátria.
  * Módulo puro (sem JSX): importável por componentes e por testes.
  */
+import { SITE_URL } from './site';
 import { ROTULO_VOTO_BRUTO } from './parlamentares';
 import { TOP_BANCADAS, resumoPartido, type LinhaPartido } from './partidos';
 import { rotuloFactual } from './pautas';
 import type { AlinhamentoVoto, VotoCanonico } from '../types/parlamentar';
 
-/** Domínio oficial do projeto. */
-export const SITE_URL = "https://fiscaldapatria.org.br";
+/** Domínio oficial do projeto (fonte única em `site.ts`). */
+export { SITE_URL };
 
 /** Mensagem oficial de compartilhamento (WhatsApp / Telegram). */
 export const MENSAGEM_OFICIAL = [

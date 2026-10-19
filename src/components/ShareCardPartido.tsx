@@ -8,6 +8,7 @@ import {
   rotuloAlinhamento,
   textoDaCor,
 } from "@/lib/parlamentares";
+import { SITE_HOST } from "@/lib/site";
 import { ORDEM_VOTOS, resumoPartido, type LinhaPartido } from "@/lib/partidos";
 import type { PautaConfig } from "@/types/parlamentar";
 
@@ -116,7 +117,7 @@ export function ShareCardPartido({
         <p className="text-[9px] text-white/80">
           Fonte oficial • {pauta.casa === "SENADO" ? "senado.leg.br" : "camara.leg.br"}
         </p>
-        <p className="text-[9px] font-bold text-dourado">fiscaldapatria.org.br</p>
+        <p className="text-[9px] font-bold text-dourado">{SITE_HOST}</p>
       </div>
     </div>
   );

@@ -1,9 +1,11 @@
 import { test, expect } from "@playwright/test";
 import { agregarPorPartido, resumoPartido } from "../src/lib/partidos";
 import { mensagemTop5 } from "../src/lib/share";
+import { SITE_URL } from "../src/lib/site";
 import type { AlinhamentoVoto, ParlamentarConsolidado } from "../src/types/parlamentar";
 
 const SLUG = "cesta_basica";
+const LINK = `${SITE_URL}/?pauta=cesta_basica`;
 
 /** Parlamentar sintético com um voto na pauta. */
 function fake(nome: string, partido: string, voto: AlinhamentoVoto): ParlamentarConsolidado {
@@ -119,7 +121,7 @@ test.describe("Agregação por partido — gráfico e cartão", () => {
         materia: "PEC 45/2019",
       },
       "Congresso Nacional",
-      "https://fiscaldapatria.org.br/?pauta=cesta_basica",
+      LINK,
     );
 
     expect(msg).toContain("Top 3 maiores bancadas — Comida sem imposto");
@@ -127,7 +129,7 @@ test.describe("Agregação por partido — gráfico e cartão", () => {
     expect(msg).toContain("• PT: 2 de 3 (Apoiou isenção)");
     expect(msg).toContain("• PSDB: sem votação nominal");
     expect(msg).toContain("Recorte: Congresso Nacional.");
-    expect(msg).toContain("https://fiscaldapatria.org.br/?pauta=cesta_basica");
+    expect(msg).toContain(LINK);
   });
 
   test("mensagem do top 5 corta a lista nas 5 maiores bancadas", () => {
@@ -149,7 +151,7 @@ test.describe("Agregação por partido — gráfico e cartão", () => {
         materia: "PEC 45/2019",
       },
       "Congresso Nacional",
-      "https://fiscaldapatria.org.br/?pauta=cesta_basica",
+      LINK,
     );
 
     expect(msg).toContain("Top 5 maiores bancadas");

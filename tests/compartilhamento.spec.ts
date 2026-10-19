@@ -1,7 +1,8 @@
 import { test, expect } from "@playwright/test";
+import { SITE_HOST, SITE_URL } from "../src/lib/site";
 import { esperarCards } from "./helpers";
 
-/** Mensagem oficial (duplicada aqui de propósito, para validação independente). */
+/** Mensagem oficial montada com a constante canônica do projeto. */
 const MSG = [
   "Gente, vocês viram isso aqui? 🚨🇧🇷",
   "Quem é patriota de verdade tem que ver antes que sumam com isso!",
@@ -9,7 +10,7 @@ const MSG = [
   "Painel oficial mostra quem votou contra zerar o imposto da comida e quem votou para proteger político de investigação. Só fatos da Câmara!",
   "",
   "Dá uma olhada no seu deputado: 👇",
-  "https://fiscaldapatria.org.br",
+  SITE_URL,
 ].join("\n");
 
 const TEXTO_X =
@@ -40,7 +41,7 @@ test.describe("Compartilhamento (Dark Social)", () => {
     const tg = footer.getByRole("link", { name: "Telegram" });
     await expect(tg).toHaveAttribute("href", /^https:\/\/t\.me\/share\/url\?url=/);
     expect(param((await tg.getAttribute("href")) as string, "url")).toBe(
-      "https://fiscaldapatria.org.br",
+      SITE_URL,
     );
 
     const x = footer.getByRole("link", { name: "X (Twitter)" });
@@ -73,7 +74,7 @@ test.describe("Compartilhamento (Dark Social)", () => {
     await footer.getByRole("button", { name: /Copiar Link/ }).click();
     await expect(footer.getByRole("button", { name: /Copiado! ✓/ })).toBeVisible();
     expect(await page.evaluate(() => navigator.clipboard.readText())).toBe(
-      "https://fiscaldapatria.org.br",
+      SITE_URL,
     );
     await expect(footer.getByRole("button", { name: /Copiar Link/ })).toBeVisible({
       timeout: 5_000,
@@ -97,7 +98,8 @@ test.describe("Compartilhamento (Dark Social)", () => {
 
     const copiado = await page.evaluate(() => navigator.clipboard.readText());
     expect(copiado).toMatch(/Nesta votação/);
-    expect(copiado).toMatch(/fiscaldapatria\.org\.br\/\?deputado=(camara|senado)-\d+&pauta=/);
+    expect(copiado).toContain(`${SITE_HOST}/?deputado=`);
+    expect(copiado).toMatch(/deputado=(camara|senado)-\d+&pauta=/);
   });
 
   test("Web Share aparece apenas quando o navegador suporta", async ({ page }) => {

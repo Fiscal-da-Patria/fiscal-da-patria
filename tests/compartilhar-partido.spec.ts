@@ -1,5 +1,6 @@
 import { test, expect } from "@playwright/test";
 import fs from "node:fs";
+import { SITE_HOST } from "../src/lib/site";
 import { esperarCards } from "./helpers";
 
 test.describe("Compartilhar o cartão de uma bancada", () => {
@@ -31,7 +32,7 @@ test.describe("Compartilhar o cartão de uma bancada", () => {
     await expect(cartao).toContainText(/\d+ de \d+/);
     await expect(cartao).toContainText(/Apoiou|Rejeitou|Abstenção|Ausente|Empate/);
     await expect(cartao).toContainText(/camara\.leg\.br/);
-    await expect(cartao).toContainText(/fiscaldapatria\.org\.br/);
+    await expect(cartao).toContainText(SITE_HOST);
   });
 
   test("baixa um PNG válido da bancada", async ({ page }) => {

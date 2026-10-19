@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -17,7 +18,7 @@ const geistMono = Geist_Mono({
  * `metadataBase` é obrigatório para o crawler montar a URL ABSOLUTA da imagem OG.
  */
 export const metadata: Metadata = {
-  metadataBase: new URL("https://fiscaldapatria.org.br"),
+  metadataBase: new URL(SITE_URL),
   title: "Fiscal da Pátria — Veja como seu deputado e senador votaram",
   description:
     "Veja como seu deputado e seu senador votaram no prato de comida e na blindagem de políticos. Auditoria cívica das votações nominais da Câmara dos Deputados e do Senado Federal, em linguagem popular e sempre com link para a fonte oficial.",

@@ -3,6 +3,14 @@
   // O `name` precisa ser o mesmo do Worker criado no dashboard.
   "name": "fiscal-da-patria",
   "compatibility_date": "2026-10-18",
+  // Custom Domain: mantenha em sincronia com `src/lib/site.ts`.
+  // Atenção: só faça deploy depois que a zona `fiscaldapatria.org` estiver ativa na Cloudflare.
+  "routes": [
+    {
+      "pattern": "fiscaldapatria.org",
+      "custom_domain": true
+    }
+  ],
   "assets": {
     "directory": "./out/",
     "not_found_handling": "404-page",
