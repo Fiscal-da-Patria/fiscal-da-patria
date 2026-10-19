@@ -65,6 +65,14 @@ test.describe("Home — estrutura e dados", () => {
     await expect(page.locator("[data-compartilhar-card]").first()).toBeVisible();
   });
 
+  test("o partido aparece em negrito no card", async ({ page }) => {
+    await esperarCards(page);
+    const partido = page.locator("[data-partido]").first();
+    await expect(partido).toBeVisible();
+    await expect(partido).toHaveClass(/font-bold/);
+    await expect(partido).toHaveCSS("font-weight", "700");
+  });
+
   test("hemiciclo com legenda completa", async ({ page }) => {
     await expect(page.getByRole("img", { name: /Distribuição dos votos/i })).toBeVisible();
     await expect(page.getByText(/Apoiou isenção:/)).toBeVisible();

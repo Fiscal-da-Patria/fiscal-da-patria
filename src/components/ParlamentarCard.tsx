@@ -77,13 +77,15 @@ export function ParlamentarCard({
               className={`whitespace-nowrap rounded px-1.5 py-0.5 text-[11px] font-bold ${
                 p.cargo === "SENADOR"
                   ? "border border-dourado/60 bg-dourado/15 text-titulo"
-                  : "border border-verde-bandeira/40 bg-verde-bandeira/10 text-titulo"
+                  : "border border-tag-verde-borda bg-tag-verde-fundo text-titulo"
               }`}
               data-cargo={p.cargo}
             >
               {rotuloCargo(p.cargo)} • {p.uf}
             </span>
-            <span className="truncate text-xs text-corpo">{p.partido}</span>
+            <span data-partido="1" className="truncate text-xs font-bold text-corpo">
+              {p.partido}
+            </span>
           </div>
         </div>
       </div>

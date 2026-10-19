@@ -35,6 +35,11 @@
   --status-nao-aplicavel-bg: #94a3b8;
   --status-nao-aplicavel-texto: #0f2f1d;
 
+  /* Tags verdes (norma vigente, votação nominal e cargo). No escuro, o verde
+     de marca a 10% sumiria na superfície #12211c. */
+  --tag-verde-borda: rgba(27, 77, 62, 0.4);
+  --tag-verde-fundo: rgba(27, 77, 62, 0.1);
+
   /* Anel de foco acessível (verde no claro; dourado no escuro). */
   --foco: #0f2f1d;
 }
@@ -58,6 +63,10 @@
 
   --status-favoravel-bg: #4caf82;
   --status-favoravel-texto: #0f2f1d;
+
+  /* Usa o verde claro já existente no tema escuro (#4caf82). */
+  --tag-verde-borda: rgba(76, 175, 130, 0.7);
+  --tag-verde-fundo: rgba(76, 175, 130, 0.16);
 
   --foco: #d9a726;
 }
@@ -91,6 +100,10 @@
   --color-contra-texto: var(--contra-texto);
   --color-abstencao: #64748b;
   --color-ausente: #cbd5e1;
+
+  /* Tags verdes semânticas (claro e escuro). */
+  --color-tag-verde-borda: var(--tag-verde-borda);
+  --color-tag-verde-fundo: var(--tag-verde-fundo);
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);

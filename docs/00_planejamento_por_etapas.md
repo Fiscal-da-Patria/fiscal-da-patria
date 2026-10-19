@@ -32,6 +32,7 @@
 | 23 | Refresh visual, mobile e P0/P1 | A11y estrutural, 320px, status dark, escopo Câmara+Senado, card compacto, pills com Ver todas, carrossel com dots e testes | ✅ |
 | 24 | Pauta das bets + ordem por interesse | PL 3626/2023 → Lei 14.790/2023; MP 1.394/2026; 12 pautas; 5 pills | ✅ |
 | 24.1 | Timeline mobile vertical | Corrige cards de 3.225px e troca o carrossel por timeline vertical; 5 colunas no desktop | ✅ |
+| 24.2 | Refinos de leitura: partido, filtro e tags | Partido em negrito, status informativo e tokens de tag no dark | ✅ |
 | 25 | Deploy | Publicação (Vercel/Cloudflare Pages) + domínio | ⏳ próxima |
 | 26 | Otimização de fotos (WebP) | Reduzir o peso de `public/fotos` | ⏳ backlog |
 | 27 | OG dinâmico / Kit por estado | Crescimento e viralidade | ⏳ backlog |
@@ -291,6 +292,12 @@
 - **Causa:** os `<li>` usavam `w-[82%]` dentro de um `<ol>` com `w-max`; a porcentagem resolvia contra o max-content e cada card virava ~3.225px (trilho de 16.174px). No mobile só uma fatia do texto aparecia.
 - **Correção:** no mobile a timeline virou uma coluna vertical com linha à esquerda, ícone e card; no desktop continua `md:grid-cols-5` com a linha horizontal. O carrossel foi removido só dessa seção.
 - **Testes:** `poderes.spec` verifica empilhamento em 390px e 5 colunas em 1280px; `carrossel.spec` passou a cobrir 3 grupos. **205 testes verdes**, build/tsc/lint limpos.
+
+### Etapa 24.2 — Refinos de leitura: partido, filtro e tags verdes ✅
+- **Partido:** o card da listagem mostra o partido em **negrito** (`data-partido` para o teste), separando-o da UF sem criar um segundo chip.
+- **Filtro “só quem votou”:** quando ativo, o estado deixa de parecer um botão e vira um **badge informativo** (`role="status"`), com a ação explícita **“Mostrar todos”** ao lado. Sem `aria-pressed` no status; ao desfazer, a paginação volta para 20.
+- **Tags verdes no dark:** novos tokens semânticos `--tag-verde-borda`/`--tag-verde-fundo` (`@theme inline`), com override `.dark` usando o verde claro `#4caf82`. Aplicados na norma vigente, na tag “Votação nominal”, no chip de cargo de deputado e no status do modal de pauta. As tags douradas (Senado/arquivada/revogada) não mudaram.
+- **Validação:** `home.spec` confere `font-weight: 700` no partido; `casa-sem-voto.spec` confere badge informativo, ausência de botão com o texto do status, “Mostrar todos” e a volta dos 81 cards. **206 testes verdes**, `tsc`, `lint` e `build` limpos.
 
 ## Decisões-chave (registro)
 1. **Pautas:** as 7 do PRD, com IDs reais e **curadoria manual** da votação-chave.

@@ -343,7 +343,7 @@ export function Dashboard({
                       className={`rounded border px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-titulo ${
                         pautaAtual.status === "ARQUIVADA" || pautaAtual.status === "REVOGADA"
                           ? "border-dourado/60 bg-dourado/15"
-                          : "border-verde-bandeira/40 bg-verde-bandeira/10"
+                          : "border-tag-verde-borda bg-tag-verde-fundo"
                       }`}
                     >
                       {pautaAtual.status === "ARQUIVADA"
@@ -357,7 +357,7 @@ export function Dashboard({
                     className={`hidden rounded px-2 py-0.5 text-[10px] font-bold sm:inline ${
                       pautaAtual.casa === "SENADO"
                         ? "border border-dourado/60 bg-dourado/15 text-titulo"
-                        : "border border-verde-bandeira/40 bg-verde-bandeira/10 text-titulo"
+                        : "border border-tag-verde-borda bg-tag-verde-fundo text-titulo"
                     }`}
                   >
                     Votação nominal
@@ -587,20 +587,42 @@ export function Dashboard({
             )}
             <div className="mt-2 flex flex-wrap gap-2">
               {/* Sem votos na casa, o aviso acima já explicou o motivo: nada de botão extra. */}
-              {!semVotoNaCasa && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setSoVotaram(true);
-                    setVisiveis(POR_PAGINA);
-                  }}
-                  aria-pressed={soVotaram}
-                  data-so-votaram="1"
-                  className="rounded-full border border-borda bg-superficie px-2.5 py-1 text-[11px] font-bold text-titulo transition hover:border-dourado"
-                >
-                  {soVotaram ? "👁️ Mostrando só quem votou" : "👁️ Ver só quem votou nesta matéria"}
-                </button>
-              )}
+              {!semVotoNaCasa &&
+                (soVotaram ? (
+                  <div
+                    data-so-votaram="1"
+                    className="inline-flex flex-wrap items-center gap-2 text-[11px]"
+                  >
+                    <span
+                      role="status"
+                      className="inline-flex items-center gap-1.5 rounded-full border border-tag-verde-borda bg-tag-verde-fundo px-2.5 py-1 font-semibold text-titulo"
+                    >
+                      👁️ Mostrando só quem votou
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSoVotaram(false);
+                        setVisiveis(POR_PAGINA);
+                      }}
+                      className="font-semibold text-titulo underline decoration-dotted underline-offset-2"
+                    >
+                      Mostrar todos
+                    </button>
+                  </div>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSoVotaram(true);
+                      setVisiveis(POR_PAGINA);
+                    }}
+                    data-so-votaram="1"
+                    className="rounded-full border border-borda bg-superficie px-2.5 py-1 text-[11px] font-bold text-titulo transition hover:border-dourado"
+                  >
+                    👁️ Ver só quem votou nesta matéria
+                  </button>
+                ))}
               {cargo !== "TODOS" && (
                 <button
                   type="button"

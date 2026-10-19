@@ -46,7 +46,9 @@ test.describe("Pautas sem voto na casa filtrada (clareza do dado)", () => {
     await expect(aviso).toContainText(/Votação parcial nesta casa \(70 de 81\)/i);
   });
 
-  test("toggle 'ver só quem votou' remove os 'Sem voto individual'", async ({ page }) => {
+  test("status 'Mostrando só quem votou' é informativo e 'Mostrar todos' restaura a lista", async ({
+    page,
+  }) => {
     await page.goto("/");
     await esperarCards(page);
     await page.getByRole("button", { name: /Senadores \(81\) · 70 votaram/ }).click();
@@ -56,9 +58,22 @@ test.describe("Pautas sem voto na casa filtrada (clareza do dado)", () => {
     await page.locator('[data-so-votaram="1"]').click();
     await carregarTodos(page);
     await expect.poll(async () => await cards(page).count(), { timeout: 15_000 }).toBe(70);
-    await expect(page.locator('[data-so-votaram="1"]')).toContainText(/Mostrando só quem votou/i);
+
+    // Ativo: o estado vira um badge informativo, não um botão com aria-pressed.
+    const status = page.locator('[data-so-votaram="1"] [role="status"]');
+    await expect(status).toHaveText(/Mostrando só quem votou/i);
+    await expect(page.getByRole("button", { name: /Mostrando só quem votou/i })).toHaveCount(0);
+    await expect(page.locator('[data-so-votaram="1"]')).not.toHaveAttribute("aria-pressed");
     await expect(page.locator("[data-nome]").filter({ hasText: "Sem voto individual" })).toHaveCount(
       0,
+    );
+
+    // A ação separada desfaz o filtro e devolve os 81 (20 por vez + carregar mais).
+    await page.getByRole("button", { name: "Mostrar todos" }).click();
+    await carregarTodos(page);
+    await expect.poll(async () => await cards(page).count(), { timeout: 15_000 }).toBe(81);
+    await expect(page.locator('[data-so-votaram="1"]')).toContainText(
+      /Ver só quem votou nesta matéria/i,
     );
   });
 

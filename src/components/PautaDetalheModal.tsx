@@ -63,7 +63,7 @@ export function PautaDetalheModal({
                 className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-[11px] font-bold uppercase tracking-wide text-titulo ${
                   encerrada
                     ? "border-dourado/60 bg-dourado/15"
-                    : "border-verde-bandeira/40 bg-verde-bandeira/10"
+                    : "border-tag-verde-borda bg-tag-verde-fundo"
                 }`}
               >
                 {encerrada ? (
