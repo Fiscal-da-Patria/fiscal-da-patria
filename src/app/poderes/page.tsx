@@ -22,6 +22,7 @@ export const metadata: Metadata = {
   title: "Entenda os Poderes | Fiscal da Pátria",
   description:
     "Os três Poderes da República, a régua dos votos (PEC exige 308/49; lei complementar 257/41) e a linha do tempo de uma lei — tudo em linguagem popular. Entenda por que o Fiscal da Pátria fiscaliza o Poder Legislativo.",
+  alternates: { canonical: "/poderes" },
 };
 
 interface Poder {

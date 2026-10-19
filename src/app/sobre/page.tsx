@@ -17,6 +17,7 @@ export const metadata: Metadata = {
   title: "Sobre Nós — Manifesto Cívico | Fiscal da Pátria",
   description:
     "Manifesto cívico do Fiscal da Pátria: apenas fatos, zero opinião. Independência, fonte oficial e código aberto.",
+  alternates: { canonical: "/sobre" },
 };
 
 export default function SobrePage() {

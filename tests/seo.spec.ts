@@ -46,6 +46,38 @@ test.describe("Card de compartilhamento (OpenGraph / X)", () => {
   });
 });
 
+test.describe("Canonical e indexação", () => {
+  test("canonical aponta para a URL oficial de cada página", async ({ page }) => {
+    const rotas: Array<[string, RegExp]> = [
+      ["/", new RegExp(`^${SITE_URL.replace(/\./g, "\\.")}/?$`)],
+      ["/sobre", new RegExp(`^${SITE_URL.replace(/\./g, "\\.")}/sobre$`)],
+      ["/poderes", new RegExp(`^${SITE_URL.replace(/\./g, "\\.")}/poderes$`)],
+    ];
+    for (const [rota, esperado] of rotas) {
+      await page.goto(rota);
+      await expect(page.locator('link[rel="canonical"]')).toHaveAttribute("href", esperado);
+    }
+  });
+
+  test("robots.txt libera o site e aponta o sitemap", async ({ request }) => {
+    const r = await request.get("/robots.txt");
+    expect(r.status()).toBe(200);
+    const texto = await r.text();
+    expect(texto).toMatch(/User-Agent:\s*\*/i);
+    expect(texto).toMatch(/Allow:\s*\//i);
+    expect(texto).toContain(`Sitemap: ${SITE_URL}/sitemap.xml`);
+  });
+
+  test("sitemap.xml lista as páginas públicas", async ({ request }) => {
+    const r = await request.get("/sitemap.xml");
+    expect(r.status()).toBe(200);
+    const xml = await r.text();
+    expect(xml).toContain(`<loc>${SITE_URL}`);
+    expect(xml).toContain(`${SITE_URL}/sobre`);
+    expect(xml).toContain(`${SITE_URL}/poderes`);
+  });
+});
+
 test.describe("Ícones, favicon e PWA", () => {
   test("HTML declara favicon, apple-touch-icon, manifest e theme-color", async ({ page }) => {
     await page.goto("/");

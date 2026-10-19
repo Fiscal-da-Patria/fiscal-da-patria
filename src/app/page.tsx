@@ -1,7 +1,12 @@
+import type { Metadata } from "next";
 import { readFileSync, statSync } from "node:fs";
 import path from "node:path";
 import { Dashboard } from "@/components/Dashboard";
 import type { ParlamentarConsolidado } from "@/types/parlamentar";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 /**
  * Server Component: lê o JSON consolidado em build-time e entrega o dashboard
