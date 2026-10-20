@@ -1,20 +1,25 @@
 {
   "_descricao": "Auditoria do mapeamento das pautas do MVP para as votações nominais do Senado Federal. Gerado por scripts/fetch_senado.ts.",
-  "_verificadoEm": "2026-10-18T18:57:36.728Z",
+  "_verificadoEm": "2026-10-20T22:54:47.895Z",
   "_metodo": "Lista de senadores (/senador/lista/atual.json) + votos individuais (/votacao JSON ou /plenario/lista/votacao XML do dia).",
+  "_nota": "sim/nao/abstencoes/outros = senadores em exercício hoje; registros = painel completo.",
   "votacoes": [
     {
       "pauta": "cesta_basica",
       "materia": "PEC 45/2019",
-      "codigoSessaoVotacao": 6773,
+      "codigoSessaoVotacao": 6777,
       "dataSessao": "2023-11-08",
-      "descricao": "Votação nominal da Emenda nº 803 (Substitutivo) e das Emendas e Subemendas de Plenário, em primeiro turno, nos termos dos pareceres, ressalvados os destaques.",
+      "descricao": "Votação nominal da Proposta de Emenda à Constituição nº 45, de 2019, em segundo turno.",
       "status": "nominal",
       "registros": 81,
+      "registrosAtuais": 73,
       "sim": 48,
       "nao": 22,
       "abstencoes": 0,
       "outros": 3,
+      "outrosDetalhe": {
+        "AP": 3
+      },
       "fonte": "https://legis.senado.leg.br/dadosabertos/plenario/lista/votacao/20231108 (painel XML)"
     },
     {
@@ -25,24 +30,37 @@
       "descricao": "Votação nominal da Proposta de Emenda à Constituição nº 221, de 2019, em segundo turno.",
       "status": "nominal",
       "registros": 81,
+      "registrosAtuais": 81,
       "sim": 75,
       "nao": 1,
       "abstencoes": 0,
       "outros": 5,
+      "outrosDetalhe": {
+        "PRESIDENTE (ART. 51 RISF)": 1,
+        "P-NRV": 2,
+        "AP": 1,
+        "NCOM": 1
+      },
       "fonte": "https://legis.senado.leg.br/dadosabertos/votacao (catálogo JSON)"
     },
     {
       "pauta": "aposentadoria_agentes_saude",
       "materia": "PEC 14/2021",
-      "codigoSessaoVotacao": 7096,
+      "codigoSessaoVotacao": 7097,
       "dataSessao": "2026-07-14",
-      "descricao": "Votação nominal da Proposta de Emenda à Constituição nº 14, de 2021, nos termos do parecer (1º turno).",
+      "descricao": "Votação nominal da Proposta de Emenda à Constituição nº 14, de 2021, em segundo turno.",
       "status": "nominal",
       "registros": 81,
+      "registrosAtuais": 77,
       "sim": 70,
       "nao": 1,
       "abstencoes": 0,
       "outros": 6,
+      "outrosDetalhe": {
+        "AP": 3,
+        "PRESIDENTE (ART. 51 RISF)": 1,
+        "P-NRV": 2
+      },
       "fonte": "https://legis.senado.leg.br/dadosabertos/votacao (catálogo JSON)"
     },
     {
@@ -53,10 +71,18 @@
       "descricao": "Votação nominal da Emenda nº 117 (Substitutivo) ao Projeto de Lei nº 5.582, de 2025, nos termos do parecer.",
       "status": "nominal",
       "registros": 81,
+      "registrosAtuais": 74,
       "sim": 58,
       "nao": 0,
       "abstencoes": 0,
       "outros": 16,
+      "outrosDetalhe": {
+        "LS": 3,
+        "AP": 5,
+        "P-NRV": 6,
+        "NCOM": 1,
+        "PRESIDENTE (ART. 51 RISF)": 1
+      },
       "fonte": "https://legis.senado.leg.br/dadosabertos/votacao (catálogo JSON)"
     },
     {
@@ -67,10 +93,16 @@
       "descricao": "Votação nominal do Projeto de Lei Complementar nº 114, de 2026, nos termos do parecer, ressalvado o destaque.",
       "status": "nominal",
       "registros": 81,
+      "registrosAtuais": 77,
       "sim": 58,
       "nao": 2,
       "abstencoes": 0,
       "outros": 17,
+      "outrosDetalhe": {
+        "P-NRV": 15,
+        "PRESIDENTE (ART. 51 RISF)": 1,
+        "AP": 1
+      },
       "fonte": "https://legis.senado.leg.br/dadosabertos/votacao (catálogo JSON)"
     }
   ],
@@ -85,7 +117,7 @@
       "pauta": "fim_blindagem",
       "materia": "PEC 3/2021",
       "status": "arquivada",
-      "nota": "A Câmara aprovou em 17/09/2025 e enviou ao Senado (PEC 3-C/2021). A CCJ do Senado rejeitou a proposta por inconstitucionalidade em 24/09/2025 e a matéria foi arquivada — não houve votação nominal no plenário."
+      "nota": "A Câmara aprovou em 17/09/2025 e enviou ao Senado (PEC 3-C/2021). A CCJ do Senado rejeitou a proposta por inconstitucionalidade em 24/09/2025 e a matéria foi arquivada em 25/09/2025 — não houve votação nominal no plenário."
     },
     {
       "pauta": "ir_isento",

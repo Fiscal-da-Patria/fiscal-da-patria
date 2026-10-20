@@ -9,8 +9,9 @@
  *
  * Princípios (iguais aos da Câmara):
  *   - apenas fonte oficial; **nenhum voto é inventado**;
- *   - voto que não é Sim/Não/Abstenção (AP, LS, P-NRV, NCom, Presidente) vira
- *     `AUSENTE`, com o texto bruto preservado para auditoria;
+ *   - voto que não é Sim/Não/Abstenção é tratado como status oficial:
+ *     `NCom` = ausência real; `AP`, `LS`, `P-NRV` e `Presidente` = sem voto
+ *     individual (`NAO_APLICAVEL`, com o motivo no card);
  *   - mesma regra única de inversão semântica (`aplicarInversao`);
  *   - falha ⇒ aborta SEM sobrescrever os arquivos.
  *
@@ -24,7 +25,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-import { PAUTAS, aplicarInversao, normalizarVotoSenado } from '../src/lib/pautas';
+import { PAUTAS, aplicarInversao, normalizarVotoSenado, statusNaoVotoSenado } from '../src/lib/pautas';
 import type { AlinhamentoVoto, VotoCanonico } from '../src/types/parlamentar';
 
 const BASE = 'https://legis.senado.leg.br/dadosabertos';
@@ -162,6 +163,7 @@ async function main(): Promise<void> {
       urlPerfilOficial: `https://www25.senado.leg.br/web/senadores/senador/-/perfil/${codigo}`,
       votos: {} as Record<string, AlinhamentoVoto>,
       votosOriginais: {} as Record<string, VotoCanonico>,
+      motivos: {} as Record<string, string>,
     };
   });
 
@@ -197,10 +199,29 @@ async function main(): Promise<void> {
     let nao = 0;
     let abst = 0;
     let outros = 0;
+    let processados = 0;
+    const outrosDetalhe: Record<string, number> = {};
 
     for (const s of senadores) {
       const bruto = votos.get(s._codigo);
       if (bruto === undefined) continue; // não estava em exercício na data da votação
+      processados++;
+
+      const status = statusNaoVotoSenado(bruto);
+      if (status) {
+        const chave = bruto.trim().toUpperCase();
+        outrosDetalhe[chave] = (outrosDetalhe[chave] ?? 0) + 1;
+        outros++;
+        if (status.ausente) {
+          s.votos[pauta.slug] = 'AUSENTE';
+          s.votosOriginais[pauta.slug] = 'AUSENTE';
+        } else {
+          s.votos[pauta.slug] = 'NAO_APLICAVEL';
+        }
+        s.motivos[pauta.slug] = status.motivo;
+        continue;
+      }
+
       const canonico = normalizarVotoSenado(bruto);
       if (canonico === 'SIM') sim++;
       else if (canonico === 'NAO') nao++;
@@ -212,6 +233,12 @@ async function main(): Promise<void> {
       comVoto.add(s._codigo);
     }
 
+    if (sim + nao + abst + outros !== processados) {
+      throw new Error(
+        `Reconciliação falhou em ${pauta.slug}: atuais no painel=${processados}, contados=${sim + nao + abst + outros}.`,
+      );
+    }
+
     auditoria.push({
       pauta: pauta.slug,
       materia: pauta.materia,
@@ -220,10 +247,12 @@ async function main(): Promise<void> {
       descricao: conf.descricao,
       status: conf.status,
       registros: votos.size,
+      registrosAtuais: processados,
       sim,
       nao,
       abstencoes: abst,
       outros,
+      outrosDetalhe,
       fonte,
     });
     console.log(
@@ -258,6 +287,8 @@ async function main(): Promise<void> {
         _verificadoEm: new Date().toISOString(),
         _metodo:
           'Lista de senadores (/senador/lista/atual.json) + votos individuais (/votacao JSON ou /plenario/lista/votacao XML do dia).',
+        _nota:
+          'sim/nao/abstencoes/outros = senadores em exercício hoje; registros = painel completo.',
         votacoes: auditoria,
         semVotoNominal: PAUTAS.filter((p) => p.senado && p.senado.status !== 'nominal').map((p) => ({
           pauta: p.slug,

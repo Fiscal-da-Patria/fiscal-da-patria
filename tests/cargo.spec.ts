@@ -68,7 +68,7 @@ test.describe("Congresso: cargo, abas e votos do Senado", () => {
     await page.goto("/");
     await esperarCards(page);
     await page.getByLabel("Ordenar a lista").selectOption("maisVotados");
-    await expect(page.getByText(/Mostrando os mais votados na eleição/i)).toBeVisible();
+    await expect(page.getByText(/Mostrando os mais votados no último pleito/i)).toBeVisible();
 
     const nomes = await page
       .locator("[data-nome]")

@@ -559,7 +559,7 @@ export function Dashboard({
                       : cargo === "SENADOR"
                         ? "O Senado ainda não votou esta matéria."
                         : cargo === "DEPUTADO"
-                          ? "Não há votação nominal da Câmara nesta matéria."
+                          ? "Esta pauta é auditada no Senado Federal."
                           : "Nenhuma votação nominal registrada nesta matéria."
                   : `Votação parcial nesta casa (${aplicaveisNaCasa} de ${totalDaCasa}).`}
               </strong>
@@ -567,9 +567,9 @@ export function Dashboard({
               {!semVotoNaCasa && (
                 <span className="hidden sm:inline">
                   {" "}
-                  Quem não votou aparece como “Sem voto individual” — normalmente porque não estava
-                  em exercício na sessão, faltou àquela votação específica ou a matéria segue
-                  pendente na outra casa.
+                  Quem estava em exercício e não registrou voto aparece como “Ausente”. Quem não
+                  estava em exercício — ou não vota por regimento (ex.: Presidente) — aparece como
+                  “Sem voto individual”, com o motivo no card.
                 </span>
               )}
             </p>
@@ -579,9 +579,9 @@ export function Dashboard({
                   Entenda a contagem
                 </summary>
                 <p className="mt-1">
-                  Quem não votou aparece como “Sem voto individual” — normalmente porque não estava
-                  em exercício na sessão, faltou àquela votação específica ou a matéria segue
-                  pendente na outra casa.
+                  Quem estava em exercício e não registrou voto aparece como “Ausente”. Quem não
+                  estava em exercício — ou não vota por regimento (ex.: Presidente) — aparece como
+                  “Sem voto individual”, com o motivo no card.
                 </p>
               </details>
             )}

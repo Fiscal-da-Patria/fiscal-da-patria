@@ -16,15 +16,15 @@ export const MENSAGEM_OFICIAL = [
   "Gente, vocês viram isso aqui? 🚨🇧🇷",
   "Quem é patriota de verdade tem que ver antes que sumam com isso!",
   "",
-  "Painel oficial mostra quem votou contra zerar o imposto da comida e quem votou para proteger político de investigação. Só fatos da Câmara!",
+  "Painel oficial mostra quem votou contra zerar o imposto da comida e quem votou para proteger político de investigação. Só fatos oficiais do Congresso!",
   "",
-  "Dá uma olhada no seu deputado: 👇",
+  "Dá uma olhada no seu deputado ou senador: 👇",
   SITE_URL,
 ].join("\n");
 
 /** Texto curto para o X (Twitter) — termina com quebra de linha, conforme especificado. */
 export const TEXTO_X =
-  "Gente, vocês viram isso aqui? 🚨🇧🇷 O painel oficial que mostra como cada deputado votou na comida, no IR e na blindagem de políticos:\n";
+  "Gente, vocês viram isso aqui? 🚨🇧🇷 O painel oficial que mostra como cada parlamentar votou na comida, no IR e na blindagem de políticos:\n";
 
 /** Link de compartilhamento do WhatsApp (encoding seguro). */
 export function urlWhatsApp(mensagem: string = MENSAGEM_OFICIAL): string {

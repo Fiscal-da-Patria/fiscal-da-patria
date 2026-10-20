@@ -39,6 +39,7 @@ export function ParlamentarCard({
     bruto === "SIM" || bruto === "NAO" || bruto === "ABSTENCAO"
       ? ROTULO_VOTO_BRUTO[bruto]
       : null;
+  const anoEleicao = p.anoEleicao ? ` em ${p.anoEleicao}` : "";
 
   return (
     <div
@@ -64,8 +65,8 @@ export function ParlamentarCard({
             {p.votosEleicao > 0 && (
               <span
                 data-votos={p.votosEleicao}
-                title={`${p.votosEleicao.toLocaleString("pt-BR")} votos recebidos nas urnas (TSE)`}
-                aria-label={`${p.votosEleicao.toLocaleString("pt-BR")} votos recebidos nas urnas (TSE)`}
+                title={`${p.votosEleicao.toLocaleString("pt-BR")} votos recebidos nas urnas${anoEleicao} (TSE)`}
+                aria-label={`${p.votosEleicao.toLocaleString("pt-BR")} votos recebidos nas urnas${anoEleicao} (TSE)`}
                 className="hidden shrink-0 items-center rounded-md border border-dourado/60 bg-dourado/15 px-1.5 py-0.5 font-mono text-[11px] font-bold text-titulo sm:inline-flex"
               >
                 🗳️ {numeroCompacto(p.votosEleicao)} votos

@@ -202,8 +202,9 @@ export default function SobrePage() {
               voto.
             </li>
             <li>
-              <strong className="text-titulo">Sem voto individual</strong> — a casa não teve votação
-              nominal (votação simbólica) ou a matéria ainda não foi apreciada por ela. O motivo
+              <strong className="text-titulo">Sem voto individual</strong> — não havia voto a
+              auditar: a casa não teve votação nominal (votação simbólica), o parlamentar não estava
+              em exercício na data ou o regimento não permite o voto (ex.: Presidente). O motivo
               aparece no próprio card.
             </li>
           </ul>

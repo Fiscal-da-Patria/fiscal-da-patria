@@ -208,7 +208,7 @@ export const BANNER_ORDEM: Record<Ordem, string> = {
     'Mostrando primeiro os parlamentares com posicionamento favorável à proposta (ordenados pelos mais votados).',
   intercalado:
     'Mostrando posições favoráveis e divergentes de forma intercalada, sempre começando pelos mais votados.',
-  maisVotados: 'Mostrando os mais votados na eleição (dados oficiais do TSE).',
+  maisVotados: 'Mostrando os mais votados no último pleito de cada parlamentar (dados oficiais do TSE).',
 };
 
 /**

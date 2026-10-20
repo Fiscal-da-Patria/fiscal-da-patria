@@ -1,6 +1,6 @@
 {
   "_fonte": "Senado Federal — Dados Abertos (legis.senado.leg.br/dadosabertos)",
-  "_geradoEm": "2026-10-18T18:57:36.722Z",
+  "_geradoEm": "2026-10-20T22:54:47.888Z",
   "_senadores": 81,
   "_comVotoNominal": 81,
   "senadores": [
@@ -28,7 +28,8 @@
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-5982",
@@ -54,7 +55,8 @@
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-6358",
@@ -78,7 +80,8 @@
         "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-5967",
@@ -96,14 +99,16 @@
         "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
-        "preco_energia": "AUSENTE"
+        "preco_energia": "NAO_APLICAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
         "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
-        "crime_organizado": "SIM",
-        "preco_energia": "AUSENTE"
+        "crime_organizado": "SIM"
+      },
+      "motivos": {
+        "preco_energia": "Presidente não registra voto (P-NRV)."
       }
     },
     {
@@ -130,7 +135,8 @@
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-4639",
@@ -156,7 +162,8 @@
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-6336",
@@ -178,7 +185,8 @@
         "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "preco_energia": "SIM"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-6295",
@@ -200,7 +208,8 @@
         "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "preco_energia": "SIM"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-5936",
@@ -218,14 +227,16 @@
         "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
-        "preco_energia": "AUSENTE"
+        "preco_energia": "NAO_APLICAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "NAO",
         "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
-        "crime_organizado": "SIM",
-        "preco_energia": "AUSENTE"
+        "crime_organizado": "SIM"
+      },
+      "motivos": {
+        "preco_energia": "Presidente não registra voto (P-NRV)."
       }
     },
     {
@@ -243,15 +254,17 @@
         "cesta_basica": "FAVORAVEL",
         "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
-        "crime_organizado": "AUSENTE",
+        "crime_organizado": "NAO_APLICAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
         "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
-        "crime_organizado": "AUSENTE",
         "preco_energia": "SIM"
+      },
+      "motivos": {
+        "crime_organizado": "Licença-saúde (LS) registrada no painel — não é voto."
       }
     },
     {
@@ -278,7 +291,8 @@
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-5973",
@@ -292,18 +306,20 @@
       "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5973.jpg",
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5973",
       "votos": {
-        "cesta_basica": "AUSENTE",
+        "cesta_basica": "NAO_APLICAVEL",
         "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
-        "preco_energia": "AUSENTE"
+        "preco_energia": "NAO_APLICAVEL"
       },
       "votosOriginais": {
-        "cesta_basica": "AUSENTE",
         "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
-        "crime_organizado": "SIM",
-        "preco_energia": "AUSENTE"
+        "crime_organizado": "SIM"
+      },
+      "motivos": {
+        "cesta_basica": "Atividade parlamentar (AP) registrada no painel — não é voto.",
+        "preco_energia": "Presidente não registra voto (P-NRV)."
       }
     },
     {
@@ -330,7 +346,8 @@
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-6337",
@@ -356,7 +373,8 @@
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "NAO"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-475",
@@ -374,14 +392,16 @@
         "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
-        "preco_energia": "AUSENTE"
+        "preco_energia": "NAO_APLICAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
         "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
-        "crime_organizado": "SIM",
-        "preco_energia": "AUSENTE"
+        "crime_organizado": "SIM"
+      },
+      "motivos": {
+        "preco_energia": "Presidente não registra voto (P-NRV)."
       }
     },
     {
@@ -408,7 +428,8 @@
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-5998",
@@ -424,16 +445,18 @@
       "votos": {
         "cesta_basica": "FAVORAVEL",
         "fim_escala_6x1": "FAVORAVEL",
-        "aposentadoria_agentes_saude": "AUSENTE",
-        "crime_organizado": "AUSENTE",
+        "aposentadoria_agentes_saude": "NAO_APLICAVEL",
+        "crime_organizado": "NAO_APLICAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
         "fim_escala_6x1": "SIM",
-        "aposentadoria_agentes_saude": "AUSENTE",
-        "crime_organizado": "AUSENTE",
         "preco_energia": "SIM"
+      },
+      "motivos": {
+        "aposentadoria_agentes_saude": "Atividade parlamentar (AP) registrada no painel — não é voto.",
+        "crime_organizado": "Atividade parlamentar (AP) registrada no painel — não é voto."
       }
     },
     {
@@ -449,17 +472,19 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/3830",
       "votos": {
         "cesta_basica": "FAVORAVEL",
-        "fim_escala_6x1": "AUSENTE",
-        "aposentadoria_agentes_saude": "AUSENTE",
-        "crime_organizado": "AUSENTE",
-        "preco_energia": "AUSENTE"
+        "fim_escala_6x1": "NAO_APLICAVEL",
+        "aposentadoria_agentes_saude": "NAO_APLICAVEL",
+        "crime_organizado": "NAO_APLICAVEL",
+        "preco_energia": "NAO_APLICAVEL"
       },
       "votosOriginais": {
-        "cesta_basica": "SIM",
-        "fim_escala_6x1": "AUSENTE",
-        "aposentadoria_agentes_saude": "AUSENTE",
-        "crime_organizado": "AUSENTE",
-        "preco_energia": "AUSENTE"
+        "cesta_basica": "SIM"
+      },
+      "motivos": {
+        "fim_escala_6x1": "Presidente da sessão (art. 51 do RISF) não registra voto.",
+        "aposentadoria_agentes_saude": "Presidente da sessão (art. 51 do RISF) não registra voto.",
+        "crime_organizado": "Presidente não registra voto (P-NRV).",
+        "preco_energia": "Presidente da sessão (art. 51 do RISF) não registra voto."
       }
     },
     {
@@ -475,17 +500,19 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5793",
       "votos": {
         "cesta_basica": "CONTRA",
-        "fim_escala_6x1": "AUSENTE",
+        "fim_escala_6x1": "NAO_APLICAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "NAO",
-        "fim_escala_6x1": "AUSENTE",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
+      },
+      "motivos": {
+        "fim_escala_6x1": "Presidente não registra voto (P-NRV)."
       }
     },
     {
@@ -510,7 +537,8 @@
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-4994",
@@ -536,7 +564,8 @@
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-3777",
@@ -562,7 +591,8 @@
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-4642",
@@ -588,7 +618,8 @@
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-5718",
@@ -605,15 +636,17 @@
         "cesta_basica": "FAVORAVEL",
         "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
-        "crime_organizado": "AUSENTE",
+        "crime_organizado": "NAO_APLICAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
         "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
-        "crime_organizado": "AUSENTE",
         "preco_energia": "SIM"
+      },
+      "motivos": {
+        "crime_organizado": "Atividade parlamentar (AP) registrada no painel — não é voto."
       }
     },
     {
@@ -631,15 +664,17 @@
         "cesta_basica": "CONTRA",
         "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
-        "crime_organizado": "AUSENTE",
+        "crime_organizado": "NAO_APLICAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "NAO",
         "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
-        "crime_organizado": "AUSENTE",
         "preco_energia": "SIM"
+      },
+      "motivos": {
+        "crime_organizado": "Presidente não registra voto (P-NRV)."
       }
     },
     {
@@ -666,7 +701,8 @@
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-5917",
@@ -684,14 +720,16 @@
         "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
-        "preco_energia": "AUSENTE"
+        "preco_energia": "NAO_APLICAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
         "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
-        "crime_organizado": "SIM",
-        "preco_energia": "AUSENTE"
+        "crime_organizado": "SIM"
+      },
+      "motivos": {
+        "preco_energia": "Presidente não registra voto (P-NRV)."
       }
     },
     {
@@ -709,15 +747,17 @@
         "cesta_basica": "FAVORAVEL",
         "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
-        "crime_organizado": "AUSENTE",
+        "crime_organizado": "NAO_APLICAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
         "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
-        "crime_organizado": "AUSENTE",
         "preco_energia": "SIM"
+      },
+      "motivos": {
+        "crime_organizado": "Presidente não registra voto (P-NRV)."
       }
     },
     {
@@ -734,16 +774,18 @@
       "votos": {
         "cesta_basica": "CONTRA",
         "fim_escala_6x1": "FAVORAVEL",
-        "aposentadoria_agentes_saude": "AUSENTE",
+        "aposentadoria_agentes_saude": "NAO_APLICAVEL",
         "crime_organizado": "FAVORAVEL",
-        "preco_energia": "AUSENTE"
+        "preco_energia": "NAO_APLICAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "NAO",
         "fim_escala_6x1": "SIM",
-        "aposentadoria_agentes_saude": "AUSENTE",
-        "crime_organizado": "SIM",
-        "preco_energia": "AUSENTE"
+        "crime_organizado": "SIM"
+      },
+      "motivos": {
+        "aposentadoria_agentes_saude": "Atividade parlamentar (AP) registrada no painel — não é voto.",
+        "preco_energia": "Presidente não registra voto (P-NRV)."
       }
     },
     {
@@ -770,6 +812,9 @@
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "AUSENTE",
         "preco_energia": "SIM"
+      },
+      "motivos": {
+        "crime_organizado": "Não compareceu à sessão (NCom)."
       }
     },
     {
@@ -796,7 +841,8 @@
         "aposentadoria_agentes_saude": "NAO",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-5008",
@@ -813,15 +859,17 @@
         "cesta_basica": "FAVORAVEL",
         "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
-        "crime_organizado": "AUSENTE",
+        "crime_organizado": "NAO_APLICAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
         "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
-        "crime_organizado": "AUSENTE",
         "preco_energia": "SIM"
+      },
+      "motivos": {
+        "crime_organizado": "Presidente da sessão (art. 51 do RISF) não registra voto."
       }
     },
     {
@@ -836,18 +884,20 @@
       "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5385.jpg",
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5385",
       "votos": {
-        "cesta_basica": "AUSENTE",
+        "cesta_basica": "NAO_APLICAVEL",
         "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
-        "cesta_basica": "AUSENTE",
         "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
+      },
+      "motivos": {
+        "cesta_basica": "Atividade parlamentar (AP) registrada no painel — não é voto."
       }
     },
     {
@@ -874,7 +924,8 @@
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-4770",
@@ -890,16 +941,18 @@
       "votos": {
         "cesta_basica": "CONTRA",
         "fim_escala_6x1": "FAVORAVEL",
-        "aposentadoria_agentes_saude": "FAVORAVEL",
-        "crime_organizado": "AUSENTE",
+        "aposentadoria_agentes_saude": "NAO_APLICAVEL",
+        "crime_organizado": "NAO_APLICAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "NAO",
         "fim_escala_6x1": "SIM",
-        "aposentadoria_agentes_saude": "SIM",
-        "crime_organizado": "AUSENTE",
         "preco_energia": "SIM"
+      },
+      "motivos": {
+        "aposentadoria_agentes_saude": "Presidente não registra voto (P-NRV).",
+        "crime_organizado": "Presidente não registra voto (P-NRV)."
       }
     },
     {
@@ -917,15 +970,17 @@
         "cesta_basica": "FAVORAVEL",
         "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
-        "crime_organizado": "AUSENTE",
+        "crime_organizado": "NAO_APLICAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
         "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
-        "crime_organizado": "AUSENTE",
         "preco_energia": "SIM"
+      },
+      "motivos": {
+        "crime_organizado": "Atividade parlamentar (AP) registrada no painel — não é voto."
       }
     },
     {
@@ -952,7 +1007,8 @@
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-581",
@@ -978,7 +1034,8 @@
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-4531",
@@ -995,15 +1052,17 @@
         "cesta_basica": "FAVORAVEL",
         "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
-        "crime_organizado": "AUSENTE",
+        "crime_organizado": "NAO_APLICAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
         "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
-        "crime_organizado": "AUSENTE",
         "preco_energia": "SIM"
+      },
+      "motivos": {
+        "crime_organizado": "Atividade parlamentar (AP) registrada no painel — não é voto."
       }
     },
     {
@@ -1022,14 +1081,16 @@
         "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
-        "preco_energia": "AUSENTE"
+        "preco_energia": "NAO_APLICAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
         "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
-        "crime_organizado": "SIM",
-        "preco_energia": "AUSENTE"
+        "crime_organizado": "SIM"
+      },
+      "motivos": {
+        "preco_energia": "Presidente não registra voto (P-NRV)."
       }
     },
     {
@@ -1052,7 +1113,8 @@
         "cesta_basica": "NAO",
         "fim_escala_6x1": "SIM",
         "crime_organizado": "SIM"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-6369",
@@ -1078,7 +1140,8 @@
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-4811",
@@ -1104,7 +1167,8 @@
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-5977",
@@ -1122,7 +1186,8 @@
       },
       "votosOriginais": {
         "fim_escala_6x1": "SIM"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-5926",
@@ -1148,7 +1213,8 @@
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-1186",
@@ -1174,7 +1240,8 @@
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-631",
@@ -1192,14 +1259,16 @@
         "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
-        "preco_energia": "AUSENTE"
+        "preco_energia": "NAO_APLICAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "NAO",
         "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
-        "crime_organizado": "SIM",
-        "preco_energia": "AUSENTE"
+        "crime_organizado": "SIM"
+      },
+      "motivos": {
+        "preco_energia": "Presidente não registra voto (P-NRV)."
       }
     },
     {
@@ -1226,7 +1295,8 @@
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-742",
@@ -1244,14 +1314,16 @@
         "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
-        "preco_energia": "AUSENTE"
+        "preco_energia": "NAO_APLICAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
         "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
-        "crime_organizado": "SIM",
-        "preco_energia": "AUSENTE"
+        "crime_organizado": "SIM"
+      },
+      "motivos": {
+        "preco_energia": "Presidente não registra voto (P-NRV)."
       }
     },
     {
@@ -1267,17 +1339,19 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/285",
       "votos": {
         "cesta_basica": "FAVORAVEL",
-        "fim_escala_6x1": "AUSENTE",
+        "fim_escala_6x1": "NAO_APLICAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
-        "fim_escala_6x1": "AUSENTE",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
+      },
+      "motivos": {
+        "fim_escala_6x1": "Atividade parlamentar (AP) registrada no painel — não é voto."
       }
     },
     {
@@ -1292,18 +1366,20 @@
       "_fotoRemota": "https://www.senado.leg.br/senadores/img/fotos-oficiais/senador5422.jpg",
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/5422",
       "votos": {
-        "cesta_basica": "AUSENTE",
+        "cesta_basica": "NAO_APLICAVEL",
         "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
-        "preco_energia": "AUSENTE"
+        "preco_energia": "NAO_APLICAVEL"
       },
       "votosOriginais": {
-        "cesta_basica": "AUSENTE",
         "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
-        "crime_organizado": "SIM",
-        "preco_energia": "AUSENTE"
+        "crime_organizado": "SIM"
+      },
+      "motivos": {
+        "cesta_basica": "Atividade parlamentar (AP) registrada no painel — não é voto.",
+        "preco_energia": "Presidente não registra voto (P-NRV)."
       }
     },
     {
@@ -1320,16 +1396,18 @@
       "votos": {
         "cesta_basica": "CONTRA",
         "fim_escala_6x1": "FAVORAVEL",
-        "aposentadoria_agentes_saude": "AUSENTE",
-        "crime_organizado": "AUSENTE",
-        "preco_energia": "AUSENTE"
+        "aposentadoria_agentes_saude": "FAVORAVEL",
+        "crime_organizado": "NAO_APLICAVEL",
+        "preco_energia": "NAO_APLICAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "NAO",
         "fim_escala_6x1": "SIM",
-        "aposentadoria_agentes_saude": "AUSENTE",
-        "crime_organizado": "AUSENTE",
-        "preco_energia": "AUSENTE"
+        "aposentadoria_agentes_saude": "SIM"
+      },
+      "motivos": {
+        "crime_organizado": "Presidente não registra voto (P-NRV).",
+        "preco_energia": "Presidente não registra voto (P-NRV)."
       }
     },
     {
@@ -1347,15 +1425,17 @@
         "cesta_basica": "FAVORAVEL",
         "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
-        "crime_organizado": "AUSENTE",
+        "crime_organizado": "NAO_APLICAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
         "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
-        "crime_organizado": "AUSENTE",
         "preco_energia": "SIM"
+      },
+      "motivos": {
+        "crime_organizado": "Atividade parlamentar (AP) registrada no painel — não é voto."
       }
     },
     {
@@ -1382,7 +1462,8 @@
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-5924",
@@ -1400,14 +1481,16 @@
         "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
-        "preco_energia": "AUSENTE"
+        "preco_energia": "NAO_APLICAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "NAO",
         "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
-        "crime_organizado": "SIM",
-        "preco_energia": "AUSENTE"
+        "crime_organizado": "SIM"
+      },
+      "motivos": {
+        "preco_energia": "Presidente não registra voto (P-NRV)."
       }
     },
     {
@@ -1434,7 +1517,8 @@
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-825",
@@ -1460,7 +1544,8 @@
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-5502",
@@ -1486,7 +1571,8 @@
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-5386",
@@ -1512,7 +1598,8 @@
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-5012",
@@ -1538,7 +1625,8 @@
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-70",
@@ -1556,14 +1644,16 @@
         "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
-        "preco_energia": "AUSENTE"
+        "preco_energia": "NAO_APLICAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
         "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
-        "crime_organizado": "SIM",
-        "preco_energia": "AUSENTE"
+        "crime_organizado": "SIM"
+      },
+      "motivos": {
+        "preco_energia": "Presidente não registra voto (P-NRV)."
       }
     },
     {
@@ -1586,7 +1676,8 @@
         "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
         "preco_energia": "SIM"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-5257",
@@ -1604,7 +1695,8 @@
       },
       "votosOriginais": {
         "fim_escala_6x1": "SIM"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-6025",
@@ -1620,12 +1712,14 @@
       "votos": {
         "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
-        "preco_energia": "AUSENTE"
+        "preco_energia": "NAO_APLICAVEL"
       },
       "votosOriginais": {
         "fim_escala_6x1": "SIM",
-        "aposentadoria_agentes_saude": "SIM",
-        "preco_energia": "AUSENTE"
+        "aposentadoria_agentes_saude": "SIM"
+      },
+      "motivos": {
+        "preco_energia": "Presidente não registra voto (P-NRV)."
       }
     },
     {
@@ -1642,16 +1736,19 @@
       "votos": {
         "cesta_basica": "CONTRA",
         "fim_escala_6x1": "AUSENTE",
-        "aposentadoria_agentes_saude": "AUSENTE",
+        "aposentadoria_agentes_saude": "NAO_APLICAVEL",
         "crime_organizado": "FAVORAVEL",
-        "preco_energia": "AUSENTE"
+        "preco_energia": "NAO_APLICAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "NAO",
         "fim_escala_6x1": "AUSENTE",
-        "aposentadoria_agentes_saude": "AUSENTE",
-        "crime_organizado": "SIM",
-        "preco_energia": "AUSENTE"
+        "crime_organizado": "SIM"
+      },
+      "motivos": {
+        "fim_escala_6x1": "Não compareceu à sessão (NCom).",
+        "aposentadoria_agentes_saude": "Atividade parlamentar (AP) registrada no painel — não é voto.",
+        "preco_energia": "Presidente não registra voto (P-NRV)."
       }
     },
     {
@@ -1678,7 +1775,8 @@
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-5322",
@@ -1695,15 +1793,17 @@
         "cesta_basica": "CONTRA",
         "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
-        "crime_organizado": "AUSENTE",
+        "crime_organizado": "NAO_APLICAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "NAO",
         "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
-        "crime_organizado": "AUSENTE",
         "preco_energia": "SIM"
+      },
+      "motivos": {
+        "crime_organizado": "Licença-saúde (LS) registrada no painel — não é voto."
       }
     },
     {
@@ -1724,7 +1824,8 @@
       "votosOriginais": {
         "fim_escala_6x1": "SIM",
         "preco_energia": "NAO"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-6331",
@@ -1739,17 +1840,19 @@
       "urlPerfilOficial": "https://www25.senado.leg.br/web/senadores/senador/-/perfil/6331",
       "votos": {
         "cesta_basica": "CONTRA",
-        "fim_escala_6x1": "AUSENTE",
+        "fim_escala_6x1": "NAO_APLICAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "NAO",
-        "fim_escala_6x1": "AUSENTE",
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
+      },
+      "motivos": {
+        "fim_escala_6x1": "Presidente não registra voto (P-NRV)."
       }
     },
     {
@@ -1776,7 +1879,8 @@
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-5959",
@@ -1802,7 +1906,8 @@
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-4560",
@@ -1828,7 +1933,8 @@
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-6338",
@@ -1844,16 +1950,18 @@
       "votos": {
         "cesta_basica": "FAVORAVEL",
         "fim_escala_6x1": "FAVORAVEL",
-        "aposentadoria_agentes_saude": "AUSENTE",
+        "aposentadoria_agentes_saude": "NAO_APLICAVEL",
         "crime_organizado": "FAVORAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
         "fim_escala_6x1": "SIM",
-        "aposentadoria_agentes_saude": "AUSENTE",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
+      },
+      "motivos": {
+        "aposentadoria_agentes_saude": "Presidente não registra voto (P-NRV)."
       }
     },
     {
@@ -1880,7 +1988,8 @@
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-5899",
@@ -1897,15 +2006,17 @@
         "cesta_basica": "FAVORAVEL",
         "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
-        "crime_organizado": "AUSENTE",
+        "crime_organizado": "NAO_APLICAVEL",
         "preco_energia": "FAVORAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
         "fim_escala_6x1": "SIM",
         "aposentadoria_agentes_saude": "SIM",
-        "crime_organizado": "AUSENTE",
         "preco_energia": "SIM"
+      },
+      "motivos": {
+        "crime_organizado": "Licença-saúde (LS) registrada no painel — não é voto."
       }
     },
     {
@@ -1932,7 +2043,8 @@
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-1173",
@@ -1958,7 +2070,8 @@
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-5411",
@@ -1984,7 +2097,8 @@
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-5070",
@@ -2010,7 +2124,8 @@
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-5783",
@@ -2036,7 +2151,8 @@
         "aposentadoria_agentes_saude": "SIM",
         "crime_organizado": "SIM",
         "preco_energia": "SIM"
-      }
+      },
+      "motivos": {}
     },
     {
       "id": "senado-3806",
@@ -2053,15 +2169,17 @@
         "cesta_basica": "FAVORAVEL",
         "fim_escala_6x1": "FAVORAVEL",
         "aposentadoria_agentes_saude": "FAVORAVEL",
-        "crime_organizado": "AUSENTE",
-        "preco_energia": "AUSENTE"
+        "crime_organizado": "NAO_APLICAVEL",
+        "preco_energia": "NAO_APLICAVEL"
       },
       "votosOriginais": {
         "cesta_basica": "SIM",
         "fim_escala_6x1": "SIM",
-        "aposentadoria_agentes_saude": "SIM",
-        "crime_organizado": "AUSENTE",
-        "preco_energia": "AUSENTE"
+        "aposentadoria_agentes_saude": "SIM"
+      },
+      "motivos": {
+        "crime_organizado": "Presidente não registra voto (P-NRV).",
+        "preco_energia": "Atividade parlamentar (AP) registrada no painel — não é voto."
       }
     }
   ]

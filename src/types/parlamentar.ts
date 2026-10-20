@@ -118,10 +118,16 @@ export interface ParlamentarConsolidado {
   urlPerfilOficial: string;
   /** Votos nominais recebidos na urna (TSE). 0 quando desconhecido. */
   votosEleicao: number;
+  /** Ano do pleito de onde veio `votosEleicao` (ex.: 2022). */
+  anoEleicao?: number;
   /** Alinhamento por slug da pauta (matriz densa: todas as pautas presentes). */
   votos: Record<string, AlinhamentoVoto>;
-  /** Voto bruto registrado na fonte (auditoria: o que o parlamentar apertou). */
+  /**
+   * Voto efetivo registrado na fonte (SIM/NÃO/ABSTENÇÃO/OBSTRUÇÃO).
+   * `AUSENTE` só quando o parlamentar estava em exercício e não registrou voto;
+   * status que não são voto (Presidente/AP/P-NRV/LS) **não** entram aqui.
+   */
   votosOriginais?: Record<string, VotoCanonico>;
-  /** Motivo curto por pauta quando não há voto individual (ex.: votação simbólica). */
+  /** Motivo oficial quando não há voto individual a auditar. */
   motivos?: Record<string, string>;
 }

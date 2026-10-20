@@ -1,9 +1,10 @@
 import { test, expect } from "@playwright/test";
 import { SLUGS, TOTAL_DEPUTADOS, TOTAL_PARLAMENTARES, TOTAL_SENADORES } from "./helpers";
-import { PAUTAS } from "../src/lib/pautas";
+import { PAUTAS, motivoSemVotoCasa } from "../src/lib/pautas";
 
 interface Parlamentar {
   id: string;
+  nome: string;
   cargo: "DEPUTADO" | "SENADOR";
   urlPerfilOficial: string;
   fotoUrl: string;
@@ -178,7 +179,7 @@ test.describe("Conferência factual das pautas (anti-desinformação)", () => {
   test("blindagem foi arquivada na CCJ do Senado (não é 'pendente')", () => {
     const pauta = PAUTAS.find((p) => p.slug === "fim_blindagem");
     expect(pauta?.status).toBe("ARQUIVADA");
-    expect(pauta?.dataArquivamento).toBe("2025-09-24");
+    expect(pauta?.dataArquivamento).toBe("2025-09-25");
     expect(pauta?.senado?.status).toBe("arquivada");
     // Voto final da Câmara: emenda aglutinativa (314×168), não o 2º turno antigo.
     expect(pauta?.votacaoId).toBe("2270800-175");
@@ -197,5 +198,31 @@ test.describe("Conferência factual das pautas (anti-desinformação)", () => {
     expect(pauta?.resultadoCamara).toMatch(/292 SIM \/ 114 NÃO \/ 1 ABST/);
     expect(pauta?.resultadoSenado).toMatch(/simbólica/i);
     expect(pauta?.pontosExplicativos).toHaveLength(3);
+  });
+
+  test("todo NAO_APLICAVEL tem motivo oficial e não inventa voto original", async ({
+    request,
+  }) => {
+    const dados = (await (await request.get("/data/parlamentares.json")).json()) as Parlamentar[];
+    let total = 0;
+    for (const p of dados) {
+      for (const [slug, v] of Object.entries(p.votos)) {
+        if (v !== "NAO_APLICAVEL") continue;
+        total++;
+        expect(p.motivos?.[slug], `${p.nome} — ${slug}`).toBeTruthy();
+        expect(p.votosOriginais?.[slug], `${p.nome} — ${slug}`).toBeUndefined();
+      }
+    }
+    expect(total).toBeGreaterThan(0);
+  });
+
+  test("pauta auditada no Senado não afirma que a Câmara não votou", () => {
+    for (const slug of ["aposentadoria_agentes_saude", "crime_organizado", "preco_energia"]) {
+      const pauta = PAUTAS.find((p) => p.slug === slug);
+      expect(pauta, slug).toBeTruthy();
+      const motivo = motivoSemVotoCasa(pauta!, "CAMARA");
+      expect(motivo, slug).toMatch(/auditada no Senado/i);
+      expect(motivo, slug).not.toMatch(/não (há|tem) votação nominal/i);
+    }
   });
 });

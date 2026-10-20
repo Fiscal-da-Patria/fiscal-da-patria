@@ -29,12 +29,12 @@ export const PAUTAS: PautaConfig[] = [
     idProposicao: 2196833,
     votacaoId: '2196833-373',
     senado: {
-      codigoSessaoVotacao: 6773,
+      codigoSessaoVotacao: 6777,
       dataSessao: '2023-11-08',
       descricao:
-        'Votação nominal da Emenda nº 803 (Substitutivo) e das Emendas e Subemendas de Plenário, em primeiro turno, nos termos dos pareceres, ressalvados os destaques.',
+        'Votação nominal da Proposta de Emenda à Constituição nº 45, de 2019, em segundo turno.',
       status: 'nominal',
-      nota: 'Votação nominal do Senado em 08/11/2023 (1º e 2º turnos): 53 SIM × 24 NÃO. Virou a Emenda Constitucional 132/2023.',
+      nota: 'Votação nominal do Senado em 08/11/2023 (1º e 2º turnos): 53 SIM × 24 NÃO. Os votos individuais exibidos são do 2º turno; o 1º turno teve o mesmo placar. Virou a Emenda Constitucional 132/2023.',
       urlMateria: 'https://www25.senado.leg.br/web/atividade/materias/-/materia/158930',
     },
     status: 'PROMULGADA',
@@ -125,15 +125,15 @@ export const PAUTAS: PautaConfig[] = [
       dataSessao: '',
       descricao: '',
       status: 'arquivada',
-      nota: 'A Câmara aprovou em 17/09/2025 e enviou ao Senado (PEC 3-C/2021). A CCJ do Senado rejeitou a proposta por inconstitucionalidade em 24/09/2025 e a matéria foi arquivada — não houve votação nominal no plenário.',
+      nota: 'A Câmara aprovou em 17/09/2025 e enviou ao Senado (PEC 3-C/2021). A CCJ do Senado rejeitou a proposta por inconstitucionalidade em 24/09/2025 e a matéria foi arquivada em 25/09/2025 — não houve votação nominal no plenário.',
       urlMateria: 'https://www25.senado.leg.br/web/atividade/materias/-/materia/170519',
     },
     status: 'ARQUIVADA',
-    dataArquivamento: '2025-09-24',
+    dataArquivamento: '2025-09-25',
     resultadoCamara: '314 SIM / 168 NÃO — texto final em 17/09/2025',
-    resultadoSenado: 'Arquivada pela CCJ em 24/09/2025 (inconstitucionalidade)',
+    resultadoSenado: 'Rejeitada pela CCJ em 24/09/2025 e arquivada em 25/09/2025 (inconstitucionalidade)',
     resumoFactual:
-      'A Câmara aprovou o texto final em 17/09/2025 (314 SIM × 168 NÃO). No Senado, a Comissão de Constituição e Justiça rejeitou a proposta por inconstitucionalidade em 24/09/2025 e a matéria foi arquivada. Não houve votação nominal no plenário do Senado.',
+      'A Câmara aprovou o texto final em 17/09/2025 (314 SIM × 168 NÃO). No Senado, a Comissão de Constituição e Justiça rejeitou a proposta por inconstitucionalidade em 24/09/2025 e a matéria foi arquivada em 25/09/2025. Não houve votação nominal no plenário do Senado.',
     pontosExplicativos: [
       {
         titulo: 'O que a PEC mudava',
@@ -234,7 +234,7 @@ export const PAUTAS: PautaConfig[] = [
       {
         titulo: 'Fundos de investimento também',
         texto:
-          'A lei alterou a tributação dos fundos de investimento no País (Lei 11.033/2004), fechando brechas que permitiam postergar o imposto. O texto foi sancionado com veto parcial, mantido pelo Congresso em 21/05/2024.',
+          'A lei alterou a tributação dos fundos de investimento no País (Lei 11.033/2004), fechando brechas que permitiam postergar o imposto. O texto foi sancionado com veto parcial, mantido pelo Congresso.',
       },
     ],
   },
@@ -269,7 +269,7 @@ export const PAUTAS: PautaConfig[] = [
       {
         titulo: 'Desenrola Brasil',
         texto:
-          'O programa renegocia dívidas privadas de pessoas físicas inscritas em cadastros de inadimplentes, para reduzir o endividamento e facilitar a volta ao crédito (art. 1º). A vigência foi prorrogada até 31/03/2024.',
+          'O programa renegocia dívidas privadas de pessoas físicas inscritas em cadastros de inadimplentes, para reduzir o endividamento e facilitar a volta ao crédito (art. 1º). O programa original tinha vigência até 31/12/2023; a MP 1.393/2026 criou o Desenrola Brasil 3.0, com duração até 30/06/2028.',
       },
       {
         titulo: 'Teto de 100% no rotativo',
@@ -322,7 +322,7 @@ export const PAUTAS: PautaConfig[] = [
       {
         titulo: 'Acordo não pode reduzir',
         texto:
-          'Acordos individuais e convenções coletivas devem respeitar o piso; considerá-lo ilegal ou suprimi-lo é vedado. O dispositivo que previa exceções foi vetado, e o veto foi mantido pelo Congresso em 02/05/2023.',
+          'Acordos individuais e convenções coletivas devem respeitar o piso; considerá-lo ilegal ou suprimi-lo é vedado. O dispositivo vetado (art. 15-D) previa o reajuste anual do piso pelo INPC; o veto foi mantido pelo Congresso.',
       },
     ],
   },
@@ -452,12 +452,12 @@ export const PAUTAS: PautaConfig[] = [
     invertida: false,
     casa: 'SENADO',
     senado: {
-      codigoSessaoVotacao: 7096,
+      codigoSessaoVotacao: 7097,
       dataSessao: '2026-07-14',
       descricao:
-        'Votação nominal da Proposta de Emenda à Constituição nº 14, de 2021, nos termos do parecer (1º turno).',
+        'Votação nominal da Proposta de Emenda à Constituição nº 14, de 2021, em segundo turno.',
       status: 'nominal',
-      nota: 'Votação nominal do Senado em 14/07/2026 (1º turno).',
+      nota: 'Votação nominal do Senado em 14/07/2026 (2º turno). Os votos individuais exibidos são do 2º turno; o 1º turno teve o mesmo placar (73 SIM / 1 NÃO / 1 ABST).',
       urlMateria: 'https://www25.senado.leg.br/web/atividade/materias/-/materia/170850',
     },
     status: 'PROMULGADA',
@@ -507,7 +507,7 @@ export const PAUTAS: PautaConfig[] = [
     normaOficial: 'Lei 15.358/2026',
     dataSancao: '2026-03-24',
     urlNorma: 'https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2026/lei/l15358.htm',
-    resultadoCamara: '370 SIM / 110 NÃO — 18/11/2025',
+    resultadoCamara: '370 SIM / 110 NÃO / 3 ABST — 18/11/2025',
     resultadoSenado: '64 SIM / 0 NÃO — 10/12/2025',
     resumoFactual:
       'A Lei 15.358/2026 (Lei Raul Jungmann) criou o marco legal do combate ao crime organizado e tipificou os crimes de domínio social estruturado e de favorecimento ao domínio social estruturado, voltados a organizações ultraviolentas, grupos paramilitares e milícias privadas.',
@@ -603,8 +603,10 @@ export function normalizarVoto(tipoVoto: string): VotoCanonico {
  *   "LS" (licença-saúde) | "P-NRV" (presidente que não registra voto) |
  *   "NCom" (não compareceu) | "Presidente (art. 51 RISF)".
  *
- * Tudo que **não** é voto registrado cai em `AUSENTE` — nunca é inventado um
- * alinhamento. O valor bruto é preservado em `votosOriginais` (auditoria).
+ * `NCom` (não compareceu) é ausência real; os demais status (AP, LS, P-NRV,
+ * Presidente) **não** são ausência: use `statusNaoVotoSenado()` para gravá-los
+ * como `NAO_APLICAVEL` com o motivo oficial. O valor bruto não é inventado em
+ * `votosOriginais` — o status oficial fica em `motivos`.
  */
 export function normalizarVotoSenado(voto: string): VotoCanonico {
   const v = semAcento(voto);
@@ -612,6 +614,41 @@ export function normalizarVotoSenado(voto: string): VotoCanonico {
   if (v.startsWith('NAO')) return 'NAO';
   if (v.startsWith('ABSTEN')) return 'ABSTENCAO';
   return 'AUSENTE';
+}
+
+/**
+ * Status oficial que **não é voto** na Câmara.
+ * Hoje a API usa "Artigo 17" para o Presidente da Casa, que não vota no painel.
+ * Retorna `null` quando o registro é um voto normal.
+ */
+export function statusNaoVotoCamara(tipoVoto: string): string | null {
+  if (semAcento(tipoVoto) === 'ARTIGO 17') {
+    return 'Presidente da Câmara (art. 17 do RICD) não vota no painel eletrônico — não é ausência.';
+  }
+  return null;
+}
+
+/** Status oficial do Senado que não é voto. `ausente: true` só para NCom. */
+export function statusNaoVotoSenado(
+  voto: string,
+): { ausente: boolean; motivo: string } | null {
+  const v = semAcento(voto);
+  if (v.startsWith('NCOM')) {
+    return { ausente: true, motivo: 'Não compareceu à sessão (NCom).' };
+  }
+  if (v.startsWith('AP')) {
+    return { ausente: false, motivo: 'Atividade parlamentar (AP) registrada no painel — não é voto.' };
+  }
+  if (v.startsWith('P-NRV')) {
+    return { ausente: false, motivo: 'Presidente não registra voto (P-NRV).' };
+  }
+  if (v.startsWith('PRESIDENTE')) {
+    return { ausente: false, motivo: 'Presidente da sessão (art. 51 do RISF) não registra voto.' };
+  }
+  if (v.startsWith('LS')) {
+    return { ausente: false, motivo: 'Licença-saúde (LS) registrada no painel — não é voto.' };
+  }
+  return null;
 }
 
 /**
@@ -736,7 +773,7 @@ export function exemploPratico(pauta: PautaConfig): string {
  */
 export function motivoSemVotoCasa(pauta: PautaConfig, casa: "CAMARA" | "SENADO"): string {
   if (pauta.casa === "SENADO") {
-    return `A votação de ${pauta.materia} é auditada no Senado Federal — a Câmara dos Deputados não tem votação nominal registrada nesta matéria.`;
+    return `A votação de ${pauta.materia} é auditada no Senado Federal. Os votos nominais da Câmara não são exibidos nesta página.`;
   }
   if (casa === "SENADO") {
     if (pauta.senado?.status === "arquivada") {
@@ -750,5 +787,5 @@ export function motivoSemVotoCasa(pauta: PautaConfig, casa: "CAMARA" | "SENADO")
     }
     return "O Senado votou esta matéria, mas o voto individual não está disponível na fonte oficial.";
   }
-  return "Não há votação nominal da Câmara dos Deputados registrada para esta matéria.";
+  return "Não há voto nominal aplicável a esta casa nesta matéria.";
 }

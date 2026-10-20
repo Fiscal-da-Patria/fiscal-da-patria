@@ -25,8 +25,9 @@ test.describe("Escala 6x1 — PEC 221/2019 → EC 141/2026", () => {
         return acc;
       }, {});
 
-    // 75 SIM + 1 NÃO + 5 sem voto registrado (Presidente, AP, NCom e 2 P-NRV).
-    expect(contar(sen)).toEqual({ FAVORAVEL: 75, AUSENTE: 5, CONTRA: 1 });
+    // 75 SIM + 1 NÃO + 1 NCom (ausência real) + 4 sem voto individual
+    // (Presidente, AP e 2 P-NRV).
+    expect(contar(sen)).toEqual({ FAVORAVEL: 75, CONTRA: 1, AUSENTE: 1, NAO_APLICAVEL: 4 });
     expect(dep).toHaveLength(513);
     // Nenhum voto inventado: todos os 594 têm uma posição na pauta.
     expect(contar(dep).FAVORAVEL).toBeGreaterThan(0);

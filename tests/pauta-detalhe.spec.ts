@@ -38,7 +38,7 @@ test.describe("Pauta — o que foi aprovado", () => {
     await page.locator('[data-abrir-detalhe="1"]').click();
 
     const dlg = page.getByRole("dialog");
-    await expect(dlg).toContainText(/Revogada em 25\/09\/2026/i);
+    await expect(dlg).toContainText(/Revogada por MP em 25\/09\/2026/i);
     await expect(dlg).toContainText(/292 SIM \/ 114 NÃO \/ 1 ABST/);
     await expect(dlg).toContainText(/Lei 14.790\/2023/);
     await expect(dlg).toContainText(/Situação atual:/i);
@@ -94,9 +94,9 @@ test.describe("Pauta — o que foi aprovado", () => {
     await page.locator('[data-abrir-detalhe="1"]').click();
 
     const dlg = page.getByRole("dialog");
-    await expect(dlg).toContainText(/Arquivada em 24\/09\/2025/i);
+    await expect(dlg).toContainText(/Arquivada em 25\/09\/2025/i);
     await expect(dlg).toContainText(/314 SIM \/ 168 NÃO/);
-    await expect(dlg).toContainText(/Arquivada pela CCJ em 24\/09\/2025/i);
+    await expect(dlg).toContainText(/Rejeitada pela CCJ em 24\/09\/2025/i);
     await expect(dlg.locator('[data-ponto-explicativo="1"]')).toHaveCount(3);
     await expect(dlg.locator('[data-link-norma="1"]')).toHaveCount(0);
     await expect(dlg.locator('[data-nota-placar="1"]')).toHaveCount(0);

@@ -20,7 +20,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-import { PAUTAS, aplicarInversao, normalizarVoto } from '../src/lib/pautas';
+import { PAUTAS, aplicarInversao, normalizarVoto, statusNaoVotoCamara } from '../src/lib/pautas';
 import type {
   AlinhamentoVoto,
   ParlamentarConsolidado,
@@ -44,19 +44,30 @@ const semAcento = (texto: string) =>
 const chaveTse = (cargo: string, nome: string, uf: string) =>
   `${cargo}|${semAcento(nome)}|${semAcento(uf)}`;
 
-/** Votos de urna (TSE) por "CARGO|NOME|UF" — ausência ⇒ votosEleicao = 0. */
-function carregarVotosTse(): Map<string, number> {
-  const mapa = new Map<string, number>();
+/** Votos de urna (TSE) e o pleito usado, por "CARGO|NOME|UF". */
+function carregarVotosTse(): {
+  votos: Map<string, number>;
+  anos: Map<string, number>;
+} {
+  const votos = new Map<string, number>();
+  const anos = new Map<string, number>();
   try {
-    const bruto = JSON.parse(fs.readFileSync(TSE, 'utf-8')) as { mapa?: Record<string, number> };
+    const bruto = JSON.parse(fs.readFileSync(TSE, 'utf-8')) as {
+      mapa?: Record<string, number>;
+      _pleitoUsado?: Record<string, number>;
+    };
     for (const [k, v] of Object.entries(bruto.mapa ?? {})) {
-      if (typeof v === 'number' && v > 0) mapa.set(k, v);
+      if (typeof v === 'number' && v > 0) {
+        votos.set(k, v);
+        const ano = bruto._pleitoUsado?.[k];
+        if (typeof ano === 'number') anos.set(k, ano);
+      }
     }
-    console.log(`🗳️  Votos do TSE carregados: ${mapa.size} parlamentares.`);
+    console.log(`🗳️  Votos do TSE carregados: ${votos.size} parlamentares.`);
   } catch {
     console.warn('⚠️  tse_votos_urnas.json indisponível — votosEleicao = 0 (rode `npm run fetch-tse`).');
   }
-  return mapa;
+  return { votos, anos };
 }
 
 interface SenadorArquivo {
@@ -70,6 +81,7 @@ interface SenadorArquivo {
   urlPerfilOficial: string;
   votos: Record<string, AlinhamentoVoto>;
   votosOriginais: Record<string, VotoCanonico>;
+  motivos?: Record<string, string>;
 }
 
 /** Senadores (roster + votos) gerados por scripts/fetch_senado.ts. */
@@ -125,7 +137,7 @@ async function fetchJson<T>(url: string, tentativas = 4): Promise<T> {
 }
 
 async function main(): Promise<void> {
-  const votosTse = carregarVotosTse();
+  const { votos: votosTse, anos: anosTse } = carregarVotosTse();
   const senadoresArquivo = carregarSenadores();
 
   // ---------------------------------------------------------------------------
@@ -150,8 +162,10 @@ async function main(): Promise<void> {
       email: d.email ?? '',
       urlPerfilOficial: `https://www.camara.leg.br/deputados/${d.id}`,
       votosEleicao: votosTse.get(chaveTse('DEPUTADO', d.nome, d.siglaUf)) ?? 0,
+      anoEleicao: anosTse.get(chaveTse('DEPUTADO', d.nome, d.siglaUf)),
       votos: {},
       votosOriginais: {},
+      motivos: {},
     });
   }
   console.log(`👥 Deputados em exercício: ${deputados.size}`);
@@ -160,9 +174,31 @@ async function main(): Promise<void> {
   // 2) Votos nominais na Câmara (pautas com `casa: CAMARA`)
   // ---------------------------------------------------------------------------
   const reconciliacao: string[] = [];
+  /** Lotação oficial da Câmara na data de cada votação (quem podia votar). */
+  const emExercicioPorPauta = new Map<string, Set<number>>();
+  const dataPorPauta = new Map<string, string>();
 
   for (const pauta of PAUTAS) {
     if (pauta.casa !== 'CAMARA' || !pauta.votacaoId) continue;
+
+    const meta = await fetchJson<{ dados: { data: string } }>(
+      `${API}/votacoes/${pauta.votacaoId}`,
+    );
+    const dataVotacao = meta.dados?.data;
+    if (!dataVotacao) {
+      throw new Error(`Votação ${pauta.votacaoId} sem data oficial — abortando.`);
+    }
+    const roster = await fetchJson<{ dados: Array<{ id: number }> }>(
+      `${API}/deputados?dataInicio=${dataVotacao}&dataFim=${dataVotacao}&itens=1000`,
+    );
+    const emExercicio = new Set((roster.dados ?? []).map((d) => d.id));
+    if (emExercicio.size < 400) {
+      throw new Error(
+        `Lotação histórica de ${dataVotacao} veio com ${emExercicio.size} deputados — abortando.`,
+      );
+    }
+    emExercicioPorPauta.set(pauta.slug, emExercicio);
+    dataPorPauta.set(pauta.slug, dataVotacao);
 
     const resposta = await fetchJson<{ dados: VotoBruto[] }>(
       `${API}/votacoes/${pauta.votacaoId}/votos`,
@@ -177,6 +213,7 @@ async function main(): Promise<void> {
     let sim = 0;
     let nao = 0;
     let abst = 0;
+    let outros = 0;
     let registrados = 0;
 
     for (const vb of votosBrutos) {
@@ -184,6 +221,15 @@ async function main(): Promise<void> {
       if (!dep) continue;
       const p = deputados.get(dep.id);
       if (!p) continue; // suplente fora de exercício: não entra na listagem
+
+      const status = statusNaoVotoCamara(vb.tipoVoto);
+      if (status) {
+        p.votos[pauta.slug] = 'NAO_APLICAVEL';
+        p.motivos![pauta.slug] = status;
+        outros++;
+        registrados++;
+        continue;
+      }
 
       const canonico = normalizarVoto(vb.tipoVoto);
       if (canonico === 'SIM') sim++;
@@ -196,7 +242,7 @@ async function main(): Promise<void> {
     }
 
     reconciliacao.push(
-      `${pauta.slug} [${pauta.votacaoId}]: SIM=${sim} NÃO=${nao} ABST=${abst} (deputados em exercício=${registrados})`,
+      `${pauta.slug} [${pauta.votacaoId}]: SIM=${sim} NÃO=${nao} ABST=${abst} OUTROS=${outros} (registros de deputados em exercício=${registrados})`,
     );
     await sleep(300);
   }
@@ -207,17 +253,31 @@ async function main(): Promise<void> {
   const lista: ParlamentarConsolidado[] = [];
 
   for (const p of deputados.values()) {
-    p.motivos = {};
+    p.motivos = p.motivos ?? {};
+    const idCamara = Number(p.id.slice('camara-'.length));
     for (const pauta of PAUTAS) {
       if (p.votos[pauta.slug]) continue;
       if (pauta.casa === 'SENADO') {
         p.votos[pauta.slug] = 'NAO_APLICAVEL';
         p.motivos[pauta.slug] =
-          `Pauta auditada no Senado (${pauta.materia}) — não há voto nominal da Câmara apurado neste MVP.`;
-      } else {
+          `Pauta auditada no Senado (${pauta.materia}). O painel de votos da Câmara não é exibido nesta página.`;
+        continue;
+      }
+
+      const emExercicio = emExercicioPorPauta.get(pauta.slug);
+      const data = dataPorPauta.get(pauta.slug);
+      if (!emExercicio || !data) {
+        throw new Error(`Sem lotação histórica para ${pauta.slug} — abortando.`);
+      }
+
+      if (emExercicio.has(idCamara)) {
         // Estava em exercício e não registrou voto naquela votação.
         p.votos[pauta.slug] = 'AUSENTE';
         p.votosOriginais![pauta.slug] = 'AUSENTE';
+      } else {
+        p.votos[pauta.slug] = 'NAO_APLICAVEL';
+        p.motivos[pauta.slug] =
+          `Não estava em exercício na data da votação (${data.split('-').reverse().join('/')}) — não havia voto a auditar.`;
       }
     }
     lista.push(p);
@@ -234,9 +294,10 @@ async function main(): Promise<void> {
       fotoUrl: s.fotoUrl,
       urlPerfilOficial: s.urlPerfilOficial,
       votosEleicao: votosTse.get(chaveTse('SENADOR', s.nome, s.uf)) ?? 0,
+      anoEleicao: anosTse.get(chaveTse('SENADOR', s.nome, s.uf)),
       votos: { ...s.votos },
       votosOriginais: { ...s.votosOriginais },
-      motivos: {},
+      motivos: { ...(s.motivos ?? {}) },
     };
 
     for (const pauta of PAUTAS) {
@@ -255,6 +316,30 @@ async function main(): Promise<void> {
 
   // O app não usa nota de alinhamento: a saída fica em ordem alfabética (determinística).
   lista.sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR'));
+
+  // Antes de gravar: nenhuma posição pode ser inventada.
+  const falhas: string[] = [];
+  for (const p of lista) {
+    for (const pauta of PAUTAS) {
+      const v = p.votos[pauta.slug];
+      if (!v) falhas.push(`${p.id}: sem posição em ${pauta.slug}`);
+      if (v === 'NAO_APLICAVEL' && !p.motivos?.[pauta.slug]) {
+        falhas.push(`${p.id}: NAO_APLICAVEL sem motivo em ${pauta.slug}`);
+      }
+      if (v === 'NAO_APLICAVEL' && p.votosOriginais?.[pauta.slug]) {
+        falhas.push(`${p.id}: NAO_APLICAVEL com voto original em ${pauta.slug}`);
+      }
+      if (p.cargo === 'DEPUTADO' && pauta.casa === 'CAMARA' && v === 'AUSENTE') {
+        const id = Number(p.id.slice('camara-'.length));
+        if (!emExercicioPorPauta.get(pauta.slug)?.has(id)) {
+          falhas.push(`${p.nome}: AUSENTE fora do mandato em ${pauta.slug}`);
+        }
+      }
+    }
+  }
+  if (falhas.length > 0) {
+    throw new Error(`Validação da saída falhou:\n${falhas.slice(0, 20).join('\n')}`);
+  }
 
   // ---------------------------------------------------------------------------
   // 5) Saída

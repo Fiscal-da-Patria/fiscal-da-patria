@@ -7,14 +7,14 @@ const MSG = [
   "Gente, vocês viram isso aqui? 🚨🇧🇷",
   "Quem é patriota de verdade tem que ver antes que sumam com isso!",
   "",
-  "Painel oficial mostra quem votou contra zerar o imposto da comida e quem votou para proteger político de investigação. Só fatos da Câmara!",
+  "Painel oficial mostra quem votou contra zerar o imposto da comida e quem votou para proteger político de investigação. Só fatos oficiais do Congresso!",
   "",
-  "Dá uma olhada no seu deputado: 👇",
+  "Dá uma olhada no seu deputado ou senador: 👇",
   SITE_URL,
 ].join("\n");
 
 const TEXTO_X =
-  "Gente, vocês viram isso aqui? 🚨🇧🇷 O painel oficial que mostra como cada deputado votou na comida, no IR e na blindagem de políticos:\n";
+  "Gente, vocês viram isso aqui? 🚨🇧🇷 O painel oficial que mostra como cada parlamentar votou na comida, no IR e na blindagem de políticos:\n";
 
 const param = (href: string, chave: string) =>
   new URL(href).searchParams.get(chave) ?? "";

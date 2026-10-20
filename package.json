@@ -12,7 +12,8 @@
     "update-all": "npm run update-data && npm run fetch-fotos",
     "test:e2e": "playwright test",
     "fetch-tse": "tsx scripts/fetch_tse_votos.ts",
-    "fetch-senado": "tsx scripts/fetch_senado.ts"
+    "fetch-senado": "tsx scripts/fetch_senado.ts",
+    "validate-data": "tsx scripts/validate_data.ts"
   },
   "dependencies": {
     "canvas-confetti": "^1.9.4",

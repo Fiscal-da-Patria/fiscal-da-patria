@@ -46,7 +46,9 @@ export function PautaDetalheModal({
       : pauta.status === "SANCIONADA"
         ? "Sancionada"
         : pauta.status === "REVOGADA"
-          ? "Revogada"
+          ? pauta.normaRevogadora?.startsWith("Medida Provisória")
+            ? "Revogada por MP"
+            : "Revogada"
           : "Arquivada";
   const arquivada = pauta.status === "ARQUIVADA";
   const revogada = pauta.status === "REVOGADA";
@@ -148,11 +150,21 @@ export function PautaDetalheModal({
                 </div>
               )}
             </div>
+            {pauta.senado?.status === "nominal" && pauta.senado.descricao && (
+              <p
+                data-detalhe-votacao-senado="1"
+                className="mt-1.5 text-[10px] leading-relaxed text-corpo"
+              >
+                <strong className="text-titulo">Votação no Senado:</strong> {pauta.senado.descricao}
+              </p>
+            )}
             {!arquivada && (
               <p data-nota-placar="1" className="mt-1.5 text-[10px] leading-relaxed text-corpo">
                 O painel da sessão inclui quem já deixou o mandato. A lista abaixo mostra os{" "}
                 <strong className="text-titulo">parlamentares em exercício</strong> — por isso a
-                soma pode ser menor que o placar oficial.
+                soma pode ser menor que o placar oficial. O placar soma apenas SIM, NÃO e
+                ABSTENÇÃO; registros de Presidente, AP (atividade parlamentar), P-NRV, LS
+                (licença-saúde) e NCom (não compareceu) não entram nessa soma.
               </p>
             )}
           </div>
